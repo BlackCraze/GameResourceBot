@@ -51,7 +51,11 @@
 			<artifactId>hsqldb</artifactId>
 			<version>2.4.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.4.1208</version>
+		</dependency>
 		<!-- Hibernate library dependency end -->
 		<!-- utility stuff -->
 		<dependency>
@@ -69,7 +73,7 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.5</version>
 		</dependency>
-		<!-- <dependency> <groupId>com.massisframework</groupId> <artifactId>j-text-utils</artifactId>
+		<!-- <dependency> <groupId>com.massisframework</groupId> <artifactId>j-text-utils</artifactId> 
 			<version>0.3.4</version> </dependency> -->
 		<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
 		<dependency>
@@ -77,7 +81,6 @@
 			<artifactId>joda-time</artifactId>
 			<version>2.9.9</version>
 		</dependency>
-
 		<!-- testing stuff -->
 		<dependency>
 			<groupId>junit</groupId>
