@@ -123,6 +123,15 @@ public class MessageListener extends ListenerAdapter {
 				}
 			} else if ("IDIOT".equalsIgnoreCase(action)) {
 				Speaker.say(responseChannel, "ich weiß :-(");
+			} else if ("status".equalsIgnoreCase(action)) {
+				Runtime rt = Runtime.getRuntime();
+				long total = rt.totalMemory();
+				long free = rt.freeMemory();
+				long used = total - free;
+
+				String memConsume = String.format("~~ My Memory | Total:%,d | Used:%,d, Free:%,d", total, used, free);
+				System.out.println(memConsume);
+				Speaker.say(responseChannel, memConsume);
 			} else {
 				Speaker.errorReaction(jda, message);
 			}

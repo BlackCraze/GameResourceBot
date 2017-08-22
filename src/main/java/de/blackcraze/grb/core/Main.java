@@ -27,7 +27,6 @@ public class Main {
 
 	private static void initData(Injector injector) {
 		new StandingDataInitializer(injector).initStockTypes();
-
 	}
 
 	private static void initDiscord(Injector injector) {
