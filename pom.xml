@@ -112,7 +112,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.maventest.App</mainClass>
+							<mainClass>de.blackcraze.grb.core.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
