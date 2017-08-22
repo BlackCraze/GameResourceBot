@@ -35,9 +35,10 @@ public class StandingDataInitializer {
 			InputStream resource = this.getClass().getClassLoader().getResourceAsStream("StockTypes.csv");
 			reader = new InputStreamReader(new BOMInputStream(resource), "UTF-8");
 			parser = new CSVParser(reader, CSVFormat.EXCEL.withHeader());
-
+			List<CSVRecord> records = parser.getRecords();
+			System.out.println("initializing stock types: " + records.size());
 			List<StockType> stocks = getStockTypeDao().findAll();
-			for (CSVRecord record : parser) {
+			for (CSVRecord record : records) {
 				String name = record.get(0);
 				String price = record.get(1);
 				boolean exists = false;
