@@ -20,19 +20,28 @@ import net.dv8tion.jda.core.OnlineStatus;
 public class Main {
 
 	public static void main(String[] args) {
+
+		String token = null;
+		try {
+			token = args[0];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.err.println("you have to provide a bot token code when starting like this: ");
+			System.err.println("\tjava -jar grb.jar thisIsMyDiscordTokenCode");
+			System.exit(1);
+		}
 		Injector injector = Guice.createInjector(new DbUtil());
 		initData(injector);
-		initDiscord(injector);
+		initDiscord(injector, token);
 	}
 
 	private static void initData(Injector injector) {
 		new StandingDataInitializer(injector).initStockTypes();
 	}
 
-	private static void initDiscord(Injector injector) {
+	private static void initDiscord(Injector injector, String token) {
 		JDABuilder builder = new JDABuilder(AccountType.BOT);
 		try {
-			builder.setToken(readToken());
+			builder.setToken(token);
 			builder.setAutoReconnect(true);
 			builder.setStatus(OnlineStatus.ONLINE);
 			builder.addEventListener(new ReadyListener(injector));
@@ -44,11 +53,6 @@ public class Main {
 		} finally {
 			builder.setStatus(OnlineStatus.OFFLINE);
 		}
-	}
-
-	private static String readToken() throws IOException {
-		InputStream stream = Main.class.getClassLoader().getResourceAsStream("token.txt");
-		return IOUtils.readLines(stream, Charset.forName("UTF-8")).get(0);
 	}
 
 }
