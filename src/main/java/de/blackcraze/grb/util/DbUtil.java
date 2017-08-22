@@ -42,7 +42,7 @@ public class DbUtil extends AbstractModule {
 		String host = st.nextToken();
 		String port = st.nextToken();
 		String databaseName = st.nextToken();
-		String jdbcUrl = String.format("jdbc:postgresql://%s:%s/%s?ssl=true", host, port, databaseName);
+		String jdbcUrl = String.format("jdbc:postgresql://%s:%s/%s", host, port, databaseName);
 		Map<String, String> properties = new HashMap<String, String>();
 		properties.put("javax.persistence.jdbc.url", jdbcUrl);
 		properties.put("javax.persistence.jdbc.user", userName);
