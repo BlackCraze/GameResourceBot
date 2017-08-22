@@ -2,6 +2,7 @@ package de.blackcraze.grb.util;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.StringTokenizer;
 
 import javax.inject.Singleton;
@@ -48,6 +49,14 @@ public class DbUtil extends AbstractModule {
 		properties.put("javax.persistence.jdbc.password", password);
 		properties.put("javax.persistence.jdbc.driver", "org.postgresql.Driver");
 		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println(databaseUrl);
+		for (Entry<String, String> pair : properties.entrySet()) {
+			System.out.println(pair.getKey() + ": " + pair.getValue());
+		}
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
 		return Persistence.createEntityManagerFactory("bc-gbr", properties);
 	}
 
