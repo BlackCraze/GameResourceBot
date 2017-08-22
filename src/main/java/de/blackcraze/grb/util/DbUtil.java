@@ -2,7 +2,6 @@ package de.blackcraze.grb.util;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.StringTokenizer;
 
 import javax.inject.Singleton;
@@ -35,6 +34,9 @@ public class DbUtil extends AbstractModule {
 	@Singleton
 	public EntityManagerFactory createEntityManagerFactory() {
 		String databaseUrl = System.getenv("DATABASE_URL");
+
+		databaseUrl = "postgres://fxxnlbhjczifuh:608eb73f0c5ed63ad699a6e180ba31390317ace9036cf866a38da8517be857ce@ec2-54-163-237-25.compute-1.amazonaws.com:5432/d1fq6j40o4ldrf";
+
 		StringTokenizer st = new StringTokenizer(databaseUrl, ":@/");
 		String dbVendor = st.nextToken(); // if DATABASE_URL is set
 		String userName = st.nextToken();
@@ -42,20 +44,13 @@ public class DbUtil extends AbstractModule {
 		String host = st.nextToken();
 		String port = st.nextToken();
 		String databaseName = st.nextToken();
-		String jdbcUrl = String.format("jdbc:postgresql://%s:%s/%s", host, port, databaseName);
+		String jdbcUrl = String.format("jdbc:postgresql://%s:%s/%s?sslmode=require", host, port, databaseName);
 		Map<String, String> properties = new HashMap<String, String>();
 		properties.put("javax.persistence.jdbc.url", jdbcUrl);
 		properties.put("javax.persistence.jdbc.user", userName);
 		properties.put("javax.persistence.jdbc.password", password);
 		properties.put("javax.persistence.jdbc.driver", "org.postgresql.Driver");
 		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println(databaseUrl);
-		for (Entry<String, String> pair : properties.entrySet()) {
-			System.out.println(pair.getKey() + ": " + pair.getValue());
-		}
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 		return Persistence.createEntityManagerFactory("bc-gbr", properties);
 	}
