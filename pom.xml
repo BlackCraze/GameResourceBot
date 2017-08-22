@@ -46,15 +46,17 @@
 			<version>5.2.10.Final</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.hsqldb/hsqldb -->
+		<!-- 
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<version>2.4.0</version>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>9.4.1208</version>
+			<version>9.4.1211</version>
 		</dependency>
 		<!-- Hibernate library dependency end -->
 		<!-- utility stuff -->

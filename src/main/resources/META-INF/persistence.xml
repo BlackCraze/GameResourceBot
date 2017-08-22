@@ -12,7 +12,7 @@
 		<class>de.blackcraze.grb.model.entity.Stock</class>
 
 		<properties>
-			<property name="hibernate.archive.autodetection" value="class" />
+			<!-- <property name="hibernate.archive.autodetection" value="class" /> -->
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
