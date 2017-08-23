@@ -1,11 +1,5 @@
 package de.blackcraze.grb.core;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
-
-import org.apache.commons.io.IOUtils;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -22,11 +16,10 @@ public class Main {
 	public static void main(String[] args) {
 
 		String token = null;
-		try {
-			token = args[0];
-		} catch (ArrayIndexOutOfBoundsException e) {
-			System.err.println("you have to provide a bot token code when starting like this: ");
-			System.err.println("\tjava -jar grb.jar thisIsMyDiscordTokenCode");
+		token = System.getenv("GBR_DISCORD_TOKEN");
+		if (token == null) {
+			System.err.println("you have to provide a bot token code when starting like this");
+			System.err.println("please provide a system environment variable named \"GBR_DISCORD_TOKEN\"");
 			System.exit(1);
 		}
 		Injector injector = Guice.createInjector(new DbUtil());

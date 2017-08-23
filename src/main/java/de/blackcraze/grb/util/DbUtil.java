@@ -37,7 +37,7 @@ public class DbUtil extends AbstractModule {
 	}
 
 	private Map<String, String> readHerokuDatabaseConnection() {
-//		databaseUrl = "postgres://herokuuser:herokupass@herokuhost:herokuport/herokuDatabase";
+//		databaseUrl = "postgres://user:pass@localhost:5432/gbr";
 		String databaseUrl = System.getenv("DATABASE_URL");
 
 		StringTokenizer st = new StringTokenizer(databaseUrl, ":@/");
