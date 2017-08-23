@@ -21,7 +21,7 @@ import de.blackcraze.grb.dao.StockTypeDaoBean;
 
 public class DbUtil extends AbstractModule {
 
-	private static final ThreadLocal<EntityManager> ENTITY_MANAGER_CACHE = new ThreadLocal<EntityManager>();
+	private static final ThreadLocal<EntityManager> ENTITY_MANAGER_CACHE = new ThreadLocal<>();
 
 	@Override
 	public void configure() {
@@ -33,13 +33,19 @@ public class DbUtil extends AbstractModule {
 	@Provides
 	@Singleton
 	public EntityManagerFactory createEntityManagerFactory() {
-		return Persistence.createEntityManagerFactory("bc-gbr", readHerokuDatabaseConnection());
+		Map<String, String> properties = readHerokuDatabaseConnection();
+		return Persistence.createEntityManagerFactory("bc-gbr", properties);
 	}
 
 	private Map<String, String> readHerokuDatabaseConnection() {
 //		databaseUrl = "postgres://user:pass@localhost:5432/gbr";
 		String databaseUrl = System.getenv("DATABASE_URL");
-
+		boolean sslEnabled = true;
+		if (databaseUrl == null) {
+			System.out.println("No DATABASE_URL, assuming we are running locally");
+			sslEnabled = false;
+			databaseUrl = "postgres://grb:grb@localhost:5432/grb";
+		}
 		StringTokenizer st = new StringTokenizer(databaseUrl, ":@/");
 		String dbVendor = st.nextToken(); // if DATABASE_URL is set
 		String userName = st.nextToken();
@@ -47,8 +53,9 @@ public class DbUtil extends AbstractModule {
 		String host = st.nextToken();
 		String port = st.nextToken();
 		String databaseName = st.nextToken();
-		String jdbcUrl = String.format("jdbc:postgresql://%s:%s/%s?sslmode=require", host, port, databaseName);
-		Map<String, String> properties = new HashMap<String, String>();
+		String ssl = sslEnabled ? "sslmode=require" : "";
+		String jdbcUrl = String.format("jdbc:postgresql://%s:%s/%s?%s", host, port, databaseName, ssl);
+		Map<String, String> properties = new HashMap<>();
 		properties.put("javax.persistence.jdbc.url", jdbcUrl);
 		properties.put("javax.persistence.jdbc.user", userName);
 		properties.put("javax.persistence.jdbc.password", password);

@@ -58,9 +58,9 @@ public class MessageListener extends ListenerAdapter {
 					StockType stockType = getStockTypeDao().findByName(stockName);
 					if (stockType != null) {
 						getStockTypeDao().delete(stockType);
-						Speaker.checkReaction(jda, message);
+						message.addReaction(Speaker.Reaction.SUCCESS).queue();
 					} else {
-						Speaker.errorReaction(jda, message);
+						message.addReaction(Speaker.Reaction.FAILURE).queue();
 						Speaker.say(responseChannel, "Kenne ich nicht");
 					}
 				}
@@ -68,14 +68,14 @@ public class MessageListener extends ListenerAdapter {
 				String stockName = parseStockName(message.getContent(), true);
 				if (stockName != null && !stockName.isEmpty()) {
 					if (getStockTypeDao().findByName(stockName) != null) {
-						Speaker.errorReaction(jda, message);
+						message.addReaction(Speaker.Reaction.FAILURE).queue();
 						Speaker.say(responseChannel, "Kenne ich schon");
 					} else {
 						StockType type = new StockType();
 						type.setName(stockName);
 						type.setPrice(0);
 						getStockTypeDao().save(type);
-						Speaker.checkReaction(jda, message);
+						message.addReaction(Speaker.Reaction.SUCCESS).queue();
 					}
 				}
 			} else if ("checkTypes".equalsIgnoreCase(action)) {
@@ -88,18 +88,18 @@ public class MessageListener extends ListenerAdapter {
 						if (!unknown.isEmpty()) {
 							Speaker.say(responseChannel,
 									"Das hier kenne ich nicht: " + Arrays.deepToString(unknown.toArray()));
-							Speaker.errorReaction(jda, message);
+							message.addReaction(Speaker.Reaction.FAILURE).queue();
 						}
 						if (unknown.size() != stocks.size()) {
-							Speaker.checkReaction(jda, message);
+							message.addReaction(Speaker.Reaction.SUCCESS).queue();
 						}
 					} else {
-						Speaker.errorReaction(jda, message);
+						message.addReaction(Speaker.Reaction.FAILURE).queue();
 						Speaker.say(responseChannel, "Da steht nichts - was soll man denn da updaten!");
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
-					Speaker.errorReaction(jda, message);
+					message.addReaction(Speaker.Reaction.FAILURE).queue();
 				}
 			} else if ("check".equalsIgnoreCase(action)) {
 				String mateName = parseStockName(message.getContent(), true);
@@ -133,7 +133,7 @@ public class MessageListener extends ListenerAdapter {
 				System.out.println(memConsume);
 				Speaker.say(responseChannel, memConsume);
 			} else {
-				Speaker.errorReaction(jda, message);
+				message.addReaction(Speaker.Reaction.FAILURE).queue();
 			}
 		}
 	}

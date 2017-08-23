@@ -29,8 +29,8 @@ public class ReadyListener extends ListenerAdapter {
 		StringBuilder b = new StringBuilder();
 		b.append("Ich laufe auf: \n");
 		for (Guild g : event.getJDA().getGuilds()) {
-			g.getTextChannelsByName("statistik", true);
-			b.append(g.getName() + "\n");
+			g.getTextChannelsByName(Speaker.C_NAME, true);
+			b.append(g.getName()).append("\n");
 			sayHelloInAllStats(g.getTextChannels());
 		}
 		System.out.println(b.toString());
