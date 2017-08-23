@@ -16,10 +16,10 @@ public class Main {
 	public static void main(String[] args) {
 
 		String token = null;
-		token = System.getenv("GBR_DISCORD_TOKEN");
+		token = System.getenv("GRB_DISCORD_TOKEN");
 		if (token == null) {
 			System.err.println("you have to provide a bot token code when starting like this");
-			System.err.println("please provide a system environment variable named \"GBR_DISCORD_TOKEN\"");
+			System.err.println("please provide a system environment variable named \"GRB_DISCORD_TOKEN\"");
 			System.exit(1);
 		}
 		Injector injector = Guice.createInjector(new DbUtil());
