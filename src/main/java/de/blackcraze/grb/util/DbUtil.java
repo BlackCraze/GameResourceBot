@@ -33,15 +33,12 @@ public class DbUtil extends AbstractModule {
 	@Provides
 	@Singleton
 	public EntityManagerFactory createEntityManagerFactory() {
-		Map<String, String> properties = readHerokuDatabaseConnection();
-
-		return Persistence.createEntityManagerFactory("bc-gbr", properties);
+		return Persistence.createEntityManagerFactory("bc-gbr", readHerokuDatabaseConnection());
 	}
 
 	private Map<String, String> readHerokuDatabaseConnection() {
+//		databaseUrl = "postgres://herokuuser:herokupass@herokuhost:herokuport/herokuDatabase";
 		String databaseUrl = System.getenv("DATABASE_URL");
-
-//		databaseUrl = "postgres://fxxnlbhjczifuh:608eb73f0c5ed63ad699a6e180ba31390317ace9036cf866a38da8517be857ce@ec2-54-163-237-25.compute-1.amazonaws.com:5432/d1fq6j40o4ldrf";
 
 		StringTokenizer st = new StringTokenizer(databaseUrl, ":@/");
 		String dbVendor = st.nextToken(); // if DATABASE_URL is set
