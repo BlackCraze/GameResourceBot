@@ -1,13 +1,11 @@
 package de.blackcraze.grb.listener;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.stream.Collectors;
 
+import de.blackcraze.grb.core.BotConfig;
+import de.blackcraze.grb.core.Configurable;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.inject.Injector;
@@ -23,7 +21,6 @@ import de.blackcraze.grb.model.entity.StockType;
 import de.blackcraze.grb.util.PrintUtils;
 import de.blackcraze.grb.util.Utils;
 import de.blackcraze.grb.util.wagu.Block;
-import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
@@ -47,95 +44,163 @@ public class MessageListener extends ListenerAdapter {
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		Message message = event.getMessage();
-		if (Utils.botMentioned(event)) {
-			Mate mate = getOrCreateMate(message.getAuthor());
-			String action = parseAction(message);
-			JDA jda = event.getJDA();
-			List<TextChannel> responseChannel = event.getGuild().getTextChannels();
-			if ("deleteType".equalsIgnoreCase(action)) {
-				String stockName = parseStockName(message.getContent(), true);
-				if (stockName != null && !stockName.isEmpty()) {
-					StockType stockType = getStockTypeDao().findByName(stockName);
-					if (stockType != null) {
-						getStockTypeDao().delete(stockType);
-						message.addReaction(Speaker.Reaction.SUCCESS).queue();
-					} else {
-						message.addReaction(Speaker.Reaction.FAILURE).queue();
-						Speaker.say(responseChannel, "Kenne ich nicht");
-					}
-				}
-			} else if ("newType".equalsIgnoreCase(action)) {
-				String stockName = parseStockName(message.getContent(), true);
-				if (stockName != null && !stockName.isEmpty()) {
-					if (getStockTypeDao().findByName(stockName) != null) {
-						message.addReaction(Speaker.Reaction.FAILURE).queue();
-						Speaker.say(responseChannel, "Kenne ich schon");
-					} else {
-						StockType type = new StockType();
-						type.setName(stockName);
-						type.setPrice(0);
-						getStockTypeDao().save(type);
-						message.addReaction(Speaker.Reaction.SUCCESS).queue();
-					}
-				}
-			} else if ("checkTypes".equalsIgnoreCase(action)) {
-				Speaker.say(responseChannel, prettyPrintStockTypes(getStockTypeDao().findAll()));
-			} else if ("update".equalsIgnoreCase(action)) {
-				try {
-					Map<String, Long> stocks = parseStocks(message);
-					List<String> unknown = getMateDao().updateStocks(mate, stocks);
-					if (stocks.size() > 0) {
-						if (!unknown.isEmpty()) {
-							Speaker.say(responseChannel,
-									"Das hier kenne ich nicht: " + Arrays.deepToString(unknown.toArray()));
-							message.addReaction(Speaker.Reaction.FAILURE).queue();
-						}
-						if (unknown.size() != stocks.size()) {
-							message.addReaction(Speaker.Reaction.SUCCESS).queue();
-						}
-					} else {
-						message.addReaction(Speaker.Reaction.FAILURE).queue();
-						Speaker.say(responseChannel, "Da steht nichts - was soll man denn da updaten!");
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-					message.addReaction(Speaker.Reaction.FAILURE).queue();
-				}
-			} else if ("check".equalsIgnoreCase(action)) {
-				String mateName = parseStockName(message.getContent(), true);
-				List<Mate> mates;
-				if (StringUtils.isEmpty(mateName)) {
-					mates = Collections.singletonList(mate);
-					Speaker.say(responseChannel, prettyPrintMate(mates));
-				} else {
-					mates = getMateDao().findByNameLike(mateName);
-					if (!mates.isEmpty()) {
-						Speaker.say(responseChannel, prettyPrintMate(mates));
-					}
-					List<StockType> types = getStockTypeDao().findByNameLike(mateName);
-					if (!types.isEmpty()) {
-						Speaker.say(responseChannel, prettyPrintStocks(types));
-					}
-					if (types.isEmpty() && mates.isEmpty()) {
-						Speaker.say(responseChannel,
-								"Ich kenne weder einen Benutzer noch eine Ressource mit diesem Namen =(");
-					}
-				}
-			} else if ("IDIOT".equalsIgnoreCase(action)) {
-				Speaker.say(responseChannel, "ich weiß :-(");
-			} else if ("status".equalsIgnoreCase(action)) {
-				Runtime rt = Runtime.getRuntime();
-				long total = rt.totalMemory();
-				long free = rt.freeMemory();
-				long used = total - free;
-
-				String memConsume = String.format("~~ My Memory | Total:%,d | Used:%,d, Free:%,d", total, used, free);
-				System.out.println(memConsume);
-				Speaker.say(responseChannel, memConsume);
-			} else {
-				message.addReaction(Speaker.Reaction.FAILURE).queue();
-			}
+		if (!Utils.botMentioned(event)) {
+			return;
 		}
+		String action = parseAction(message);
+
+		TextChannel responseChannel = message.getTextChannel();
+
+		switch (action.toLowerCase()) {
+			case "deletetype":
+				deleteType(message);
+				break;
+			case "newtype":
+				newType(message);
+				break;
+			case "checktypes":
+				checkTypes(message);
+				break;
+			case "update":
+				update(message);
+				break;
+			case "check":
+				check(message);
+				break;
+			case "idiot":
+				ping(responseChannel);
+				break;
+			case "status":
+				status(responseChannel);
+				break;
+			case "config":
+				config(message);
+				break;
+			default:
+				message.addReaction(Speaker.Reaction.FAILURE).queue();
+				break;
+		}
+	}
+
+	private void config(Message message) {
+		if (parse(message.getContent(), 2) == null) {
+			StringBuilder response = new StringBuilder();
+			response.append("```\n");
+			List<Field> fields = Arrays.stream(BotConfig.class.getDeclaredFields())
+					.filter(field -> field.isAnnotationPresent(Configurable.class))
+					.collect(Collectors.toList());
+
+			for (Field field : fields) {
+				Object value;
+				try {
+					value = field.get(null);
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+					continue;
+				}
+				response.append(field.getName());
+				response.append(": ");
+				response.append(value.toString());
+				response.append("\n");
+			}
+			response.append("```");
+			Speaker.say(message.getTextChannel(), response.toString());
+		}
+	}
+
+	private void status(TextChannel textChannel) {
+		Runtime rt = Runtime.getRuntime();
+		long total = rt.totalMemory();
+		long free = rt.freeMemory();
+		long used = total - free;
+
+		String memConsume = String.format("~~ My Memory | Total:%,d | Used:%,d, Free:%,d", total, used, free);
+		System.out.println(memConsume);
+		Speaker.say(textChannel, memConsume);
+	}
+
+	private void ping(TextChannel textChannel) {
+		Speaker.say(textChannel, "ich weiß :-(");
+	}
+
+	private void check(Message message) {
+		String mateName = parseStockName(message.getContent(), true);
+		List<Mate> mates;
+		if (StringUtils.isEmpty(mateName)) {
+            mates = Collections.singletonList(getOrCreateMate(message.getAuthor()));
+            Speaker.say(message.getTextChannel(), prettyPrintMate(mates));
+        } else {
+            mates = getMateDao().findByNameLike(mateName);
+            if (!mates.isEmpty()) {
+                Speaker.say(message.getTextChannel(), prettyPrintMate(mates));
+            }
+            List<StockType> types = getStockTypeDao().findByNameLike(mateName);
+            if (!types.isEmpty()) {
+                Speaker.say(message.getTextChannel(), prettyPrintStocks(types));
+            }
+            if (types.isEmpty() && mates.isEmpty()) {
+                Speaker.say(message.getTextChannel(),
+                        "Ich kenne weder einen Benutzer noch eine Ressource mit diesem Namen =(");
+            }
+        }
+	}
+
+	private void update(Message message) {
+		try {
+            Map<String, Long> stocks = parseStocks(message);
+            List<String> unknown = getMateDao().updateStocks(getOrCreateMate(message.getAuthor()), stocks);
+            if (stocks.size() > 0) {
+                if (!unknown.isEmpty()) {
+                    Speaker.say(message.getTextChannel(),
+                            "Das hier kenne ich nicht: " + Arrays.deepToString(unknown.toArray()));
+                    message.addReaction(Speaker.Reaction.FAILURE).queue();
+                }
+                if (unknown.size() != stocks.size()) {
+                    message.addReaction(Speaker.Reaction.SUCCESS).queue();
+                }
+            } else {
+                message.addReaction(Speaker.Reaction.FAILURE).queue();
+                Speaker.say(message.getTextChannel(), "Da steht nichts - was soll man denn da updaten!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            message.addReaction(Speaker.Reaction.FAILURE).queue();
+        }
+	}
+
+	private void checkTypes(Message message) {
+		Speaker.say(message.getTextChannel(), prettyPrintStockTypes(getStockTypeDao().findAll()));
+	}
+
+	private void newType(Message message) {
+		String stockName = parseStockName(message.getContent(), true);
+		if (stockName != null && !stockName.isEmpty()) {
+            if (getStockTypeDao().findByName(stockName) != null) {
+                message.addReaction(Speaker.Reaction.FAILURE).queue();
+                Speaker.say(message.getTextChannel(), "Kenne ich schon");
+            } else {
+                StockType type = new StockType();
+                type.setName(stockName);
+                type.setPrice(0);
+                getStockTypeDao().save(type);
+                message.addReaction(Speaker.Reaction.SUCCESS).queue();
+            }
+        }
+	}
+
+	private void deleteType(Message message) {
+
+		String stockName = parseStockName(message.getContent(), true);
+		if (stockName != null && !stockName.isEmpty()) {
+            StockType stockType = getStockTypeDao().findByName(stockName);
+            if (stockType != null) {
+                getStockTypeDao().delete(stockType);
+                message.addReaction(Speaker.Reaction.SUCCESS).queue();
+            } else {
+                message.addReaction(Speaker.Reaction.FAILURE).queue();
+                Speaker.say(message.getTextChannel(), "Kenne ich nicht");
+            }
+        }
 	}
 
 	private Mate getOrCreateMate(User author) {
@@ -165,7 +230,7 @@ public class MessageListener extends ListenerAdapter {
 
 	private String prettyPrintStockTypes(List<StockType> stockTypes) {
 		StringBuilder b = new StringBuilder();
-		b.append("```css\n");
+		b.append("```\n");
 		if (stockTypes.isEmpty()) {
 			b.append("Leider keine Daten vorhanden :-(");
 		}
@@ -258,9 +323,13 @@ public class MessageListener extends ListenerAdapter {
 	private Long parseAmount(String row, boolean firstRow) {
 		try {
 			return Long.valueOf(parse(row, 1, firstRow));
-		} catch (Exception e) {
+		} catch (NumberFormatException e) {
 			return null;
 		}
+	}
+
+	private String parse(String row, int index) {
+		return parse(row, index, false);
 	}
 
 	private String parse(String row, int index, boolean firstRow) {

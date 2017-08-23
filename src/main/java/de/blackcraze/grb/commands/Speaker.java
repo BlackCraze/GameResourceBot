@@ -22,6 +22,10 @@ public class Speaker {
 			return;
 		}
 		TextChannel textChannel = optionalChannel.get();
+		say(textChannel, text);
+	}
+
+	public static void say(TextChannel textChannel, String text) {
 		if (!textChannel.canTalk()) {
 			System.err.printf("Can not talk in: %s/%s%n", textChannel.getGuild().getName(), textChannel.getName());
 		}

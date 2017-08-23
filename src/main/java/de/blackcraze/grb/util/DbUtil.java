@@ -13,7 +13,6 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 
 import de.blackcraze.grb.core.BotConfig;
-import de.blackcraze.grb.core.Main;
 import de.blackcraze.grb.dao.IMateDao;
 import de.blackcraze.grb.dao.IStockDao;
 import de.blackcraze.grb.dao.IStockTypeDao;
