@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.google.inject.Injector;
 
-import de.blackcraze.grb.commands.Speaker;
+import de.blackcraze.grb.core.BotConfig;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.ReadyEvent;
@@ -29,7 +29,7 @@ public class ReadyListener extends ListenerAdapter {
 		StringBuilder b = new StringBuilder();
 		b.append("Ich laufe auf: \n");
 		for (Guild g : event.getJDA().getGuilds()) {
-			g.getTextChannelsByName(Speaker.C_NAME, true);
+			g.getTextChannelsByName(BotConfig.CHANNEL, true);
 			b.append(g.getName()).append("\n");
 			sayHelloInAllStats(g.getTextChannels());
 		}

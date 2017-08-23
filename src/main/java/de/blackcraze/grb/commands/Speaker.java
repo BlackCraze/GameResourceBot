@@ -1,13 +1,12 @@
 package de.blackcraze.grb.commands;
 
+import de.blackcraze.grb.core.BotConfig;
 import net.dv8tion.jda.core.entities.TextChannel;
 
 import java.util.List;
 import java.util.Optional;
 
 public class Speaker {
-
-	public static final String C_NAME = "statistik";
 
 	public static class Reaction {
 		public final static String SUCCESS = "✔";
@@ -16,10 +15,10 @@ public class Speaker {
 
 	public static void say(List<TextChannel> channels, String text) {
 		Optional<TextChannel> optionalChannel = channels.stream()
-				.filter(channel -> C_NAME.equalsIgnoreCase(channel.getName()))
+				.filter(channel -> BotConfig.CHANNEL.equalsIgnoreCase(channel.getName()))
 				.findFirst();
 		if (!optionalChannel.isPresent()) {
-			System.err.printf("No channel found matching name:%s%n", C_NAME);
+			System.err.printf("No channel found matching name:%s%n", BotConfig.CHANNEL);
 			return;
 		}
 		TextChannel textChannel = optionalChannel.get();

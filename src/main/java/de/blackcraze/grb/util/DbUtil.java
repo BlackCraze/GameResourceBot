@@ -12,6 +12,8 @@ import javax.persistence.Persistence;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 
+import de.blackcraze.grb.core.BotConfig;
+import de.blackcraze.grb.core.Main;
 import de.blackcraze.grb.dao.IMateDao;
 import de.blackcraze.grb.dao.IStockDao;
 import de.blackcraze.grb.dao.IStockTypeDao;
@@ -34,18 +36,13 @@ public class DbUtil extends AbstractModule {
 	@Singleton
 	public EntityManagerFactory createEntityManagerFactory() {
 		Map<String, String> properties = readHerokuDatabaseConnection();
-		return Persistence.createEntityManagerFactory("bc-gbr", properties);
+		return Persistence.createEntityManagerFactory("bc-grb", properties);
 	}
 
 	private Map<String, String> readHerokuDatabaseConnection() {
-//		databaseUrl = "postgres://user:pass@localhost:5432/gbr";
-		String databaseUrl = System.getenv("DATABASE_URL");
-		boolean sslEnabled = true;
-		if (databaseUrl == null) {
-			System.out.println("No DATABASE_URL, assuming we are running locally");
-			sslEnabled = false;
-			databaseUrl = "postgres://grb:grb@localhost:5432/grb";
-		}
+//		databaseUrl = "postgres://user:pass@localhost:5432/grb";
+		String databaseUrl = BotConfig.DATABASE_URL;
+		boolean sslEnabled = !BotConfig.USE_SSL.isEmpty();
 		StringTokenizer st = new StringTokenizer(databaseUrl, ":@/");
 		String dbVendor = st.nextToken(); // if DATABASE_URL is set
 		String userName = st.nextToken();

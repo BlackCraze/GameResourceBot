@@ -2,7 +2,6 @@ package de.blackcraze.grb.core;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-
 import de.blackcraze.grb.listener.MessageListener;
 import de.blackcraze.grb.listener.ReadyListener;
 import de.blackcraze.grb.util.DbUtil;
@@ -15,15 +14,16 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		String token = System.getenv("GRB_DISCORD_TOKEN");
-		if (token == null) {
-			System.err.println("you have to provide a bot token code when starting like this");
-			System.err.println("please provide a system environment variable named \"GRB_DISCORD_TOKEN\"");
-			System.exit(1);
+		for (String env_var: BotConfig.REQUIRED_ENV_VARS) {
+			if (System.getenv(env_var) == null) {
+				System.err.printf("Missing environment variable: \"%s\"%n", env_var);
+				System.exit(1);
+			}
 		}
+
 		Injector injector = Guice.createInjector(new DbUtil());
 		initData(injector);
-		initDiscord(injector, token);
+		initDiscord(injector, BotConfig.DISCORD_TOKEN);
 	}
 
 	private static void initData(Injector injector) {
