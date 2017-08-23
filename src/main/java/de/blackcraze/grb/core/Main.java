@@ -15,8 +15,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		String token = null;
-		token = System.getenv("GRB_DISCORD_TOKEN");
+		String token = System.getenv("GRB_DISCORD_TOKEN");
 		if (token == null) {
 			System.err.println("you have to provide a bot token code when starting like this");
 			System.err.println("please provide a system environment variable named \"GRB_DISCORD_TOKEN\"");
