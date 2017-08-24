@@ -1,5 +1,6 @@
 package de.blackcraze.grb.core;
 
+import java.util.Locale;
 import java.util.Optional;
 
 public class BotConfig {
@@ -14,6 +15,12 @@ public class BotConfig {
     public static String PREFIX = getEnv("PREFIX", "dcbot");
     @Configurable
     public static String CHANNEL = getEnv("CHANNEL", "statistik");
+    @Configurable
+    public static String LANGUAGE = getEnv("LANGUAGE", "en");
+
+    public static Locale getLocale(){
+        return new Locale(LANGUAGE);
+    }
 
     private static String getEnv(String envVar, String defaultValue) {
         Optional<String> envValue = Optional.ofNullable(System.getenv(envVar));
