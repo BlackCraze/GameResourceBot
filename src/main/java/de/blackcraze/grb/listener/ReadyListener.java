@@ -4,6 +4,7 @@ import com.google.inject.Injector;
 
 import de.blackcraze.grb.commands.Speaker;
 import de.blackcraze.grb.core.BotConfig;
+import de.blackcraze.grb.i18n.Resource;
 import net.dv8tion.jda.core.entities.Channel;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -55,7 +56,7 @@ public class ReadyListener extends ListenerAdapter {
 	}
 
 	private void sayHello(TextChannel channel) {
-//		Speaker.say(channel, "Hallo - da bin ich wieder =)");
+		Speaker.say(channel, Resource.getString("PONG"));
 	}
 
 }

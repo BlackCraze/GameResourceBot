@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.core.Configurable;
+import de.blackcraze.grb.i18n.Resource;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.inject.Injector;
@@ -142,7 +143,7 @@ public class MessageListener extends ListenerAdapter {
 	}
 
 	private void ping(TextChannel textChannel) {
-		Speaker.say(textChannel, "ich weiß :-(");
+		Speaker.say(textChannel, Resource.getString("PONG"));
 	}
 
 	private void check(Message message) {
@@ -161,8 +162,7 @@ public class MessageListener extends ListenerAdapter {
                 Speaker.say(message.getTextChannel(), prettyPrintStocks(types));
             }
             if (types.isEmpty() && mates.isEmpty()) {
-                Speaker.say(message.getTextChannel(),
-                        "Ich kenne weder einen Benutzer noch eine Ressource mit diesem Namen =(");
+                Speaker.say(message.getTextChannel(),Resource.getString("RESOURCE_AND_USER_UNKNOWN"));
             }
         }
 	}
@@ -173,8 +173,7 @@ public class MessageListener extends ListenerAdapter {
             List<String> unknown = getMateDao().updateStocks(getOrCreateMate(message.getAuthor()), stocks);
             if (stocks.size() > 0) {
                 if (!unknown.isEmpty()) {
-                    Speaker.say(message.getTextChannel(),
-                            "Das hier kenne ich nicht: " + Arrays.deepToString(unknown.toArray()));
+                    Speaker.say(message.getTextChannel(), Resource.getString("DO_NOT_KNOW_ABOUT"));
                     message.addReaction(Speaker.Reaction.FAILURE).queue();
                 }
                 if (unknown.size() != stocks.size()) {
@@ -182,7 +181,7 @@ public class MessageListener extends ListenerAdapter {
                 }
             } else {
                 message.addReaction(Speaker.Reaction.FAILURE).queue();
-                Speaker.say(message.getTextChannel(), "Da steht nichts - was soll man denn da updaten!");
+                Speaker.say(message.getTextChannel(), Resource.getString("RESOURCES_EMPTY"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -199,7 +198,7 @@ public class MessageListener extends ListenerAdapter {
 		if (stockName != null && !stockName.isEmpty()) {
             if (getStockTypeDao().findByName(stockName) != null) {
                 message.addReaction(Speaker.Reaction.FAILURE).queue();
-                Speaker.say(message.getTextChannel(), "Kenne ich schon");
+                Speaker.say(message.getTextChannel(), Resource.getString("ALREADY_KNOW"));
             } else {
                 StockType type = new StockType();
                 type.setName(stockName);
@@ -220,7 +219,7 @@ public class MessageListener extends ListenerAdapter {
                 message.addReaction(Speaker.Reaction.SUCCESS).queue();
             } else {
                 message.addReaction(Speaker.Reaction.FAILURE).queue();
-                Speaker.say(message.getTextChannel(), "Kenne ich nicht");
+                Speaker.say(message.getTextChannel(), Resource.getString("RESOURCE_UNKNOWN"));
             }
         }
 	}
@@ -254,7 +253,7 @@ public class MessageListener extends ListenerAdapter {
 		StringBuilder b = new StringBuilder();
 		b.append("```\n");
 		if (stockTypes.isEmpty()) {
-			b.append("Leider keine Daten vorhanden :-(");
+			b.append(Resource.getString("NO_DATA"));
 		}
 		for (StockType type : stockTypes) {
 			b.append(type.getName());
@@ -266,9 +265,9 @@ public class MessageListener extends ListenerAdapter {
 
 	private String prettyPrintMate(List<Mate> mates) {
 		if (mates.isEmpty()) {
-			return "Diesen Benutzer kenne ich nicht =(";
+			return Resource.getString("USER_UNKNOWN");
 		}
-		List<String> headers = Arrays.asList("Rohstoff", "Menge", "Gepflegt vor");
+		List<String> headers = Arrays.asList(Resource.getString("RAW_MATERIAL"), Resource.getString("AMOUNT"), Resource.getString("UPDATED"));
 		List<Integer> aligns = Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT, Block.DATA_MIDDLE_RIGHT);
 
 		PrintableTable[] tables = new PrintableTable[mates.size()];
@@ -292,9 +291,9 @@ public class MessageListener extends ListenerAdapter {
 
 	private String prettyPrintStocks(List<StockType> stockTypes) {
 		if (stockTypes.isEmpty()) {
-			return "Diese Ressource kenne ich nicht =(";
+			return Resource.getString("RESOURCE_UNKNOWN");
 		}
-		List<String> headers = Arrays.asList("Benutzer", "Menge", "Gepflegt vor");
+		List<String> headers = Arrays.asList(Resource.getString("USER"), Resource.getString("AMOUNT"), Resource.getString("UPDATED"));
 		List<Integer> aligns = Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT, Block.DATA_MIDDLE_RIGHT);
 
 		PrintableTable[] tables = new PrintableTable[stockTypes.size()];
