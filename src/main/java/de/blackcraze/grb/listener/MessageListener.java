@@ -44,6 +44,9 @@ public class MessageListener extends ListenerAdapter {
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		Message message = event.getMessage();
+		if (!BotConfig.CHANNEL.equalsIgnoreCase(message.getTextChannel().getName())) {
+			return;
+		}
 		if (!Utils.botMentioned(event)) {
 			return;
 		}
