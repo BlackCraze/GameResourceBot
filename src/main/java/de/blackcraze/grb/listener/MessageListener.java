@@ -83,7 +83,8 @@ public class MessageListener extends ListenerAdapter {
 	}
 
 	private void config(Message message) {
-		if (parse(message.getContent(), 2) == null) {
+		String config_action = parse(message.getContent(), 2);
+		if (config_action == null) {
 			StringBuilder response = new StringBuilder();
 			response.append("```\n");
 			List<Field> fields = Arrays.stream(BotConfig.class.getDeclaredFields())
@@ -105,7 +106,25 @@ public class MessageListener extends ListenerAdapter {
 			}
 			response.append("```");
 			Speaker.say(message.getTextChannel(), response.toString());
+			return;
 		}
+		if ("set".equals(config_action.toLowerCase())) {
+			String field = parse(message.getContent(), 3);
+			String value = parse(message.getContent(), 4);
+			if (field != null && value != null) {
+				try {
+					Field declaredField = BotConfig.class.getDeclaredField(field);
+					assert declaredField.isAnnotationPresent(Configurable.class);
+					assert String.class.equals(declaredField.getType());
+					declaredField.set(null, value);
+					message.addReaction(Speaker.Reaction.SUCCESS).queue();
+					return;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		message.addReaction(Speaker.Reaction.FAILURE).queue();
 	}
 
 	private void status(TextChannel textChannel) {

@@ -11,9 +11,9 @@ public class BotConfig {
     public static final String USE_SSL = getEnv("USE_SSL", "");
 
     @Configurable
-    public static final String PREFIX = getEnv("PREFIX", "dcbot");
+    public static String PREFIX = getEnv("PREFIX", "dcbot");
     @Configurable
-    public static final String CHANNEL = getEnv("CHANNEL", "statistik");
+    public static String CHANNEL = getEnv("CHANNEL", "statistik");
 
     private static String getEnv(String envVar, String defaultValue) {
         Optional<String> envValue = Optional.ofNullable(System.getenv(envVar));
