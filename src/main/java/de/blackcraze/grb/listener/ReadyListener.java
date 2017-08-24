@@ -49,7 +49,7 @@ public class ReadyListener extends ListenerAdapter {
 	@Override
 	public void onReconnect(ReconnectedEvent event) {
 		for (Guild guild : event.getJDA().getGuilds()) {
-			for(TextChannel channel : g.getTextChannelsByName(BotConfig.CHANNEL, true)) {
+			for(TextChannel channel : guild.getTextChannelsByName(BotConfig.CHANNEL, true)) {
 				sayHello(channel);
 			}		}
 	}
