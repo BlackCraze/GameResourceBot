@@ -1,10 +1,11 @@
 package de.blackcraze.grb.listener;
 
-import java.util.List;
-
 import com.google.inject.Injector;
 
 import de.blackcraze.grb.commands.Speaker;
+import de.blackcraze.grb.core.BotConfig;
+import de.blackcraze.grb.i18n.Resource;
+import net.dv8tion.jda.core.entities.Channel;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.ReadyEvent;
@@ -29,9 +30,10 @@ public class ReadyListener extends ListenerAdapter {
 		StringBuilder b = new StringBuilder();
 		b.append("Ich laufe auf: \n");
 		for (Guild g : event.getJDA().getGuilds()) {
-			g.getTextChannelsByName("statistik", true);
-			b.append(g.getName() + "\n");
-			sayHelloInAllStats(g.getTextChannels());
+			b.append(g.getName()).append("\n");
+			for(TextChannel channel : g.getTextChannelsByName(BotConfig.CHANNEL, true)) {
+				sayHello(channel);
+			}
 		}
 		System.out.println(b.toString());
 	}
@@ -39,19 +41,22 @@ public class ReadyListener extends ListenerAdapter {
 	@Override
 	public void onResume(ResumedEvent event) {
 		for (Guild guild : event.getJDA().getGuilds()) {
-			sayHelloInAllStats(guild.getTextChannels());
+			for(TextChannel channel : guild.getTextChannelsByName(BotConfig.CHANNEL, true)) {
+				sayHello(channel);
+			}
 		}
 	}
 
 	@Override
 	public void onReconnect(ReconnectedEvent event) {
 		for (Guild guild : event.getJDA().getGuilds()) {
-			sayHelloInAllStats(guild.getTextChannels());
-		}
+			for(TextChannel channel : guild.getTextChannelsByName(BotConfig.CHANNEL, true)) {
+				sayHello(channel);
+			}		}
 	}
 
-	private final void sayHelloInAllStats(List<TextChannel> channels) {
-//		Speaker.say(channels, "Hallo - da bin ich wieder =)");
+	private void sayHello(TextChannel channel) {
+		Speaker.say(channel, Resource.getString("PONG"));
 	}
 
 }
