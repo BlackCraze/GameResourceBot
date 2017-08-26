@@ -1,31 +1,23 @@
 package de.blackcraze.grb.util;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.util.List;
-
+import de.blackcraze.grb.model.entity.StockType;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.BOMInputStream;
 
-import com.google.inject.Injector;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.List;
 
-import de.blackcraze.grb.dao.IStockTypeDao;
-import de.blackcraze.grb.model.entity.StockType;
+import static de.blackcraze.grb.util.InjectorUtils.getStockTypeDao;
 
 public class StandingDataInitializer {
 
-	Injector in;
 
-	@SuppressWarnings("unused")
-	private StandingDataInitializer() {
-	}
-
-	public StandingDataInitializer(Injector injector) {
-		this.in = injector;
+	public StandingDataInitializer() {
 	}
 
 	public void initStockTypes() {
@@ -65,10 +57,6 @@ public class StandingDataInitializer {
 			IOUtils.closeQuietly(parser);
 		}
 
-	}
-
-	private IStockTypeDao getStockTypeDao() {
-		return in.getInstance(IStockTypeDao.class);
 	}
 
 }

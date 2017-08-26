@@ -12,11 +12,11 @@ public class BotConfig {
     public static final String USE_SSL = getEnv("USE_SSL", "");
 
     @Configurable
-    public static String PREFIX = getEnv("PREFIX", "dcbot");
+    public static final String PREFIX = getEnv("PREFIX", "dcbot");
     @Configurable
-    public static String CHANNEL = getEnv("CHANNEL", "statistik");
+    public static final String CHANNEL = getEnv("CHANNEL", "statistik");
     @Configurable
-    public static String LANGUAGE = getEnv("LANGUAGE", "en");
+    public static final String LANGUAGE = getEnv("LANGUAGE", "en");
 
     public static Locale getLocale(){
         return new Locale(LANGUAGE);

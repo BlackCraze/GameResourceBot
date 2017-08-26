@@ -1,11 +1,8 @@
 package de.blackcraze.grb.listener;
 
-import com.google.inject.Injector;
-
-import de.blackcraze.grb.commands.Speaker;
 import de.blackcraze.grb.core.BotConfig;
+import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
-import net.dv8tion.jda.core.entities.Channel;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.ReadyEvent;
@@ -15,14 +12,7 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class ReadyListener extends ListenerAdapter {
 
-	private Injector in;
-
-	@SuppressWarnings("unused")
-	private ReadyListener() {
-	}
-
-	public ReadyListener(Injector injector) {
-		this.in = injector;
+	public ReadyListener() {
 	}
 
 	@Override

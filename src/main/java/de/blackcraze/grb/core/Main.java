@@ -1,10 +1,7 @@
 package de.blackcraze.grb.core;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import de.blackcraze.grb.listener.MessageListener;
 import de.blackcraze.grb.listener.ReadyListener;
-import de.blackcraze.grb.util.DbUtil;
 import de.blackcraze.grb.util.StandingDataInitializer;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDABuilder;
@@ -21,23 +18,22 @@ public class Main {
 			}
 		}
 
-		Injector injector = Guice.createInjector(new DbUtil());
-		initData(injector);
-		initDiscord(injector, BotConfig.DISCORD_TOKEN);
+		initData();
+		initDiscord();
 	}
 
-	private static void initData(Injector injector) {
-		new StandingDataInitializer(injector).initStockTypes();
+	private static void initData() {
+		new StandingDataInitializer().initStockTypes();
 	}
 
-	private static void initDiscord(Injector injector, String token) {
+	private static void initDiscord() {
 		JDABuilder builder = new JDABuilder(AccountType.BOT);
 		try {
-			builder.setToken(token);
+			builder.setToken(BotConfig.DISCORD_TOKEN);
 			builder.setAutoReconnect(true);
 			builder.setStatus(OnlineStatus.ONLINE);
-			builder.addEventListener(new ReadyListener(injector));
-			builder.addEventListener(new MessageListener(injector));
+			builder.addEventListener(new ReadyListener());
+			builder.addEventListener(new MessageListener());
 
 			builder.buildBlocking();
 		} catch (Throwable e) {
