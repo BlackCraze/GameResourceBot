@@ -14,6 +14,7 @@ import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static de.blackcraze.grb.util.InjectorUtils.getStockDao;
 
@@ -66,8 +67,7 @@ public final class PrintUtils {
 	}
 
 	static String getDiffFormatted(Date from, Date to) {
-		Duration duration = new Duration(to.getTime() - from.getTime()); // in
-		// milliseconds
+		Duration duration = new Duration(to.getTime() - from.getTime()); // in milliseconds
 		PeriodFormatter formatter = new PeriodFormatterBuilder().printZeroNever()//
 				.appendWeeks().appendSuffix("w").appendSeparator(" ")//
 				.appendDays().appendSuffix("d").appendSeparator(" ")//
@@ -75,7 +75,10 @@ public final class PrintUtils {
 				.appendMinutes().appendSuffix("m").appendSeparator(" ")//
 				.appendSeconds().appendSuffix("s")//
 				.toFormatter();
-		return formatter.print(duration.toPeriod(PeriodType.yearMonthDayTime()));
+		String fullTimeAgo = formatter.print(duration.toPeriod(PeriodType.yearMonthDayTime()));
+		return Arrays.stream(fullTimeAgo.split(" "))
+				.limit(2)
+				.collect(Collectors.joining(" "));
 	}
 
 
