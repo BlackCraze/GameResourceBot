@@ -7,7 +7,6 @@
     <entry key="USER">Benutzer</entry>
     <entry key="DO_NOT_KNOW_ABOUT">Das hier kenne ich nicht: {}</entry>
     <entry key="RESOURCES_EMPTY">Da steht nichts - was soll man denn da updaten!</entry>
-    <entry key="PONG">ich weiß :-(</entry>
     <entry key="NO_DATA">Leider keine Daten vorhanden :-(</entry>
     <entry key="USER_UNKNOWN">Diesen Benutzer kenne ich nicht =(</entry>
     <entry key="RAW_MATERIAL">Rohstoff</entry>
