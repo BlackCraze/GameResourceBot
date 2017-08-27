@@ -11,7 +11,7 @@
     <entry key="PONG">Το ξέρω :-(</entry>
     <entry key="NO_DATA">Συγνώμη, αλλά δεν υπάρχουν δεδομένα:-(</entry>
     <entry key="USER_UNKNOWN">Δεν ξέρω αυτόν τον χρήστη =(</entry>
-    <entry key="RAW_MATERIAL">Ακατέργαστα υλικά</entry>
+    <entry key="RAW_MATERIAL">Υλικό</entry>
     <entry key="AMOUNT">Ποσότητα</entry>
     <entry key="UPDATED">Το δήλωσε πριν από</entry>
 </properties>
