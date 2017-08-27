@@ -1,21 +1,14 @@
 package de.blackcraze.grb.dao;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
+import de.blackcraze.grb.model.entity.Mate;
+import de.blackcraze.grb.model.entity.Stock;
+import de.blackcraze.grb.model.entity.StockType;
 
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
-
-import org.apache.commons.lang3.StringUtils;
-
-import de.blackcraze.grb.model.entity.Mate;
-import de.blackcraze.grb.model.entity.Stock;
-import de.blackcraze.grb.model.entity.StockType;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
 
@@ -26,17 +19,17 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
 	private IStockDao stockDao;
 
 	@Override
-	public Mate findByDiscord(String discordId) {
+	public Optional<Mate> findByDiscord(String discordID) {
 		try {
-			return (Mate) em
+			return Optional.of((Mate) em
 					.createQuery(
 							"select m from Mate m left join fetch m.stocks left join fetch m.buildings where m.discordId = :discordId")
-					.setParameter("discordId", discordId).getSingleResult();
+					.setParameter("discordId", discordID).getSingleResult());
 		} catch (NoResultException e) {
-			return null;
+			return Optional.empty();
 		} catch (NonUniqueResultException e) {
 			e.printStackTrace();
-			return null;
+			return Optional.empty();
 		}
 	}
 
@@ -65,10 +58,10 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
 		if (!toInsert.isEmpty()) {
 			for (Entry<String, Long> entry : toInsert) {
 				String typeName = entry.getKey();
-				StockType type = stockTypeDao.findByName(typeName);
-				if (type != null) {
+				Optional<StockType> type = stockTypeDao.findByName(typeName);
+				if (type.isPresent()) {
 					Stock stock = new Stock();
-					stock.setType(type);
+					stock.setType(type.get());
 					stock.setAmount(entry.getValue());
 					stock.setMate(mate);
 					stockDao.save(stock);
@@ -85,7 +78,8 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
 	@Override
 	public List<Mate> findByNameLike(String name) {
 		return em.createQuery("from Mate where lower(name) like :name order by name")
-				.setParameter("name", "%" + StringUtils.lowerCase(name) + "%").getResultList();
+				.setParameter("name", "%" + name.toLowerCase() + "%")
+				.getResultList();
 	}
 
 	// TODO more power

@@ -4,10 +4,10 @@ import de.blackcraze.grb.core.BotConfig;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.SelfUser;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class CommandUtils {
 
@@ -19,7 +19,7 @@ public class CommandUtils {
             String row = rows[i];
             Long amount = parseAmount(row, firstRow);
             String name = parseStockName(row, firstRow);
-            if (amount != null && name != null) {
+            if (!Objects.isNull(amount) && !Objects.isNull(name)) {
                 stocks.put(name, amount);
             }
         }
@@ -48,7 +48,7 @@ public class CommandUtils {
 
     public static String parse(String row, int index, boolean firstRow) {
         index = firstRow ? index + 2 : index;
-        String[] split = StringUtils.split(row, " ");
+        String[] split = row.split(" ");
         if (index < split.length) {
             return split[index];
         }

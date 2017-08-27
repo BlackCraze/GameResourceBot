@@ -11,20 +11,13 @@ import net.dv8tion.jda.core.entities.Message;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static de.blackcraze.grb.util.CommandUtils.parseStockName;
 import static de.blackcraze.grb.util.CommandUtils.parseStocks;
-import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
-import static de.blackcraze.grb.util.InjectorUtils.getOrCreateMate;
-import static de.blackcraze.grb.util.InjectorUtils.getStockTypeDao;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrintMate;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrintStockTypes;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrintStocks;
+import static de.blackcraze.grb.util.InjectorUtils.*;
+import static de.blackcraze.grb.util.PrintUtils.*;
 
 @SuppressWarnings("unused")
 public final class Commands {
@@ -39,7 +32,7 @@ public final class Commands {
 
 	public static void config(Message message) {
 		String config_action = CommandUtils.parse(message.getContent(), 2);
-		if (config_action == null) {
+		if (Objects.isNull(config_action)) {
 			StringBuilder response = new StringBuilder();
 			response.append("```\n");
 			List<Field> fields = Arrays.stream(BotConfig.class.getDeclaredFields())
@@ -66,7 +59,7 @@ public final class Commands {
 		if ("set".equals(config_action.toLowerCase())) {
 			String field = CommandUtils.parse(message.getContent(), 3);
 			String value = CommandUtils.parse(message.getContent(), 4);
-			if (field == null || value == null) {
+			if (Objects.isNull(field) || Objects.isNull(value)) {
 				message.addReaction(Speaker.Reaction.FAILURE).queue();
 				return;
 			}
@@ -119,8 +112,8 @@ public final class Commands {
 
 	public static void newType(Message message) {
 		String stockName = parseStockName(message.getContent(), true);
-		if (stockName != null && !stockName.isEmpty()) {
-			if (getStockTypeDao().findByName(stockName) != null) {
+		if (!Objects.isNull(stockName) && !stockName.isEmpty()) {
+			if (getStockTypeDao().findByName(stockName).isPresent()) {
 				Speaker.err(message, Resource.getString("ALREADY_KNOW"));
 			} else {
 				StockType type = new StockType();
@@ -136,9 +129,9 @@ public final class Commands {
 
 		String stockName = parseStockName(message.getContent(), true);
 		if (stockName != null && !stockName.isEmpty()) {
-			StockType stockType = getStockTypeDao().findByName(stockName);
-			if (stockType != null) {
-				getStockTypeDao().delete(stockType);
+			Optional<StockType> stockType = getStockTypeDao().findByName(stockName);
+			if (stockType.isPresent()) {
+				getStockTypeDao().delete(stockType.get());
 				message.addReaction(Speaker.Reaction.SUCCESS).queue();
 			} else {
 				Speaker.err(message, Resource.getString("RESOURCE_UNKNOWN"));

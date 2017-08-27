@@ -7,12 +7,14 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 
+import java.util.Objects;
+
 public class Main {
 
 	public static void main(String[] args) {
 
 		for (String env_var: BotConfig.REQUIRED_ENV_VARS) {
-			if (System.getenv(env_var) == null) {
+			if (Objects.isNull(System.getenv(env_var))) {
 				System.err.printf("Missing environment variable: \"%s\"%n", env_var);
 				System.exit(1);
 			}
