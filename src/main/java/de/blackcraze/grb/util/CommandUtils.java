@@ -58,7 +58,7 @@ public class CommandUtils {
     public static boolean botMentioned(GuildMessageReceivedEvent event) {
         Message message = event.getMessage();
         SelfUser selfUser = event.getJDA().getSelfUser();
-        boolean prefixCheck = BotConfig.PREFIX.equalsIgnoreCase(message.getContent());
+        boolean prefixCheck = BotConfig.PREFIX.equalsIgnoreCase(message.getContent().split(" ")[0]);
         boolean mentionCheck = message.isMentioned(selfUser);
         return prefixCheck || mentionCheck;
         // for (Role role : event.getMessage().getMentionedRoles()) {

@@ -2,7 +2,6 @@ package de.blackcraze.grb.listener;
 
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.core.Speaker;
-import de.blackcraze.grb.i18n.Resource;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.ReadyEvent;
@@ -46,7 +45,7 @@ public class ReadyListener extends ListenerAdapter {
 	}
 
 	private void sayHello(TextChannel channel) {
-		Speaker.say(channel, Resource.getString("PONG"));
+		Speaker.say(channel, "Listening with prefix " + BotConfig.PREFIX);
 	}
 
 }
