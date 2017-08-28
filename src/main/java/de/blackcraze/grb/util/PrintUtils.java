@@ -82,11 +82,14 @@ public final class PrintUtils {
 	}
 
 
-	public static String prettyPrintStocks(List<StockType> stockTypes) {
+	public static String prettyPrintStocks(List<StockType> stockTypes, Locale responseLocale) {
 		if (stockTypes.isEmpty()) {
-			return Resource.getString("RESOURCE_UNKNOWN");
+			return Resource.getString("RESOURCE_UNKNOWN", responseLocale);
 		}
-		List<String> headers = Arrays.asList(Resource.getString("USER"), Resource.getString("AMOUNT"), Resource.getString("UPDATED"));
+		List<String> headers = Arrays.asList(
+				Resource.getString("USER", responseLocale),
+				Resource.getString("AMOUNT", responseLocale),
+				Resource.getString("UPDATED", responseLocale));
 		List<Integer> aligns = Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT, Block.DATA_MIDDLE_RIGHT);
 
 		PrintableTable[] tables = new PrintableTable[stockTypes.size()];
@@ -111,11 +114,11 @@ public final class PrintUtils {
 		return PrintUtils.prettyPrint(tables);
 	}
 
-	public static String prettyPrintStockTypes(List<StockType> stockTypes) {
+	public static String prettyPrintStockTypes(List<StockType> stockTypes, Locale responseLocale) {
 		StringBuilder b = new StringBuilder();
 		b.append("```\n");
 		if (stockTypes.isEmpty()) {
-			b.append(Resource.getString("NO_DATA"));
+			b.append(Resource.getString("NO_DATA", responseLocale));
 		}
 		for (StockType type : stockTypes) {
 			b.append(type.getName());
@@ -125,11 +128,14 @@ public final class PrintUtils {
 		return b.toString();
 	}
 
-	public static String prettyPrintMate(List<Mate> mates) {
+	public static String prettyPrintMate(List<Mate> mates, Locale responseLocale) {
 		if (mates.isEmpty()) {
-			return Resource.getString("USER_UNKNOWN");
+			return Resource.getString("USER_UNKNOWN", responseLocale);
 		}
-		List<String> headers = Arrays.asList(Resource.getString("RAW_MATERIAL"), Resource.getString("AMOUNT"), Resource.getString("UPDATED"));
+		List<String> headers = Arrays.asList(
+				Resource.getString("RAW_MATERIAL", responseLocale),
+				Resource.getString("AMOUNT", responseLocale),
+				Resource.getString("UPDATED", responseLocale));
 		List<Integer> aligns = Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT, Block.DATA_MIDDLE_RIGHT);
 
 		PrintableTable[] tables = new PrintableTable[mates.size()];

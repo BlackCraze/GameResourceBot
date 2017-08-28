@@ -23,10 +23,12 @@ public class MessageListener extends ListenerAdapter {
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		Message message = event.getMessage();
-		if (!BotConfig.CHANNEL.equalsIgnoreCase(message.getTextChannel().getName())) {
+		String listeningChannel = BotConfig.getConfig(message.getGuild()).CHANNEL;
+		String messageChannel = message.getTextChannel().getName();
+		if (!listeningChannel.equalsIgnoreCase(messageChannel)) {
 			return;
 		}
-		if (!CommandUtils.botMentioned(event)) {
+		if (!CommandUtils.botMentioned(message)) {
 			return;
 		}
 		String action = parseAction(message);

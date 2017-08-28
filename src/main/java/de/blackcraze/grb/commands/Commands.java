@@ -1,7 +1,6 @@
 package de.blackcraze.grb.commands;
 
 import de.blackcraze.grb.core.BotConfig;
-import de.blackcraze.grb.core.Configurable;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
 import de.blackcraze.grb.model.entity.Mate;
@@ -12,10 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.stream.Collectors;
 
-import static de.blackcraze.grb.util.CommandUtils.parseStockName;
-import static de.blackcraze.grb.util.CommandUtils.parseStocks;
+import static de.blackcraze.grb.util.CommandUtils.*;
 import static de.blackcraze.grb.util.InjectorUtils.*;
 import static de.blackcraze.grb.util.PrintUtils.*;
 
@@ -27,22 +24,21 @@ public final class Commands {
 
 
 	public static void ping(Message message) {
-		Speaker.say(message.getTextChannel(), Resource.getString("PONG"));
+		Speaker.say(message.getTextChannel(), Resource.getString("PONG", getResponseLocale(message)));
 	}
 
 	public static void config(Message message) {
 		String config_action = CommandUtils.parse(message.getContent(), 2);
+		BotConfig.ServerConfig instance = BotConfig.getConfig(message.getGuild());
 		if (Objects.isNull(config_action)) {
 			StringBuilder response = new StringBuilder();
 			response.append("```\n");
-			List<Field> fields = Arrays.stream(BotConfig.class.getDeclaredFields())
-					.filter(field -> field.isAnnotationPresent(Configurable.class))
-					.collect(Collectors.toList());
+			Field[] fields = BotConfig.ServerConfig.class.getDeclaredFields();
 
 			for (Field field : fields) {
 				Object value;
 				try {
-					value = field.get(null);
+					value = field.get(instance);
 				} catch (IllegalAccessException e) {
 					e.printStackTrace();
 					continue;
@@ -64,12 +60,12 @@ public final class Commands {
 				return;
 			}
 			try {
-				Field declaredField = BotConfig.class.getDeclaredField(field);
-				assert declaredField.isAnnotationPresent(Configurable.class);
+				Field declaredField = BotConfig.ServerConfig.class.getDeclaredField(field);
 				assert String.class.equals(declaredField.getType());
-				declaredField.set(null, value);
+				declaredField.set(instance, value);
 				message.addReaction(Speaker.Reaction.SUCCESS).queue();
 			} catch (Exception e) {
+				message.addReaction(Speaker.Reaction.FAILURE).queue();
 				e.printStackTrace();
 			}
 		}
@@ -92,13 +88,13 @@ public final class Commands {
 			List<String> unknown = getMateDao().updateStocks(getOrCreateMate(message.getAuthor()), stocks);
 			if (stocks.size() > 0) {
 				if (!unknown.isEmpty()) {
-					Speaker.err(message, Resource.getString("DO_NOT_KNOW_ABOUT"));
+					Speaker.err(message, Resource.getString("DO_NOT_KNOW_ABOUT", getResponseLocale(message)));
 				}
 				if (unknown.size() != stocks.size()) {
 					message.addReaction(Speaker.Reaction.SUCCESS).queue();
 				}
 			} else {
-				Speaker.err(message, Resource.getString("RESOURCES_EMPTY"));
+				Speaker.err(message, Resource.getString("RESOURCES_EMPTY", getResponseLocale(message)));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -107,14 +103,14 @@ public final class Commands {
 	}
 
 	public static void checkTypes(Message message) {
-		Speaker.say(message.getTextChannel(), prettyPrintStockTypes(getStockTypeDao().findAll()));
+		Speaker.say(message.getTextChannel(), prettyPrintStockTypes(getStockTypeDao().findAll(), getResponseLocale(message)));
 	}
 
 	public static void newType(Message message) {
 		String stockName = parseStockName(message.getContent(), true);
 		if (!Objects.isNull(stockName) && !stockName.isEmpty()) {
 			if (getStockTypeDao().findByName(stockName).isPresent()) {
-				Speaker.err(message, Resource.getString("ALREADY_KNOW"));
+				Speaker.err(message, Resource.getString("ALREADY_KNOW", getResponseLocale(message)));
 			} else {
 				StockType type = new StockType();
 				type.setName(stockName);
@@ -134,7 +130,7 @@ public final class Commands {
 				getStockTypeDao().delete(stockType.get());
 				message.addReaction(Speaker.Reaction.SUCCESS).queue();
 			} else {
-				Speaker.err(message, Resource.getString("RESOURCE_UNKNOWN"));
+				Speaker.err(message, Resource.getString("RESOURCE_UNKNOWN", getResponseLocale(message)));
 			}
 		}
 	}
@@ -145,18 +141,18 @@ public final class Commands {
 		List<Mate> mates;
 		if (StringUtils.isEmpty(mateName)) {
 			mates = Collections.singletonList(getOrCreateMate(message.getAuthor()));
-			Speaker.say(message.getTextChannel(), prettyPrintMate(mates));
+			Speaker.say(message.getTextChannel(), prettyPrintMate(mates, getResponseLocale(message)));
 		} else {
 			mates = getMateDao().findByNameLike(mateName);
 			if (!mates.isEmpty()) {
-				Speaker.say(message.getTextChannel(), prettyPrintMate(mates));
+				Speaker.say(message.getTextChannel(), prettyPrintMate(mates, getResponseLocale(message)));
 			}
 			List<StockType> types = getStockTypeDao().findByNameLike(mateName);
 			if (!types.isEmpty()) {
-				Speaker.say(message.getTextChannel(), prettyPrintStocks(types));
+				Speaker.say(message.getTextChannel(), prettyPrintStocks(types, getResponseLocale(message)));
 			}
 			if (types.isEmpty() && mates.isEmpty()) {
-				Speaker.say(message.getTextChannel(),Resource.getString("RESOURCE_AND_USER_UNKNOWN"));
+				Speaker.say(message.getTextChannel(),Resource.getString("RESOURCE_AND_USER_UNKNOWN", getResponseLocale(message)));
 			}
 		}
 	}

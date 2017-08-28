@@ -1,11 +1,12 @@
 package de.blackcraze.grb.util;
 
 import de.blackcraze.grb.core.BotConfig;
+import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.SelfUser;
-import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -55,10 +56,11 @@ public class CommandUtils {
         return null;
     }
 
-    public static boolean botMentioned(GuildMessageReceivedEvent event) {
-        Message message = event.getMessage();
-        SelfUser selfUser = event.getJDA().getSelfUser();
-        boolean prefixCheck = BotConfig.PREFIX.equalsIgnoreCase(message.getContent().split(" ")[0]);
+    public static boolean botMentioned(Message message) {
+        SelfUser selfUser = message.getJDA().getSelfUser();
+        String prefix = BotConfig.getConfig(message.getGuild()).PREFIX;
+        String messageStartWord = message.getContent().split(" ")[0];
+        boolean prefixCheck = prefix.equalsIgnoreCase(messageStartWord);
         boolean mentionCheck = message.isMentioned(selfUser);
         return prefixCheck || mentionCheck;
         // for (Role role : event.getMessage().getMentionedRoles()) {
@@ -67,5 +69,12 @@ public class CommandUtils {
         // }
         // }
         // return false;
+    }
+
+    public static Locale getResponseLocale(Message message) {
+        Guild guild = message.getGuild();
+        BotConfig.ServerConfig config = BotConfig.getConfig(guild);
+        String langString = config.LANGUAGE;
+        return new Locale(langString);
     }
 }
