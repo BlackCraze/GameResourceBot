@@ -7,7 +7,6 @@ import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.StockType;
 import de.blackcraze.grb.util.CommandUtils;
 import net.dv8tion.jda.core.entities.Message;
-import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -138,12 +137,11 @@ public final class Commands {
 
 	public static void check(Message message) {
 		String mateName = parseStockName(message.getContent(), true);
-		List<Mate> mates;
-		if (StringUtils.isEmpty(mateName)) {
-			mates = Collections.singletonList(getOrCreateMate(message.getAuthor()));
+		if (Objects.isNull(mateName) || mateName.isEmpty()) {
+			List<Mate> mates = Collections.singletonList(getOrCreateMate(message.getAuthor()));
 			Speaker.say(message.getTextChannel(), prettyPrintMate(mates, getResponseLocale(message)));
 		} else {
-			mates = getMateDao().findByNameLike(mateName);
+			List<Mate> mates = getMateDao().findByNameLike(mateName);
 			if (!mates.isEmpty()) {
 				Speaker.say(message.getTextChannel(), prettyPrintMate(mates, getResponseLocale(message)));
 			}

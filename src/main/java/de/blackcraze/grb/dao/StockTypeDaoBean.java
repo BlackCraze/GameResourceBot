@@ -1,7 +1,6 @@
 package de.blackcraze.grb.dao;
 
 import de.blackcraze.grb.model.entity.StockType;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.NoResultException;
 import java.util.Collections;
@@ -32,7 +31,7 @@ public class StockTypeDaoBean extends BaseDaoBean<StockType> implements IStockTy
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<StockType> findByNameLike(String name) {
-		if (StringUtils.isEmpty(name)) {
+		if (name.isEmpty()) {
 			return Collections.emptyList();
 		} else {
 			return em.createQuery("from StockType where lower(name) like :name order by name")
