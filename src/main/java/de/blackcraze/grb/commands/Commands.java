@@ -59,7 +59,7 @@ public final class Commands {
 				return;
 			}
 			try {
-				Field declaredField = BotConfig.ServerConfig.class.getDeclaredField(field);
+				Field declaredField = BotConfig.ServerConfig.class.getDeclaredField(field.toUpperCase());
 				assert String.class.equals(declaredField.getType());
 				declaredField.set(instance, value);
 				message.addReaction(Speaker.Reaction.SUCCESS).queue();
@@ -87,7 +87,7 @@ public final class Commands {
 			List<String> unknown = getMateDao().updateStocks(getOrCreateMate(message.getAuthor()), stocks);
 			if (stocks.size() > 0) {
 				if (!unknown.isEmpty()) {
-					Speaker.err(message, Resource.getString("DO_NOT_KNOW_ABOUT", getResponseLocale(message)));
+					Speaker.err(message, String.format(Resource.getString("DO_NOT_KNOW_ABOUT", getResponseLocale(message)), unknown.toString()));
 				}
 				if (unknown.size() != stocks.size()) {
 					message.addReaction(Speaker.Reaction.SUCCESS).queue();

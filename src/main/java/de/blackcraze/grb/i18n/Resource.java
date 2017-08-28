@@ -9,8 +9,15 @@ public class Resource {
 
     }
 
+    public static String getItem(String key, Locale locale) {
+        return getResource(key, locale, "items");
+    }
+
     public static String getString(String key, Locale locale) {
-        String baseName = "strings";
+        return getResource(key, locale, "strings");
+    }
+
+    private static String getResource(String key, Locale locale, String baseName) {
         ResourceBundle resourceBundle = ResourceBundle.getBundle(baseName, locale, new XMLResourceBundleControl());
         if (!resourceBundle.containsKey(key)) {
             System.err.printf("Can't find key %s in locale %s%n", key, locale.toLanguageTag());

@@ -6,7 +6,7 @@
     <entry key="ALREADY_KNOW">I already know.</entry>
     <entry key="RESOURCE_UNKNOWN">I don't know this resource =(</entry>
     <entry key="USER">User</entry>
-    <entry key="DO_NOT_KNOW_ABOUT">I do not know anything about this: {}</entry>
+    <entry key="DO_NOT_KNOW_ABOUT">I do not know anything about this: %s</entry>
     <entry key="RESOURCES_EMPTY">There is nothing here! Why don't you consider updating your resources!</entry>
     <entry key="PONG">Pong!</entry>
     <entry key="NO_DATA">Sorry, nothing to see here :-(</entry>

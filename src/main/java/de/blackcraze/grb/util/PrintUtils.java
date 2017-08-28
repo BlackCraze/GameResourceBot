@@ -102,14 +102,17 @@ public final class PrintUtils {
 				rows.add(Arrays.asList("-", "-", "-"));
 			}
 			for (Stock stock : stocks) {
-				String name = stock.getMate().getName();
+				String resourceKey = stock.getMate().getName();
+				String resourceName = Resource.getItem(resourceKey, responseLocale);
 				String amount = String.format("%,d", stock.getAmount());
 				String updated = PrintUtils.getDiffFormatted(stock.getUpdated(), new Date());
-				rows.add(Arrays.asList(name, amount, updated));
+				rows.add(Arrays.asList(resourceName, amount, updated));
 				sumAmount += stock.getAmount();
 			}
-			List<String> summary = Arrays.asList(type.getName(), String.format("%,d", sumAmount), "");
-			tables[i] = new PrintableTable(type.getName(), summary, headers, rows, aligns);
+			String resourceKey = type.getName();
+			String resourceName = Resource.getItem(resourceKey, responseLocale);
+			List<String> summary = Arrays.asList(resourceName, String.format("%,d", sumAmount), "");
+			tables[i] = new PrintableTable(resourceName, summary, headers, rows, aligns);
 		}
 		return PrintUtils.prettyPrint(tables);
 	}
@@ -121,7 +124,9 @@ public final class PrintUtils {
 			b.append(Resource.getString("NO_DATA", responseLocale));
 		}
 		for (StockType type : stockTypes) {
-			b.append(type.getName());
+			String resourceKey = type.getName();
+			String resourceName = Resource.getItem(resourceKey, responseLocale);
+			b.append(resourceName);
 			b.append("\n");
 		}
 		b.append("\n```\n");
@@ -143,14 +148,15 @@ public final class PrintUtils {
 			Mate mate = mates.get(i);
 			List<Stock> stocks = getStockDao().findStocksByMate(mate);
 			List<List<String>> rows = new ArrayList<>(stocks.size());
-			if (stocks.isEmpty()) {
-				rows.add(Arrays.asList("-", "-", "-"));
-			}
 			for (Stock stock : stocks) {
-				String name = stock.getType().getName();
+				String resourceKey = stock.getType().getName();
+				String resourceName = Resource.getItem(resourceKey, responseLocale);
 				String amount = String.format("%,d", stock.getAmount());
 				String updated = PrintUtils.getDiffFormatted(stock.getUpdated(), new Date());
-				rows.add(Arrays.asList(name, amount, updated));
+				rows.add(Arrays.asList(resourceName, amount, updated));
+			}
+			if (stocks.isEmpty()) {
+				rows.add(Arrays.asList("-", "-", "-"));
 			}
 			tables[i] = new PrintableTable(mate.getName(), Collections.emptyList(), headers, rows, aligns);
 		}
