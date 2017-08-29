@@ -3,8 +3,6 @@ package de.blackcraze.grb.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 public class PrintableTable {
 	private static final String SPACER = " ";
 	private final List<List<String>> rows;
@@ -77,19 +75,19 @@ public class PrintableTable {
 		if (widths == null) {
 			widths = new ArrayList<>(rows.get(0).size());
 			for (String title : titles) {
-				widths.add(StringUtils.length(title));
+				widths.add(title.length());
 			}
 			for (List<String> row : rows) {
 				for (int i = 0; i < row.size(); i++) {
 					// adding spacer just because adding a space looks nice
-					int width = StringUtils.length(row.get(i));
+					int width = row.get(i).length();
 					if (width > widths.get(i)) {
 						widths.set(i, width);
 					}
 				}
 			}
 			for (int i = 0; i < footer.size(); i++) {
-				int width = StringUtils.length(footer.get(i));
+				int width = footer.get(i).length();
 				if (width > widths.get(i)) {
 					widths.set(i, width);
 				}

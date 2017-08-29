@@ -1,24 +1,18 @@
 package de.blackcraze.grb.util;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
+import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
+import de.blackcraze.grb.core.BotConfig;
+import de.blackcraze.grb.dao.*;
 
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
-import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
-
-import de.blackcraze.grb.core.BotConfig;
-import de.blackcraze.grb.dao.IMateDao;
-import de.blackcraze.grb.dao.IStockDao;
-import de.blackcraze.grb.dao.IStockTypeDao;
-import de.blackcraze.grb.dao.MateDaoBean;
-import de.blackcraze.grb.dao.StockDaoBean;
-import de.blackcraze.grb.dao.StockTypeDaoBean;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.StringTokenizer;
 
 public class DbUtil extends AbstractModule {
 
@@ -63,7 +57,7 @@ public class DbUtil extends AbstractModule {
 	@Provides
 	public EntityManager createEntityManager(EntityManagerFactory entityManagerFactory) {
 		EntityManager entityManager = ENTITY_MANAGER_CACHE.get();
-		if (entityManager == null) {
+		if (Objects.isNull(entityManager)) {
 			ENTITY_MANAGER_CACHE.set(entityManager = entityManagerFactory.createEntityManager());
 		}
 		return entityManager;

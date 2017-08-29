@@ -27,7 +27,7 @@ public class XMLResourceBundleControl extends ResourceBundle.Control {
         if ((baseName == null) || (locale == null) || (format == null) || (loader == null)) {
             throw new NullPointerException();
         }
-        ResourceBundle bundle = null;
+        ResourceBundle bundle;
         if (!format.equals(XML)) {
             return null;
         }
