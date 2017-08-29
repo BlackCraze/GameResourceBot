@@ -9,10 +9,9 @@ import de.blackcraze.grb.util.CommandUtils;
 import net.dv8tion.jda.core.entities.Message;
 
 import java.lang.reflect.Field;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.lang.reflect.Method;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static de.blackcraze.grb.util.CommandUtils.*;
 import static de.blackcraze.grb.util.InjectorUtils.*;
@@ -127,5 +126,15 @@ public final class Commands {
 				Speaker.say(message.getTextChannel(),Resource.getString("RESOURCE_AND_USER_UNKNOWN", getResponseLocale(message)));
 			}
 		}
+	}
+
+	public static void help(Message message) {
+		String response = Arrays.stream(Commands.class.getDeclaredMethods())
+				.map(Method::getName)
+				.collect(Collectors.joining(
+						"\n  ",
+						"```\n" + Resource.getString("COMMANDS", getResponseLocale(message)) + "\n  ",
+						"```"));
+		Speaker.say(message.getTextChannel(), response);
 	}
 }
