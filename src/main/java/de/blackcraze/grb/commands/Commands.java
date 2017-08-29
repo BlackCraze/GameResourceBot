@@ -1,5 +1,21 @@
 package de.blackcraze.grb.commands;
 
+import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
+import static de.blackcraze.grb.util.CommandUtils.parseStockName;
+import static de.blackcraze.grb.util.CommandUtils.parseStocks;
+import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
+import static de.blackcraze.grb.util.InjectorUtils.getStockTypeDao;
+import static de.blackcraze.grb.util.PrintUtils.prettyPrintMate;
+import static de.blackcraze.grb.util.PrintUtils.prettyPrintStockTypes;
+import static de.blackcraze.grb.util.PrintUtils.prettyPrintStocks;
+
+import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
@@ -8,19 +24,10 @@ import de.blackcraze.grb.model.entity.StockType;
 import de.blackcraze.grb.util.CommandUtils;
 import net.dv8tion.jda.core.entities.Message;
 
-import java.lang.reflect.Field;
-import java.util.*;
-
-import static de.blackcraze.grb.util.CommandUtils.*;
-import static de.blackcraze.grb.util.InjectorUtils.*;
-import static de.blackcraze.grb.util.PrintUtils.*;
-
-@SuppressWarnings("unused")
 public final class Commands {
 
 	private Commands() {
 	}
-
 
 	public static void ping(Message message) {
 		Speaker.say(message.getTextChannel(), Resource.getString("PONG", getResponseLocale(message)));
@@ -84,10 +91,11 @@ public final class Commands {
 	public static void update(Message message) {
 		try {
 			Map<String, Long> stocks = parseStocks(message);
-			List<String> unknown = getMateDao().updateStocks(getOrCreateMate(message.getAuthor()), stocks);
+			List<String> unknown = getMateDao().updateStocks(getMateDao().getOrCreateMate(message.getAuthor()), stocks);
 			if (stocks.size() > 0) {
 				if (!unknown.isEmpty()) {
-					Speaker.err(message, String.format(Resource.getString("DO_NOT_KNOW_ABOUT", getResponseLocale(message)), unknown.toString()));
+					Speaker.err(message, String.format(
+							Resource.getString("DO_NOT_KNOW_ABOUT", getResponseLocale(message)), unknown.toString()));
 				}
 				if (unknown.size() != stocks.size()) {
 					message.addReaction(Speaker.Reaction.SUCCESS).queue();
@@ -102,7 +110,8 @@ public final class Commands {
 	}
 
 	public static void checkTypes(Message message) {
-		Speaker.say(message.getTextChannel(), prettyPrintStockTypes(getStockTypeDao().findAll(), getResponseLocale(message)));
+		Speaker.say(message.getTextChannel(),
+				prettyPrintStockTypes(getStockTypeDao().findAll(), getResponseLocale(message)));
 	}
 
 	public static void newType(Message message) {
@@ -134,11 +143,10 @@ public final class Commands {
 		}
 	}
 
-
 	public static void check(Message message) {
 		String mateName = parseStockName(message.getContent(), true);
 		if (Objects.isNull(mateName) || mateName.isEmpty()) {
-			List<Mate> mates = Collections.singletonList(getOrCreateMate(message.getAuthor()));
+			List<Mate> mates = Collections.singletonList(getMateDao().getOrCreateMate(message.getAuthor()));
 			Speaker.say(message.getTextChannel(), prettyPrintMate(mates, getResponseLocale(message)));
 		} else {
 			List<Mate> mates = getMateDao().findByNameLike(mateName);
@@ -150,7 +158,8 @@ public final class Commands {
 				Speaker.say(message.getTextChannel(), prettyPrintStocks(types, getResponseLocale(message)));
 			}
 			if (types.isEmpty() && mates.isEmpty()) {
-				Speaker.say(message.getTextChannel(),Resource.getString("RESOURCE_AND_USER_UNKNOWN", getResponseLocale(message)));
+				Speaker.say(message.getTextChannel(),
+						Resource.getString("RESOURCE_AND_USER_UNKNOWN", getResponseLocale(message)));
 			}
 		}
 	}

@@ -63,12 +63,6 @@ public class CommandUtils {
         boolean prefixCheck = prefix.equalsIgnoreCase(messageStartWord);
         boolean mentionCheck = message.isMentioned(selfUser);
         return prefixCheck || mentionCheck;
-        // for (Role role : event.getMessage().getMentionedRoles()) {
-        // if (role.getName().equalsIgnoreCase("bot")) {
-        // return true;
-        // }
-        // }
-        // return false;
     }
 
     public static Locale getResponseLocale(Message message) {

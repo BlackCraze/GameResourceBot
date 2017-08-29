@@ -1,6 +1,7 @@
 package de.blackcraze.grb.dao;
 
 import de.blackcraze.grb.model.entity.Mate;
+import net.dv8tion.jda.core.entities.User;
 
 import java.util.List;
 import java.util.Map;
@@ -15,5 +16,7 @@ public interface IMateDao {
 	List<String> updateStocks(Mate mate, Map<String, Long> newStocks);
 
 	List<Mate> findByNameLike(String name);
+
+	Mate getOrCreateMate(User author);
 
 }

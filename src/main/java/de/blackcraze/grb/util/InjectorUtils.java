@@ -30,17 +30,4 @@ public class InjectorUtils {
         return INJECTOR.getInstance(IStockDao.class);
     }
 
-    public static Mate getOrCreateMate(User author) {
-        String discordId = author.getId();
-        Optional<Mate> mateOptional = getMateDao().findByDiscord(discordId);
-        if (!mateOptional.isPresent()) {
-            Mate mate = new Mate();
-            mate.setDiscordId(discordId);
-            mate.setName(author.getName());
-            getMateDao().save(mate);
-            return mate;
-        }
-        return mateOptional.get();
-    }
-
 }

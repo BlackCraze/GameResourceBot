@@ -3,6 +3,7 @@ package de.blackcraze.grb.dao;
 import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.Stock;
 import de.blackcraze.grb.model.entity.StockType;
+import net.dv8tion.jda.core.entities.User;
 
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
@@ -78,8 +79,20 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
 	@Override
 	public List<Mate> findByNameLike(String name) {
 		return em.createQuery("from Mate where lower(name) like :name order by name")
-				.setParameter("name", "%" + name.toLowerCase() + "%")
-				.getResultList();
+				.setParameter("name", "%" + name.toLowerCase() + "%").getResultList();
+	}
+
+	public Mate getOrCreateMate(User author) {
+		String discordId = author.getId();
+		Optional<Mate> mateOptional = findByDiscord(discordId);
+		if (!mateOptional.isPresent()) {
+			Mate mate = new Mate();
+			mate.setDiscordId(discordId);
+			mate.setName(author.getName());
+			save(mate);
+			return mate;
+		}
+		return mateOptional.get();
 	}
 
 	// TODO more power
