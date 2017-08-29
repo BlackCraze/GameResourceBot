@@ -9,7 +9,10 @@ import de.blackcraze.grb.util.CommandUtils;
 import net.dv8tion.jda.core.entities.Message;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import static de.blackcraze.grb.util.CommandUtils.*;
 import static de.blackcraze.grb.util.InjectorUtils.*;
@@ -103,35 +106,6 @@ public final class Commands {
 
 	public static void checkTypes(Message message) {
 		Speaker.say(message.getTextChannel(), prettyPrintStockTypes(getStockTypeDao().findAll(), getResponseLocale(message)));
-	}
-
-	public static void newType(Message message) {
-		String stockName = parseStockName(message.getContent(), true);
-		if (!Objects.isNull(stockName) && !stockName.isEmpty()) {
-			if (getStockTypeDao().findByName(stockName).isPresent()) {
-				Speaker.err(message, Resource.getString("ALREADY_KNOW", getResponseLocale(message)));
-			} else {
-				StockType type = new StockType();
-				type.setName(stockName);
-				type.setPrice(0);
-				getStockTypeDao().save(type);
-				message.addReaction(Speaker.Reaction.SUCCESS).queue();
-			}
-		}
-	}
-
-	public static void deleteType(Message message) {
-
-		String stockName = parseStockName(message.getContent(), true);
-		if (stockName != null && !stockName.isEmpty()) {
-			Optional<StockType> stockType = getStockTypeDao().findByName(stockName);
-			if (stockType.isPresent()) {
-				getStockTypeDao().delete(stockType.get());
-				message.addReaction(Speaker.Reaction.SUCCESS).queue();
-			} else {
-				Speaker.err(message, Resource.getString("RESOURCE_UNKNOWN", getResponseLocale(message)));
-			}
-		}
 	}
 
 
