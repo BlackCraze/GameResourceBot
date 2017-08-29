@@ -1,15 +1,26 @@
 package de.blackcraze.grb.i18n;
 
-import de.blackcraze.grb.core.BotConfig;
-
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Resource {
-    public static String getString(String key) {
-        String baseName = "strings";
-        ResourceBundle resourceBundle = ResourceBundle.getBundle(baseName, BotConfig.getLocale(), new XMLResourceBundleControl());
+
+    private Resource() {
+
+    }
+
+    public static String getItem(String key, Locale locale) {
+        return getResource(key, locale, "items");
+    }
+
+    public static String getString(String key, Locale locale) {
+        return getResource(key, locale, "strings");
+    }
+
+    private static String getResource(String key, Locale locale, String baseName) {
+        ResourceBundle resourceBundle = ResourceBundle.getBundle(baseName, locale, new XMLResourceBundleControl());
         if (!resourceBundle.containsKey(key)) {
-            System.err.printf("Can't find key %s in locale %s%n", key, BotConfig.getLocale().toLanguageTag());
+            System.err.printf("Can't find key %s in locale %s%n", key, locale.toLanguageTag());
         }
         return resourceBundle.getString(key);
     }
