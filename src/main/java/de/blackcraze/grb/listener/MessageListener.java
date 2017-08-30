@@ -11,6 +11,7 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.Scanner;
 
 import static de.blackcraze.grb.util.CommandUtils.parseAction;
 
@@ -28,13 +29,17 @@ public class MessageListener extends ListenerAdapter {
 		if (!listeningChannel.equalsIgnoreCase(messageChannel)) {
 			return;
 		}
-		if (!CommandUtils.botMentioned(message)) {
+		Optional<Scanner> scannerOptional = CommandUtils.commandParser(message);
+		if (!scannerOptional.isPresent()) {
 			return;
 		}
-		String action = parseAction(message);
+
+		Scanner scanner = scannerOptional.get();
+
+		Optional<String> actionOptional = parseAction(scanner);
 
 		Optional<Method> methodOptional = Arrays.stream(Commands.class.getDeclaredMethods())
-				.filter(aMethod -> aMethod.getName().equalsIgnoreCase(action))
+				.filter(aMethod -> aMethod.getName().equalsIgnoreCase(actionOptional.orElse("help")))
 				.findFirst();
 
 		if (!methodOptional.isPresent()) {
@@ -42,8 +47,10 @@ public class MessageListener extends ListenerAdapter {
 			return;
 		}
 
+		System.out.printf("%s:%s%n", message.getAuthor().getName(), message.getContent());
+
 		try {
-			methodOptional.get().invoke(null, message);
+			methodOptional.get().invoke(null, scanner, message);
 		} catch (Exception e) {
 			message.addReaction(Speaker.Reaction.FAILURE).queue();
 			e.printStackTrace();

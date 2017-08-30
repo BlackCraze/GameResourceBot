@@ -7,8 +7,10 @@ import de.blackcraze.grb.model.entity.StockType;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
-import java.util.*;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
 
@@ -37,40 +39,32 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
 	public List<String> updateStocks(Mate mate, Map<String, Long> newStocks) {
 		List<String> unknown = new ArrayList<>();
 		List<Stock> stocks = stockDao.findStocksByMate(mate);
-		Set<Entry<String, Long>> toInsert = new HashSet<>();
 
-		for (Entry<String, Long> entry : newStocks.entrySet()) {
+		newStocks.forEach((stockName, stockAmount) -> {
 			boolean found = false;
 			for (Stock stock : stocks) {
-				String name = entry.getKey();
-				if (isStockMent(stock, name)) {
+				if (isStockMent(stock, stockName)) {
 					found = true;
-					stock.setAmount(entry.getValue());
+					stock.setAmount(stockAmount);
 					stockDao.update(stock);
 					break;
 				}
 			}
 			if (!found) {
-				toInsert.add(entry);
-			}
-		}
-
-		if (!toInsert.isEmpty()) {
-			for (Entry<String, Long> entry : toInsert) {
-				String typeName = entry.getKey();
-				Optional<StockType> type = stockTypeDao.findByName(typeName);
+				System.out.printf("Creating new stock %s for player %s%n", stockName, mate.getName());
+				Optional<StockType> type = stockTypeDao.findByName(stockName);
 				if (type.isPresent()) {
 					Stock stock = new Stock();
 					stock.setType(type.get());
-					stock.setAmount(entry.getValue());
+					stock.setAmount(stockAmount);
 					stock.setMate(mate);
 					stockDao.save(stock);
 				} else {
-					unknown.add(typeName);
-					System.err.println("I do not know this stock type: " + typeName);
+					unknown.add(stockName);
+					System.err.println("Unknown stock type: " + stockName);
 				}
 			}
-		}
+		});
 		return unknown;
 	}
 

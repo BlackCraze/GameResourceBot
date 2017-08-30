@@ -5,8 +5,8 @@ import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
 import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.StockType;
-import de.blackcraze.grb.util.CommandUtils;
 import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.TextChannel;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -24,14 +24,13 @@ public final class Commands {
 	}
 
 
-	public static void ping(Message message) {
+	public static void ping(Scanner scanner, Message message) {
 		Speaker.say(message.getTextChannel(), Resource.getString("PONG", getResponseLocale(message)));
 	}
 
-	public static void config(Message message) {
-		String config_action = CommandUtils.parse(message.getContent(), 2);
+	public static void config(Scanner scanner, Message message) {
 		BotConfig.ServerConfig instance = BotConfig.getConfig(message.getGuild());
-		if (Objects.isNull(config_action)) {
+		if (!scanner.hasNext()) {
 			StringBuilder response = new StringBuilder();
 			response.append("```\n");
 			Field[] fields = BotConfig.ServerConfig.class.getDeclaredFields();
@@ -53,9 +52,10 @@ public final class Commands {
 			Speaker.say(message.getTextChannel(), response.toString());
 			return;
 		}
+		String config_action = scanner.next();
 		if ("set".equals(config_action.toLowerCase())) {
-			String field = CommandUtils.parse(message.getContent(), 3);
-			String value = CommandUtils.parse(message.getContent(), 4);
+			String field = scanner.next();
+			String value = scanner.next();
 			if (Objects.isNull(field) || Objects.isNull(value)) {
 				message.addReaction(Speaker.Reaction.FAILURE).queue();
 				return;
@@ -72,7 +72,7 @@ public final class Commands {
 		}
 	}
 
-	public static void status(Message message) {
+	public static void status(Scanner scanner, Message message) {
 		Runtime rt = Runtime.getRuntime();
 		long total = rt.totalMemory();
 		long free = rt.freeMemory();
@@ -83,52 +83,56 @@ public final class Commands {
 		Speaker.say(message.getTextChannel(), memConsume);
 	}
 
-	public static void update(Message message) {
+	public static void update(Scanner scanner, Message message) {
+		Locale responseLocale = getResponseLocale(message);
+		Map<String, Long> stocks = parseStocks(scanner, responseLocale);
+		List<String> unknownStocks;
 		try {
-			Map<String, Long> stocks = parseStocks(message);
-			List<String> unknown = getMateDao().updateStocks(getOrCreateMate(message.getAuthor()), stocks);
-			if (stocks.size() > 0) {
-				if (!unknown.isEmpty()) {
-					Speaker.err(message, String.format(Resource.getString("DO_NOT_KNOW_ABOUT", getResponseLocale(message)), unknown.toString()));
-				}
-				if (unknown.size() != stocks.size()) {
-					message.addReaction(Speaker.Reaction.SUCCESS).queue();
-				}
-			} else {
-				Speaker.err(message, Resource.getString("RESOURCES_EMPTY", getResponseLocale(message)));
-			}
+			unknownStocks = getMateDao().updateStocks(getOrCreateMate(message.getAuthor()), stocks);
 		} catch (Exception e) {
 			e.printStackTrace();
 			message.addReaction(Speaker.Reaction.FAILURE).queue();
+			return;
+		}
+		if (stocks.size() > 0) {
+			if (!unknownStocks.isEmpty()) {
+				Speaker.err(message, String.format(Resource.getString("DO_NOT_KNOW_ABOUT", responseLocale), unknownStocks.toString()));
+			}
+			if (unknownStocks.size() != stocks.size()) {
+				message.addReaction(Speaker.Reaction.SUCCESS).queue();
+			}
+		} else {
+			Speaker.err(message, Resource.getString("RESOURCES_EMPTY", responseLocale));
 		}
 	}
 
-	public static void checkTypes(Message message) {
+	public static void checkTypes(Scanner scanner, Message message) {
 		Speaker.say(message.getTextChannel(), prettyPrintStockTypes(getStockTypeDao().findAll(), getResponseLocale(message)));
 	}
 
 
-	public static void check(Message message) {
-		String mateName = parseStockName(message.getContent(), true);
-		if (Objects.isNull(mateName) || mateName.isEmpty()) {
+	public static void check(Scanner scanner, Message message) {
+		Optional<String> mateOrStockOptional = parseStockName(scanner);
+		TextChannel textChannel = message.getTextChannel();
+		if (!mateOrStockOptional.isPresent()) {
 			List<Mate> mates = Collections.singletonList(getOrCreateMate(message.getAuthor()));
-			Speaker.say(message.getTextChannel(), prettyPrintMate(mates, getResponseLocale(message)));
+			Speaker.say(textChannel, prettyPrintMate(mates, getResponseLocale(message)));
 		} else {
-			List<Mate> mates = getMateDao().findByNameLike(mateName);
+			List<Mate> mates = getMateDao().findByNameLike(mateOrStockOptional.get());
 			if (!mates.isEmpty()) {
-				Speaker.say(message.getTextChannel(), prettyPrintMate(mates, getResponseLocale(message)));
+				Speaker.say(textChannel, prettyPrintMate(mates, getResponseLocale(message)));
 			}
-			List<StockType> types = getStockTypeDao().findByNameLike(mateName);
+			List<StockType> types = getStockTypeDao().findByNameLike(mateOrStockOptional.get());
 			if (!types.isEmpty()) {
-				Speaker.say(message.getTextChannel(), prettyPrintStocks(types, getResponseLocale(message)));
+				Speaker.say(textChannel, prettyPrintStocks(types, getResponseLocale(message)));
 			}
 			if (types.isEmpty() && mates.isEmpty()) {
-				Speaker.say(message.getTextChannel(),Resource.getString("RESOURCE_AND_USER_UNKNOWN", getResponseLocale(message)));
+				Speaker.say(textChannel,Resource.getString("RESOURCE_AND_USER_UNKNOWN", getResponseLocale(message)));
 			}
 		}
 	}
 
-	public static void help(Message message) {
+	public static void help(Scanner scanner, Message message) {
 		String response = Arrays.stream(Commands.class.getDeclaredMethods())
 				.map(Method::getName)
 				.collect(Collectors.joining(
