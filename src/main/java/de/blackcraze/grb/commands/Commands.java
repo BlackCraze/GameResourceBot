@@ -3,8 +3,10 @@ package de.blackcraze.grb.commands;
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
+import de.blackcraze.grb.model.PrintableTable;
 import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.StockType;
+import de.blackcraze.grb.util.wagu.Block;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 
@@ -140,5 +142,41 @@ public final class Commands {
 						"```\n" + Resource.getString("COMMANDS", getResponseLocale(message)) + "\n  ",
 						"```"));
 		Speaker.say(message.getTextChannel(), response);
+	}
+
+
+	public static void total(Scanner scanner, Message message) {
+		Optional<String> stockOptional = parseStockName(scanner);
+		List<StockType> stocks;
+		if (!stockOptional.isPresent()) {
+			stocks = getStockTypeDao().findAll();
+		} else {
+			Optional<StockType> byName = getStockTypeDao().findByName(stockOptional.get());
+			if (!byName.isPresent()) {
+				Speaker.say(message.getTextChannel(), Resource.getString("RESOURCE_UNKNOWN", getResponseLocale(message)));
+				return;
+			}
+			stocks = Collections.singletonList(byName.get());
+		}
+
+		List<List<String>> rows = new ArrayList<>();
+		for (StockType stockType : stocks) {
+			Long total = getMateDao().findAll().stream()
+					.map(mate -> mate.getStocks().stream()
+							.filter(stock -> stock.getType().equals(stockType)).findFirst())
+					.filter(Optional::isPresent)
+					.map(Optional::get)
+					.reduce(0L, (aLong, stock) -> aLong + stock.getAmount(), (aLong, aLong2) -> aLong + aLong2);
+			if (total > 0) {
+				String localisedStockName = Resource.getItem(stockType.getName(), getResponseLocale(message));
+				rows.add(Arrays.asList(localisedStockName, String.format("%,d", total)));
+			}
+		}
+		PrintableTable total_guild_resources = new PrintableTable("Total Guild Resources", // TODO LOCALISE
+				Collections.emptyList(),
+				Arrays.asList("Material", "Amount"),
+				rows,
+				Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT));
+		Speaker.say(message.getTextChannel(), prettyPrint(total_guild_resources));
 	}
 }

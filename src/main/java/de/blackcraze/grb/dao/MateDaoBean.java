@@ -70,6 +70,13 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public List<Mate> findAll() {
+		return em.createQuery("from Mate order by name")
+				.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<Mate> findByNameLike(String name) {
 		return em.createQuery("from Mate where lower(name) like :name order by name")
 				.setParameter("name", "%" + name.toLowerCase() + "%")
