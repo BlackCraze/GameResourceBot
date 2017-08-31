@@ -148,12 +148,13 @@ public final class Commands {
 	public static void total(Scanner scanner, Message message) {
 		Optional<String> stockOptional = parseStockName(scanner);
 		List<StockType> stocks;
+		Locale responseLocale = getResponseLocale(message);
 		if (!stockOptional.isPresent()) {
 			stocks = getStockTypeDao().findAll();
 		} else {
 			Optional<StockType> byName = getStockTypeDao().findByName(stockOptional.get());
 			if (!byName.isPresent()) {
-				Speaker.say(message.getTextChannel(), Resource.getString("RESOURCE_UNKNOWN", getResponseLocale(message)));
+				Speaker.say(message.getTextChannel(), Resource.getString("RESOURCE_UNKNOWN", responseLocale));
 				return;
 			}
 			stocks = Collections.singletonList(byName.get());
@@ -168,13 +169,13 @@ public final class Commands {
 					.map(Optional::get)
 					.reduce(0L, (aLong, stock) -> aLong + stock.getAmount(), (aLong, aLong2) -> aLong + aLong2);
 			if (total > 0) {
-				String localisedStockName = Resource.getItem(stockType.getName(), getResponseLocale(message));
+				String localisedStockName = Resource.getItem(stockType.getName(), responseLocale);
 				rows.add(Arrays.asList(localisedStockName, String.format("%,d", total)));
 			}
 		}
-		PrintableTable total_guild_resources = new PrintableTable("Total Guild Resources", // TODO LOCALISE
+		PrintableTable total_guild_resources = new PrintableTable(Resource.getString("TOTAL_RESOURCES", responseLocale),
 				Collections.emptyList(),
-				Arrays.asList("Material", "Amount"),
+				Arrays.asList(Resource.getString("RAW_MATERIAL", responseLocale), Resource.getString("AMOUNT", responseLocale)),
 				rows,
 				Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT));
 		Speaker.say(message.getTextChannel(), prettyPrint(total_guild_resources));

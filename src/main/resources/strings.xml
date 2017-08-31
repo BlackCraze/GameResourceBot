@@ -15,4 +15,5 @@
     <entry key="AMOUNT">Amount</entry>
     <entry key="UPDATED">Updated</entry>
     <entry key="COMMANDS">Possible commands:</entry>
+    <entry key="TOTAL_RESOURCES">Total Guild Resources</entry>
 </properties>
