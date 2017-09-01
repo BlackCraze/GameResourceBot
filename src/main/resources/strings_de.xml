@@ -16,7 +16,9 @@
 	<entry key="PONG">Pong!</entry>
 	<entry key="COMMANDS">Befehle:</entry>
 	<entry key="TOTAL_RESOURCES">Rohstoffe der Gilde</entry>
-	<entry key="CDS">Dieser Bot wurde geschrieben von BlackCraze und
-		Dangercrow. Übersetzungen wurden von babdab9 beigesteuert.</entry>
-
+	<entry key="CDS">Dieser Bot wurde geschrieben von BlackCraze und Dangercrow. 
+	Übersetzungen wurden von babdab9 beigesteuert.
+	
+	Codebase: https://github.com/BlackCraze/GameResourceBot/</entry>
+	<entry key="INIT">Verbindung hergestellt! Höre auf Befehle mit Prefix </entry>
 </properties>

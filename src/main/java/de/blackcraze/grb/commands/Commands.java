@@ -51,7 +51,6 @@ public final class Commands {
 		BotConfig.ServerConfig instance = BotConfig.getConfig(message.getGuild());
 		if (!scanner.hasNext()) {
 			StringBuilder response = new StringBuilder();
-			response.append("```\n");
 			Field[] fields = BotConfig.ServerConfig.class.getDeclaredFields();
 
 			for (Field field : fields) {
@@ -67,8 +66,7 @@ public final class Commands {
 				response.append(value.toString());
 				response.append("\n");
 			}
-			response.append("```");
-			Speaker.say(message.getTextChannel(), response.toString());
+			Speaker.sayCode(message.getTextChannel(), response.toString());
 			return;
 		}
 		String config_action = scanner.next();
@@ -131,7 +129,7 @@ public final class Commands {
 		Locale locale = getResponseLocale(message);
 		List<StockType> stocks = stockNameOptional.isPresent()
 				? getStockTypeDao().findByNameLike(stockNameOptional.get(), locale) : getStockTypeDao().findAll();
-		Speaker.say(message.getTextChannel(), prettyPrintStockTypes(stocks, locale));
+		Speaker.sayCode(message.getTextChannel(), prettyPrintStockTypes(stocks, locale));
 	}
 
 	public static void check(Scanner scanner, Message message) {
@@ -140,15 +138,15 @@ public final class Commands {
 		Locale locale = getResponseLocale(message);
 		if (!mateOrStockOptional.isPresent()) {
 			List<Mate> mates = Collections.singletonList(getMateDao().getOrCreateMate(message.getAuthor()));
-			Speaker.say(textChannel, prettyPrintMate(mates, locale));
+			Speaker.sayCode(textChannel, prettyPrintMate(mates, locale));
 		} else {
 			List<Mate> mates = getMateDao().findByNameLike(mateOrStockOptional.get());
 			if (!mates.isEmpty()) {
-				Speaker.say(textChannel, prettyPrintMate(mates, locale));
+				Speaker.sayCode(textChannel, prettyPrintMate(mates, locale));
 			}
 			List<StockType> types = getStockTypeDao().findByNameLike(mateOrStockOptional.get(), locale);
 			if (!types.isEmpty()) {
-				Speaker.say(textChannel, prettyPrintStocks(types, locale));
+				Speaker.sayCode(textChannel, prettyPrintStocks(types, locale));
 			}
 			if (types.isEmpty() && mates.isEmpty()) {
 				Speaker.say(textChannel, Resource.getString("RESOURCE_AND_USER_UNKNOWN", locale));
@@ -158,11 +156,9 @@ public final class Commands {
 
 	public static void help(Scanner scanner, Message message) {
 		String response = Arrays.stream(Commands.class.getDeclaredMethods()).map(Method::getName)
-				.collect(Collectors.joining(//
-						"\n  ", //
-						"```\n" + Resource.getString("COMMANDS", getResponseLocale(message)) + "\n  ", //
-						"```"));
-		Speaker.say(message.getTextChannel(), response);
+				.collect(Collectors.joining(
+						Resource.getString("COMMANDS", getResponseLocale(message)) + "\n"));
+		Speaker.sayCode(message.getTextChannel(), response);
 	}
 
 	public static void total(Scanner scanner, Message message) {
@@ -192,7 +188,7 @@ public final class Commands {
 					Collections.emptyList(),
 					Arrays.asList(Resource.getString("RAW_MATERIAL", locale), Resource.getString("AMOUNT", locale)),
 					rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT));
-			Speaker.say(message.getTextChannel(), prettyPrint(total_guild_resources));
+			Speaker.sayCode(message.getTextChannel(), prettyPrint(total_guild_resources));
 		} else {
 			Speaker.say(message.getTextChannel(), Resource.getString("RESOURCES_EMPTY", locale));
 		}
