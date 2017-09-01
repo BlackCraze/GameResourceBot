@@ -15,7 +15,7 @@ public class BotConfig {
     private static Map<Guild, ServerConfig> servers = new HashMap<>();
 
     public static class ServerConfig {
-        public String PREFIX = getEnv("PREFIX", "dcbot");
+        public String PREFIX = getEnv("PREFIX", "bot");
         public String CHANNEL = getEnv("CHANNEL", "statistik");
         public String LANGUAGE = getEnv("LANGUAGE", "en");
     }
