@@ -42,7 +42,11 @@ public final class Commands {
     public static void ping(Scanner scanner, Message message) {
         Speaker.say(message.getTextChannel(), Resource.getString("PONG", getResponseLocale(message)));
     }
-
+    
+    public static void credits(Scanner scanner, Message message) {
+        Speaker.say(message.getTextChannel(), Resource.getString("CDS", getResponceLocale(message)));
+    }
+    
     public static void config(Scanner scanner, Message message) {
         BotConfig.ServerConfig instance = BotConfig.getConfig(message.getGuild());
         if (!scanner.hasNext()) {
@@ -193,4 +197,5 @@ public final class Commands {
             Speaker.say(message.getTextChannel(), Resource.getString("RESOURCES_EMPTY", locale));
         }
     }
+        
 }
