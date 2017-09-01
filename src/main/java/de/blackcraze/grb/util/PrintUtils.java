@@ -23,7 +23,7 @@ public final class PrintUtils {
 	private PrintUtils() {
 	}
 
-	static String prettyPrint(PrintableTable... stocks) {
+	public static String prettyPrint(PrintableTable... stocks) {
 		StringBuilder returnHandle = new StringBuilder();
 		for (PrintableTable stock : stocks) {
 			if (stock != null) {
@@ -66,7 +66,7 @@ public final class PrintUtils {
 		return returnHandle.toString();
 	}
 
-	static String getDiffFormatted(Date from, Date to) {
+	private static String getDiffFormatted(Date from, Date to) {
 		Duration duration = new Duration(to.getTime() - from.getTime()); // in milliseconds
 		PeriodFormatter formatter = new PeriodFormatterBuilder().printZeroNever()//
 				.appendWeeks().appendSuffix("w").appendSeparator(" ")//

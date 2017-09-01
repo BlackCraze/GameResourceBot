@@ -14,6 +14,8 @@ public interface IMateDao {
 
 	List<String> updateStocks(Mate mate, Map<String, Long> newStocks);
 
+	List<Mate> findAll();
+
 	List<Mate> findByNameLike(String name);
 
 }
