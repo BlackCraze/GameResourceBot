@@ -102,11 +102,10 @@ public final class PrintUtils {
 				rows.add(Arrays.asList("-", "-", "-"));
 			}
 			for (Stock stock : stocks) {
-				String resourceKey = stock.getMate().getName();
-				String resourceName = Resource.getItem(resourceKey, responseLocale);
+				String mateName = stock.getMate().getName();
 				String amount = String.format("%,d", stock.getAmount());
 				String updated = PrintUtils.getDiffFormatted(stock.getUpdated(), new Date());
-				rows.add(Arrays.asList(resourceName, amount, updated));
+				rows.add(Arrays.asList(mateName, amount, updated));
 				sumAmount += stock.getAmount();
 			}
 			String resourceKey = type.getName();
