@@ -37,6 +37,7 @@ public class DbUtil extends AbstractModule {
 		String databaseUrl = BotConfig.DATABASE_URL;
 		boolean sslEnabled = !BotConfig.USE_SSL.isEmpty();
 		StringTokenizer st = new StringTokenizer(databaseUrl, ":@/");
+		@SuppressWarnings("unused")
 		String dbVendor = st.nextToken(); // if DATABASE_URL is set
 		String userName = st.nextToken();
 		String password = st.nextToken();

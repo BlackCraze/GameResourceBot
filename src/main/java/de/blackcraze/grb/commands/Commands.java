@@ -19,7 +19,6 @@ import static de.blackcraze.grb.util.CommandUtils.*;
 import static de.blackcraze.grb.util.InjectorUtils.*;
 import static de.blackcraze.grb.util.PrintUtils.*;
 
-@SuppressWarnings("unused")
 public final class Commands {
 
 	private Commands() {
