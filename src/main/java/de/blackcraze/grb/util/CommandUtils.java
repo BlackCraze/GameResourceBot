@@ -1,59 +1,48 @@
 package de.blackcraze.grb.util;
 
 import de.blackcraze.grb.core.BotConfig;
+import de.blackcraze.grb.i18n.Resource;
+import net.dv8tion.jda.core.entities.Channel;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.SelfUser;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class CommandUtils {
 
-    public static Map<String, Long> parseStocks(Message message) {
-        String rows[] = message.getRawContent().split("\\r?\\n");
-        Map<String, Long> stocks = new HashMap<>(rows.length);
-        for (int i = 0; i < rows.length; i++) {
-            boolean firstRow = i == 0;
-            String row = rows[i];
-            Long amount = parseAmount(row, firstRow);
-            String name = parseStockName(row, firstRow);
-            if (!Objects.isNull(amount) && !Objects.isNull(name)) {
-                stocks.put(name, amount);
+    public static Map<String, Long> parseStocks(Scanner scanner, Locale responseLocale) {
+        Map<String, Long> stocks = new HashMap<>();
+        while (true) {
+            Optional<String> stockName = parseStockName(scanner);
+            Optional<Long> stockAmount = parseAmount(scanner);
+            if (!stockName.isPresent() || !stockAmount.isPresent()) {
+                break;
             }
+            String stockIdentifier = Resource.getItemKey(stockName.get(), responseLocale);
+            stocks.put(stockIdentifier, stockAmount.get());
         }
         return stocks;
     }
 
-    public static String parseAction(Message message) {
-        return parse(message.getContent(), 1, false);
-    }
-
-    public static String parseStockName(String row, boolean firstRow) {
-        return parse(row, 0, firstRow);
-    }
-
-    public static Long parseAmount(String row, boolean firstRow) {
-        try {
-            return Long.valueOf(parse(row, 1, firstRow));
-        } catch (NumberFormatException e) {
-            return null;
+    public static Optional<String> parseStockName(Scanner scanner) {
+        if (!scanner.hasNext()) {
+            return Optional.empty();
         }
-    }
-
-    public static String parse(String row, int index) {
-        return parse(row, index, false);
-    }
-
-    public static String parse(String row, int index, boolean firstRow) {
-        index = firstRow ? index + 2 : index;
-        String[] split = row.split(" ");
-        if (index < split.length) {
-            return split[index];
+        StringBuilder stockName = new StringBuilder();
+        stockName.append(scanner.next());
+        while (scanner.hasNext() && !scanner.hasNextLong()) {
+            stockName.append(" ");
+            stockName.append(scanner.next());
         }
-        return null;
+        return Optional.of(stockName.toString());
+    }
+
+    public static Optional<Long> parseAmount(Scanner scanner) {
+        if (!scanner.hasNextLong()) {
+            return Optional.empty();
+        }
+        return Optional.of(scanner.nextLong());
     }
 
     public static boolean botMentioned(Message message) {
@@ -61,12 +50,33 @@ public class CommandUtils {
         String prefix = BotConfig.getConfig(message.getGuild()).PREFIX;
         String messageStartWord = message.getContent().split(" ")[0];
         boolean prefixCheck = prefix.equalsIgnoreCase(messageStartWord);
-        boolean mentionCheck = message.isMentioned(selfUser);
+        boolean mentionCheck = message.isMentioned(selfUser) && !message.mentionsEveryone();
         return prefixCheck || mentionCheck;
     }
 
+    public static Optional<Scanner> commandParser(Message message) {
+        if (!botMentioned(message)) {
+            return Optional.empty();
+        }
+        Scanner scanner = new Scanner(message.getContent());
+        String botPrefix = scanner.next();
+        System.out.println("Mentioned with prefix: " + botPrefix);
+        return Optional.of(scanner);
+    }
+
+    public static Optional<String> parseAction(Scanner scanner) {
+        if(!scanner.hasNext()) {
+            return Optional.empty();
+        }
+        return Optional.of(scanner.next());
+    }
+
     public static Locale getResponseLocale(Message message) {
-        Guild guild = message.getGuild();
+        return getResponseLocale(message.getTextChannel());
+    }
+
+    public static Locale getResponseLocale(Channel channel) {
+        Guild guild = channel.getGuild();
         BotConfig.ServerConfig config = BotConfig.getConfig(guild);
         String langString = config.LANGUAGE;
         return new Locale(langString);

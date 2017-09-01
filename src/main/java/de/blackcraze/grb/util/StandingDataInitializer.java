@@ -30,25 +30,23 @@ public class StandingDataInitializer {
 			List<CSVRecord> records = parser.getRecords();
 			System.out.println("initializing stock types: " + records.size());
 			List<StockType> stocks = getStockTypeDao().findAll();
+
 			for (CSVRecord record : records) {
 				String name = record.get(0);
 				String price = record.get(1);
-				boolean exists = false;
 
-				for (StockType stock : stocks) {
-					if (stock.getName().equalsIgnoreCase(name)) {
-						exists = true;
-						break;
-					}
+				boolean stockAlreadyExists = stocks.stream()
+						.anyMatch(stockType -> stockType.getName().equalsIgnoreCase(name));
+
+				if (stockAlreadyExists) {
+					break;
 				}
 
-				if (!exists) {
-					StockType type = new StockType();
-					type.setName(name);
-					type.setPrice(Long.valueOf(price));
-					getStockTypeDao().save(type);
-					System.out.println("created new stock type: " + type.getName());
-				}
+				StockType type = new StockType();
+				type.setName(name);
+				type.setPrice(Long.valueOf(price));
+				getStockTypeDao().save(type);
+				System.out.println("Created new stock type: " + type.getName());
 			}
 		} catch (Throwable e) {
 			e.printStackTrace();

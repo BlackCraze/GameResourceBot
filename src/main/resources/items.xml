@@ -16,7 +16,7 @@
     <entry key="DIAMOND">Diamond</entry>
     <entry key="DIAMOND_CUTTER">Diamond Cutter</entry>
     <entry key="DIETHYL_ETHER">Diethyl Ether</entry>
-    <entry key="COPPER_WIRE">Copper Wire</entry>
+    <entry key="COPPER_WIRE">Wire</entry>
     <entry key="IRON_BAR">Iron Bar</entry>
     <entry key="IRON">Iron</entry>
     <entry key="ETHANOL">Ethanol</entry>
@@ -34,7 +34,7 @@
     <entry key="COPPER">Copper</entry>
     <entry key="COPPER_BAR">Copper Bar</entry>
     <entry key="COPPER_NAIL">Copper Nail</entry>
-    <entry key="GLASS_FLASK">Glass Flask</entry>
+    <entry key="GLASS_FLASK">Lab Flask</entry>
     <entry key="LAMP">Lamp</entry>
     <entry key="LIANA">Liana</entry>
     <entry key="LIANA_SEED">Liana Seed</entry>
