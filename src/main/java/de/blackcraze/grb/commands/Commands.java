@@ -105,7 +105,7 @@ public final class Commands {
 		Map<String, Long> stocks = parseStocks(scanner, responseLocale);
 		List<String> unknownStocks;
 		try {
-			unknownStocks = getMateDao().updateStocks(getMateDao().getOrCreateMate(message.getAuthor()), stocks);
+			unknownStocks = getMateDao().updateStocks(getMateDao().getOrCreateMate(message.getMember()), stocks);
 		} catch (Exception e) {
 			e.printStackTrace();
 			message.addReaction(Speaker.Reaction.FAILURE).queue();
@@ -137,7 +137,7 @@ public final class Commands {
 		TextChannel textChannel = message.getTextChannel();
 		Locale locale = getResponseLocale(message);
 		if (!mateOrStockOptional.isPresent()) {
-			List<Mate> mates = Collections.singletonList(getMateDao().getOrCreateMate(message.getAuthor()));
+			List<Mate> mates = Collections.singletonList(getMateDao().getOrCreateMate(message.getMember()));
 			Speaker.sayCode(textChannel, prettyPrintMate(mates, locale));
 		} else {
 			List<Mate> mates = getMateDao().findByNameLike(mateOrStockOptional.get());
@@ -156,8 +156,7 @@ public final class Commands {
 
 	public static void help(Scanner scanner, Message message) {
 		String response = Arrays.stream(Commands.class.getDeclaredMethods()).map(Method::getName)
-				.collect(Collectors.joining(
-						Resource.getString("COMMANDS", getResponseLocale(message)) + "\n"));
+				.collect(Collectors.joining(Resource.getString("COMMANDS", getResponseLocale(message)) + "\n"));
 		Speaker.sayCode(message.getTextChannel(), response);
 	}
 
