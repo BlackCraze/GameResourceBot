@@ -156,8 +156,9 @@ public final class Commands {
 
 	public static void help(Scanner scanner, Message message) {
 		String response = Arrays.stream(Commands.class.getDeclaredMethods()).map(Method::getName)
-				.collect(Collectors.joining(Resource.getString("COMMANDS", getResponseLocale(message)) + "\n"));
-		Speaker.sayCode(message.getTextChannel(), response);
+				.collect(Collectors.joining("\n"));
+		Speaker.sayCode(message.getTextChannel(),
+				Resource.getString("COMMANDS", getResponseLocale(message)) + "\n" + response);
 	}
 
 	public static void total(Scanner scanner, Message message) {

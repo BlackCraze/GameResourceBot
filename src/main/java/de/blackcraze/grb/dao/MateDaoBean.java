@@ -92,7 +92,7 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
 
 	public Mate getOrCreateMate(Member member) {
 
-		String name = Optional.of(member.getNickname()).orElse(member.getUser().getName());
+		String name = member.getNickname() != null ? member.getNickname() : member.getUser().getName();
 		String discordId = member.getUser().getId();
 
 		Optional<Mate> mateOptional = findByDiscord(discordId);
