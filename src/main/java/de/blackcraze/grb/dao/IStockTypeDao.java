@@ -1,16 +1,17 @@
 package de.blackcraze.grb.dao;
 
-import de.blackcraze.grb.model.entity.StockType;
-
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+
+import de.blackcraze.grb.model.entity.StockType;
 
 public interface IStockTypeDao extends IBaseDao<StockType> {
 
-	List<StockType> findAll();
+    List<StockType> findAll();
 
-	Optional<StockType> findByName(String name);
+    Optional<StockType> findByKey(String key);
 
-	List<StockType> findByNameLike(String name);
+    List<StockType> findByNameLike(String name, Locale locale);
 
 }

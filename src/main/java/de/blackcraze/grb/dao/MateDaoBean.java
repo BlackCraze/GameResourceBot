@@ -42,13 +42,15 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
         List<String> unknown = new ArrayList<>();
         List<Stock> stocks = stockDao.findStocksByMate(mate);
 
-        newStocks.forEach((stockName, stockAmount) -> {
+        newStocks.forEach((stockKey, stockAmount) -> {
             if (Long.MIN_VALUE == stockAmount) {
-                unknown.add(stockName);
+                // in this case it is the misspelled name see
+                // de.blackcraze.grb.util.CommandUtils.parseStocks(Scanner, Locale)
+                unknown.add(stockKey);
             } else {
                 boolean found = false;
                 for (Stock stock : stocks) {
-                    if (isStockMent(stock, stockName)) {
+                    if (isStockMent(stock, stockKey)) {
                         found = true;
                         stock.setAmount(stockAmount);
                         stockDao.update(stock);
@@ -56,8 +58,8 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
                     }
                 }
                 if (!found) {
-                    System.out.printf("Creating new stock %s for player %s%n", stockName, mate.getName());
-                    Optional<StockType> type = stockTypeDao.findByName(stockName);
+                    System.out.printf("Creating new stock %s for player %s%n", stockKey, mate.getName());
+                    Optional<StockType> type = stockTypeDao.findByKey(stockKey);
                     if (type.isPresent()) {
                         Stock stock = new Stock();
                         stock.setType(type.get());
@@ -65,8 +67,8 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
                         stock.setMate(mate);
                         stockDao.save(stock);
                     } else {
-                        unknown.add(stockName);
-                        System.err.println("Unknown stock type: " + stockName);
+                        unknown.add(stockKey);
+                        System.err.println("Unknown stock type: " + stockKey);
                     }
                 }
             }

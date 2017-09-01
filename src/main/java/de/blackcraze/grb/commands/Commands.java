@@ -4,6 +4,7 @@ import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
 import static de.blackcraze.grb.util.CommandUtils.parseStockName;
 import static de.blackcraze.grb.util.CommandUtils.parseStocks;
 import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
+import static de.blackcraze.grb.util.InjectorUtils.getStockDao;
 import static de.blackcraze.grb.util.InjectorUtils.getStockTypeDao;
 import static de.blackcraze.grb.util.PrintUtils.prettyPrint;
 import static de.blackcraze.grb.util.PrintUtils.prettyPrintMate;
@@ -122,33 +123,31 @@ public final class Commands {
     }
 
     public static void checkTypes(Scanner scanner, Message message) {
-        Speaker.say(message.getTextChannel(),
-                prettyPrintStockTypes(getStockTypeDao().findAll(), getResponseLocale(message)));
+        Optional<String> stockNameOptional = parseStockName(scanner);
+        Locale locale = getResponseLocale(message);
+        List<StockType> stocks = stockNameOptional.isPresent()
+                ? getStockTypeDao().findByNameLike(stockNameOptional.get(), locale) : getStockTypeDao().findAll();
+        Speaker.say(message.getTextChannel(), prettyPrintStockTypes(stocks, locale));
     }
 
     public static void check(Scanner scanner, Message message) {
         Optional<String> mateOrStockOptional = parseStockName(scanner);
         TextChannel textChannel = message.getTextChannel();
+        Locale locale = getResponseLocale(message);
         if (!mateOrStockOptional.isPresent()) {
             List<Mate> mates = Collections.singletonList(getMateDao().getOrCreateMate(message.getAuthor()));
-            Speaker.say(textChannel, prettyPrintMate(mates, getResponseLocale(message)));
+            Speaker.say(textChannel, prettyPrintMate(mates, locale));
         } else {
             List<Mate> mates = getMateDao().findByNameLike(mateOrStockOptional.get());
             if (!mates.isEmpty()) {
-                Speaker.say(textChannel, prettyPrintMate(mates, getResponseLocale(message)));
+                Speaker.say(textChannel, prettyPrintMate(mates, locale));
             }
-            List<StockType> types = Collections.emptyList();
-            try {
-                String stockName = Resource.getItemKey(mateOrStockOptional.get(), getResponseLocale(message));
-                types = getStockTypeDao().findByNameLike(stockName);
-            } catch (Exception e) {
-                System.err.println(e);
-            }
+            List<StockType> types = getStockTypeDao().findByNameLike(mateOrStockOptional.get(), locale);
             if (!types.isEmpty()) {
-                Speaker.say(textChannel, prettyPrintStocks(types, getResponseLocale(message)));
+                Speaker.say(textChannel, prettyPrintStocks(types, locale));
             }
             if (types.isEmpty() && mates.isEmpty()) {
-                Speaker.say(textChannel, Resource.getString("RESOURCE_AND_USER_UNKNOWN", getResponseLocale(message)));
+                Speaker.say(textChannel, Resource.getString("RESOURCE_AND_USER_UNKNOWN", locale));
             }
         }
     }
@@ -163,37 +162,35 @@ public final class Commands {
     }
 
     public static void total(Scanner scanner, Message message) {
-        Optional<String> stockOptional = parseStockName(scanner);
-        List<StockType> stocks;
-        Locale responseLocale = getResponseLocale(message);
-        if (!stockOptional.isPresent()) {
-            stocks = getStockTypeDao().findAll();
+        Optional<String> stockNameOptional = parseStockName(scanner);
+        List<StockType> stockTypes;
+        Locale locale = getResponseLocale(message);
+        if (!stockNameOptional.isPresent()) {
+            stockTypes = getStockTypeDao().findAll();
         } else {
-            Optional<StockType> byName = getStockTypeDao().findByName(stockOptional.get());
-            if (!byName.isPresent()) {
-                Speaker.say(message.getTextChannel(), Resource.getString("RESOURCE_UNKNOWN", responseLocale));
+            stockTypes = getStockTypeDao().findByNameLike(stockNameOptional.get(), locale);
+            if (stockTypes.isEmpty()) {
+                Speaker.say(message.getTextChannel(), Resource.getString("RESOURCE_UNKNOWN", locale));
                 return;
             }
-            stocks = Collections.singletonList(byName.get());
         }
 
         List<List<String>> rows = new ArrayList<>();
-        for (StockType stockType : stocks) {
-            Long total = getMateDao().findAll().stream()
-                    .map(mate -> mate.getStocks().stream().filter(stock -> stock.getType().equals(stockType))
-                            .findFirst())
-                    .filter(Optional::isPresent).map(Optional::get)
-                    .reduce(0L, (aLong, stock) -> aLong + stock.getAmount(), (aLong, aLong2) -> aLong + aLong2);
+        for (StockType stockType : stockTypes) {
+            long total = getStockDao().getTotalAmount(stockType);
             if (total > 0) {
-                String localisedStockName = Resource.getItem(stockType.getName(), responseLocale);
+                String localisedStockName = Resource.getItem(stockType.getName(), locale);
                 rows.add(Arrays.asList(localisedStockName, String.format("%,d", total)));
             }
         }
-        PrintableTable total_guild_resources = new PrintableTable(Resource.getString("TOTAL_RESOURCES", responseLocale),
-                Collections.emptyList(),
-                Arrays.asList(Resource.getString("RAW_MATERIAL", responseLocale),
-                        Resource.getString("AMOUNT", responseLocale)),
-                rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT));
-        Speaker.say(message.getTextChannel(), prettyPrint(total_guild_resources));
+        if (!rows.isEmpty()) {
+            PrintableTable total_guild_resources = new PrintableTable(Resource.getString("TOTAL_RESOURCES", locale),
+                    Collections.emptyList(),
+                    Arrays.asList(Resource.getString("RAW_MATERIAL", locale), Resource.getString("AMOUNT", locale)),
+                    rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT));
+            Speaker.say(message.getTextChannel(), prettyPrint(total_guild_resources));
+        } else {
+            Speaker.say(message.getTextChannel(), Resource.getString("RESOURCES_EMPTY", locale));
+        }
     }
 }

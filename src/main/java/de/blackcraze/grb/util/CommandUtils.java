@@ -27,6 +27,8 @@ public class CommandUtils {
 				String stockIdentifier = Resource.getItemKey(stockName.get(), responseLocale);
 				stocks.put(stockIdentifier, stockAmount.get());
 			} catch (Exception e) {
+			    // we add the clear text stock name with an identifier value
+			    // this way we can show the user an error message showing errored type names
 				stocks.put(stockName.get(), Long.MIN_VALUE);
 				System.err.println(e);
 			}

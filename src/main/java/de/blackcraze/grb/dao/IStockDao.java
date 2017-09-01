@@ -8,8 +8,10 @@ import de.blackcraze.grb.model.entity.StockType;
 
 public interface IStockDao extends IBaseDao<Stock> {
 
-	List<Stock> findStocksByMate(Mate mate);
+    List<Stock> findStocksByMate(Mate mate);
 
-	List<Stock> findStocksByType(StockType type);
+    List<Stock> findStocksByType(StockType type);
+
+    long getTotalAmount(StockType type);
 
 }
