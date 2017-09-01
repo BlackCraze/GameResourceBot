@@ -1,28 +1,5 @@
 package de.blackcraze.grb.commands;
 
-import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
-import static de.blackcraze.grb.util.CommandUtils.parseStockName;
-import static de.blackcraze.grb.util.CommandUtils.parseStocks;
-import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
-import static de.blackcraze.grb.util.InjectorUtils.getStockTypeDao;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrint;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrintMate;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrintStockTypes;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrintStocks;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
@@ -32,7 +9,6 @@ import de.blackcraze.grb.model.entity.StockType;
 import de.blackcraze.grb.util.wagu.Block;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
-
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -121,8 +97,7 @@ public final class Commands {
 		}
 		if (stocks.size() > 0) {
 			if (!unknownStocks.isEmpty()) {
-				Speaker.err(message, String.format(Resource.getString("DO_NOT_KNOW_ABOUT", responseLocale),
-						unknownStocks.toString()));
+				Speaker.err(message, String.format(Resource.getString("DO_NOT_KNOW_ABOUT", responseLocale), unknownStocks.toString()));
 			}
 			if (unknownStocks.size() != stocks.size()) {
 				message.addReaction(Speaker.Reaction.SUCCESS).queue();
@@ -133,8 +108,7 @@ public final class Commands {
 	}
 
 	public static void checkTypes(Scanner scanner, Message message) {
-		Speaker.say(message.getTextChannel(),
-				prettyPrintStockTypes(getStockTypeDao().findAll(), getResponseLocale(message)));
+		Speaker.say(message.getTextChannel(), prettyPrintStockTypes(getStockTypeDao().findAll(), getResponseLocale(message)));
 	}
 
 	public static void check(Scanner scanner, Message message) {
@@ -159,8 +133,12 @@ public final class Commands {
 	}
 
 	public static void help(Scanner scanner, Message message) {
-		String response = Arrays.stream(Commands.class.getDeclaredMethods()).map(Method::getName).collect(Collectors
-				.joining("\n  ", "```\n" + Resource.getString("COMMANDS", getResponseLocale(message)) + "\n  ", "```"));
+		String response = Arrays.stream(Commands.class.getDeclaredMethods())
+				.map(Method::getName)
+				.collect(Collectors.joining(
+						"\n  ",
+						"```\n" + Resource.getString("COMMANDS", getResponseLocale(message)) + "\n  ",
+						"```"));
 		Speaker.say(message.getTextChannel(), response);
 	}
 
@@ -182,9 +160,10 @@ public final class Commands {
 		List<List<String>> rows = new ArrayList<>();
 		for (StockType stockType : stocks) {
 			Long total = getMateDao().findAll().stream()
-					.map(mate -> mate.getStocks().stream().filter(stock -> stock.getType().equals(stockType))
-							.findFirst())
-					.filter(Optional::isPresent).map(Optional::get)
+					.map(mate -> mate.getStocks().stream()
+							.filter(stock -> stock.getType().equals(stockType)).findFirst())
+					.filter(Optional::isPresent)
+					.map(Optional::get)
 					.reduce(0L, (aLong, stock) -> aLong + stock.getAmount(), (aLong, aLong2) -> aLong + aLong2);
 			if (total > 0) {
 				String localisedStockName = Resource.getItem(stockType.getName(), responseLocale);
@@ -193,9 +172,9 @@ public final class Commands {
 		}
 		PrintableTable total_guild_resources = new PrintableTable(Resource.getString("TOTAL_RESOURCES", responseLocale),
 				Collections.emptyList(),
-				Arrays.asList(Resource.getString("RAW_MATERIAL", responseLocale),
-						Resource.getString("AMOUNT", responseLocale)),
-				rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT));
+				Arrays.asList(Resource.getString("RAW_MATERIAL", responseLocale), Resource.getString("AMOUNT", responseLocale)),
+				rows,
+				Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT));
 		Speaker.say(message.getTextChannel(), prettyPrint(total_guild_resources));
 	}
 }
