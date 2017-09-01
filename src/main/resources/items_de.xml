@@ -15,9 +15,9 @@
     <entry key="BOMB">Bombe</entry>
     <entry key="DIAMOND">Diamant</entry>
     <entry key="DIAMOND_CUTTER">Diamantschneider</entry>
-    <entry key="DIETHYL_ETHER">Diähyläther</entry>
+    <entry key="DIETHYL_ETHER">Diäthyläther</entry>
     <entry key="COPPER_WIRE">Draht</entry>
-    <entry key="IRON_BAR">Einsenbarren</entry>
+    <entry key="IRON_BAR">Eisenbarren</entry>
     <entry key="IRON">Eisen</entry>
     <entry key="ETHANOL">Ethanol</entry>
     <entry key="SOLID_PROPELLANT">Fester Treibstoff</entry>
@@ -53,7 +53,7 @@
     <entry key="POLISHED_TOPAZ">Polierter Topas</entry>
     <entry key="REFINED_OIL">Raffiniertes Öl</entry>
     <entry key="RUBY">Rubin</entry>
-    <entry key="SEED">Samen</entry>
+    <entry key="SEED">Saatgut</entry>
     <entry key="SAPPHIRE">Saphir</entry>
     <entry key="CLEAN_WATER">Sauberes Wasser</entry>
     <entry key="OXYGEN">Sauerstoff</entry>
@@ -63,12 +63,12 @@
     <entry key="SULPHURIC_ACID">Schwefelsäure</entry>
     <entry key="SILVER">Silber</entry>
     <entry key="SILVER_BAR">Silberbarren</entry>
-    <entry key="SILICON">Silikon</entry>
+    <entry key="SILICON">Silizium</entry>
     <entry key="EMERALD">Smaragd</entry>
     <entry key="EMERALD_RING">Smaragdring</entry>
     <entry key="SOLAR_PANEL">Solaranlage</entry>
     <entry key="STEEL_BAR">Stahlbarren</entry>
-    <entry key="STEEL_PLATE">Stahlplatten</entry>
+    <entry key="STEEL_PLATE">Stahlplatte</entry>
     <entry key="TITANIUM">Titan</entry>
     <entry key="TITANIUM_BAR">Titanbarren</entry>
     <entry key="TITANIUM_ORE">Titanerz</entry>
