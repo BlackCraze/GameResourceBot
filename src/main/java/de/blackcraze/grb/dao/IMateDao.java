@@ -1,6 +1,7 @@
 package de.blackcraze.grb.dao;
 
 import de.blackcraze.grb.model.entity.Mate;
+import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.User;
 
 import java.util.List;
@@ -19,6 +20,6 @@ public interface IMateDao {
 
 	List<Mate> findByNameLike(String name);
 
-	Mate getOrCreateMate(User author);
+	Mate getOrCreateMate(Member member);
 
 }

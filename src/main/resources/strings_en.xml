@@ -16,4 +16,14 @@
     <entry key="UPDATED">Updated</entry>
     <entry key="COMMANDS">Possible commands:</entry>
     <entry key="TOTAL_RESOURCES">Total Guild Resources</entry>
+    <entry key="CDS">This bot is a creation of BlackCraze and Dangercrow.
+    Translations by babdab9.
+
+	Codebase:
+	https://github.com/BlackCraze/GameResourceBot/
+	
+	discord dev channel:
+	https://discord.gg/e77yjxj
+	</entry>
+    <entry key="INIT">Connection established! Listening with prefix </entry>
 </properties>

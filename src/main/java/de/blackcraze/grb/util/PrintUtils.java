@@ -1,5 +1,20 @@
 package de.blackcraze.grb.util;
 
+import static de.blackcraze.grb.util.InjectorUtils.getStockDao;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
+
+import org.joda.time.Duration;
+import org.joda.time.PeriodType;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
+
 import de.blackcraze.grb.i18n.Resource;
 import de.blackcraze.grb.model.PrintableTable;
 import de.blackcraze.grb.model.entity.Mate;
@@ -8,29 +23,19 @@ import de.blackcraze.grb.model.entity.StockType;
 import de.blackcraze.grb.util.wagu.Block;
 import de.blackcraze.grb.util.wagu.Board;
 import de.blackcraze.grb.util.wagu.Table;
-import org.joda.time.Duration;
-import org.joda.time.PeriodType;
-import org.joda.time.format.PeriodFormatter;
-import org.joda.time.format.PeriodFormatterBuilder;
-
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static de.blackcraze.grb.util.InjectorUtils.getStockDao;
 
 public final class PrintUtils {
 
 	private PrintUtils() {
 	}
 
-	public static String prettyPrint(PrintableTable... stocks) {
-		StringBuilder returnHandle = new StringBuilder();
+	public static List<String> prettyPrint(PrintableTable... stocks) {
+		List<String> returnHandle = new ArrayList<>(stocks.length);
 		for (PrintableTable stock : stocks) {
 			if (stock != null) {
 				int boardWidth = stock.getWidth();
 				int headerWidth = boardWidth - 2; // außenränder
 				StringBuilder b = new StringBuilder();
-				b.append("```dsconfig\n");
 				Board board = new Board(boardWidth);
 				// board.showBlockIndex(true); // DEBUG
 				Block header = new Block(board, headerWidth, 1, stock.getHeader());
@@ -53,21 +58,15 @@ public final class PrintUtils {
 
 				board.build();
 				b.append(board.getPreview());
-				b.append("```\n");
-
-				if (returnHandle.length() + b.length() > 2000) {
-					// discord limits output to 2000 chars
-					return returnHandle.toString();
-				} else {
-					returnHandle.append(b.toString());
-				}
+				returnHandle.add(b.toString());
 			}
 		}
-		return returnHandle.toString();
+		return returnHandle;
 	}
 
 	private static String getDiffFormatted(Date from, Date to) {
-		Duration duration = new Duration(to.getTime() - from.getTime()); // in milliseconds
+		Duration duration = new Duration(to.getTime() - from.getTime()); // in
+																			// milliseconds
 		PeriodFormatter formatter = new PeriodFormatterBuilder().printZeroNever()//
 				.appendWeeks().appendSuffix("w").appendSeparator(" ")//
 				.appendDays().appendSuffix("d").appendSeparator(" ")//
@@ -76,20 +75,15 @@ public final class PrintUtils {
 				.appendSeconds().appendSuffix("s")//
 				.toFormatter();
 		String fullTimeAgo = formatter.print(duration.toPeriod(PeriodType.yearMonthDayTime()));
-		return Arrays.stream(fullTimeAgo.split(" "))
-				.limit(2)
-				.collect(Collectors.joining(" "));
+		return Arrays.stream(fullTimeAgo.split(" ")).limit(2).collect(Collectors.joining(" "));
 	}
 
-
-	public static String prettyPrintStocks(List<StockType> stockTypes, Locale responseLocale) {
+	public static List<String> prettyPrintStocks(List<StockType> stockTypes, Locale responseLocale) {
 		if (stockTypes.isEmpty()) {
-			return Resource.getString("RESOURCE_UNKNOWN", responseLocale);
+			return Collections.singletonList(Resource.getString("RESOURCE_UNKNOWN", responseLocale));
 		}
-		List<String> headers = Arrays.asList(
-				Resource.getString("USER", responseLocale),
-				Resource.getString("AMOUNT", responseLocale),
-				Resource.getString("UPDATED", responseLocale));
+		List<String> headers = Arrays.asList(Resource.getString("USER", responseLocale),
+				Resource.getString("AMOUNT", responseLocale), Resource.getString("UPDATED", responseLocale));
 		List<Integer> aligns = Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT, Block.DATA_MIDDLE_RIGHT);
 
 		PrintableTable[] tables = new PrintableTable[stockTypes.size()];
@@ -118,7 +112,6 @@ public final class PrintUtils {
 
 	public static String prettyPrintStockTypes(List<StockType> stockTypes, Locale responseLocale) {
 		StringBuilder b = new StringBuilder();
-		b.append("```\n");
 		if (stockTypes.isEmpty()) {
 			b.append(Resource.getString("NO_DATA", responseLocale));
 		}
@@ -128,18 +121,15 @@ public final class PrintUtils {
 			b.append(resourceName);
 			b.append("\n");
 		}
-		b.append("\n```\n");
 		return b.toString();
 	}
 
-	public static String prettyPrintMate(List<Mate> mates, Locale responseLocale) {
+	public static List<String> prettyPrintMate(List<Mate> mates, Locale responseLocale) {
 		if (mates.isEmpty()) {
-			return Resource.getString("USER_UNKNOWN", responseLocale);
+			return Collections.singletonList(Resource.getString("USER_UNKNOWN", responseLocale));
 		}
-		List<String> headers = Arrays.asList(
-				Resource.getString("RAW_MATERIAL", responseLocale),
-				Resource.getString("AMOUNT", responseLocale),
-				Resource.getString("UPDATED", responseLocale));
+		List<String> headers = Arrays.asList(Resource.getString("RAW_MATERIAL", responseLocale),
+				Resource.getString("AMOUNT", responseLocale), Resource.getString("UPDATED", responseLocale));
 		List<Integer> aligns = Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT, Block.DATA_MIDDLE_RIGHT);
 
 		PrintableTable[] tables = new PrintableTable[mates.size()];

@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE properties SYSTEM
         "http://java.sun.com/dtd/properties.dtd">
-<properties >
-    <entry key="RESOURCE_AND_USER_UNKNOWN">Ich kenne weder einen Benutzer noch eine Ressource mit diesem Namen =(</entry>
-    <entry key="ALREADY_KNOW">Kenne ich schon</entry>
-    <entry key="RESOURCE_UNKNOWN">Diese Ressource kenne ich nicht =(</entry>
-    <entry key="USER">Benutzer</entry>
-    <entry key="DO_NOT_KNOW_ABOUT">Das hier kenne ich nicht: %s</entry>
-    <entry key="RESOURCES_EMPTY">Da steht nichts - was soll man denn da updaten!</entry>
-    <entry key="NO_DATA">Leider keine Daten vorhanden :-(</entry>
-    <entry key="USER_UNKNOWN">Diesen Benutzer kenne ich nicht =(</entry>
-    <entry key="RAW_MATERIAL">Rohstoff</entry>
-    <entry key="AMOUNT">Menge</entry>
-    <entry key="UPDATED">Gepflegt vor</entry>
+<properties>
+	<entry key="RESOURCE_AND_USER_UNKNOWN">Ich kenne weder einen Benutzer noch eine Ressource mit
+		diesem Namen =(</entry>
+	<entry key="ALREADY_KNOW">Kenne ich schon</entry>
+	<entry key="RESOURCE_UNKNOWN">Diese Ressource kenne ich nicht =(</entry>
+	<entry key="USER">Benutzer</entry>
+	<entry key="DO_NOT_KNOW_ABOUT">Das hier kenne ich nicht: %s</entry>
+	<entry key="RESOURCES_EMPTY">Da steht nichts - was soll man denn da updaten!</entry>
+	<entry key="NO_DATA">Leider keine Daten vorhanden :-(</entry>
+	<entry key="USER_UNKNOWN">Diesen Benutzer kenne ich nicht =(</entry>
+	<entry key="RAW_MATERIAL">Rohstoff</entry>
+	<entry key="AMOUNT">Menge</entry>
+	<entry key="UPDATED">Gepflegt vor</entry>
+	<entry key="PONG">Pong!</entry>
+	<entry key="COMMANDS">Befehle:</entry>
+	<entry key="TOTAL_RESOURCES">Rohstoffe der Gilde</entry>
+	<entry key="CDS">Dieser Bot wurde geschrieben von BlackCraze und Dangercrow. 
+	Übersetzungen wurden von babdab9 beigesteuert.
+	
+	Codebase:
+	https://github.com/BlackCraze/GameResourceBot/
+	
+	discord dev channel:
+	https://discord.gg/e77yjxj
+	</entry>
+	<entry key="INIT">Verbindung hergestellt! Höre auf Befehle mit Prefix </entry>
 </properties>
