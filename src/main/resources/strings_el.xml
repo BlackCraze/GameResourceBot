@@ -13,4 +13,15 @@
     <entry key="RAW_MATERIAL">Υλικό</entry>
     <entry key="AMOUNT">Ποσότητα</entry>
     <entry key="UPDATED">Το δήλωσε πριν από</entry>
+    <entry key="CRS" Αυτή η υποεφαρμογή φτιάχτηκε από τον BlackCraze και τον Dangercrow,
+    Μεταφράσθη στα Ελληνικά και στα Αγγλικά από τον babdab9
+               
+               Βρείτε τον πηγαίο κώδικα εδώ:
+               https://github.com/BlackCraze/GameResourceBot/
+               
+               Βρείτε μας στο Discord!
+               https://discord.gg/e77yjxj
+               </entry>
+        <entry key="INIT"> Σύνδεση επιτεύχθη! Χρησιμοποιήστε με με την προοτροπή </entry>
+               
 </properties>
