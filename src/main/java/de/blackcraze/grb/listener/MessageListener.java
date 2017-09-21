@@ -5,6 +5,7 @@ import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.util.CommandUtils;
 import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.SelfUser;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
@@ -17,45 +18,49 @@ import static de.blackcraze.grb.util.CommandUtils.parseAction;
 
 public class MessageListener extends ListenerAdapter {
 
+    public MessageListener() {
+    }
 
-	public MessageListener() {
-	}
+    @Override
+    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+        Message message = event.getMessage();
+        String listeningChannel = BotConfig.getConfig(message.getGuild()).CHANNEL;
+        String messageChannel = message.getTextChannel().getName();
+        if (!listeningChannel.equalsIgnoreCase(messageChannel)) {
+            return;
+        }
 
-	@Override
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-		Message message = event.getMessage();
-		String listeningChannel = BotConfig.getConfig(message.getGuild()).CHANNEL;
-		String messageChannel = message.getTextChannel().getName();
-		if (!listeningChannel.equalsIgnoreCase(messageChannel)) {
-			return;
-		}
-		Optional<Scanner> scannerOptional = CommandUtils.commandParser(message);
-		if (!scannerOptional.isPresent()) {
-			return;
-		}
+        if (!message.getAttachments().isEmpty()) {
+            Commands.ocrImages(message);
+            return;
+        }
 
-		Scanner scanner = scannerOptional.get();
+        Optional<Scanner> scannerOptional = CommandUtils.commandParser(message);
+        if (!scannerOptional.isPresent()) {
+            return;
+        }
 
-		Optional<String> actionOptional = parseAction(scanner);
+        Scanner scanner = scannerOptional.get();
 
-		Optional<Method> methodOptional = Arrays.stream(Commands.class.getDeclaredMethods())
-				.filter(aMethod -> aMethod.getName().equalsIgnoreCase(actionOptional.orElse("help")))
-				.findFirst();
+        Optional<String> actionOptional = parseAction(scanner);
 
-		if (!methodOptional.isPresent()) {
-			message.addReaction(Speaker.Reaction.FAILURE).queue();
-			return;
-		}
+        Optional<Method> methodOptional = Arrays.stream(Commands.class.getDeclaredMethods())
+                .filter(aMethod -> aMethod.getName().equalsIgnoreCase(actionOptional.orElse("help"))).findFirst();
 
-		System.out.printf("%s:%s%n", message.getAuthor().getName(), message.getContent());
+        if (!methodOptional.isPresent()) {
+            message.addReaction(Speaker.Reaction.FAILURE).queue();
+            return;
+        }
 
-		try {
-			methodOptional.get().invoke(null, scanner, message);
-		} catch (Exception e) {
-			message.addReaction(Speaker.Reaction.FAILURE).queue();
-			e.printStackTrace();
-		}
+        System.out.printf("%s:%s%n", message.getAuthor().getName(), message.getContent());
 
-	}
+        try {
+            methodOptional.get().invoke(null, scanner, message);
+        } catch (Exception e) {
+            message.addReaction(Speaker.Reaction.FAILURE).queue();
+            e.printStackTrace();
+        }
+
+    }
 
 }

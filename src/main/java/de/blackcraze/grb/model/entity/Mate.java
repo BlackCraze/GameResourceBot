@@ -17,33 +17,44 @@ import de.blackcraze.grb.model.AbstractNamed;
 @Table(name = "MATE")
 public class Mate extends AbstractNamed {
 
-	private static final long serialVersionUID = 1453233261285704063L;
+    private static final long serialVersionUID = 1453233261285704063L;
 
-	@Column(nullable = false, unique = true)
-	private String discordId;
+    @Column(nullable = false, unique = true)
+    private String discordId;
 
-	@OneToMany(mappedBy = "mate", fetch = FetchType.LAZY)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	private Set<Building> buildings;
+    @Column
+    private String language;
 
-	@OneToMany(mappedBy = "mate", fetch = FetchType.LAZY)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	private Set<Stock> stocks;
+    @OneToMany(mappedBy = "mate", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Set<Building> buildings;
 
-	public Set<Building> getBuildings() {
-		return buildings;
-	}
+    @OneToMany(mappedBy = "mate", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Set<Stock> stocks;
 
-	public Set<Stock> getStocks() {
-		return stocks;
-	}
+    public Set<Building> getBuildings() {
+        return buildings;
+    }
 
-	public String getDiscordId() {
-		return discordId;
-	}
+    public Set<Stock> getStocks() {
+        return stocks;
+    }
 
-	public void setDiscordId(String discordId) {
-		this.discordId = discordId;
-	}
+    public String getDiscordId() {
+        return discordId;
+    }
+
+    public void setDiscordId(String discordId) {
+        this.discordId = discordId;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 
 }

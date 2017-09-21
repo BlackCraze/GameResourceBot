@@ -34,7 +34,7 @@
     <entry key="COPPER">Kupfer</entry>
     <entry key="COPPER_BAR">Kupferbarren</entry>
     <entry key="COPPER_NAIL">Kupfernagel</entry>
-    <entry key="GLASS_FLASK">Laborflasche</entry>
+    <entry key="GLASS_FLASK">Laborfläschchen</entry>
     <entry key="LAMP">Lampe</entry>
     <entry key="LIANA">Liane</entry>
     <entry key="LIANA_SEED">Lianensamen</entry>
@@ -57,13 +57,13 @@
     <entry key="SAPPHIRE">Saphir</entry>
     <entry key="CLEAN_WATER">Sauberes Wasser</entry>
     <entry key="OXYGEN">Sauerstoff</entry>
-    <entry key="CIRCUIT">Schaltkreis</entry>
+    <entry key="CIRCUIT">Schaltkreise</entry>
     <entry key="GUNPOWDER">Schiesspulver</entry>
     <entry key="SULPHUR">Schwefel</entry>
     <entry key="SULPHURIC_ACID">Schwefelsäure</entry>
     <entry key="SILVER">Silber</entry>
     <entry key="SILVER_BAR">Silberbarren</entry>
-    <entry key="SILICON">Silizium</entry>
+    <entry key="SILICON">Silikon</entry>
     <entry key="EMERALD">Smaragd</entry>
     <entry key="EMERALD_RING">Smaragdring</entry>
     <entry key="SOLAR_PANEL">Solaranlage</entry>

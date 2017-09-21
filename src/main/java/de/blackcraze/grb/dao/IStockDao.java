@@ -14,4 +14,8 @@ public interface IStockDao extends IBaseDao<Stock> {
 
     long getTotalAmount(StockType type);
 
+    int delete(Mate mate, StockType type);
+
+    int deleteAll(Mate mate);
+
 }
