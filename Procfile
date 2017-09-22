@@ -1,1 +1,1 @@
-run: java -jar target/grb-0.0.1-SNAPSHOT-uber.jar -Xmx300M
+run: java -jar target/grb-0.0.1-SNAPSHOT-uber.jar -Xms64m -Xmx64m -Xss512k -XX:MaxMetaspaceSize=20m
