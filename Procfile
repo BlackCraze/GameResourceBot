@@ -1,1 +1,1 @@
-run: java -jar target/grb-0.0.1-SNAPSHOT.jar -Xmx300M
+run: java -jar target/grb-0.0.1-SNAPSHOT-uber.jar -Xmx300M
