@@ -90,7 +90,8 @@
 		</dependency>
 		<!-- https://github.com/bytedeco/javacv -->
 		<!-- REMOVE THIS to get a smaller JAR -->
-		<!-- FIXME - there is only one class dependency that avoid me to remove this -->
+		<!-- FIXME - there is only one class dependency that avoid me to remove
+			this -->
 		<!-- Search for 'FIXME' to see that stuff -->
 		<dependency>
 			<groupId>org.bytedeco</groupId>
@@ -149,6 +150,25 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<finalName>${project.artifactId}-${project.version}-uber</finalName>
+					<filters>
+						<filter>
+							<artifact>*:tess4j</artifact>
+							<excludes>
+								<exclude>tessdata/**</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>*:*</artifact>
+							<excludes>
+								<exclude>META-INF/*.SF</exclude>
+								<exclude>META-INF/*.DSA</exclude>
+								<exclude>META-INF/*.RSA</exclude>
+							</excludes>
+						</filter>
+					</filters>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

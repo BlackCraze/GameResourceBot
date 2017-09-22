@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacv.Java2DFrameUtils;
 
+import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.i18n.Resource;
 import net.sourceforge.tess4j.ITessAPI.TessPageSegMode;
 import net.sourceforge.tess4j.Tesseract;
@@ -61,6 +62,8 @@ public class OCR {
     }
 
     public static Tesseract getTeseract(boolean header) {
+        System.out.println("TESSDATA PATH: " + BotConfig.TESS_DATA);
+
         Tesseract instance = new Tesseract();
         instance.setTessVariable("load_system_dawg", "F");
         instance.setTessVariable("load_freq_dawg", "F");
@@ -68,7 +71,7 @@ public class OCR {
         instance.setTessVariable("language_model_penalty_non_dict_word", "1");
         instance.setTessVariable("debug_file", "/dev/null");
         instance.setLanguage("deu");
-        instance.setDatapath("./tessdata");
+        instance.setDatapath(BotConfig.TESS_DATA);
         if (header) {
             instance.setTessVariable("tessedit_char_whitelist", "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ");
             instance.setPageSegMode(TessPageSegMode.PSM_SINGLE_COLUMN);
