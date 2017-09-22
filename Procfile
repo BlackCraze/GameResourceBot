@@ -1,1 +1,1 @@
-run: java -jar target/grb-0.0.1-SNAPSHOT.jar -Xmx256m -Xss512k -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+UseConcMarkSweepGC
+run: java -jar target/grb-0.0.1-SNAPSHOT.jar -Xmx300M
