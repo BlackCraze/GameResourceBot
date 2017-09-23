@@ -37,6 +37,14 @@ import net.dv8tion.jda.core.entities.TextChannel;
 public final class Commands {
 
 	private Commands() {
+		}
+
+	public static void srccode(Scanner scanner, Message message) {
+		Speaker.say(message.getTextChannel(), Resource.getString("SC", getResponseLocale(message)));
+	}
+
+	public static void devdiscord(Scanner scanner, Message message) {
+		Speaker.say(message.getTextChannel(), Resource.getString("DD", getResponseLocale(message)));
 	}
 
 	public static void ping(Scanner scanner, Message message) {
