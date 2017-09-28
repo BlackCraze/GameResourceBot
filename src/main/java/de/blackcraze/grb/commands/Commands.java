@@ -137,11 +137,6 @@ public final class Commands {
     }
 
     public static void status(Scanner scanner, Message message) {
-//        Runtime rt = Runtime.getRuntime();
-//        long total = rt.totalMemory() / 1024 / 1024;
-//        long free = rt.freeMemory() / 1024 / 1024;
-//        long used = total - free;
-
         StringBuffer buffer = new StringBuffer();
         buffer.append("My Memory:\n\n");
         for (MemPool pool : getPools()) {
@@ -151,10 +146,7 @@ public final class Commands {
             buffer.append("\tUSED:     ").append(FileUtils.byteCountToDisplaySize(usage.getUsed())).append("\n");
             buffer.append("\tCOMMITED: ").append(FileUtils.byteCountToDisplaySize(usage.getCommitted())).append("\n");
             buffer.append("\tMAX:      ").append(FileUtils.byteCountToDisplaySize(usage.getMax())).append("\n");
-            buffer.append("\n");
         }
-//        String memConsume = String.format("My Memory%nTotal:%,dM%nUsed:%,dM%nFree:%,dM", total, used, free);
-//        System.out.println(memConsume);
         Speaker.sayCode(message.getTextChannel(), buffer.toString());
     }
 

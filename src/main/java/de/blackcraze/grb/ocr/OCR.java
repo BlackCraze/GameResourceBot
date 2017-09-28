@@ -32,9 +32,6 @@ public class OCR {
 
 		Map<String, Long> stocks = new HashMap<>((int) extract.size());
 
-		// Tesseract num = getTeseract(false);
-		// Tesseract head = getTeseract(true);
-
 		for (int i = 0; i < extract.size(); i += 2) {
 			String itemName = doOcr(extract.get(i), true);
 			itemName = StringUtils.strip(itemName.replace("\n", "").replace("\r", ""));
@@ -61,33 +58,8 @@ public class OCR {
 		return stocks;
 	}
 
-	// private static String doOcr(Mat value, Tesseract tess) throws
-	// TesseractException {
-	// return tess.doOCR(Java2DFrameUtils.toBufferedImage(value)); // FIXME
-	// }
-	//
-	// public static Tesseract getTeseract(boolean header) {
-	// Tesseract instance = new Tesseract();
-	// instance.setTessVariable("load_system_dawg", "F");
-	// instance.setTessVariable("load_freq_dawg", "F");
-	// instance.setTessVariable("user_words_suffix", "user-words");
-	// instance.setTessVariable("language_model_penalty_non_dict_word", "1");
-	// instance.setTessVariable("debug_file", "/dev/null");
-	// instance.setLanguage("deu");
-	// instance.setDatapath(BotConfig.TESS_DATA);
-	// if (header) {
-	// instance.setTessVariable("tessedit_char_whitelist",
-	// "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ");
-	// instance.setPageSegMode(TessPageSegMode.PSM_SINGLE_COLUMN);
-	// } else {
-	// instance.setTessVariable("tessedit_char_whitelist", "0123456789");
-	// instance.setPageSegMode(TessPageSegMode.PSM_SINGLE_LINE);
-	// }
-	// return instance;
-	// }
-
 	private static String doOcr(Mat mat, boolean header) throws IOException {
-		File tmp = File.createTempFile("mat", ".png");
+		File tmp = File.createTempFile("mat", ".png"); //TODO more efficient
 		tmp.deleteOnExit();
 		TessBaseAPI api = new TessBaseAPI();
 		try {
