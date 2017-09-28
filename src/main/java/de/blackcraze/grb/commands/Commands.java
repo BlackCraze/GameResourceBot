@@ -13,6 +13,9 @@ import static de.blackcraze.grb.util.PrintUtils.prettyPrintStocks;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryPoolMXBean;
+import java.lang.management.MemoryUsage;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -28,6 +31,7 @@ import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import org.apache.commons.io.FileUtils;
 import org.bytedeco.javacpp.opencv_core.Mat;
 
 import de.blackcraze.grb.core.BotConfig;
@@ -133,14 +137,64 @@ public final class Commands {
     }
 
     public static void status(Scanner scanner, Message message) {
-        Runtime rt = Runtime.getRuntime();
-        long total = rt.totalMemory() / 1024 / 1024;
-        long free = rt.freeMemory() / 1024 / 1024;
-        long used = total - free;
+//        Runtime rt = Runtime.getRuntime();
+//        long total = rt.totalMemory() / 1024 / 1024;
+//        long free = rt.freeMemory() / 1024 / 1024;
+//        long used = total - free;
 
-        String memConsume = String.format("My Memory%nTotal:%,dM%nUsed:%,dM%nFree:%,dM", total, used, free);
-        System.out.println(memConsume);
-        Speaker.sayCode(message.getTextChannel(), memConsume);
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("My Memory:\n\n");
+        for (MemPool pool : getPools()) {
+            MemoryUsage usage = pool.getUsage();
+            buffer.append(pool.getName()).append("\n");
+            buffer.append("\tINIT:     ").append(FileUtils.byteCountToDisplaySize(usage.getInit())).append("\n");
+            buffer.append("\tUSED:     ").append(FileUtils.byteCountToDisplaySize(usage.getUsed())).append("\n");
+            buffer.append("\tCOMMITED: ").append(FileUtils.byteCountToDisplaySize(usage.getCommitted())).append("\n");
+            buffer.append("\tMAX:      ").append(FileUtils.byteCountToDisplaySize(usage.getMax())).append("\n");
+        }
+//        String memConsume = String.format("My Memory%nTotal:%,dM%nUsed:%,dM%nFree:%,dM", total, used, free);
+//        System.out.println(memConsume);
+        Speaker.sayCode(message.getTextChannel(), buffer.toString());
+    }
+
+    /**
+    *
+    */
+    public static class MemPool {
+
+        private final String name;
+
+        private final MemoryUsage usage;
+
+        public MemPool(String name, MemoryUsage usage) {
+            this.name = name;
+            this.usage = usage;
+        }
+
+        /**
+         * @return The name.
+         */
+        public String getName() {
+            return name;
+        }
+
+        /**
+         * @return The usage.
+         */
+        public MemoryUsage getUsage() {
+            return usage;
+        }
+    }
+
+    private static List<MemPool> getPools() {
+        List<MemoryPoolMXBean> poolMXBeans = ManagementFactory.getMemoryPoolMXBeans();
+        List<MemPool> result = new ArrayList<MemPool>(poolMXBeans.size() + 2);
+        result.add(new MemPool("Heap", ManagementFactory.getMemoryMXBean().getHeapMemoryUsage()));
+        result.add(new MemPool("Non-Heap", ManagementFactory.getMemoryMXBean().getNonHeapMemoryUsage()));
+        for (MemoryPoolMXBean poolMXBean : poolMXBeans) {
+            result.add(new MemPool(poolMXBean.getName(), poolMXBean.getUsage()));
+        }
+        return result;
     }
 
     public static void clearMe(Scanner scanner, Message message) {

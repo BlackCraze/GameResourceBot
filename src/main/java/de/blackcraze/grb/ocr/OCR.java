@@ -1,5 +1,6 @@
 package de.blackcraze.grb.ocr;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -62,7 +63,13 @@ public class OCR {
     }
 
     public static Tesseract getTeseract(boolean header) {
-        System.out.println("TESSDATA PATH: " + BotConfig.TESS_DATA);
+        String tessData = BotConfig.TESS_DATA;
+
+        File tessDataFolder = new File(tessData);
+        System.out.println("TESSDATA PATH: " + tessDataFolder.getAbsolutePath());
+        if (!tessDataFolder.exists()) {
+            throw new IllegalStateException("TESS_DATA FOLDER NOT FOUND");
+        }
 
         Tesseract instance = new Tesseract();
         instance.setTessVariable("load_system_dawg", "F");
@@ -71,7 +78,7 @@ public class OCR {
         instance.setTessVariable("language_model_penalty_non_dict_word", "1");
         instance.setTessVariable("debug_file", "/dev/null");
         instance.setLanguage("deu");
-        instance.setDatapath(BotConfig.TESS_DATA);
+        instance.setDatapath(tessData);
         if (header) {
             instance.setTessVariable("tessedit_char_whitelist", "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ");
             instance.setPageSegMode(TessPageSegMode.PSM_SINGLE_COLUMN);

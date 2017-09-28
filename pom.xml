@@ -97,6 +97,88 @@
 			<groupId>org.bytedeco</groupId>
 			<artifactId>javacv-platform</artifactId>
 			<version>1.3.3</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>ffmpeg</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>ffmpeg-platform</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>flycapture</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>flycapture-platform</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>artoolkitplus</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>artoolkitplus-platform</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>artoolkit</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>artoolkit-platform</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>videoinput</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>videoinput-platform</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>flandmark</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>flandmark-platform</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>librealsense</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>librealsense-platform</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>libfreenect</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>libfreenect-platform</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>libfreenect2</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>libfreenect2-platform</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>libdc1394</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>libdc1394-platform</artifactId>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.bytedeco.javacpp-presets</groupId>
@@ -118,6 +200,23 @@
 	</properties>
 
 	<build>
+		<resources>
+			<!-- The resources in the lib folder -->
+			<resource>
+				<directory>tessdata</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+				<targetPath>${project.build.directory}/tessdata/</targetPath>
+				<filtering>false</filtering>
+			</resource>
+			<!-- We need to redeclare the project resources again -->
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -134,6 +233,8 @@
 				<configuration>
 					<archive>
 						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
 							<mainClass>de.blackcraze.grb.core.Main</mainClass>
 						</manifest>
 					</archive>
@@ -141,36 +242,27 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
+				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
-						<phase>package</phase>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
 						<goals>
-							<goal>shade</goal>
+							<goal>copy-dependencies</goal>
 						</goals>
+						<configuration>
+							<excludeGroupIds>
+							</excludeGroupIds>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<finalName>${project.artifactId}-${project.version}-uber</finalName>
-					<filters>
-						<filter>
-							<artifact>*:tess4j</artifact>
-							<excludes>
-								<exclude>tessdata/**</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>*:*</artifact>
-							<excludes>
-								<exclude>META-INF/*.SF</exclude>
-								<exclude>META-INF/*.DSA</exclude>
-								<exclude>META-INF/*.RSA</exclude>
-							</excludes>
-						</filter>
-					</filters>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
