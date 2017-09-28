@@ -1,5 +1,10 @@
 package de.blackcraze.grb.ocr;
 
+import static org.bytedeco.javacpp.lept.pixDestroy;
+import static org.bytedeco.javacpp.lept.pixRead;
+import static org.bytedeco.javacpp.opencv_imgcodecs.imwrite;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -7,14 +12,13 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.bytedeco.javacpp.BytePointer;
+import org.bytedeco.javacpp.lept.PIX;
 import org.bytedeco.javacpp.opencv_core.Mat;
-import org.bytedeco.javacv.Java2DFrameUtils;
+import org.bytedeco.javacpp.tesseract.TessBaseAPI;
 
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.i18n.Resource;
-import net.sourceforge.tess4j.ITessAPI.TessPageSegMode;
-import net.sourceforge.tess4j.Tesseract;
-import net.sourceforge.tess4j.TesseractException;
 
 public class OCR {
 
@@ -23,16 +27,16 @@ public class OCR {
 	 *
 	 * @throws IOException
 	 */
-	public static Map<String, Long> convertToStocks(List<Mat> extract, Locale locale) throws TesseractException {
+	public static Map<String, Long> convertToStocks(List<Mat> extract, Locale locale) throws IOException {
 		System.setProperty("jna.encoding", "UTF8");
 
 		Map<String, Long> stocks = new HashMap<>((int) extract.size());
 
-		Tesseract num = getTeseract(false);
-		Tesseract head = getTeseract(true);
+		// Tesseract num = getTeseract(false);
+		// Tesseract head = getTeseract(true);
 
 		for (int i = 0; i < extract.size(); i += 2) {
-			String itemName = doOcr(extract.get(i), head);
+			String itemName = doOcr(extract.get(i), true);
 			itemName = StringUtils.strip(itemName.replace("\n", "").replace("\r", ""));
 			String key;
 			try {
@@ -44,7 +48,7 @@ public class OCR {
 				stocks.put(itemName, Long.MIN_VALUE);
 				continue;
 			}
-			String value = doOcr(extract.get(i + 1), num);
+			String value = doOcr(extract.get(i + 1), false);
 			String valueCorrected = StringUtils.replaceAll(value, "\\D", "");
 			try {
 				Long valueOf = Long.valueOf(valueCorrected);
@@ -57,27 +61,61 @@ public class OCR {
 		return stocks;
 	}
 
-	private static String doOcr(Mat value, Tesseract tess) throws TesseractException {
-		return tess.doOCR(Java2DFrameUtils.toBufferedImage(value)); // FIXME
-	}
+	// private static String doOcr(Mat value, Tesseract tess) throws
+	// TesseractException {
+	// return tess.doOCR(Java2DFrameUtils.toBufferedImage(value)); // FIXME
+	// }
+	//
+	// public static Tesseract getTeseract(boolean header) {
+	// Tesseract instance = new Tesseract();
+	// instance.setTessVariable("load_system_dawg", "F");
+	// instance.setTessVariable("load_freq_dawg", "F");
+	// instance.setTessVariable("user_words_suffix", "user-words");
+	// instance.setTessVariable("language_model_penalty_non_dict_word", "1");
+	// instance.setTessVariable("debug_file", "/dev/null");
+	// instance.setLanguage("deu");
+	// instance.setDatapath(BotConfig.TESS_DATA);
+	// if (header) {
+	// instance.setTessVariable("tessedit_char_whitelist",
+	// "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ");
+	// instance.setPageSegMode(TessPageSegMode.PSM_SINGLE_COLUMN);
+	// } else {
+	// instance.setTessVariable("tessedit_char_whitelist", "0123456789");
+	// instance.setPageSegMode(TessPageSegMode.PSM_SINGLE_LINE);
+	// }
+	// return instance;
+	// }
 
-	public static Tesseract getTeseract(boolean header) {
-		Tesseract instance = new Tesseract();
-		instance.setTessVariable("load_system_dawg", "F");
-		instance.setTessVariable("load_freq_dawg", "F");
-		instance.setTessVariable("user_words_suffix", "user-words");
-		instance.setTessVariable("language_model_penalty_non_dict_word", "1");
-		instance.setTessVariable("debug_file", "/dev/null");
-		instance.setLanguage("deu");
-		instance.setDatapath(BotConfig.TESS_DATA);
-		if (header) {
-			instance.setTessVariable("tessedit_char_whitelist", "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ");
-			instance.setPageSegMode(TessPageSegMode.PSM_SINGLE_COLUMN);
-		} else {
-			instance.setTessVariable("tessedit_char_whitelist", "0123456789");
-			instance.setPageSegMode(TessPageSegMode.PSM_SINGLE_LINE);
+	private static String doOcr(Mat mat, boolean header) throws IOException {
+		File tmp = File.createTempFile("mat", ".png");
+		tmp.deleteOnExit();
+		TessBaseAPI api = new TessBaseAPI();
+		try {
+			imwrite(tmp.getAbsolutePath(), mat);
+			if (header) {
+				api.SetVariable("tessedit_char_whitelist", "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ");
+				api.SetPageSegMode(7);
+			} else {
+				api.SetVariable("tessedit_char_whitelist", "1234567890");
+				api.SetPageSegMode(4);
+			}
+			int init = api.Init(BotConfig.TESS_DATA, "deu");
+			if (init != 0) {
+				System.err.println("could not init");
+			}
+
+			PIX image = pixRead(tmp.getAbsolutePath());
+			api.SetImage(image);
+			BytePointer outText = api.GetUTF8Text();
+			String out = outText.getString();
+			outText.deallocate();
+			pixDestroy(image);
+			return out;
+		} finally {
+			api.End();
+			api.close();
+			tmp.delete();
 		}
-		return instance;
 	}
 
 }
