@@ -10,6 +10,14 @@ import static de.blackcraze.grb.util.PrintUtils.prettyPrint;
 import static de.blackcraze.grb.util.PrintUtils.prettyPrintMate;
 import static de.blackcraze.grb.util.PrintUtils.prettyPrintStockTypes;
 import static de.blackcraze.grb.util.PrintUtils.prettyPrintStocks;
+import static org.bytedeco.javacpp.Pointer.availablePhysicalBytes;
+import static org.bytedeco.javacpp.Pointer.deallocateReferences;
+import static org.bytedeco.javacpp.Pointer.formatBytes;
+import static org.bytedeco.javacpp.Pointer.maxBytes;
+import static org.bytedeco.javacpp.Pointer.maxPhysicalBytes;
+import static org.bytedeco.javacpp.Pointer.physicalBytes;
+import static org.bytedeco.javacpp.Pointer.totalBytes;
+import static org.bytedeco.javacpp.Pointer.totalPhysicalBytes;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
@@ -137,9 +145,21 @@ public final class Commands {
 	public static void status(Scanner scanner, Message message) {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("My Memory:\n\n");
-		buffer.append("JAVACPP:");
-		buffer.append(org.bytedeco.javacpp.Pointer.totalBytes());
-		buffer.append("b\n\n");
+		buffer.append("JAVACPP:\n");
+		buffer.append("memory tracked by deallocators: " + formatBytes(totalBytes()) + "\n");
+		buffer.append("maximum memory allowed to be tracked: " + formatBytes(maxBytes()) + "\n");
+		try {
+			buffer.append("physical memory installed according to the operating system, or 0 if unknown: "
+					+ formatBytes(totalPhysicalBytes()) + "\n");
+			buffer.append("maximum physical memory that should be used: " + formatBytes(maxPhysicalBytes()) + "\n");
+			buffer.append("physical memory that is free according to the operating system, or 0 if unknown: "
+					+ formatBytes(availablePhysicalBytes()) + "\n");
+			buffer.append("physical memory currently used by the whole process, or 0 if unknown: "
+					+ formatBytes(physicalBytes()) + "\n");
+		} catch (UnsatisfiedLinkError e) {
+			buffer.append("no physical Data Available");
+		}
+		buffer.append("\n\n");
 		for (MemPool pool : getPools()) {
 			MemoryUsage usage = pool.getUsage();
 			buffer.append(pool.getName()).append("\n");
@@ -310,9 +330,11 @@ public final class Commands {
 					Map<String, Long> stocks = OCR.convertToStocks(stream, locale);
 					Speaker.sayCode(message.getTextChannel(), prettyPrint(stocks, locale));
 					internalUpdate(message, locale, stocks);
-				} catch (Exception e) {
+				} catch (Throwable e) {
 					Speaker.err(message, String.format(Resource.getString("ERROR_UNKNOWN", locale), e.getMessage()));
 					e.printStackTrace();
+				} finally {
+					deallocateReferences();
 				}
 			}
 		}
