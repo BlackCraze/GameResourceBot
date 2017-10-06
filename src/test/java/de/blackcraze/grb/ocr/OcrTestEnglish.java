@@ -1,11 +1,9 @@
 package de.blackcraze.grb.ocr;
 
 import java.io.InputStream;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.bytedeco.javacpp.opencv_core.Mat;
 import org.junit.Test;
 
 import junit.framework.Assert;
@@ -15,8 +13,7 @@ public class OcrTestEnglish {
 	@Test
 	public void testEnglish1() throws Exception {
 		InputStream stream = OcrTestEnglish.class.getClassLoader().getResourceAsStream("720_eng_01.png");
-		List<Mat> extract = Preprocessor.extract(stream);
-		Map<String, Long> stocks = OCR.convertToStocks(extract, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.convertToStocks(stream, Locale.ENGLISH);
 		Assert.assertTrue(stocks.keySet().size() == 9);
 		Assert.assertEquals(Long.valueOf(11227), stocks.get("OIL"));
 		Assert.assertEquals(Long.valueOf(98), stocks.get("URANIUM"));
@@ -32,8 +29,7 @@ public class OcrTestEnglish {
 	@Test
 	public void testEnglish2() throws Exception {
 		InputStream stream = OcrTestEnglish.class.getClassLoader().getResourceAsStream("720_eng_02.png");
-		List<Mat> extract = Preprocessor.extract(stream);
-		Map<String, Long> stocks = OCR.convertToStocks(extract, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.convertToStocks(stream, Locale.ENGLISH);
 		Assert.assertTrue(stocks.keySet().size() == 9);
 		Assert.assertEquals(Long.valueOf(554247), stocks.get("GOLD"));
 		Assert.assertEquals(Long.valueOf(301793), stocks.get("AMBER"));
@@ -49,8 +45,7 @@ public class OcrTestEnglish {
 	@Test
 	public void testEnglish3() throws Exception {
 		InputStream stream = OcrTestEnglish.class.getClassLoader().getResourceAsStream("720_eng_03.png");
-		List<Mat> extract = Preprocessor.extract(stream);
-		Map<String, Long> stocks = OCR.convertToStocks(extract, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.convertToStocks(stream, Locale.ENGLISH);
 		Assert.assertTrue(stocks.keySet().size() == 9);
 		Assert.assertEquals(Long.valueOf(432215), stocks.get("EMERALD"));
 		Assert.assertEquals(Long.valueOf(484), stocks.get("PLATINUM"));
@@ -66,8 +61,7 @@ public class OcrTestEnglish {
 	@Test
 	public void test_screens_fire_b1() throws Exception {
 		InputStream stream = OcrTestEnglish.class.getClassLoader().getResourceAsStream("720_en_b1.png");
-		List<Mat> extract = Preprocessor.extract(stream);
-		Map<String, Long> stocks = OCR.convertToStocks(extract, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.convertToStocks(stream, Locale.ENGLISH);
 		Assert.assertTrue(stocks.keySet().size() == 9);
 		Assert.assertEquals(Long.valueOf(33766), stocks.get("COPPER_BAR"));
 		Assert.assertEquals(Long.valueOf(32340), stocks.get("IRON_BAR"));
@@ -83,8 +77,7 @@ public class OcrTestEnglish {
 	@Test
 	public void test_screens_fire_b2() throws Exception {
 		InputStream stream = OcrTestEnglish.class.getClassLoader().getResourceAsStream("720_en_b2.png");
-		List<Mat> extract = Preprocessor.extract(stream);
-		Map<String, Long> stocks = OCR.convertToStocks(extract, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.convertToStocks(stream, Locale.ENGLISH);
 		Assert.assertTrue(stocks.keySet().size() == 9);
 		Assert.assertEquals(Long.valueOf(391), stocks.get("DIAMOND_CUTTER"));
 		Assert.assertEquals(Long.valueOf(434), stocks.get("MOTHERBOARD"));
@@ -100,8 +93,7 @@ public class OcrTestEnglish {
 	@Test
 	public void test_screens_fire_b3() throws Exception {
 		InputStream stream = OcrTestEnglish.class.getClassLoader().getResourceAsStream("720_en_b3.png");
-		List<Mat> extract = Preprocessor.extract(stream);
-		Map<String, Long> stocks = OCR.convertToStocks(extract, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.convertToStocks(stream, Locale.ENGLISH);
 		Assert.assertTrue(stocks.keySet().size() == 9);
 		Assert.assertEquals(Long.valueOf(3266), stocks.get("AMBER_CHARGER"));
 		Assert.assertEquals(Long.valueOf(7418), stocks.get("ALUMINIUM_BOTTLE"));
@@ -117,8 +109,7 @@ public class OcrTestEnglish {
 	@Test
 	public void test_screens_fire_a1() throws Exception {
 		InputStream stream = OcrTestEnglish.class.getClassLoader().getResourceAsStream("720_en_a1.png");
-		List<Mat> extract = Preprocessor.extract(stream);
-		Map<String, Long> stocks = OCR.convertToStocks(extract, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.convertToStocks(stream, Locale.ENGLISH);
 		Assert.assertTrue(stocks.keySet().size() == 9);
 		Assert.assertEquals(Long.valueOf(149941), stocks.get("COAL"));
 		Assert.assertEquals(Long.valueOf(218279), stocks.get("COPPER"));
@@ -134,8 +125,7 @@ public class OcrTestEnglish {
 	@Test
 	public void test_screens_fire_a2() throws Exception {
 		InputStream stream = OcrTestEnglish.class.getClassLoader().getResourceAsStream("720_en_a2.png");
-		List<Mat> extract = Preprocessor.extract(stream);
-		Map<String, Long> stocks = OCR.convertToStocks(extract, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.convertToStocks(stream, Locale.ENGLISH);
 		Assert.assertTrue(stocks.keySet().size() == 8);
 		Assert.assertEquals(Long.valueOf(309595), stocks.get("TOPAZ"));
 		Assert.assertEquals(Long.valueOf(340464), stocks.get("RUBY"));
@@ -150,8 +140,7 @@ public class OcrTestEnglish {
 	@Test
 	public void test_screens_fire_c1() throws Exception {
 		InputStream stream = OcrTestEnglish.class.getClassLoader().getResourceAsStream("720_en_c1.png");
-		List<Mat> extract = Preprocessor.extract(stream);
-		Map<String, Long> stocks = OCR.convertToStocks(extract, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.convertToStocks(stream, Locale.ENGLISH);
 		Assert.assertTrue(stocks.keySet().size() == 9);
 		Assert.assertEquals(Long.valueOf(112959), stocks.get("WATER"));
 		Assert.assertEquals(Long.valueOf(8444), stocks.get("OIL"));
@@ -167,8 +156,7 @@ public class OcrTestEnglish {
 	@Test
 	public void test_screens_fire_c2() throws Exception {
 		InputStream stream = OcrTestEnglish.class.getClassLoader().getResourceAsStream("720_en_c2.png");
-		List<Mat> extract = Preprocessor.extract(stream);
-		Map<String, Long> stocks = OCR.convertToStocks(extract, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.convertToStocks(stream, Locale.ENGLISH);
 		Assert.assertTrue(stocks.keySet().size() == 9);
 		Assert.assertEquals(Long.valueOf(13277), stocks.get("GLASS"));
 		Assert.assertEquals(Long.valueOf(1437), stocks.get("OXYGEN"));
@@ -184,8 +172,7 @@ public class OcrTestEnglish {
 	@Test
 	public void test_screens_fire_d1() throws Exception {
 		InputStream stream = OcrTestEnglish.class.getClassLoader().getResourceAsStream("720_en_d1.png");
-		List<Mat> extract = Preprocessor.extract(stream);
-		Map<String, Long> stocks = OCR.convertToStocks(extract, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.convertToStocks(stream, Locale.ENGLISH);
 		Assert.assertTrue(stocks.keySet().size() == 9);
 		Assert.assertEquals(Long.valueOf(4226), stocks.get("POLISHED_AMBER"));
 		Assert.assertEquals(Long.valueOf(29348), stocks.get("POLISHED_EMERALD"));
@@ -201,8 +188,7 @@ public class OcrTestEnglish {
 	@Test
 	public void test_screens_fire_d2() throws Exception {
 		InputStream stream = OcrTestEnglish.class.getClassLoader().getResourceAsStream("720_en_d2.png");
-		List<Mat> extract = Preprocessor.extract(stream);
-		Map<String, Long> stocks = OCR.convertToStocks(extract, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.convertToStocks(stream, Locale.ENGLISH);
 		Assert.assertTrue(stocks.keySet().size() == 7);
 		Assert.assertEquals(Long.valueOf(6372), stocks.get("POLISHED_SAPPHIRE"));
 		Assert.assertEquals(Long.valueOf(15109), stocks.get("POLISHED_RUBY"));
@@ -217,7 +203,7 @@ public class OcrTestEnglish {
 	public void test_screens_fire_e1() throws Exception {
 		InputStream stream = OcrTestEnglish.class.getClassLoader().getResourceAsStream("720_en_e1.png");
 		try {
-			Preprocessor.extract(stream);
+			OCR.convertToStocks(stream, Locale.ENGLISH);
 			Assert.fail("Exception expected");
 		} catch (IllegalStateException e) {
 			Assert.assertTrue(true);

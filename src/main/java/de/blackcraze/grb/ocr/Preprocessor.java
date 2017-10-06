@@ -8,6 +8,7 @@ import static org.bytedeco.javacpp.opencv_core.hconcat;
 import static org.bytedeco.javacpp.opencv_core.inRange;
 import static org.bytedeco.javacpp.opencv_core.normalize;
 import static org.bytedeco.javacpp.opencv_core.vconcat;
+import static org.bytedeco.javacpp.opencv_imgcodecs.imread;
 import static org.bytedeco.javacpp.opencv_imgcodecs.imwrite;
 import static org.bytedeco.javacpp.opencv_imgproc.CHAIN_APPROX_SIMPLE;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_BGR2HSV;
@@ -33,7 +34,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -210,7 +213,8 @@ public class Preprocessor {
 		}
 	}
 
-	private static MatVector load(InputStream stream) throws IOException {
+	private static List<File> load(InputStream stream) throws IOException {
+		List<File> result = getColumnTempFiles();
 		BufferedImage image = ImageIO.read(stream);
 		image = Preprocessor.cropCenterScreen(image);
 		Preprocessor.maskIconRing(image);
@@ -219,19 +223,31 @@ public class Preprocessor {
 		// Mat src = null; //FIXME
 		double factor = 720d / image.getWidth();
 		resize(src, src, new Size(720, Double.valueOf(image.getHeight() * factor).intValue()));
-		Mat col1 = src.apply(new Rect(50, 0, 200, src.rows()));
-		Mat col2 = src.apply(new Rect(255, 0, 200, src.rows()));
-		Mat col3 = src.apply(new Rect(465, 0, 200, src.rows()));
-		MatVector matVector = new MatVector(3);
-		matVector.put(0, col1);
-		matVector.put(1, col2);
-		matVector.put(2, col3);
-		return matVector;
+		imwrite(result.get(0).getAbsolutePath(), src.apply(new Rect(50, 0, 200, src.rows())));
+		imwrite(result.get(1).getAbsolutePath(), src.apply(new Rect(255, 0, 200, src.rows())));
+		imwrite(result.get(2).getAbsolutePath(), src.apply(new Rect(465, 0, 200, src.rows())));
+		src.deallocate();
+		return result;
 	}
 
-	private static List<Mat> process(Mat src, Mat maskLow, Mat maskUp, double thresh, int erodeV, int erodeH,
+	private static List<File> getColumnTempFiles() throws IOException {
+		List<File> result = new ArrayList<>(3);
+		File col1File = File.createTempFile("col1", ".png");
+		col1File.deleteOnExit();
+		File col2File = File.createTempFile("col2", ".png");
+		col1File.deleteOnExit();
+		File col3File = File.createTempFile("col3", ".png");
+		col1File.deleteOnExit();
+		result.add(col1File);
+		result.add(col2File);
+		result.add(col3File);
+		return result;
+	}
+
+	private static List<File> process(File srcFile, Mat maskLow, Mat maskUp, double thresh, int erodeV, int erodeH,
 			int threshSrcBwLow, int threshSrcBwUp, boolean cropContour, String prefix) throws IOException {
 		Mat dest = new Mat();
+		Mat src = imread(srcFile.getAbsolutePath());
 		cvtColor(src, dest, CV_BGR2HSV);
 		inRange(dest, maskLow, maskUp, dest);
 		threshold(dest, dest, 200, 255, CV_THRESH_BINARY_INV);
@@ -254,7 +270,7 @@ public class Preprocessor {
 		findContours(dist_8u, contours, hierarchy, RETR_CCOMP, CHAIN_APPROX_SIMPLE);
 
 		Mat mat = applyBorders(src.clone(), 1);
-		List<Mat> result = new ArrayList<>((int) contours.size());
+		List<File> result = new ArrayList<>((int) contours.size());
 
 		// Draw the foreground markers
 		if (debug()) {
@@ -286,11 +302,15 @@ public class Preprocessor {
 				resize(cut, cut, new Size(cut.size().width() * 2, cut.size().height() * 2));
 				cvtColor(cut, cut, CV_RGB2GRAY);
 				threshold(cut, cut, threshSrcBwLow, threshSrcBwUp, CV_THRESH_BINARY_INV);
-				result.add(cut);
+				File tempFile = File.createTempFile(prefix + i, ".png");
+				tempFile.deleteOnExit();
+				result.add(tempFile);
+				imwrite(tempFile.getAbsolutePath(), cut);
 				saveToDisk(cut, prefix + "_5_cut_" + i);
+				cut.deallocate();
 			}
 		}
-
+		contours.deallocate();
 		return result;
 	}
 
@@ -311,21 +331,23 @@ public class Preprocessor {
 		return dest;
 	}
 
-	public static List<Mat> extract(InputStream imageStream) throws IOException {
-		List<Mat> result = new ArrayList<>(24); // should not be more I think
-		MatVector load = load(imageStream);
-		for (int i = 0; i < 3; i++) {
-			List<Mat> texts = process(load.get(i), MASK_TEXT_LOW, MASK_TEXT_UP, TRESH_TEXT, ERODE_TEXT_V, ERODE_TEXT_H,
+	public static Map<File, File> extract(InputStream imageStream) throws IOException {
+		List<File> parts = load(imageStream);
+		Map<File, File> result = new HashMap<>();
+		int i = 0;
+		for (File part : parts) {
+			List<File> texts = process(part, MASK_TEXT_LOW, MASK_TEXT_UP, TRESH_TEXT, ERODE_TEXT_V, ERODE_TEXT_H,
 					TRESH_TEXT_SRC_BW_LOW, TRESH_TEXT_SRC_BW_UP, false, "col_" + i + "_text");
-			List<Mat> numbers = process(load.get(i), MASK_NUM_LOW, MASK_NUM_UP, TRESH_NUM, ERODE_NUM_V, ERODE_NUM_H,
+			List<File> numbers = process(part, MASK_NUM_LOW, MASK_NUM_UP, TRESH_NUM, ERODE_NUM_V, ERODE_NUM_H,
 					TRESH_NUM_SRC_BW_LOW, TRESH_NUM_SRC_BW_UP, true, "col_" + i + "_num");
 			if (texts.size() != numbers.size()) {
 				throw new IllegalStateException("could not extract headers and columns exactly");
 			}
-			for (int j = 0; j < texts.size(); j++) {
-				result.add(texts.get(j));
-				result.add(numbers.get(j));
+			for (int y = 0; y < numbers.size(); y++) {
+				result.put(texts.get(y), numbers.get(y));
 			}
+			i++;
+			part.delete();
 		}
 		return result;
 	}
