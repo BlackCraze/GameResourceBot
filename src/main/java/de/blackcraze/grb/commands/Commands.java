@@ -12,7 +12,6 @@ import static de.blackcraze.grb.util.PrintUtils.prettyPrintStockTypes;
 import static de.blackcraze.grb.util.PrintUtils.prettyPrintStocks;
 
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.InputStream;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryPoolMXBean;
@@ -41,7 +40,6 @@ import de.blackcraze.grb.model.PrintableTable;
 import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.StockType;
 import de.blackcraze.grb.ocr.OCR;
-import de.blackcraze.grb.ocr.Preprocessor;
 import de.blackcraze.grb.util.wagu.Block;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.Message.Attachment;
@@ -139,6 +137,9 @@ public final class Commands {
 	public static void status(Scanner scanner, Message message) {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("My Memory:\n\n");
+		buffer.append("JAVACPP:");
+		buffer.append(org.bytedeco.javacpp.Pointer.totalBytes());
+		buffer.append("b\n\n");
 		for (MemPool pool : getPools()) {
 			MemoryUsage usage = pool.getUsage();
 			buffer.append(pool.getName()).append("\n");

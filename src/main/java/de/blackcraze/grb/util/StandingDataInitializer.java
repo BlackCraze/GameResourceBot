@@ -39,7 +39,7 @@ public class StandingDataInitializer {
 						.anyMatch(stockType -> stockType.getName().equalsIgnoreCase(name));
 
 				if (stockAlreadyExists) {
-					break;
+					continue;
 				}
 
 				StockType type = new StockType();

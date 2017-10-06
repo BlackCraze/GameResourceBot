@@ -220,7 +220,6 @@ public class Preprocessor {
 		Preprocessor.maskIconRing(image);
 		image = Preprocessor.cropMasked(image);
 		Mat src = Java2DFrameUtils.toMat(image);
-		// Mat src = null; //FIXME
 		double factor = 720d / image.getWidth();
 		resize(src, src, new Size(720, Double.valueOf(image.getHeight() * factor).intValue()));
 		imwrite(result.get(0).getAbsolutePath(), src.apply(new Rect(50, 0, 200, src.rows())));
