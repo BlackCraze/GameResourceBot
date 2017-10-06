@@ -34,7 +34,7 @@ public class OCR {
 
 		for (int i = 0; i < extract.size(); i += 2) {
 			String itemName = doOcr(extract.get(i), true);
-			itemName = StringUtils.strip(itemName.replace("\n", "").replace("\r", ""));
+			itemName = StringUtils.strip(itemName.replaceAll("\\W", ""));
 			String key;
 			try {
 				key = Resource.getItemKey(itemName, locale);
@@ -59,7 +59,7 @@ public class OCR {
 	}
 
 	private static String doOcr(Mat mat, boolean header) throws IOException {
-		File tmp = File.createTempFile("mat", ".png"); //TODO more efficient
+		File tmp = File.createTempFile("mat", ".png"); // TODO more efficient
 		tmp.deleteOnExit();
 		TessBaseAPI api = new TessBaseAPI();
 		try {
