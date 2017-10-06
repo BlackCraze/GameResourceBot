@@ -81,4 +81,12 @@
     <entry key="HYDROGEN">Hydrogen</entry>
     <entry key="GEAR">Gear</entry>
     <entry key="OIL">Oil</entry>
+    <entry key="POLISHED_OBSIDIAN">Polished Obsidian</entry>
+    <entry key="OBSIDIAN_KNIFE">Obsidian Knife</entry>
+    <entry key="COMPRESSOR">Compressor</entry>
+    <entry key="HELIUM_3">Helium 3</entry>
+    <entry key="OBSIDIAN">Obsidian</entry>
+    <entry key="LIQUID_NITROGEN">Liquid Nitrogen</entry>
+    <entry key="OPTIC_FIBER">Optic Fibre</entry>
+    <entry key="NITROGEN">Nitrogen</entry>
 </properties>

@@ -81,4 +81,12 @@
     <entry key="HYDROGEN">Wasserstoff</entry>
     <entry key="GEAR">Zahnrad</entry>
     <entry key="OIL">Öl</entry>
+    <entry key="POLISHED_OBSIDIAN">Polierter Obsidian</entry>
+    <entry key="OBSIDIAN_KNIFE">Obsidianmesser</entry>
+    <entry key="COMPRESSOR">Kompressor</entry>
+    <entry key="HELIUM_3">Helium 3</entry>
+    <entry key="OBSIDIAN">Obsidian</entry>
+    <entry key="LIQUID_NITROGEN">Flüssiger Stickstoff</entry>
+    <entry key="OPTIC_FIBER">Glasfaserkabel</entry>
+    <entry key="NITROGEN">Stickstoff</entry>
 </properties>
