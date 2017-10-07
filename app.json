@@ -12,27 +12,27 @@
     "GRB_DISCORD_TOKEN": {
       "description": "This is the 'secret' from you 'App Bot User' you copied before.",
       "value": "",
-      "required": true
+      "required": "true"
     },    
     "CHANNEL": {
       "description": "The channel the bot will listen to on your discord server",
       "value": "GuildRessourceBot",
-      "required": false
+      "required": "false"
     },
     "LANGUAGE": {
       "description": "Language for the ressources, currenlty 'en' or 'de' are valid values.",
       "value": "en",
-      "required": false
+      "required": "false"
     },
     "JAVA_TOOL_OPTIONS": {
       "description": "Memory instructions so this project can run on a free heroku plan",
       "value": "-Xms200m -Xmx200m -Xss512k -XX:MaxMetaspaceSize=80m",
-      "required": true
+      "required": "true"
     },    
     "TESS_DATA": {
       "description": "Path for the tessdata files",
       "value": "./target/tessdata",
-      "required": true
+      "required": "true"
     }    
   }  
 }
