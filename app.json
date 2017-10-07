@@ -1,8 +1,6 @@
 {
   "name": "RessourceBot",
   "description": "A Ressource Management Tool for Guilds",
-  "repository": "https://github.com/heroku/node-js-sample",
-  "logo": "https://node-js-sample.herokuapp.com/node.png",
   "keywords": ["deeptown", "ressource management", "guild"],
   "repository": "https://github.com/BlackCraze/GameResourceBot",
   "addons": [
@@ -16,7 +14,7 @@
       "generator": "GuildRessourceBot"
     },
     "GRB_DISCORD_TOKEN": {
-      "description": "This is the "secret" from you "App Bot User" you copied before.",
+      "description": "This is the 'secret' from you 'App Bot User' you copied before.",
       "value": "YouNeedToChangeIt"
     },
     "JAVA_TOOL_OPTIONS": {
