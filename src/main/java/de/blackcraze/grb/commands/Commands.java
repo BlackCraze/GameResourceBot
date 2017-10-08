@@ -11,7 +11,6 @@ import static de.blackcraze.grb.util.PrintUtils.prettyPrintMate;
 import static de.blackcraze.grb.util.PrintUtils.prettyPrintStockTypes;
 import static de.blackcraze.grb.util.PrintUtils.prettyPrintStocks;
 import static org.bytedeco.javacpp.Pointer.availablePhysicalBytes;
-import static org.bytedeco.javacpp.Pointer.deallocateReferences;
 import static org.bytedeco.javacpp.Pointer.formatBytes;
 import static org.bytedeco.javacpp.Pointer.maxBytes;
 import static org.bytedeco.javacpp.Pointer.maxPhysicalBytes;
@@ -19,15 +18,12 @@ import static org.bytedeco.javacpp.Pointer.physicalBytes;
 import static org.bytedeco.javacpp.Pointer.totalBytes;
 import static org.bytedeco.javacpp.Pointer.totalPhysicalBytes;
 
-import java.io.BufferedInputStream;
-import java.io.InputStream;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryPoolMXBean;
 import java.lang.management.MemoryUsage;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.net.URL;
-import java.net.URLConnection;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,6 +33,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
@@ -47,10 +44,8 @@ import de.blackcraze.grb.i18n.Resource;
 import de.blackcraze.grb.model.PrintableTable;
 import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.StockType;
-import de.blackcraze.grb.ocr.OCR;
 import de.blackcraze.grb.util.wagu.Block;
 import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.Message.Attachment;
 import net.dv8tion.jda.core.entities.TextChannel;
 
 public final class Commands {
@@ -174,7 +169,7 @@ public final class Commands {
 	/**
 	*
 	*/
-	public static class MemPool {
+	static class MemPool {
 
 		private final String name;
 
@@ -223,7 +218,7 @@ public final class Commands {
 		internalUpdate(message, responseLocale, stocks);
 	}
 
-	private static void internalUpdate(Message message, Locale responseLocale, Map<String, Long> stocks) {
+	static void internalUpdate(Message message, Locale responseLocale, Map<String, Long> stocks) {
 		try {
 			Mate mate = getMateDao().getOrCreateMate(message.getMember(), getResponseLocale(message.getTextChannel()));
 			List<String> unknownStocks = getMateDao().updateStocks(mate, stocks);
@@ -277,7 +272,8 @@ public final class Commands {
 	}
 
 	public static void help(Scanner scanner, Message message) {
-		String response = Arrays.stream(Commands.class.getDeclaredMethods()).map(Method::getName)
+		Predicate<Method> filter = method -> Modifier.isPublic(method.getModifiers());
+		String response = Arrays.stream(Commands.class.getDeclaredMethods()).filter(filter).map(Method::getName)
 				.collect(Collectors.joining("\n"));
 		Speaker.sayCode(message.getTextChannel(),
 				Resource.getString("COMMANDS", getResponseLocale(message)) + "\n" + response);
@@ -313,30 +309,6 @@ public final class Commands {
 			Speaker.sayCode(message.getTextChannel(), prettyPrint(total_guild_resources));
 		} else {
 			Speaker.say(message.getTextChannel(), Resource.getString("RESOURCES_EMPTY", locale));
-		}
-	}
-
-	public static void ocrImages(Message message) {
-		for (Attachment att : message.getAttachments()) {
-			if (att.isImage()) {
-				Locale locale = getResponseLocale(message);
-				try {
-					URLConnection conn = new URL(att.getProxyUrl()).openConnection();
-					conn.setRequestProperty("User-Agent",
-							"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
-					conn.connect();
-
-					InputStream stream = new BufferedInputStream(conn.getInputStream());
-					Map<String, Long> stocks = OCR.convertToStocks(stream, locale);
-					Speaker.sayCode(message.getTextChannel(), prettyPrint(stocks, locale));
-					internalUpdate(message, locale, stocks);
-				} catch (Throwable e) {
-					Speaker.err(message, String.format(Resource.getString("ERROR_UNKNOWN", locale), e.getMessage()));
-					e.printStackTrace();
-				} finally {
-					deallocateReferences();
-				}
-			}
 		}
 	}
 
