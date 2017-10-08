@@ -12,6 +12,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.events.ReconnectedEvent;
 import net.dv8tion.jda.core.events.ResumedEvent;
+import net.dv8tion.jda.core.events.DisconnectEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class ReadyListener extends ListenerAdapter {
@@ -51,4 +52,24 @@ public class ReadyListener extends ListenerAdapter {
 				+ "`" + BotConfig.getConfig(channel.getGuild()).PREFIX + "`");
 	}
 
+	/* Mesaage when the bot disconnects */
+	
+	@Override
+	public void onDisconnect(DisconnectEvent event) {
+		goodbyeServers(event.getJDA());
+	}	
+	
+	private void goodbyeServers(JDA jda) {
+		for (Guild guild : jda.getGuilds()) {
+			String listenChannel = BotConfig.getConfig(guild).CHANNEL;
+			for (TextChannel channel : guild.getTextChannelsByName(listenChannel, true)) {
+				goodbyeMessage(channel);
+			}
+		}
+	}
+	
+	private void goodbyeMessage(TextChannel channel) {
+		Speaker.say(channel, Resource.getString("BYE_MSG", CommandUtils.getResponseLocale(channel))
+				+ "`" + BotConfig.getConfig(channel.getGuild()).PREFIX + "`");
+	}	
 }
