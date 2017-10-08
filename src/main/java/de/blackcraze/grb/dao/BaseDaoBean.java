@@ -26,8 +26,9 @@ public abstract class BaseDaoBean<E extends BaseEntity> implements IBaseDao<E> {
 
 	@Override
 	public void delete(E entity) {
+		String entityName = entity.getClass().getSimpleName();
 		em.getTransaction().begin();
-		em.detach(entity);
+		em.createQuery("delete " + entityName + " s where id = :id").setParameter("id", entity.getId()).executeUpdate();
 		em.getTransaction().commit();
 	}
 
