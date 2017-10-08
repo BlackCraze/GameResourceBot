@@ -28,7 +28,7 @@ public class FileProcessor {
 					conn.setRequestProperty("User-Agent",
 							"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
 					conn.connect();
-	
+
 					InputStream stream = new BufferedInputStream(conn.getInputStream());
 					Map<String, Long> stocks = OCR.convertToStocks(stream, locale);
 					Speaker.sayCode(message.getTextChannel(), prettyPrint(stocks, locale));
