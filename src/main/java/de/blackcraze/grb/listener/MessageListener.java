@@ -1,20 +1,20 @@
 package de.blackcraze.grb.listener;
 
-import de.blackcraze.grb.commands.Commands;
-import de.blackcraze.grb.core.BotConfig;
-import de.blackcraze.grb.core.Speaker;
-import de.blackcraze.grb.util.CommandUtils;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.SelfUser;
-import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import static de.blackcraze.grb.util.CommandUtils.parseAction;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Scanner;
 
-import static de.blackcraze.grb.util.CommandUtils.parseAction;
+import de.blackcraze.grb.commands.Commands;
+import de.blackcraze.grb.commands.FileProcessor;
+import de.blackcraze.grb.core.BotConfig;
+import de.blackcraze.grb.core.Speaker;
+import de.blackcraze.grb.util.CommandUtils;
+import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class MessageListener extends ListenerAdapter {
 
@@ -31,7 +31,7 @@ public class MessageListener extends ListenerAdapter {
         }
 
         if (!message.getAttachments().isEmpty()) {
-            Commands.ocrImages(message);
+            FileProcessor.ocrImages(message);
             return;
         }
 
