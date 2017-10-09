@@ -21,6 +21,8 @@ import de.blackcraze.grb.i18n.Resource;
 
 public class OCR {
 
+	private static final String ITEM_CHAR_FILTER = "[^ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜabcdefghijklmnopqrstuvwxyzäöü]";
+
 	/**
 	 * preprocess with {@link Preprocessor}
 	 *
@@ -30,7 +32,7 @@ public class OCR {
 		Map<String, Long> stocks = new HashMap<>();
 		for (Entry<File, File> entry : Preprocessor.extract(stream).entrySet()) {
 			String itemName = doOcr(entry.getKey(), true);
-			itemName = StringUtils.strip(itemName.replaceAll("\\W", ""));
+			itemName = StringUtils.strip(itemName.replaceAll(ITEM_CHAR_FILTER, ""));
 			String key;
 			try {
 				key = Resource.getItemKey(itemName, locale);
@@ -62,7 +64,7 @@ public class OCR {
 		System.setProperty("jna.encoding", "UTF8");
 		try {
 			if (header) {
-				api.SetVariable("tessedit_char_whitelist", "[^ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜabcdefghijklmnopqrstuvwxyzäöü]");
+				api.SetVariable("tessedit_char_whitelist", "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ");
 				api.SetPageSegMode(7);
 			} else {
 				api.SetVariable("tessedit_char_whitelist", "1234567890");
