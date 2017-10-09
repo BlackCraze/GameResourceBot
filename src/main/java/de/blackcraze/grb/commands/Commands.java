@@ -137,9 +137,12 @@ public final class Commands {
 		}
 	}
 
-	public static void status(Scanner scanner, Message message) {
+	public static void shutdown(Scanner scanner, Message message) {
+		System.exit(1);
+	}
+
+	public static void nativeStatus(Scanner scanner, Message message) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("My Memory:\n\n");
 		buffer.append("JAVACPP:\n");
 		buffer.append("memory tracked by deallocators: " + formatBytes(totalBytes()) + "\n");
 		buffer.append("maximum memory allowed to be tracked: " + formatBytes(maxBytes()) + "\n");
@@ -154,6 +157,12 @@ public final class Commands {
 		} catch (UnsatisfiedLinkError e) {
 			buffer.append("no physical Data Available");
 		}
+		Speaker.sayCode(message.getTextChannel(), buffer.toString());
+	}
+
+	public static void status(Scanner scanner, Message message) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("My Memory:\n\n");
 		buffer.append("\n\n");
 		for (MemPool pool : getPools()) {
 			MemoryUsage usage = pool.getUsage();

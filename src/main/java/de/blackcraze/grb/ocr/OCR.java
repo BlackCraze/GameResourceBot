@@ -62,7 +62,7 @@ public class OCR {
 		System.setProperty("jna.encoding", "UTF8");
 		try {
 			if (header) {
-				api.SetVariable("tessedit_char_whitelist", "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ");
+				api.SetVariable("tessedit_char_whitelist", "[^ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜabcdefghijklmnopqrstuvwxyzäöü]");
 				api.SetPageSegMode(7);
 			} else {
 				api.SetVariable("tessedit_char_whitelist", "1234567890");
@@ -70,13 +70,13 @@ public class OCR {
 			}
 			int init = api.Init(BotConfig.TESS_DATA, "deu");
 			if (init != 0) {
-				System.err.println("could not init");
-			}
+	            throw new RuntimeException("Could not initialize tesseract.");
+	        }
 
 			PIX image = pixRead(tempFile.getAbsolutePath());
 			api.SetImage(image);
 			BytePointer outText = api.GetUTF8Text();
-			String out = outText.getString();
+			String out = outText.getString("UTF-8");
 			outText.deallocate();
 			pixDestroy(image);
 			return out;
