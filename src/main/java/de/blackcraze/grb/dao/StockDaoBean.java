@@ -29,4 +29,21 @@ public class StockDaoBean extends BaseDaoBean<Stock> implements IStockDao {
         return number != null ? number.longValue() : 0;
     }
 
+    @Override
+    public int delete(Mate mate, StockType type) {
+        em.getTransaction().begin();
+        int rowCount = em.createQuery("delete Stock where type = :type and mate = :mate").setParameter("type", type)
+                .setParameter("mate", mate).executeUpdate();
+        em.getTransaction().commit();
+        return rowCount;
+    }
+
+    @Override
+    public int deleteAll(Mate mate) {
+        em.getTransaction().begin();
+        int rowCount = em.createQuery("delete Stock s where mate = :mate").setParameter("mate", mate).executeUpdate();
+        em.getTransaction().commit();
+        return rowCount;
+    }
+
 }
