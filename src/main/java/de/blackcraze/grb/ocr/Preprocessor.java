@@ -2,7 +2,7 @@ package de.blackcraze.grb.ocr;
 
 import static org.bytedeco.javacpp.opencv_core.CV_8U;
 import static org.bytedeco.javacpp.opencv_core.CV_8UC1;
-import static org.bytedeco.javacpp.opencv_core.LINE_4;
+import static org.bytedeco.javacpp.opencv_core.*;
 import static org.bytedeco.javacpp.opencv_core.NORM_MINMAX;
 import static org.bytedeco.javacpp.opencv_core.hconcat;
 import static org.bytedeco.javacpp.opencv_core.inRange;
@@ -18,7 +18,6 @@ import static org.bytedeco.javacpp.opencv_imgproc.CV_THRESH_BINARY;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_THRESH_BINARY_INV;
 import static org.bytedeco.javacpp.opencv_imgproc.RETR_CCOMP;
 import static org.bytedeco.javacpp.opencv_imgproc.boundingRect;
-import static org.bytedeco.javacpp.opencv_imgproc.circle;
 import static org.bytedeco.javacpp.opencv_imgproc.cvtColor;
 import static org.bytedeco.javacpp.opencv_imgproc.distanceTransform;
 import static org.bytedeco.javacpp.opencv_imgproc.drawContours;
@@ -246,7 +245,7 @@ public class Preprocessor {
         return Preprocessor.cropMasked(image);
     }
 
-    private static List<File> process(File srcFile, Mat maskLow, Mat maskUp, double thresh, int erodeV, int erodeH,
+    private static File process(File srcFile, Mat maskLow, Mat maskUp, double thresh, int erodeV, int erodeH,
             int threshSrcBwLow, int threshSrcBwUp, boolean cropContour, String prefix) throws IOException {
         Mat dest = new Mat();
         Mat src = imread(srcFile.getAbsolutePath());
@@ -256,11 +255,11 @@ public class Preprocessor {
         distanceTransform(dest, dest, CV_DIST_L2, 3);
         // Normalize the distance image for range = {0.0, 1.0}
         // so we can visualize and threshold it
-        normalize(dest, dest, 0, 1., NORM_MINMAX, -1, null);
+        normalize(dest.clone(), dest, 0, 1., NORM_MINMAX, -1, null);
         threshold(dest, dest, thresh, 1, CV_THRESH_BINARY);
 
-        Mat kernel1 = Mat.ones(erodeV, erodeH, CV_8UC1).asMat();
-        erode(dest, dest, kernel1);
+        // Mat kernel1 = Mat.ones(erodeV, erodeH, CV_8UC1).asMat();
+        // erode(dest, dest, kernel1);
 
         Mat dist_8u = new Mat();
         dest.convertTo(dist_8u, CV_8U);
@@ -271,48 +270,28 @@ public class Preprocessor {
         dist_8u = applyBorders(dist_8u, borderSize);
         findContours(dist_8u, contours, hierarchy, RETR_CCOMP, CHAIN_APPROX_SIMPLE);
 
-        Mat mat = applyBorders(src.clone(), 1);
-        List<File> result = new ArrayList<>((int) contours.size());
-
-        // Draw the foreground markers
-        if (debug()) {
-            for (int i = 0; i < contours.size(); i++) {
-                Mat contour = contours.get(i);
-                if (isValidContour(src, contour, borderSize)) {
-                    drawContours(mat, contours, i, Scalar.CYAN, 2, LINE_4, hierarchy, 0, null);
-                    circle(mat, getCenterPoint(contour), 2, Scalar.RED, 2, LINE_4, 0);
-                }
-            }
-            saveToDisk(mat, prefix + "_4_contours");
-            mat = applyBorders(src.clone(), 1); // reset mat src
-        }
-
+        Mat mask = new Mat(dist_8u.size(), CV_8UC3, Scalar.BLACK);
         for (int i = 0; i < contours.size(); i++) {
-            Mat contour = contours.get(i);
-            if (isValidContour(src, contour, borderSize)) {
-
-                // remove some white buffer from erode
-                Rect rect = boundingRect(contour);
-                if (cropContour) {
-                    rect.x(rect.x() + (erodeH / 2));
-                    rect.width(rect.width() - erodeH);
-                    rect.y(rect.y() + (erodeV / 2));
-                    rect.height(rect.height() - erodeV);
-                }
-
-                Mat cut = mat.apply(rect);
-                resize(cut, cut, new Size(cut.size().width() * 2, cut.size().height() * 2));
-                cvtColor(cut, cut, CV_RGB2GRAY);
-                threshold(cut, cut, threshSrcBwLow, threshSrcBwUp, CV_THRESH_BINARY_INV);
-                File tempFile = File.createTempFile(prefix + i, ".png");
-                tempFile.deleteOnExit();
-                result.add(tempFile);
-                imwrite(tempFile.getAbsolutePath(), cut);
-                saveToDisk(cut, prefix + "_5_cut_" + i);
-                cut.deallocate();
+            if (isValidContour(src, contours.get(i), borderSize)) {
+                drawContours(mask, contours, i, Scalar.WHITE, -1, LINE_8, hierarchy, 0, null);
             }
         }
-        contours.deallocate();
+        saveToDisk(mask, prefix + "_01_mask");
+
+        Mat crop = new Mat(dist_8u.size(), CV_8UC3, Scalar.WHITE);
+        Mat cut = applyBorders(src, borderSize);
+        cut.copyTo(crop, mask);
+        saveToDisk(crop, prefix + "_02_crop");
+
+        resize(crop, crop, new Size(crop.size().width() * 2, crop.size().height() * 2));
+        cvtColor(crop, crop, CV_RGB2GRAY);
+        threshold(crop, crop, threshSrcBwLow, threshSrcBwUp, CV_THRESH_BINARY_INV);
+
+        File result = File.createTempFile(prefix, ".png");
+        result.deleteOnExit();
+        imwrite(result.getAbsolutePath(), crop);
+
+        saveToDisk(crop, prefix + "_03_ocr");
         return result;
     }
 
@@ -338,20 +317,11 @@ public class Preprocessor {
         Map<File, File> result = new HashMap<>();
         int i = 0;
         for (File part : parts) {
-            List<File> texts = process(part, MASK_TEXT_LOW, MASK_TEXT_UP, TRESH_TEXT, ERODE_TEXT_V, ERODE_TEXT_H,
-                    TRESH_TEXT_SRC_BW_LOW, TRESH_TEXT_SRC_BW_UP, false, "col_" + i + "_text");
-            List<File> numbers = process(part, MASK_NUM_LOW, MASK_NUM_UP, TRESH_NUM, ERODE_NUM_V, ERODE_NUM_H,
-                    TRESH_NUM_SRC_BW_LOW, TRESH_NUM_SRC_BW_UP, true, "col_" + i + "_num");
-            if (texts.size() != numbers.size()) {
-                deleteTempFiles(part, texts, numbers);
-                throw new IllegalStateException("could not extract headers and columns exactly");
-            } else if (texts.size() == 0) {
-                deleteTempFiles(part, texts, numbers);
-                continue;
-            }
-            for (int y = 0; y < numbers.size(); y++) {
-                result.put(texts.get(y), numbers.get(y));
-            }
+            File text = process(part, MASK_TEXT_LOW, MASK_TEXT_UP, TRESH_TEXT, ERODE_TEXT_V, ERODE_TEXT_H,
+                    TRESH_TEXT_SRC_BW_LOW, TRESH_TEXT_SRC_BW_UP, false, i + "_text");
+            File number = process(part, MASK_NUM_LOW, MASK_NUM_UP, TRESH_NUM, ERODE_NUM_V, ERODE_NUM_H,
+                    TRESH_NUM_SRC_BW_LOW, TRESH_NUM_SRC_BW_UP, true, i + "_num");
+            result.put(text, number);
             i++;
             part.delete();
         }
@@ -388,6 +358,7 @@ public class Preprocessor {
             }
         }
 
+        //FIXME
         if (maskedRows.size() == 0) {
             result.add(new SubImage(0, imageHeight));
         } else if (maskedRows.get(maskedRows.size() - 1) == imageHeight) {
@@ -396,7 +367,6 @@ public class Preprocessor {
             int lastValidRow = maskedRows.get(maskedRows.size() - 1) + 1;
             result.add(new SubImage(lastValidRow, imageHeight - lastValidRow));
         }
-
         return result;
     }
 
