@@ -1,8 +1,8 @@
 package de.blackcraze.grb.ocr;
 
 import static org.bytedeco.javacpp.opencv_core.CV_8U;
-import static org.bytedeco.javacpp.opencv_core.CV_8UC1;
-import static org.bytedeco.javacpp.opencv_core.*;
+import static org.bytedeco.javacpp.opencv_core.CV_8UC3;
+import static org.bytedeco.javacpp.opencv_core.LINE_8;
 import static org.bytedeco.javacpp.opencv_core.NORM_MINMAX;
 import static org.bytedeco.javacpp.opencv_core.hconcat;
 import static org.bytedeco.javacpp.opencv_core.inRange;
@@ -21,7 +21,6 @@ import static org.bytedeco.javacpp.opencv_imgproc.boundingRect;
 import static org.bytedeco.javacpp.opencv_imgproc.cvtColor;
 import static org.bytedeco.javacpp.opencv_imgproc.distanceTransform;
 import static org.bytedeco.javacpp.opencv_imgproc.drawContours;
-import static org.bytedeco.javacpp.opencv_imgproc.erode;
 import static org.bytedeco.javacpp.opencv_imgproc.findContours;
 import static org.bytedeco.javacpp.opencv_imgproc.resize;
 import static org.bytedeco.javacpp.opencv_imgproc.threshold;
@@ -49,6 +48,13 @@ import org.bytedeco.javacpp.opencv_core.Scalar;
 import org.bytedeco.javacpp.opencv_core.Size;
 
 public class Preprocessor {
+
+    private static final File TMP_FILE_DIR = new File("./target/tmp/");
+    static {
+        if (!TMP_FILE_DIR.exists()) {
+            TMP_FILE_DIR.mkdirs();
+        }
+    }
 
     final static Mat MASK_TEXT_LOW = new Mat(new double[] { 0, 0, 170 });
     final static Mat MASK_TEXT_UP = new Mat(new double[] { 0, 255, 255 });
@@ -104,17 +110,17 @@ public class Preprocessor {
 
             File tempFile;
 
-            tempFile = File.createTempFile("subImage_" + i + "_c1", ".png");
+            tempFile = File.createTempFile("subImage_" + i + "_c1", ".png", TMP_FILE_DIR);
             tempFile.deleteOnExit();
             ImageIO.write(dimg.getSubimage(50, 0, 200, scaledHeight), "png", tempFile);
             result.add(tempFile);
 
-            tempFile = File.createTempFile("subImage_" + i + "_c2", ".png");
+            tempFile = File.createTempFile("subImage_" + i + "_c2", ".png", TMP_FILE_DIR);
             tempFile.deleteOnExit();
             ImageIO.write(dimg.getSubimage(255, 0, 200, scaledHeight), "png", tempFile);
             result.add(tempFile);
 
-            tempFile = File.createTempFile("subImage_" + i + "_c3", ".png");
+            tempFile = File.createTempFile("subImage_" + i + "_c3", ".png", TMP_FILE_DIR);
             tempFile.deleteOnExit();
             ImageIO.write(dimg.getSubimage(465, 0, 200, scaledHeight), "png", tempFile);
             result.add(tempFile);
@@ -214,26 +220,14 @@ public class Preprocessor {
 
     private static void saveToDisk(Mat mat, String name) throws IOException {
         if (debug()) {
-            String prefix = "./target/debug/";
-            File output = new File(prefix + name + ".png");
-            File dir = new File(prefix);
-            if (!dir.exists()) {
-                dir.mkdirs();
-                System.out.println("DEBUG: " + dir.getAbsolutePath());
-            }
+            File output = new File(TMP_FILE_DIR, name + ".png");
             imwrite(output.getAbsolutePath(), mat);
         }
     }
 
     public static void saveToDisk(BufferedImage image, String name) throws IOException {
         if (debug()) {
-            String prefix = "./target/debug/";
-            File output = new File(prefix + name + ".png");
-            File dir = new File(prefix);
-            if (!dir.exists()) {
-                dir.mkdirs();
-                System.out.println("DEBUG: " + dir.getAbsolutePath());
-            }
+            File output = new File(TMP_FILE_DIR, name + ".png");
             ImageIO.write(image, "png", output);
         }
     }
@@ -255,14 +249,16 @@ public class Preprocessor {
         distanceTransform(dest, dest, CV_DIST_L2, 3);
         // Normalize the distance image for range = {0.0, 1.0}
         // so we can visualize and threshold it
-        normalize(dest.clone(), dest, 0, 1., NORM_MINMAX, -1, null);
+        normalize(dest, dest, 0, 1., NORM_MINMAX, -1, null);
         threshold(dest, dest, thresh, 1, CV_THRESH_BINARY);
 
+        // Mat clip = new Mat();
         // Mat kernel1 = Mat.ones(erodeV, erodeH, CV_8UC1).asMat();
-        // erode(dest, dest, kernel1);
+        // erode(dest, clip, kernel1);
 
         Mat dist_8u = new Mat();
         dest.convertTo(dist_8u, CV_8U);
+        // clip.convertTo(dist_8u, CV_8U);
         // Find total markers
         MatVector contours = new MatVector();
         Mat hierarchy = new Mat();
@@ -270,24 +266,36 @@ public class Preprocessor {
         dist_8u = applyBorders(dist_8u, borderSize);
         findContours(dist_8u, contours, hierarchy, RETR_CCOMP, CHAIN_APPROX_SIMPLE);
 
-        Mat mask = new Mat(dist_8u.size(), CV_8UC3, Scalar.BLACK);
+        Mat charMask = new Mat(dist_8u.size(), CV_8UC3, Scalar.BLACK);
+        int minX = 9999999, minY = 9999999; // FIXME
+        int maxX = 0, maxY = 0;
         for (int i = 0; i < contours.size(); i++) {
-            if (isValidContour(src, contours.get(i), borderSize)) {
-                drawContours(mask, contours, i, Scalar.WHITE, -1, LINE_8, hierarchy, 0, null);
+            Mat contour = contours.get(i);
+            if (isValidContour(src, contour, borderSize)) {
+                drawContours(charMask, contours, i, Scalar.WHITE, -1, LINE_8, hierarchy, 0, null);
+                Rect bounds = boundingRect(contour);
+                int boundsMaxX = bounds.x() + bounds.width();
+                int boundsMaxY = bounds.y() + bounds.height();
+                maxX = boundsMaxX > maxX ? boundsMaxX : maxX;
+                maxY = boundsMaxY > maxY ? boundsMaxY : maxY;
+                minX = bounds.x() < minX ? bounds.x() : minX;
+                minY = bounds.y() < minY ? bounds.y() : minY;
             }
         }
-        saveToDisk(mask, prefix + "_01_mask");
+        Rect cutRect = new Rect(minX, minY, maxX - minX, maxY - minY);
+        saveToDisk(charMask, prefix + "_01_charMask");
 
-        Mat crop = new Mat(dist_8u.size(), CV_8UC3, Scalar.WHITE);
+        Mat crop = new Mat(dist_8u.size(), CV_8UC3, Scalar.BLACK);
         Mat cut = applyBorders(src, borderSize);
-        cut.copyTo(crop, mask);
+        cut.copyTo(crop, charMask);
+        crop = crop.apply(cutRect);
         saveToDisk(crop, prefix + "_02_crop");
 
         resize(crop, crop, new Size(crop.size().width() * 2, crop.size().height() * 2));
         cvtColor(crop, crop, CV_RGB2GRAY);
         threshold(crop, crop, threshSrcBwLow, threshSrcBwUp, CV_THRESH_BINARY_INV);
 
-        File result = File.createTempFile(prefix, ".png");
+        File result = File.createTempFile(prefix, ".png", TMP_FILE_DIR);
         result.deleteOnExit();
         imwrite(result.getAbsolutePath(), crop);
 
@@ -358,7 +366,7 @@ public class Preprocessor {
             }
         }
 
-        //FIXME
+        // FIXME
         if (maskedRows.size() == 0) {
             result.add(new SubImage(0, imageHeight));
         } else if (maskedRows.get(maskedRows.size() - 1) == imageHeight) {
