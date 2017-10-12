@@ -22,7 +22,6 @@ import de.blackcraze.grb.i18n.Resource;
 public class OCR {
 
 	private static final String ITEM_CHAR_FILTER = "[^ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜabcdefghijklmnopqrstuvwxyzäöü]";
-
 	/**
 	 * preprocess with {@link Preprocessor}
 	 *
