@@ -190,7 +190,7 @@ public class Preprocessor {
         return new Point(r.x() + (r.width() / 2), r.y() + (r.height() / 2));
     }
 
-    public static boolean debug = true;
+    public static boolean debug = false;
 
     private static boolean debug() {
         return debug;
