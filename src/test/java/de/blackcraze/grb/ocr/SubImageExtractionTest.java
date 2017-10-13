@@ -23,6 +23,25 @@ public class SubImageExtractionTest {
     }
 
     /*
+     * 0 1 2 3 * 4 * 5 * 6 7 8 9 * 10 *
+     **/
+    @Test
+    public void filterTheEnd() {
+        List<Integer> rows = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7);
+        List<SubImage> x = Preprocessor.extractSubimageBetweenMaskedRows(rows, 10, 5);
+        Assert.assertEquals(0, x.size());
+    }
+
+    @Test
+    public void dontFilterTheEnd() {
+        List<Integer> rows = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7);
+        List<SubImage> x = Preprocessor.extractSubimageBetweenMaskedRows(rows, 10, 2);
+        Assert.assertEquals(1, x.size());
+        Assert.assertEquals(8, x.get(0).y);
+        Assert.assertEquals(2, x.get(0).height);
+    }
+
+    /*
      * 0 * 1 * 2 * 3 4 5 * 6 * 7 8 9 * 10 *
      */
     @Test

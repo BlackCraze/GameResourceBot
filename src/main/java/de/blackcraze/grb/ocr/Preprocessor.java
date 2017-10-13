@@ -1,6 +1,7 @@
 package de.blackcraze.grb.ocr;
 
 import static org.bytedeco.javacpp.opencv_core.CV_8U;
+import static org.bytedeco.javacpp.opencv_core.CV_8UC1;
 import static org.bytedeco.javacpp.opencv_core.CV_8UC3;
 import static org.bytedeco.javacpp.opencv_core.LINE_8;
 import static org.bytedeco.javacpp.opencv_core.NORM_MINMAX;
@@ -11,9 +12,10 @@ import static org.bytedeco.javacpp.opencv_core.vconcat;
 import static org.bytedeco.javacpp.opencv_imgcodecs.imread;
 import static org.bytedeco.javacpp.opencv_imgcodecs.imwrite;
 import static org.bytedeco.javacpp.opencv_imgproc.CHAIN_APPROX_SIMPLE;
+import static org.bytedeco.javacpp.opencv_imgproc.CV_BGR2GRAY;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_BGR2HSV;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_DIST_L2;
-import static org.bytedeco.javacpp.opencv_imgproc.CV_RGB2GRAY;
+import static org.bytedeco.javacpp.opencv_imgproc.CV_INTER_CUBIC;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_THRESH_BINARY;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_THRESH_BINARY_INV;
 import static org.bytedeco.javacpp.opencv_imgproc.RETR_CCOMP;
@@ -34,12 +36,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.lang3.StringUtils;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_core.MatVector;
 import org.bytedeco.javacpp.opencv_core.Point;
@@ -55,26 +56,6 @@ public class Preprocessor {
             TMP_FILE_DIR.mkdirs();
         }
     }
-
-    final static Mat MASK_TEXT_LOW = new Mat(new double[] { 0, 0, 170 });
-    final static Mat MASK_TEXT_UP = new Mat(new double[] { 0, 255, 255 });
-
-    final static Mat MASK_NUM_LOW = new Mat(new double[] { 25, 255, 50 });
-    final static Mat MASK_NUM_UP = new Mat(new double[] { 50, 255, 255 });
-
-    final static double TRESH_TEXT = 0.03d;
-    final static int ERODE_TEXT_V = 11;
-    final static int ERODE_TEXT_H = 60;
-
-    final static double TRESH_NUM = 0.03d;
-    final static int ERODE_NUM_V = 4;
-    final static int ERODE_NUM_H = 3;
-
-    final static int TRESH_TEXT_SRC_BW_LOW = 150;
-    final static int TRESH_TEXT_SRC_BW_UP = 255;
-
-    final static int TRESH_NUM_SRC_BW_LOW = 80;
-    final static int TRESH_NUM_SRC_BW_UP = 255;
 
     public static List<File> cropMasked(BufferedImage image) throws IOException {
         // now we iterate over the rows and remove the masked areas since the
@@ -95,34 +76,25 @@ public class Preprocessor {
         }
         List<SubImage> subImages = extractSubimageBetweenMaskedRows(rowsToRemove, image.getHeight(), 50);
         List<File> result = new ArrayList<>(subImages.size() * 3);
-        double factor = 720d / image.getWidth();
         int i = 0;
         for (SubImage subImage : subImages) {
             BufferedImage cut = image.getSubimage(0, subImage.y, image.getWidth(), subImage.height);
-            int scaledHeight = (int) (cut.getHeight() * factor);
-            int scaledWidth = (int) (cut.getWidth() * factor);
-
-            Image tmp = cut.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
-            BufferedImage dimg = new BufferedImage(scaledWidth, scaledHeight, cut.getType());
-            Graphics2D g2d = dimg.createGraphics();
-            g2d.drawImage(tmp, 0, 0, null);
-            g2d.dispose();
 
             File tempFile;
 
             tempFile = File.createTempFile("subImage_" + i + "_c1", ".png", TMP_FILE_DIR);
             tempFile.deleteOnExit();
-            ImageIO.write(dimg.getSubimage(50, 0, 200, scaledHeight), "png", tempFile);
+            ImageIO.write(cut.getSubimage(50, 0, 200, cut.getHeight()), "png", tempFile);
             result.add(tempFile);
 
             tempFile = File.createTempFile("subImage_" + i + "_c2", ".png", TMP_FILE_DIR);
             tempFile.deleteOnExit();
-            ImageIO.write(dimg.getSubimage(255, 0, 200, scaledHeight), "png", tempFile);
+            ImageIO.write(cut.getSubimage(255, 0, 200, cut.getHeight()), "png", tempFile);
             result.add(tempFile);
 
             tempFile = File.createTempFile("subImage_" + i + "_c3", ".png", TMP_FILE_DIR);
             tempFile.deleteOnExit();
-            ImageIO.write(dimg.getSubimage(465, 0, 200, scaledHeight), "png", tempFile);
+            ImageIO.write(cut.getSubimage(465, 0, 200, cut.getHeight()), "png", tempFile);
             result.add(tempFile);
 
             i++;
@@ -139,7 +111,7 @@ public class Preprocessor {
         int footerHeight = width / 2;
         // a half of screen width is reserved for details stuff at the bottom
         // screen (sell bar, price and such stuff)
-        return image.getSubimage(0, headerHeight, width, height - headerHeight - footerHeight + 10);
+        return image.getSubimage(0, headerHeight, width, height - headerHeight - footerHeight);
     }
 
     /**
@@ -151,8 +123,9 @@ public class Preprocessor {
      * colored pixels and overpaint the shadows and lights with it.
      *
      * @param image
+     * @throws IOException
      */
-    public static void maskIconRing(BufferedImage image) {
+    public static void maskIconRing(BufferedImage image) throws IOException {
         // resolution independent mask box size (720 pixels --> boxsize 10)
         WritableRaster raster = image.getRaster();
         int boxWidth = image.getWidth() / 100;
@@ -214,13 +187,16 @@ public class Preprocessor {
         return new Point(r.x() + (r.width() / 2), r.y() + (r.height() / 2));
     }
 
+    public static boolean debug = false;
+
     private static boolean debug() {
-        return true;
+        return debug;
     }
 
     private static void saveToDisk(Mat mat, String name) throws IOException {
         if (debug()) {
             File output = new File(TMP_FILE_DIR, name + ".png");
+            System.out.println("debug file: " + output.getAbsolutePath());
             imwrite(output.getAbsolutePath(), mat);
         }
     }
@@ -228,86 +204,137 @@ public class Preprocessor {
     public static void saveToDisk(BufferedImage image, String name) throws IOException {
         if (debug()) {
             File output = new File(TMP_FILE_DIR, name + ".png");
+            System.out.println("debug file: " + output.getAbsolutePath());
             ImageIO.write(image, "png", output);
         }
     }
 
-    private static List<File> load(InputStream stream) throws IOException {
+    public static List<File> load(InputStream stream) throws IOException {
         BufferedImage image = ImageIO.read(stream);
+        image = Preprocessor.resizeSource(image);
         image = Preprocessor.cropCenterScreen(image);
         Preprocessor.maskIconRing(image);
         return Preprocessor.cropMasked(image);
     }
 
-    private static File process(File srcFile, Mat maskLow, Mat maskUp, double thresh, int erodeV, int erodeH,
-            int threshSrcBwLow, int threshSrcBwUp, boolean cropContour, String prefix) throws IOException {
-        Mat dest = new Mat();
+    private static BufferedImage resizeSource(BufferedImage image) {
+        double factor = 720d / image.getWidth();
+        int scaledHeight = (int) (image.getHeight() * factor);
+        int scaledWidth = (int) (image.getWidth() * factor);
+
+        Image tmp = image.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
+        int type = image.getType();
+        if (type == 0)
+            type = 5; // hacky but does work
+
+        BufferedImage dimg = new BufferedImage(scaledWidth, scaledHeight, type);
+        Graphics2D g2d = dimg.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+        return dimg;
+    }
+
+    private static File process(File srcFile, Mat maskLow, Mat maskUp, double thresh, int threshSrcBwLow,
+            int threshSrcBwUp, int distTransformThreshMode, String prefix) throws IOException {
         Mat src = imread(srcFile.getAbsolutePath());
-        cvtColor(src, dest, CV_BGR2HSV);
-        inRange(dest, maskLow, maskUp, dest);
-        threshold(dest, dest, 200, 255, CV_THRESH_BINARY_INV);
-        distanceTransform(dest, dest, CV_DIST_L2, 3);
+        Mat crop = process(src, maskLow, maskUp, thresh, threshSrcBwLow, threshSrcBwUp, distTransformThreshMode,
+                prefix);
+        File result = null;
+        if (crop != null) {
+            result = File.createTempFile(prefix, ".png", TMP_FILE_DIR);
+            result.deleteOnExit();
+            imwrite(result.getAbsolutePath(), crop);
+            crop.close();
+        }
+        src.close();
+        return result;
+    }
+
+    public static Mat process(Mat src, Mat maskLow, Mat maskUp, double thresh, int threshSrcBwLow, int threshSrcBwUp,
+            int distTransformThreshMode, String prefix) throws IOException {
+        int borderSize = 1;
+        Mat colorFilter = src.clone();
+        cvtColor(colorFilter, colorFilter, CV_BGR2HSV);
+        saveToDisk(colorFilter, prefix + "_02_brgh");
+        inRange(colorFilter, maskLow, maskUp, colorFilter);
+        saveToDisk(colorFilter, prefix + "_03_inRange");
+        threshold(colorFilter, colorFilter, 150, 255, distTransformThreshMode);
+        saveToDisk(colorFilter, prefix + "_04_thresh");
+        distanceTransform(colorFilter, colorFilter, CV_DIST_L2, 3);
         // Normalize the distance image for range = {0.0, 1.0}
         // so we can visualize and threshold it
-        normalize(dest, dest, 0, 1., NORM_MINMAX, -1, null);
-        threshold(dest, dest, thresh, 1, CV_THRESH_BINARY);
-
-        // Mat clip = new Mat();
-        // Mat kernel1 = Mat.ones(erodeV, erodeH, CV_8UC1).asMat();
-        // erode(dest, clip, kernel1);
+        normalize(colorFilter, colorFilter, 0, 1., NORM_MINMAX, -1, null);
+        threshold(colorFilter, colorFilter, thresh, 1, CV_THRESH_BINARY);
 
         Mat dist_8u = new Mat();
-        dest.convertTo(dist_8u, CV_8U);
-        // clip.convertTo(dist_8u, CV_8U);
+        colorFilter.convertTo(dist_8u, CV_8U);
+        colorFilter.close();
         // Find total markers
         MatVector contours = new MatVector();
         Mat hierarchy = new Mat();
-        int borderSize = 1;
-        dist_8u = applyBorders(dist_8u, borderSize);
+        dist_8u = applyBorders(dist_8u, borderSize, Scalar.WHITE); // to prevent
+                                                                   // connect
+                                                                   // the
+        // texts connected to the
+        // edge
         findContours(dist_8u, contours, hierarchy, RETR_CCOMP, CHAIN_APPROX_SIMPLE);
 
-        Mat charMask = new Mat(dist_8u.size(), CV_8UC3, Scalar.BLACK);
+        Mat charMask = new Mat(dist_8u.size(), CV_8U, Scalar.BLACK);
         int minX = 9999999, minY = 9999999; // FIXME
         int maxX = 0, maxY = 0;
+        int validContours = 0;
         for (int i = 0; i < contours.size(); i++) {
             Mat contour = contours.get(i);
-            if (isValidContour(src, contour, borderSize)) {
+            if (isValidContour(dist_8u, contour)) {
                 drawContours(charMask, contours, i, Scalar.WHITE, -1, LINE_8, hierarchy, 0, null);
                 Rect bounds = boundingRect(contour);
-                int boundsMaxX = bounds.x() + bounds.width();
-                int boundsMaxY = bounds.y() + bounds.height();
+                int boundsMaxX = bounds.x() + bounds.width() - 1;
+                int boundsMaxY = bounds.y() + bounds.height() - 1;
                 maxX = boundsMaxX > maxX ? boundsMaxX : maxX;
                 maxY = boundsMaxY > maxY ? boundsMaxY : maxY;
                 minX = bounds.x() < minX ? bounds.x() : minX;
                 minY = bounds.y() < minY ? bounds.y() : minY;
+                bounds.close();
+                validContours++;
             }
+            contour.close();
+        }
+        if (debug()) {
+            System.out.println("found contours: " + contours.size());
+            System.out.println("valid contours: " + validContours);
+        }
+        contours.close();
+        dist_8u.close();
+        hierarchy.close();
+        if (validContours == 0) {
+            charMask.close();
+            return null;// empty part
         }
         Rect cutRect = new Rect(minX, minY, maxX - minX, maxY - minY);
-        saveToDisk(charMask, prefix + "_01_charMask");
+        saveToDisk(charMask, prefix + "_05_contours");
 
-        Mat crop = new Mat(dist_8u.size(), CV_8UC3, Scalar.BLACK);
-        Mat cut = applyBorders(src, borderSize);
-        cut.copyTo(crop, charMask);
+        Mat crop = new Mat(charMask.size(), CV_8UC3, Scalar.BLACK);
+        applyBorders(src, borderSize, Scalar.BLACK).copyTo(crop, charMask);
         crop = crop.apply(cutRect);
-        saveToDisk(crop, prefix + "_02_crop");
+        charMask.close();
+        cutRect.close();
+        saveToDisk(crop, prefix + "_06_crop");
 
-        resize(crop, crop, new Size(crop.size().width() * 2, crop.size().height() * 2));
-        cvtColor(crop, crop, CV_RGB2GRAY);
-        threshold(crop, crop, threshSrcBwLow, threshSrcBwUp, CV_THRESH_BINARY_INV);
-
-        File result = File.createTempFile(prefix, ".png", TMP_FILE_DIR);
-        result.deleteOnExit();
-        imwrite(result.getAbsolutePath(), crop);
-
-        saveToDisk(crop, prefix + "_03_ocr");
+        Mat result = new Mat(crop.size(), CV_8UC1);
+        cvtColor(crop, result, CV_BGR2GRAY);
+        resize(result, result, new Size(result.size().width() * 4, result.size().height() * 4), 0, 0, CV_INTER_CUBIC);
+        crop.close();
+        saveToDisk(result, prefix + "_07_scale");
+        threshold(result, result, threshSrcBwLow, threshSrcBwUp, CV_THRESH_BINARY_INV);
+        saveToDisk(result, prefix + "_08_ocr");
         return result;
     }
 
-    private static Mat applyBorders(Mat src, int borderSize) {
+    private static Mat applyBorders(Mat src, int borderSize, Scalar color) {
 
         Mat dest = new Mat();
-        Mat borderH = new Mat(borderSize, src.cols(), src.type(), Scalar.WHITE);
-        Mat borderV = new Mat(src.rows() + (borderSize * 2), borderSize, src.type(), Scalar.WHITE);
+        Mat borderH = new Mat(borderSize, src.cols(), src.type(), color);
+        Mat borderV = new Mat(src.rows() + (borderSize * 2), borderSize, src.type(), color);
 
         MatVector order = new MatVector(3);
         order.put(borderH, src, borderH);
@@ -320,30 +347,32 @@ public class Preprocessor {
         return dest;
     }
 
-    public static Map<File, File> extract(InputStream imageStream) throws IOException {
-        List<File> parts = load(imageStream);
-        Map<File, File> result = new HashMap<>();
-        int i = 0;
-        for (File part : parts) {
-            File text = process(part, MASK_TEXT_LOW, MASK_TEXT_UP, TRESH_TEXT, ERODE_TEXT_V, ERODE_TEXT_H,
-                    TRESH_TEXT_SRC_BW_LOW, TRESH_TEXT_SRC_BW_UP, false, i + "_text");
-            File number = process(part, MASK_NUM_LOW, MASK_NUM_UP, TRESH_NUM, ERODE_NUM_V, ERODE_NUM_H,
-                    TRESH_NUM_SRC_BW_LOW, TRESH_NUM_SRC_BW_UP, true, i + "_num");
-            result.put(text, number);
-            i++;
-            part.delete();
-        }
-        return result;
-    }
+    public static File[] extract(File frame) throws IOException {
+        Mat colorFilterTextLow = new Mat(new double[] { 0, 2, 0 });
+        Mat colorFilterNumberLow = new Mat(new double[] { 255, 255, 255 });
+        final double threshText = 0.04d;
+        final int threshTextSrcLow = 150;
+        final int threshTextSrcUp = 255;
 
-    private static void deleteTempFiles(File part, List<File> texts, List<File> numbers) {
-        part.delete();
-        for (File file : numbers) {
-            file.delete();
-        }
-        for (File file : texts) {
-            file.delete();
-        }
+        final double threshNum = 0.06d;
+        Mat colorFilterNumLow = new Mat(new double[] { 25, 255, 50 });
+        Mat colorFilterNumUp = new Mat(new double[] { 50, 255, 255 });
+        final int threshNumSrcLow = 80;
+        final int threshNumSrcUp = 255;
+
+        String prefix = StringUtils.substringBeforeLast(frame.getName(), "_");
+
+        File text = process(frame, colorFilterTextLow, colorFilterNumberLow, threshText, threshTextSrcLow,
+                threshTextSrcUp, CV_THRESH_BINARY, prefix + "_text");
+        File number = process(frame, colorFilterNumLow, colorFilterNumUp, threshNum, threshNumSrcLow, threshNumSrcUp,
+                CV_THRESH_BINARY_INV, prefix + "_num");
+
+        colorFilterTextLow.close();
+        colorFilterNumberLow.close();
+        colorFilterNumLow.close();
+        colorFilterNumUp.close();
+
+        return new File[] { text, number };
     }
 
     public static List<SubImage> extractSubimageBetweenMaskedRows(List<Integer> maskedRows, int imageHeight,
@@ -366,25 +395,30 @@ public class Preprocessor {
             }
         }
 
-        // FIXME
         if (maskedRows.size() == 0) {
-            result.add(new SubImage(0, imageHeight));
+            if (imageHeight >= minSubImageHeight) {
+                result.add(new SubImage(0, imageHeight));
+            }
         } else if (maskedRows.get(maskedRows.size() - 1) == imageHeight) {
             // nothing to do
         } else {
             int lastValidRow = maskedRows.get(maskedRows.size() - 1) + 1;
-            result.add(new SubImage(lastValidRow, imageHeight - lastValidRow));
+            int height = imageHeight - lastValidRow;
+            if (height >= minSubImageHeight) {
+                result.add(new SubImage(lastValidRow, height));
+            }
         }
         return result;
     }
 
-    private static boolean isValidContour(Mat src, Mat contour, int borderSize) {
+    private static boolean isValidContour(Mat src, Mat contour) {
         Rect bounds = boundingRect(contour);
         int width = bounds.width();
         int height = bounds.height();
-        boolean wholeScreenX = src.cols() + (2 * borderSize) == width;
-        boolean wholeScreenY = src.rows() + (2 * borderSize) == height;
-        return !wholeScreenX || !wholeScreenY;
+        boolean wholeScreenX = src.cols() <= width + 8;
+        boolean wholeScreenY = src.rows() <= height + 8;
+        boolean artifact = width < 15 && height < 15;
+        return !(wholeScreenX && wholeScreenY) && !artifact;
     }
 
 }
