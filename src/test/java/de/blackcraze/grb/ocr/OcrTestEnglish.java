@@ -127,7 +127,7 @@ public class OcrTestEnglish {
 	public void test_screens_fire_a2() throws Exception {
 		InputStream stream = OcrTestEnglish.class.getClassLoader().getResourceAsStream("720_en_a2.png");
 		Map<String, Long> stocks = OCR.convertToStocks(stream, Locale.ENGLISH);
-		Assert.assertEquals(9,stocks.keySet().size());
+		Assert.assertEquals(8,stocks.keySet().size());
 		Assert.assertEquals(Long.valueOf(309595), stocks.get(TOPAZ));
 		Assert.assertEquals(Long.valueOf(340464), stocks.get(RUBY));
 		Assert.assertEquals(Long.valueOf(54821), stocks.get(SAPPHIRE));

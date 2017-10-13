@@ -64,7 +64,7 @@ public class PreProcessorGui {
     int out = 1;
     int in = 0;
 
-    final String src = "en_iphone7_750px_1334px_1710102230d.png";
+    final String src = "720_en_a2.png";
 
     private Mat load;
 
