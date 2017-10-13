@@ -80,7 +80,7 @@ public class PreProcessorGui {
                 changeState(lastKey);
                 print(lastKey);
 
-                opencv_highgui.imshow("1st Collumn", process(load));
+                opencv_highgui.imshow("fragment", process(load));
                 if (lastKey == KEY_BACKSPACE) {
                     switchDebug();
                     lastKey = -1;

@@ -176,10 +176,13 @@ public class Preprocessor {
     }
 
     private static boolean matchIconRing(int[] pixels) {
-        boolean matchBlue = 0 <= pixels[0] && pixels[0] <= 50 && //
+        boolean blueAndroid = 0 <= pixels[0] && pixels[0] <= 50 && //
                 0 <= pixels[1] && pixels[1] <= 240 && //
                 180 <= pixels[2] && pixels[2] <= 255;
-        return matchBlue;
+        boolean blueIphone = 0 <= pixels[0] && pixels[0] <= 120 && //
+                180 <= pixels[1] && pixels[1] <= 255 && //
+                180 <= pixels[2] && pixels[2] <= 255;
+        return blueAndroid || blueIphone;
     }
 
     static final Point getCenterPoint(Mat m) {
@@ -187,7 +190,7 @@ public class Preprocessor {
         return new Point(r.x() + (r.width() / 2), r.y() + (r.height() / 2));
     }
 
-    public static boolean debug = false;
+    public static boolean debug = true;
 
     private static boolean debug() {
         return debug;
