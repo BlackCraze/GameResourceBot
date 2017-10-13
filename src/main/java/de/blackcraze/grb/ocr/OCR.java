@@ -32,43 +32,50 @@ public class OCR {
         Map<String, Long> stocks = new HashMap<>();
         List<File> frames = Preprocessor.load(stream);
         for (File frame : frames) {
-            File[] pair = Preprocessor.extract(frame);
-            File text = pair[0];
-            File number = pair[1];
-
-            if (text == null && number == null) {
-                // thats okay - empty fragment
-                // nothing to do
-                continue;
-            }
-
-            String itemName = doOcr(text, true);
-            itemName = StringUtils.strip(StringUtils.replaceAll(itemName, ITEM_CHAR_FILTER, ""));
-            String key;
             try {
-                key = Resource.getItemKey(itemName, locale);
-            } catch (Exception e) {
-                // we add the clear text stock name with an identifier value
-                // this way we can show the user an error message showing
-                // errored type names
-                stocks.put(itemName, Long.MIN_VALUE);
-                continue;
-            }
-            String value = doOcr(number, false);
-            String valueCorrected = StringUtils.replaceAll(value, "\\D", "");
-            try {
-                Long valueOf = Long.valueOf(valueCorrected);
-                stocks.put(key, valueOf);
-            } catch (NumberFormatException e) {
-                System.err.println("could not convert to number: '" + value + "'");
-                stocks.put(itemName + ": '" + value + "'", Long.MIN_VALUE);
+                File[] pair = Preprocessor.extract(frame);
+                File text = pair[0];
+                File number = pair[1];
+
+                if (text == null && number == null) {
+                    // thats okay - empty fragment
+                    // nothing to do
+                    continue;
+                }
+
+                String itemName = doOcr(text, true);
+                itemName = StringUtils.strip(StringUtils.replaceAll(itemName, ITEM_CHAR_FILTER, ""));
+                try {
+                    if (StringUtils.isEmpty(itemName)) {
+                        continue;
+                    }
+                    itemName = Resource.getItemKey(itemName, locale);
+                } catch (Exception e) {
+                    // we add the clear text stock name with an identifier value
+                    // this way we can show the user an error message showing
+                    // errored type names
+                    stocks.put(itemName, Long.MIN_VALUE);
+                    continue;
+                } finally {
+                    if (text != null) {
+                        text.delete();
+                    }
+                }
+
+                String value = doOcr(number, false);
+                String valueCorrected = StringUtils.replaceAll(value, "\\D", "");
+                try {
+                    Long valueOf = Long.valueOf(valueCorrected);
+                    stocks.put(itemName, valueOf);
+                } catch (NumberFormatException e) {
+                    System.err.println("could not convert to number: '" + value + "'");
+                    stocks.put(itemName + ": '" + value + "'", Long.MIN_VALUE);
+                } finally {
+                    if (number != null) {
+                        number.delete();
+                    }
+                }
             } finally {
-                if (text != null) {
-                    text.delete();
-                }
-                if (number != null) {
-                    number.delete();
-                }
                 if (frame != null) {
                     frame.delete();
                 }
