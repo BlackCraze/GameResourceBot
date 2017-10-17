@@ -1,6 +1,7 @@
 package de.blackcraze.grb.ocr;
 
 import static org.bytedeco.javacpp.opencv_imgcodecs.imread;
+import static org.bytedeco.javacpp.opencv_imgcodecs.imwrite;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_THRESH_BINARY;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_THRESH_BINARY_INV;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_highgui;
+import org.bytedeco.javacpp.tesseract.TessBaseAPI;
 
 public class PreProcessorGui {
 
@@ -35,6 +37,7 @@ public class PreProcessorGui {
     final int KEY_V = 118;
     final int KEY_H = 104;
     final int KEY_BACKSPACE = 8;
+    final int KEY_ENTER = 13;
     // states
 
     // init with texts
@@ -52,6 +55,8 @@ public class PreProcessorGui {
 
     int threshMode;
 
+    boolean isNumbers = true;
+
     {
         initNum();
     }
@@ -64,7 +69,7 @@ public class PreProcessorGui {
     int out = 1;
     int in = 0;
 
-    final String src = "720_en_a2.png";
+    final String src = "720_de_bc_09.png";
 
     private Mat load;
 
@@ -80,7 +85,21 @@ public class PreProcessorGui {
                 changeState(lastKey);
                 print(lastKey);
 
-                opencv_highgui.imshow("fragment", process(load));
+                Mat mat = process(load);
+                if (lastKey == KEY_ENTER) {
+                    File tmp = File.createTempFile("ocr_from_gui", ".png");
+                    tmp.deleteOnExit();
+                    imwrite(tmp.getAbsolutePath(), mat);
+                    OCR ocr = OCR.getInstance();
+                    TessBaseAPI api = isNumbers ? ocr.getTesseractForNumbers() : ocr.getTesseractForText();
+                    String result = ocr.doOcr(tmp, api);
+                    System.out.println("--------------------------------------");
+                    System.out.println("ocr result:");
+                    System.out.println(result);
+                    System.out.println("--------------------------------------");
+                    tmp.delete();
+                }
+                opencv_highgui.imshow("fragment", mat);
                 if (lastKey == KEY_BACKSPACE) {
                     switchDebug();
                     lastKey = -1;
@@ -100,25 +119,29 @@ public class PreProcessorGui {
     }
 
     private void initNum() {
+        System.out.println("init num");
+        isNumbers = true;
         lr = 25;
         lg = 255;
         lb = 50;
         ur = 50;
         ug = 255;
         ub = 255;
-        threshSrcLow = 80;
+        threshSrcLow = 180;
         threshSrcUp = 255;
         threshMode = CV_THRESH_BINARY_INV;
     }
 
     private void initText() {
+        System.out.println("init text");
+        isNumbers = false;
         lr = 0;
         lg = 2;
         lb = 0;
         ur = 255;
         ug = 255;
         ub = 255;
-        threshSrcLow = 150;
+        threshSrcLow = 200;
         threshSrcUp = 255;
         threshMode = CV_THRESH_BINARY;
     }
@@ -199,6 +222,7 @@ public class PreProcessorGui {
             break;
         case KEY_BACKSPACE:
             switchDebug();
+            break;
         }
     }
 

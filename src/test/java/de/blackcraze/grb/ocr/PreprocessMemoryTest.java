@@ -18,7 +18,7 @@ public class PreprocessMemoryTest {
         for (i = 0; i < 100000; i++) {
             try {
                 InputStream stream = PreprocessMemoryTest.class.getClassLoader().getResourceAsStream("1080_de_01.png");
-                OCR.convertToStocks(stream, Locale.GERMAN);
+                OCR.getInstance().convertToStocks(stream, Locale.GERMAN);
                 if (i % 100 == 0 || i == 0) {
                     long maxPhysicalBytes = Pointer.maxPhysicalBytes();
                     long physicalBytes = Pointer.physicalBytes();

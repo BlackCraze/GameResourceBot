@@ -33,7 +33,7 @@ public class FileProcessor {
 					conn.connect();
 
                     stream = new BufferedInputStream(conn.getInputStream());
-					Map<String, Long> stocks = OCR.convertToStocks(stream, locale);
+					Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, locale);
 					Speaker.sayCode(message.getTextChannel(), prettyPrint(stocks, locale));
 					Commands.internalUpdate(message, locale, stocks);
 				} catch (Throwable e) {

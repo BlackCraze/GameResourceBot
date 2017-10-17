@@ -354,13 +354,13 @@ public class Preprocessor {
         Mat colorFilterTextLow = new Mat(new double[] { 0, 2, 0 });
         Mat colorFilterNumberLow = new Mat(new double[] { 255, 255, 255 });
         final double threshText = 0.04d;
-        final int threshTextSrcLow = 150;
+        final int threshTextSrcLow = 200;
         final int threshTextSrcUp = 255;
 
         final double threshNum = 0.06d;
         Mat colorFilterNumLow = new Mat(new double[] { 25, 255, 50 });
         Mat colorFilterNumUp = new Mat(new double[] { 50, 255, 255 });
-        final int threshNumSrcLow = 80;
+        final int threshNumSrcLow = 180;
         final int threshNumSrcUp = 255;
 
         String prefix = StringUtils.substringBeforeLast(frame.getName(), "_");
