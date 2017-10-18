@@ -341,4 +341,20 @@ public class OcrTestEnglish {
 		Assert.assertEquals(Long.valueOf(5), stocks.get(OBSIDIAN_KNIFE));
 		Assert.assertEquals(Long.valueOf(40), stocks.get(HAIR_COMB));
 	}
+
+	@Test
+	public void en_720x1280_largeNumber() throws Exception {
+	    InputStream stream = OcrTestEnglish.class.getClassLoader().getResourceAsStream("en_720x1280_largeNumber.png");
+	    Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.ENGLISH);
+	    Assert.assertEquals(9,stocks.keySet().size());
+	    Assert.assertEquals(Long.valueOf(1145), stocks.get(MAYAN_CALENDAR));
+	    Assert.assertEquals(Long.valueOf(29), stocks.get(LIQUID_NITROGEN));
+	    Assert.assertEquals(Long.valueOf(46), stocks.get(OBSIDIAN_KNIFE));
+	    Assert.assertEquals(Long.valueOf(497), stocks.get(HAIR_COMB));
+	    Assert.assertEquals(Long.valueOf(1262061947), stocks.get(REFINED_OIL));
+	    Assert.assertEquals(Long.valueOf(252), stocks.get(MOTHERBOARD));
+	    Assert.assertEquals(Long.valueOf(396), stocks.get(URANIUM_ROD));
+	    Assert.assertEquals(Long.valueOf(2026), stocks.get(PLASTIC));
+	    Assert.assertEquals(Long.valueOf(7285), stocks.get(AMBER_CHARGER));
+	}
 }

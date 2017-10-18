@@ -7,6 +7,7 @@
     <entry key="ALUMINIUM_BAR">Aluminium Bar</entry>
     <entry key="ALUMINIUM_BOTTLE">Aluminium Bottle</entry>
     <entry key="AMETHYST">Amethyst</entry>
+    <entry key="PUMPKIN">Pumpkin</entry>
     <entry key="BATTERY">Battery</entry>
     <entry key="AMBER">Amber</entry>
     <entry key="AMBER_CHARGER">Amber Charger</entry>
@@ -87,6 +88,6 @@
     <entry key="HELIUM_3">Helium 3</entry>
     <entry key="OBSIDIAN">Obsidian</entry>
     <entry key="LIQUID_NITROGEN">Liquid Nitrogen</entry>
-    <entry key="OPTIC_FIBER">Optic Fibre</entry>
+    <entry key="OPTIC_FIBER">Optic Fiber</entry>
     <entry key="NITROGEN">Nitrogen</entry>
 </properties>

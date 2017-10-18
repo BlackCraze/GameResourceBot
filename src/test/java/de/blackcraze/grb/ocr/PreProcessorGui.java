@@ -69,7 +69,7 @@ public class PreProcessorGui {
     int out = 1;
     int in = 0;
 
-    final String src = "720_de_bc_09.png";
+    final String src = "en_720x1280_largeNumber.png";
 
     private Mat load;
 
