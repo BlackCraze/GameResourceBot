@@ -8,7 +8,7 @@ import java.util.Optional;
 import de.blackcraze.grb.model.entity.Mate;
 import net.dv8tion.jda.core.entities.Member;
 
-public interface IMateDao extends IBaseDao<Mate>{
+public interface IMateDao extends IBaseDao<Mate> {
 
     void save(Mate mate);
 
@@ -21,5 +21,7 @@ public interface IMateDao extends IBaseDao<Mate>{
     List<Mate> findByNameLike(String name);
 
     Mate getOrCreateMate(Member member, Locale defaultLocale);
+
+    List<List<String>> listOrderByOldestStock();
 
 }

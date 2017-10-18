@@ -1,0 +1,4 @@
+tessedit_char_whitelist 0123456789
+tessedit_pageseg_mode 6
+load_system_dawg 0
+load_freq_dawg 0

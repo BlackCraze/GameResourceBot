@@ -72,7 +72,7 @@
 		</dependency>
 		<!-- OCR -->
 		<!-- https://mvnrepository.com/artifact/net.sourceforge.tess4j/tess4j -->
-		<!-- 
+		<!--
 		 -->
 		<dependency>
 			<groupId>com.sksamuel.diff</groupId>

@@ -21,14 +21,24 @@ import de.blackcraze.grb.i18n.Resource;
 
 public class OCR {
 
-    private static final String ITEM_CHAR_FILTER = "[^ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜabcdefghijklmnopqrstuvwxyzäöü]";
+    private TessBaseAPI api;
+
+    private static final OCR OBJ = new OCR();
+
+    private OCR() {
+        System.setProperty("jna.encoding", "UTF8");
+    }
+
+    public static OCR getInstance() {
+        return OBJ;
+    }
 
     /**
      * preprocess with {@link Preprocessor}
      *
      * @throws IOException
      */
-    public static Map<String, Long> convertToStocks(InputStream stream, Locale locale) throws IOException {
+    public Map<String, Long> convertToStocks(InputStream stream, Locale locale) throws IOException {
         Map<String, Long> stocks = new HashMap<>();
         List<File> frames = Preprocessor.load(stream);
         for (File frame : frames) {
@@ -43,9 +53,9 @@ public class OCR {
                     continue;
                 }
 
-                String itemName = doOcr(text, true);
-                itemName = StringUtils.strip(StringUtils.replaceAll(itemName, ITEM_CHAR_FILTER, ""));
+                String itemName = null;
                 try {
+                    itemName = doOcr(text, getTesseractForText());
                     if (StringUtils.isEmpty(itemName)) {
                         continue;
                     }
@@ -62,7 +72,7 @@ public class OCR {
                     }
                 }
 
-                String value = doOcr(number, false);
+                String value = doOcr(number, getTesseractForNumbers());
                 String valueCorrected = StringUtils.replaceAll(value, "\\D", "");
                 try {
                     Long valueOf = Long.valueOf(valueCorrected);
@@ -84,36 +94,38 @@ public class OCR {
         return stocks;
     }
 
-    private static String doOcr(File tempFile, boolean header) throws IOException {
+    public String doOcr(File tempFile, TessBaseAPI api) throws IOException {
         if (tempFile == null) {
             return null;
         }
-        TessBaseAPI api = new TessBaseAPI();
-        System.setProperty("jna.encoding", "UTF8");
-        try {
-            if (header) {
-                api.SetVariable("tessedit_char_whitelist", "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ");
-                api.SetPageSegMode(7);
-            } else {
-                api.SetVariable("tessedit_char_whitelist", "0123456789");
-                api.SetPageSegMode(4);
-            }
+        PIX image = pixRead(tempFile.getAbsolutePath());
+        api.SetImage(image);
+        BytePointer outText = api.GetUTF8Text();
+        String out = outText.getString("UTF-8");
+        outText.deallocate();
+        pixDestroy(image);
+        return out;
+    }
+
+    public TessBaseAPI getTesseractForText() {
+        getTesseract();
+        api.ReadConfigFile("./tessdata/configs/chars");
+        return api;
+    }
+
+    public TessBaseAPI getTesseractForNumbers() {
+        getTesseract();
+        api.ReadConfigFile("./tessdata/configs/digits");
+        return api;
+    }
+
+    private void getTesseract() {
+        if (api == null) {
+            api = new TessBaseAPI();
             int init = api.Init(BotConfig.TESS_DATA, "deu");
             if (init != 0) {
                 throw new RuntimeException("Could not initialize tesseract.");
             }
-
-            PIX image = pixRead(tempFile.getAbsolutePath());
-            api.SetImage(image);
-            BytePointer outText = api.GetUTF8Text();
-            String out = outText.getString("UTF-8");
-            outText.deallocate();
-            pixDestroy(image);
-            return out;
-        } finally {
-            api.End();
-            api.close();
-            tempFile.delete();
         }
     }
 

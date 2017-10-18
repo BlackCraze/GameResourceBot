@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE properties SYSTEM
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM
         "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="ERROR_UNKNOWN">Uuuuups - Fehler gefunden - Bitte nicht streicheln! --> "%s"</entry>
@@ -6,6 +7,9 @@
 	<entry key="ALREADY_KNOW">Kenne ich schon</entry>
 	<entry key="RESOURCE_UNKNOWN">Diese Ressource kenne ich nicht =(</entry>
 	<entry key="USER">Benutzer</entry>
+	<entry key="USERS_LIST_HEADER">Gildenmitglieder</entry>
+    <entry key="OLDEST_STOCK">Alter</entry>
+    <entry key="POPULATED">Anzahl</entry>
 	<entry key="DO_NOT_KNOW_ABOUT">Das hier kenne ich nicht: %s</entry>
 	<entry key="RESOURCES_EMPTY">Da steht nichts - was soll man denn da updaten!</entry>
 	<entry key="NO_DATA">Leider keine Daten vorhanden :-(</entry>

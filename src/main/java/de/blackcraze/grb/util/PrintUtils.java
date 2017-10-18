@@ -36,7 +36,7 @@ public final class PrintUtils {
         for (PrintableTable stock : stocks) {
             if (stock != null) {
                 int boardWidth = stock.getWidth();
-                int headerWidth = boardWidth - 2; // außenränder
+                int headerWidth = boardWidth - 2; // outer borders
                 StringBuilder b = new StringBuilder();
                 Board board = new Board(boardWidth);
                 // board.showBlockIndex(true); // DEBUG
@@ -83,7 +83,7 @@ public final class PrintUtils {
         return Collections.singletonList(b.toString());
     }
 
-    private static String getDiffFormatted(Date from, Date to) {
+    public static String getDiffFormatted(Date from, Date to) {
         Duration duration = new Duration(to.getTime() - from.getTime()); // in
                                                                          // milliseconds
         PeriodFormatter formatter = new PeriodFormatterBuilder().printZeroNever()//
