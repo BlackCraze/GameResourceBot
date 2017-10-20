@@ -90,4 +90,7 @@
     <entry key="LIQUID_NITROGEN">Liquid Nitrogen</entry>
     <entry key="OPTIC_FIBER">Optic Fiber</entry>
     <entry key="NITROGEN">Nitrogen</entry>
+    <entry key="DEFECTIVE_PUMPKIN">Defective Pumpkin</entry>
+    <entry key="CARVED_PUMPKIN">Carved Pumkin</entry>
+    <entry key="COPPER_KNIVE">Copper Knive</entry>
 </properties>
