@@ -90,4 +90,7 @@
     <entry key="LIQUID_NITROGEN">Flüssiger Stickstoff</entry>
     <entry key="OPTIC_FIBER">Glasfaserkabel</entry>
     <entry key="NITROGEN">Stickstoff</entry>
+    <entry key="DEFECTIVE_PUMPKIN">Kaputter Kürbis</entry>
+    <entry key="CARVED_PUMPKIN">Geschnitzter Kürbis</entry>
+    <entry key="COPPER_KNIVE">Kupfermesser</entry>
 </properties>
