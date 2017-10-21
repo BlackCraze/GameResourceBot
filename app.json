@@ -24,6 +24,16 @@
       "value": "en",
       "required": "false"
     },
+    "OCR_RESULT": {
+      "description": "If set to 'on' the bot will say tell you the result of the OCR",
+      "value": "on",
+      "required": "false"
+    },
+    "DELETE_PICTURE_MESSAGE": {
+      "description": "If set to 'on' the bot will delete the message with pictures right after it has scanned it",
+      "value": "off",
+      "required": "false"
+    },
     "JAVA_TOOL_OPTIONS": {
       "description": "Memory instructions so this project can run on a free heroku plan",
       "value": "-Xms400m -Xmx400m -Xss512k -XX:MaxMetaspaceSize=80m",
