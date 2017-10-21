@@ -1,25 +1,27 @@
 package de.blackcraze.grb.dao;
 
-import de.blackcraze.grb.model.entity.Mate;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.User;
-
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
-public interface IMateDao {
+import de.blackcraze.grb.model.entity.Mate;
+import net.dv8tion.jda.core.entities.Member;
 
-	void save(Mate mate);
+public interface IMateDao extends IBaseDao<Mate> {
 
-	Optional<Mate> findByDiscord(String discordID);
+    void save(Mate mate);
 
-	List<String> updateStocks(Mate mate, Map<String, Long> newStocks);
+    Optional<Mate> findByDiscord(String discordID);
 
-	List<Mate> findAll();
+    List<String> updateStocks(Mate mate, Map<String, Long> newStocks);
 
-	List<Mate> findByNameLike(String name);
+    List<Mate> findAll();
 
-	Mate getOrCreateMate(Member member);
+    List<Mate> findByNameLike(String name);
+
+    Mate getOrCreateMate(Member member, Locale defaultLocale);
+
+    List<List<String>> listOrderByOldestStock();
 
 }

@@ -39,7 +39,7 @@ public class StandingDataInitializer {
 						.anyMatch(stockType -> stockType.getName().equalsIgnoreCase(name));
 
 				if (stockAlreadyExists) {
-					break;
+					continue;
 				}
 
 				StockType type = new StockType();
@@ -47,6 +47,20 @@ public class StandingDataInitializer {
 				type.setPrice(Long.valueOf(price));
 				getStockTypeDao().save(type);
 				System.out.println("Created new stock type: " + type.getName());
+			}
+			
+			for (StockType type : stocks) {
+				boolean found = false;
+				for (CSVRecord record : records) {
+					String name = record.get(0);
+					if(type.getName().equals(name)){
+						found = true;
+					}
+				}
+				if(!found){
+					System.out.println("Delete obsoleth stock type: " + type.getName());
+					getStockTypeDao().delete(type);
+				}
 			}
 		} catch (Throwable e) {
 			e.printStackTrace();

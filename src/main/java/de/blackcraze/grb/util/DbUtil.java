@@ -2,10 +2,11 @@ package de.blackcraze.grb.util;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import com.google.inject.Singleton;
+
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.dao.*;
 
-import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
