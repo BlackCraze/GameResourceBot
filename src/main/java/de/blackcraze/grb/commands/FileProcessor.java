@@ -54,9 +54,11 @@ public class FileProcessor {
 		
 		/* try to delete the message containing the upload images or add a "finished" reaction */
 		if (BotConfig.getConfig(message.getGuild()).remPictureMessage.equalsIgnoreCase("on")) {
-			message.delete();
-		} else {
-			message.addReaction(Speaker.Reaction.COMPLETE).queue();
+			try {
+				message.delete();
+			} catch (Exception e) {
+				Speaker.err(message, "Cant delete messages here :( - " + e.getMessage() );
+			}
 		}
 	}
 
