@@ -14,6 +14,7 @@ import java.util.Map;
 import org.apache.commons.io.IOUtils;
 
 import de.blackcraze.grb.core.Speaker;
+import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.i18n.Resource;
 import de.blackcraze.grb.ocr.OCR;
 import net.dv8tion.jda.core.entities.Message;
@@ -34,7 +35,12 @@ public class FileProcessor {
 
                     stream = new BufferedInputStream(conn.getInputStream());
 					Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, locale);
-					Speaker.sayCode(message.getTextChannel(), prettyPrint(stocks, locale));
+					
+					/* decide if the result is printed into the channel */
+					if (BotConfig.getConfig(message.getGuild()).ocrResult.equalsIgnoreCase("on")) {
+						Speaker.sayCode(message.getTextChannel(), prettyPrint(stocks, locale));
+					}
+					
 					Commands.internalUpdate(message, locale, stocks);
 				} catch (Throwable e) {
 					Speaker.err(message, String.format(Resource.getString("ERROR_UNKNOWN", locale), e.getMessage()));
@@ -43,6 +49,15 @@ public class FileProcessor {
 				    IOUtils.closeQuietly(stream);
 					deallocateReferences();
 				}
+			}
+		}
+		
+		/* try to delete the message containing the upload images */
+		if (BotConfig.getConfig(message.getGuild()).remPictureMessage.equalsIgnoreCase("on")) {
+			try {
+				message.delete();
+			} catch (Exception e) {
+				Speaker.err(message, "Cant delete messages here :( - " + e.getMessage() );
 			}
 		}
 	}
