@@ -30,4 +30,5 @@
 	https://discord.gg/e77yjxj
 	</entry>
     <entry key="INIT">Connection established! Listening with prefix </entry>
+    <entry key="BYE_MSG">I will be offline now. Will be back as soon as possible.</entry>
 </properties>
