@@ -51,6 +51,11 @@ public class FileProcessor {
 				}
 			}
 		}
+		
+		/* try to delete the message containing the upload images. */
+		if (BotConfig.getConfig(message.getGuild()).remPictureMessage == "on") {
+			message.delete();			
+		}
 	}
 
 }
