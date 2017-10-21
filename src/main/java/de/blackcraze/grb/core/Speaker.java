@@ -13,6 +13,7 @@ public class Speaker {
     public static class Reaction {
         public final static String SUCCESS = "✔";
         public final static String FAILURE = "✖";
+        public final static String COMPLETE = ":100:";
     }
 
     public static void say(TextChannel textChannel, String text) {
