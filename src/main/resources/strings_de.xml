@@ -30,4 +30,5 @@
 	https://discord.gg/e77yjxj
 	</entry>
 	<entry key="INIT">Verbindung hergestellt! Höre auf Befehle mit Prefix </entry>
+	<entry key="BYE_MSG">Ich bin jetzt offline - komme sobald wie möglich zurück.</entry>
 </properties>
