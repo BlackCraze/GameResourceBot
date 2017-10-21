@@ -19,6 +19,8 @@ public class BotConfig {
         public String PREFIX = getEnv("PREFIX", "bot");
         public String CHANNEL = getEnv("CHANNEL", "statistik");
         public String LANGUAGE = getEnv("LANGUAGE", "en");
+        public String OCR_RESULT = getEnv("OCR_RESULT", "on");
+        public String DELETE_PICTURE_MESSAGE = getEnv("DELETE_PICTURE_MESSAGE", "off");
     }
 
     private static String getEnv(String envVar, String defaultValue) {
