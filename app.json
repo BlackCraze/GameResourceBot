@@ -26,7 +26,7 @@
     },
     "JAVA_TOOL_OPTIONS": {
       "description": "Memory instructions so this project can run on a free heroku plan",
-      "value": "-Xms200m -Xmx200m -Xss512k -XX:MaxMetaspaceSize=80m",
+      "value": "-Xms400m -Xmx400m -Xss512k -XX:MaxMetaspaceSize=80m",
       "required": "true"
     },    
     "TESS_DATA": {

@@ -1,0 +1,5 @@
+tessedit_char_whitelist ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ
+tessedit_pageseg_mode 4
+load_system_dawg 0
+load_freq_dawg 0
+user_words_suffix user-words
