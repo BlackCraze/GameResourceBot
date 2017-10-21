@@ -37,7 +37,7 @@ public class FileProcessor {
 					Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, locale);
 					
 					/* decide if the result is printed into the channel */
-					if (BotConfig.getConfig(message.getGuild()).ocrResult == "on") {
+					if (BotConfig.getConfig(message.getGuild()).ocrResult.equalsIgnoreCase("on")) {
 						Speaker.sayCode(message.getTextChannel(), prettyPrint(stocks, locale));
 					}
 					
@@ -53,8 +53,8 @@ public class FileProcessor {
 		}
 		
 		/* try to delete the message containing the upload images or add a "finished" reaction */
-		if (BotConfig.getConfig(message.getGuild()).remPictureMessage == "on") {
-			message.delete().queue();			
+		if (BotConfig.getConfig(message.getGuild()).remPictureMessage.equalsIgnoreCase("on")) {
+			message.delete();
 		} else {
 			message.addReaction(Speaker.Reaction.COMPLETE).queue();
 		}
