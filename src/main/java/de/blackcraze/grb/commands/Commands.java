@@ -234,7 +234,7 @@ public final class Commands {
         
         if (!mateOrStockOptional.isPresent()) {
             // if no member was selected assume the user of the message.
-            mates = getMateDao().findByName(mateOrStockOptional.get());
+            mates = getMateDao().findByName(message.getMember().toString());
         } else {
         	if ("all".equalsIgnoreCase(mateOrStockOptional.get())) {
         		// select guild members
