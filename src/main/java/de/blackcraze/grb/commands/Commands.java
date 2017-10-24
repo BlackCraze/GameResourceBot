@@ -235,13 +235,16 @@ public final class Commands {
         if (!mateOrStockOptional.isPresent()) {
             // if no member was selected assume the user of the message.
             mates = getMateDao().findByName(message.getMember().toString());
+            System.out.print("clear myself: " + message.getMember().toString());
         } else {
         	if ("all".equalsIgnoreCase(mateOrStockOptional.get())) {
         		// select guild members
         		mates = getMateDao().findByNameLike("%");
+        		System.out.print("clear all");
         	} else {
         		// select only given member
         		mates = getMateDao().findByName(mateOrStockOptional.get());
+        		System.out.print("clear member: " + mateOrStockOptional.get());
         	}
         }
         // Delete the stocks from defined members.
