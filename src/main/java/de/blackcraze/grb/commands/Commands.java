@@ -233,16 +233,16 @@ public final class Commands {
         String clearReaction = Speaker.Reaction.FAILURE;
         
         if (!mateOrStockOptional.isPresent()) {
-            if ("all".equalsIgnoreCase(mateOrStockOptional.get())) {
-            	// select guild members
-                mates = getMateDao().findByNameLike("%");
-            } else {
-            	// select only given member
-            	mates = getMateDao().findByName(mateOrStockOptional.get());
-            }
+            // if no member was selected assume the user of the message.
+            mates = getMateDao().findByName(mateOrStockOptional.get());
         } else {
-        	// if no member was selected assume the user of the message.
-        	mates = getMateDao().findByName(mateOrStockOptional.get());
+        	if ("all".equalsIgnoreCase(mateOrStockOptional.get())) {
+        		// select guild members
+        		mates = getMateDao().findByNameLike("%");
+        	} else {
+        		// select only given member
+        		mates = getMateDao().findByName(mateOrStockOptional.get());
+        	}
         }
         // Delete the stocks from defined members.
         if (!mates.isEmpty()) {
