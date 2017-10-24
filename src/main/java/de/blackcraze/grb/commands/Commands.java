@@ -236,15 +236,13 @@ public final class Commands {
         if (!mateOrStockOptional.isPresent()) {
             // if no member was selected assume the user of the message.
             mates = getMateDao().findByName(message.getMember().getNickname());
-            System.out.print("clear myself: " + message.getMember().getNickname());
         } else {
         	MemberName = mateOrStockOptional.get();
-        	System.out.print("Member:" + MemberName);
         	if ("all".equalsIgnoreCase(MemberName)) {
         		// select guild members
         		mates = getMateDao().findByNameLike("%");
         	} else {
-        		// select only given member
+        		// select only given member with exact matching name.
         		mates = getMateDao().findByName(MemberName);
         	}
         }
