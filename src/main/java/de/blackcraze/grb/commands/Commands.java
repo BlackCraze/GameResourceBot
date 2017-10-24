@@ -227,10 +227,32 @@ public final class Commands {
         Speaker.sayCode(message.getTextChannel(), PrintUtils.prettyPrint(table));
     }
 
-    public static void clearMe(Scanner scanner, Message message) {
-        Mate mate = getMateDao().getOrCreateMate(message.getMember(), getResponseLocale(message));
-        getStockDao().deleteAll(mate);
-        message.addReaction(Speaker.Reaction.SUCCESS).queue();
+    public static void clear(Scanner scanner, Message message) {
+        Optional<String> mateOrStockOptional = parseStockName(scanner);
+        List<Mate> mates = null;
+        String clearReaction = Speaker.Reaction.FAILURE;
+        
+        if (!mateOrStockOptional.isPresent()) {
+            if ("all".equalsIgnoreCase(mateOrStockOptional.get())) {
+            	// select guild members
+                mates = getMateDao().findByNameLike("%");
+            } else {
+            	// select only given member
+            	mates = getMateDao().findByName(mateOrStockOptional.get());
+            }
+        } else {
+        	// if no member was selected assume the user of the message.
+        	mates = getMateDao().findByName(mateOrStockOptional.get());
+        }
+        // Delete the stocks from defined members.
+        if (!mates.isEmpty()) {
+    		for (Mate mate : mates) {
+    			 getStockDao().deleteAll(mate);
+    		}        	
+    		clearReaction = Speaker.Reaction.SUCCESS;    
+        }
+        // Always response to a bot request.
+        message.addReaction(clearReaction).queue();    
     }
 
     public static void update(Scanner scanner, Message message) {
