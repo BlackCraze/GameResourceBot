@@ -231,20 +231,21 @@ public final class Commands {
         Optional<String> mateOrStockOptional = parseStockName(scanner);
         List<Mate> mates = null;
         String clearReaction = Speaker.Reaction.FAILURE;
+        String MemberName = null;
         
         if (!mateOrStockOptional.isPresent()) {
             // if no member was selected assume the user of the message.
-            mates = getMateDao().findByName(message.getMember().toString());
-            System.out.print("clear myself: " + message.getMember().toString());
+            mates = getMateDao().findByName(message.getMember().getNickname());
+            System.out.print("clear myself: " + message.getMember().getNickname());
         } else {
-        	if ("all".equalsIgnoreCase(mateOrStockOptional.get())) {
+        	MemberName = mateOrStockOptional.get();
+        	System.out.print("Member:" + MemberName);
+        	if ("all".equalsIgnoreCase(MemberName)) {
         		// select guild members
         		mates = getMateDao().findByNameLike("%");
-        		System.out.print("clear all");
         	} else {
         		// select only given member
-        		mates = getMateDao().findByName(mateOrStockOptional.get());
-        		System.out.print("clear member: " + mateOrStockOptional.get());
+        		mates = getMateDao().findByName(MemberName);
         	}
         }
         // Delete the stocks from defined members.
