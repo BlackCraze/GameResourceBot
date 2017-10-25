@@ -69,7 +69,7 @@ public class PreProcessorGui {
     int out = 1;
     int in = 0;
 
-    final String src = "en_720x1280_largeNumber.png";
+    final String src = "720_de_bc_06.png";
 
     private Mat load;
 
@@ -99,7 +99,7 @@ public class PreProcessorGui {
                     System.out.println("--------------------------------------");
                     tmp.delete();
                 }
-                opencv_highgui.imshow("fragment", mat);
+                opencv_highgui.imshow("fragment", mat == null ? load : mat);
                 if (lastKey == KEY_BACKSPACE) {
                     switchDebug();
                     lastKey = -1;
@@ -122,7 +122,7 @@ public class PreProcessorGui {
         System.out.println("init num");
         isNumbers = true;
         lr = 25;
-        lg = 255;
+        lg = 180;
         lb = 50;
         ur = 50;
         ug = 255;

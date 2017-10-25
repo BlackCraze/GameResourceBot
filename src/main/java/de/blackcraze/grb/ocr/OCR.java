@@ -18,6 +18,7 @@ import org.bytedeco.javacpp.tesseract.TessBaseAPI;
 
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.i18n.Resource;
+import de.blackcraze.grb.model.Device;
 
 public class OCR {
 
@@ -38,12 +39,12 @@ public class OCR {
      *
      * @throws IOException
      */
-    public Map<String, Long> convertToStocks(InputStream stream, Locale locale) throws IOException {
+    public Map<String, Long> convertToStocks(InputStream stream, Locale locale, Device device) throws IOException {
         Map<String, Long> stocks = new HashMap<>();
         List<File> frames = Preprocessor.load(stream);
         for (File frame : frames) {
             try {
-                File[] pair = Preprocessor.extract(frame);
+                File[] pair = Preprocessor.extract(frame, device);
                 File text = pair[0];
                 File number = pair[1];
 

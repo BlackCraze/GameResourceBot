@@ -5,6 +5,9 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.junit.Test;
+
+import de.blackcraze.grb.model.Device;
+
 import static de.blackcraze.grb.ocr.ItemStatics.*;
 
 import junit.framework.Assert;
@@ -14,7 +17,7 @@ public class OcrTestEnglishIphone {
 	@Test
 	public void en_iphone7_750px_1334px_1710102230a() throws Exception {
 		InputStream stream = OcrTestEnglishIphone.class.getClassLoader().getResourceAsStream("en_iphone7_750px_1334px_1710102230a.png");
-		Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.ENGLISH, Device.IPHONE);
 		Assert.assertEquals(9,stocks.keySet().size());
 		Assert.assertEquals(Long.valueOf(430), stocks.get(REFINED_OIL));
 		Assert.assertEquals(Long.valueOf(2881), stocks.get(MOTHERBOARD));
@@ -30,7 +33,7 @@ public class OcrTestEnglishIphone {
 	@Test
 	public void en_iphone7_750px_1334px_1710102230b() throws Exception {
 		InputStream stream = OcrTestEnglishIphone.class.getClassLoader().getResourceAsStream("en_iphone7_750px_1334px_1710102230b.png");
-		Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.ENGLISH, Device.IPHONE);
 		Assert.assertEquals(9,stocks.keySet().size());
 		Assert.assertEquals(Long.valueOf(3987), stocks.get(LIANA_SEED));
 		Assert.assertEquals(Long.valueOf(10517), stocks.get(CLEAN_WATER));
@@ -46,7 +49,7 @@ public class OcrTestEnglishIphone {
 	@Test
 	public void en_iphone7_750px_1334px_1710102230c() throws Exception {
 		InputStream stream = OcrTestEnglishIphone.class.getClassLoader().getResourceAsStream("en_iphone7_750px_1334px_1710102230c.png");
-		Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.ENGLISH, Device.IPHONE);
 		Assert.assertEquals(9,stocks.keySet().size());
 		Assert.assertEquals(Long.valueOf(2136), stocks.get(SULFURIC_ACID));
 		Assert.assertEquals(Long.valueOf(3961), stocks.get(RUBBER));
@@ -62,7 +65,7 @@ public class OcrTestEnglishIphone {
 	@Test
 	public void en_iphone7_750px_1334px_1710102230d() throws Exception {
 		InputStream stream = OcrTestEnglishIphone.class.getClassLoader().getResourceAsStream("en_iphone7_750px_1334px_1710102230d.png");
-		Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.ENGLISH, Device.IPHONE);
 		Assert.assertEquals(9,stocks.keySet().size());
 		Assert.assertEquals(Long.valueOf(75), stocks.get(SOLAR_PANEL));
 		Assert.assertEquals(Long.valueOf(75245), stocks.get(GRAPHITE));
@@ -78,7 +81,7 @@ public class OcrTestEnglishIphone {
 	@Test
 	public void en_iphone7s_1242px_2208px_1710111915() throws Exception {
 		InputStream stream = OcrTestEnglishIphone.class.getClassLoader().getResourceAsStream("en_iphone7s_1242px_2208px_1710111915.png");
-		Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.ENGLISH);
+		Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.ENGLISH, Device.IPHONE);
 		Assert.assertEquals(9,stocks.keySet().size());
 		Assert.assertEquals(Long.valueOf(4), stocks.get(COAL));
 		Assert.assertEquals(Long.valueOf(133982), stocks.get(COPPER));

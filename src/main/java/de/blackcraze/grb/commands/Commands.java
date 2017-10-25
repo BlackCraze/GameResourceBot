@@ -37,10 +37,12 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
+import de.blackcraze.grb.model.Device;
 import de.blackcraze.grb.model.PrintableTable;
 import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.StockType;
@@ -69,6 +71,17 @@ public final class Commands {
             response.append("language: ");
             response.append(mate.getLanguage());
             response.append("\n");
+            response.append("device: ");
+            response.append(mate.getDevice());
+            response.append(" [");
+            Device[] devices = Device.values();
+            for (int i = 0; i < devices.length; i++) {
+                response.append(devices[i].name());
+                if (i + 1 < devices.length) {
+                    response.append(',');
+                }
+            }
+            response.append("]\n");
             Speaker.sayCode(message.getTextChannel(), response.toString());
             return;
         }
@@ -81,14 +94,22 @@ public final class Commands {
                 return;
             }
             try {
-                Locale locale = new Locale(value);
-                if ("language".equalsIgnoreCase(field) && locale != null) {
+                if ("language".equalsIgnoreCase(field)) {
+                    new Locale(value); // may throw an exception
                     mate.setLanguage(value);
+                    getMateDao().update(mate);
+                    message.addReaction(Speaker.Reaction.SUCCESS).queue();
+                } else if ("device".equalsIgnoreCase(field)) {
+                    Device dev = Device.valueOf(StringUtils.upperCase(value));
+                    mate.setDevice(dev);
                     getMateDao().update(mate);
                     message.addReaction(Speaker.Reaction.SUCCESS).queue();
                 } else {
                     throw new IllegalStateException();
                 }
+            } catch (IllegalArgumentException e) {
+                //when setting an unknown device
+                message.addReaction(Speaker.Reaction.FAILURE).queue();
             } catch (Exception e) {
                 message.addReaction(Speaker.Reaction.FAILURE).queue();
                 e.printStackTrace();

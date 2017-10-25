@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -12,6 +14,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import de.blackcraze.grb.model.AbstractNamed;
+import de.blackcraze.grb.model.Device;
 
 @Entity
 @Table(name = "MATE")
@@ -24,6 +27,10 @@ public class Mate extends AbstractNamed {
 
     @Column
     private String language;
+
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Device device;
 
     @OneToMany(mappedBy = "mate", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -55,6 +62,14 @@ public class Mate extends AbstractNamed {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public Device getDevice() {
+        return device;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
     }
 
 }

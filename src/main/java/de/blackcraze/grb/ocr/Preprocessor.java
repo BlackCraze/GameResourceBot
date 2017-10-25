@@ -48,6 +48,8 @@ import org.bytedeco.javacpp.opencv_core.Rect;
 import org.bytedeco.javacpp.opencv_core.Scalar;
 import org.bytedeco.javacpp.opencv_core.Size;
 
+import de.blackcraze.grb.model.Device;
+
 public class Preprocessor {
 
     private static final File TMP_FILE_DIR = new File("./target/tmp/");
@@ -350,7 +352,7 @@ public class Preprocessor {
         return dest;
     }
 
-    public static File[] extract(File frame) throws IOException {
+    public static File[] extract(File frame, Device device) throws IOException {
         Mat colorFilterTextLow = new Mat(new double[] { 0, 2, 0 });
         Mat colorFilterNumberLow = new Mat(new double[] { 255, 255, 255 });
         final double threshText = 0.04d;
@@ -358,7 +360,18 @@ public class Preprocessor {
         final int threshTextSrcUp = 255;
 
         final double threshNum = 0.06d;
-        Mat colorFilterNumLow = new Mat(new double[] { 25, 255, 50 });
+
+        // iphone 7
+        Mat colorFilterNumLow;
+        switch (device) {
+        case IPHONE:
+            colorFilterNumLow = new Mat(new double[] { 25, 175, 50 });
+            break;
+        default:
+            colorFilterNumLow = new Mat(new double[] { 25, 255, 50 });
+            break;
+        }
+
         Mat colorFilterNumUp = new Mat(new double[] { 50, 255, 255 });
         final int threshNumSrcLow = 180;
         final int threshNumSrcUp = 255;

@@ -14,6 +14,7 @@ import javax.persistence.NonUniqueResultException;
 
 import org.apache.commons.lang3.StringUtils;
 
+import de.blackcraze.grb.model.Device;
 import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.Stock;
 import de.blackcraze.grb.model.entity.StockType;

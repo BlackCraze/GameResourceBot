@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.i18n.Resource;
+import de.blackcraze.grb.model.Device;
 import de.blackcraze.grb.model.entity.Mate;
 import net.dv8tion.jda.core.entities.Channel;
 import net.dv8tion.jda.core.entities.Message;
@@ -94,6 +95,12 @@ public class CommandUtils {
             return new Locale(mate.getLanguage());
         }
         return channelLocale;
+    }
+
+    public static Device getMateDevice(Message message) {
+        Locale channelLocale = getResponseLocale(message.getTextChannel());
+        Mate mate = getMateDao().getOrCreateMate(message.getMember(), channelLocale);
+        return mate.getDevice();
     }
 
     public static Locale getResponseLocale(Channel channel) {

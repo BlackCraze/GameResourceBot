@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import de.blackcraze.grb.model.Device;
 import junit.framework.Assert;
 
 public class OcrTestGerman {
@@ -15,7 +16,7 @@ public class OcrTestGerman {
     @Test
     public void test_de_01() throws Exception {
         InputStream stream = OcrTestEnglishIphone.class.getClassLoader().getResourceAsStream("1080_de_01.png");
-        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN);
+        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN, Device.ANDROID);
         Assert.assertEquals(9, stocks.keySet().size());
         Assert.assertEquals(Long.valueOf(4910), stocks.get(SODIUM));
         Assert.assertEquals(Long.valueOf(1440), stocks.get(SILICON));
@@ -31,7 +32,7 @@ public class OcrTestGerman {
     @Test
     public void test_de_03() throws Exception {
         InputStream stream = OcrTestEnglishIphone.class.getClassLoader().getResourceAsStream("720_de_03.png");
-        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN);
+        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN, Device.ANDROID);
         Assert.assertEquals(9, stocks.keySet().size());
         Assert.assertEquals(Long.valueOf(5168), stocks.get(DIAMOND_CUTTER));
         Assert.assertEquals(Long.valueOf(5000), stocks.get(MAYAN_CALENDAR));
@@ -47,7 +48,7 @@ public class OcrTestGerman {
     @Test
     public void test_screens_bc_01() throws Exception {
         InputStream stream = OcrTestGerman.class.getClassLoader().getResourceAsStream("720_de_bc_01.png");
-        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN);
+        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN, Device.ANDROID);
         Assert.assertEquals(9, stocks.keySet().size());
         Assert.assertEquals(Long.valueOf(134633), stocks.get(COAL));
         Assert.assertEquals(Long.valueOf(3116596), stocks.get(COPPER));
@@ -63,7 +64,7 @@ public class OcrTestGerman {
     @Test
     public void test_screens_bc_02() throws Exception {
         InputStream stream = OcrTestGerman.class.getClassLoader().getResourceAsStream("720_de_bc_02.png");
-        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN);
+        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN, Device.ANDROID);
         Assert.assertEquals(9, stocks.keySet().size());
         Assert.assertEquals(Long.valueOf(1484845), stocks.get(EMERALD));
         Assert.assertEquals(Long.valueOf(79481), stocks.get(PLATINUM));
@@ -79,7 +80,7 @@ public class OcrTestGerman {
     @Test
     public void test_screens_bc_03() throws Exception {
         InputStream stream = OcrTestGerman.class.getClassLoader().getResourceAsStream("720_de_bc_03.png");
-        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN);
+        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN, Device.ANDROID);
         Assert.assertEquals(9, stocks.keySet().size());
         Assert.assertEquals(Long.valueOf(12991), stocks.get(OIL));
         Assert.assertEquals(Long.valueOf(64697), stocks.get(URANIUM));
@@ -95,7 +96,7 @@ public class OcrTestGerman {
     @Test
     public void test_screens_bc_04() throws Exception {
         InputStream stream = OcrTestGerman.class.getClassLoader().getResourceAsStream("720_de_bc_04.png");
-        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN);
+        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN, Device.ANDROID);
         Assert.assertEquals(9, stocks.keySet().size());
         Assert.assertEquals(Long.valueOf(3619), stocks.get(POLISHED_EMERALD));
         Assert.assertEquals(Long.valueOf(8102), stocks.get(STEEL_BAR));
@@ -117,7 +118,7 @@ public class OcrTestGerman {
     @Test
     public void test_screens_bc_05() throws Exception {
         InputStream stream = OcrTestGerman.class.getClassLoader().getResourceAsStream("720_de_bc_05.png");
-        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN);
+        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN, Device.ANDROID);
         Assert.assertEquals(9, stocks.keySet().size());
         Assert.assertEquals(Long.valueOf(19575), stocks.get(TITANIUM));
         Assert.assertEquals(Long.valueOf(4311), stocks.get(POLISHED_ALEXANDRITE));
@@ -133,7 +134,7 @@ public class OcrTestGerman {
     @Test
     public void test_screens_bc_06() throws Exception {
         InputStream stream = OcrTestGerman.class.getClassLoader().getResourceAsStream("720_de_bc_06.png");
-        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN);
+        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN, Device.ANDROID);
         Assert.assertEquals(9, stocks.keySet().size());
         Assert.assertEquals(Long.valueOf(447), stocks.get(CLEAN_WATER));
         Assert.assertEquals(Long.valueOf(484), stocks.get(STEEL_PLATE));
@@ -149,7 +150,7 @@ public class OcrTestGerman {
     @Test
     public void test_screens_bc_07() throws Exception {
         InputStream stream = OcrTestGerman.class.getClassLoader().getResourceAsStream("720_de_bc_07.png");
-        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN);
+        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN, Device.ANDROID);
         Assert.assertEquals(9, stocks.keySet().size());
         Assert.assertEquals(Long.valueOf(1282), stocks.get(URANIUM_ROD));
         Assert.assertEquals(Long.valueOf(263), stocks.get(DIETHYL_ETHER));
@@ -165,7 +166,7 @@ public class OcrTestGerman {
     @Test
     public void test_screens_bc_08() throws Exception {
         InputStream stream = OcrTestGerman.class.getClassLoader().getResourceAsStream("720_de_bc_08.png");
-        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN);
+        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN, Device.ANDROID);
         Assert.assertEquals(7, stocks.keySet().size());
         Assert.assertEquals(Long.valueOf(17224), stocks.get(COPPER_WIRE));
         Assert.assertEquals(Long.valueOf(1768), stocks.get(LAMP));
@@ -179,7 +180,7 @@ public class OcrTestGerman {
    @Test
     public void test_screens_bc_09() throws Exception {
         InputStream stream = OcrTestGerman.class.getClassLoader().getResourceAsStream("720_de_bc_09.png");
-        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN);
+        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN, Device.ANDROID);
         Assert.assertEquals(9, stocks.keySet().size());
         Assert.assertEquals(Long.valueOf(4762), stocks.get(DIAMOND_CUTTER));
         Assert.assertEquals(Long.valueOf(2388), stocks.get(MAYAN_CALENDAR));
@@ -195,7 +196,7 @@ public class OcrTestGerman {
     @Test
     public void test_screens_luc_02() throws Exception {
         InputStream stream = OcrTestGerman.class.getClassLoader().getResourceAsStream("720_de_luc_02.png");
-        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN);
+        Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, Locale.GERMAN, Device.ANDROID);
         Assert.assertEquals(9, stocks.keySet().size());
         Assert.assertEquals(Long.valueOf(72933), stocks.get(COPPER_NAIL));
         Assert.assertEquals(Long.valueOf(301), stocks.get(CIRCUIT));
