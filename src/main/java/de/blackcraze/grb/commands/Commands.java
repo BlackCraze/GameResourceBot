@@ -219,17 +219,14 @@ public final class Commands {
     }
 
     public static void users(Scanner scanner, Message message) {
-    	Optional<String> parameters = parseParameters(scanner);    	
     	List<Mate> mates = null;
     	
     	// Check if users has additional arguments
-    	if (parameters.isPresent()) {
-    		String[] argument = parameters.toString().split(" ");
-    		System.out.println("parameter found: " + argument[0] + "," + argument[1] );
-			switch (argument[0]) {
+    	if (scanner.hasNext()) {
+			switch (scanner.next()) {
 				case "delete":
 					System.out.println("want to delete a member.");
-					mates = getMateDao().findByName(argument[1]);
+					mates = getMateDao().findByName(scanner.next());
 					if (!mates.isEmpty()) {
 						System.out.println("Members found:");
 						// Finally delete the member.
