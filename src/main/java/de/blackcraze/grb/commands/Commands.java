@@ -225,8 +225,8 @@ public final class Commands {
     	
     	// Check if users has additional arguments
     	if (parameters.isPresent()) {
-    		System.out.println("parameters found.");
     		argument = parameters.get();
+    		System.out.println("parameter found: " + argument);
 			switch (argument) {
 				case "delete":
 					System.out.println("want to delete a member.");
