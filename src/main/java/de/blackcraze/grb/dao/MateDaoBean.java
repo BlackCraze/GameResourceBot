@@ -102,6 +102,13 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
         return em.createQuery("from Mate where lower(name) like :name order by name")
                 .setParameter("name", "%" + name.toLowerCase() + "%").getResultList();
     }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Mate> findByName(String name) {
+    	return em.createQuery("from Mate where lower(name) = :name order by name")
+    			.setParameter("name", name.toLowerCase() ).getResultList();
+    }
 
     public Mate getOrCreateMate(Member member, Locale defaultLocale) {
 

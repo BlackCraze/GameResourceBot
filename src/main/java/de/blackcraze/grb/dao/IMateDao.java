@@ -19,6 +19,8 @@ public interface IMateDao extends IBaseDao<Mate> {
     List<Mate> findAll();
 
     List<Mate> findByNameLike(String name);
+    
+    List<Mate> findByName(String name);    
 
     Mate getOrCreateMate(Member member, Locale defaultLocale);
 
