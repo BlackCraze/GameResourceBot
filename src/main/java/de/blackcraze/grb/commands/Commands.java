@@ -219,31 +219,38 @@ public final class Commands {
 
     public static void users(Scanner scanner, Message message) {
     	Optional<String> parameters = parseParameters(scanner);
-    	System.out.println("Parameters:" + parameters);
+    	String argument = null;
     	String MemberName = null;
     	List<Mate> mates = null;
     	
     	// Check if users has additional arguments
     	if (parameters.isPresent()) {
-  		  if ("delete".equalsIgnoreCase(parameters.get())) {
-  			// Delete a member?
-			MemberName = parameters.get();
-			System.out.println("member:" + MemberName);
-			mates = getMateDao().findByName(MemberName);
-			if (!mates.isEmpty()) {
-				// Finally delete the member.
-				for (Mate mate : mates) {
-					 getMateDao().delete(mate);
-				}        	
-				message.addReaction(Speaker.Reaction.SUCCESS).queue();				
-			} else {
-				// No Mate with given name.
-				message.addReaction(Speaker.Reaction.FAILURE).queue();
+    		System.out.println("parameters found.");
+    		argument = parameters.get();
+			switch (argument) {
+				case "delete":
+					System.out.println("want to delete a member.");
+					MemberName = parameters.get();
+					mates = getMateDao().findByName(MemberName);
+					if (!mates.isEmpty()) {
+						System.out.println("Members found:");
+						// Finally delete the member.
+						for (Mate mate : mates) {
+							getMateDao().delete(mate);
+						}        	
+						message.addReaction(Speaker.Reaction.SUCCESS).queue();				
+					} else {
+						System.out.println("no members :(.");
+						// No Mate with given name.
+						message.addReaction(Speaker.Reaction.FAILURE).queue();
+					}			
+					break;
+				default:
+					System.out.println("no idea what he wants.");
+					// Wrong argument!
+					message.addReaction(Speaker.Reaction.FAILURE).queue();			
+					break;
 			}
-  		  } else {
-  			  // Wrong argument!
-  			  message.addReaction(Speaker.Reaction.FAILURE).queue();
-  		  }    		
     	} else {
     		// List Users
 	        List<List<String>> rows = getMateDao().listOrderByOldestStock();
