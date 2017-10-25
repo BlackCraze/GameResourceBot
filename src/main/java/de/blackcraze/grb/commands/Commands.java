@@ -223,19 +223,22 @@ public final class Commands {
     	
     	// Check if users has additional arguments
     	if (scanner.hasNext()) {
-			switch (scanner.next()) {
+    		String action = scanner.next();
+    		System.out.println("action:" + action);
+			switch (action) {
 				case "delete":
-					System.out.println("want to delete a member.");
-					mates = getMateDao().findByName(scanner.next());
+					String memberName = scanner.next();
+					System.out.println("want to delete a member: " + memberName);					
+					mates = getMateDao().findByName(memberName);
 					if (!mates.isEmpty()) {
-						System.out.println("Members found:");
+						System.out.println("Member found");
 						// Finally delete the member.
 						for (Mate mate : mates) {
 							getMateDao().delete(mate);
 						}        	
 						message.addReaction(Speaker.Reaction.SUCCESS).queue();				
 					} else {
-						System.out.println("no members :(.");
+						System.out.println("member not there :(.");
 						// No Mate with given name.
 						message.addReaction(Speaker.Reaction.FAILURE).queue();
 					}			
