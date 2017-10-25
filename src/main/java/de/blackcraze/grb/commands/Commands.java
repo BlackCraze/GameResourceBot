@@ -219,6 +219,7 @@ public final class Commands {
 
     public static void users(Scanner scanner, Message message) {
     	Optional<String> parameters = parseParameters(scanner);
+    	System.out.println("Parameters:" + parameters);
     	String MemberName = null;
     	List<Mate> mates = null;
     	
@@ -227,9 +228,10 @@ public final class Commands {
   		  if ("delete".equalsIgnoreCase(parameters.get())) {
   			// Delete a member?
 			MemberName = parameters.get();
+			System.out.println("member:" + MemberName);
 			mates = getMateDao().findByName(MemberName);
 			if (!mates.isEmpty()) {
-				// Finaly delete the member.
+				// Finally delete the member.
 				for (Mate mate : mates) {
 					 getMateDao().delete(mate);
 				}        	
