@@ -352,7 +352,7 @@ public class Preprocessor {
         return dest;
     }
 
-    public static File[] extract(File frame, Device device) throws IOException {
+    public static File[] extract(File frame, Device userDevice) throws IOException {
         Mat colorFilterTextLow = new Mat(new double[] { 0, 2, 0 });
         Mat colorFilterNumberLow = new Mat(new double[] { 255, 255, 255 });
         final double threshText = 0.04d;
@@ -363,6 +363,7 @@ public class Preprocessor {
 
         // iphone 7
         Mat colorFilterNumLow;
+        Device device = userDevice != null ? userDevice : Device.ANDROID;
         switch (device) {
         case IPHONE:
             colorFilterNumLow = new Mat(new double[] { 25, 175, 50 });
