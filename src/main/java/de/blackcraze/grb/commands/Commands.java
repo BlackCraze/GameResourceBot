@@ -108,7 +108,7 @@ public final class Commands {
                     throw new IllegalStateException();
                 }
             } catch (IllegalArgumentException e) {
-                //when setting an unknown device
+                // when setting an unknown device
                 message.addReaction(Speaker.Reaction.FAILURE).queue();
             } catch (Exception e) {
                 message.addReaction(Speaker.Reaction.FAILURE).queue();
@@ -253,29 +253,30 @@ public final class Commands {
         List<Mate> mates = null;
         String clearReaction = Speaker.Reaction.FAILURE;
         String MemberName = null;
-        
+
         if (!mateOrStockOptional.isPresent()) {
             // if no member was selected assume the user of the message.
-            mates = getMateDao().findByName(message.getMember().getNickname());
+            Mate me = getMateDao().getOrCreateMate(message.getMember(), getResponseLocale(message));
+            mates = Collections.singletonList(me);
         } else {
-        	MemberName = mateOrStockOptional.get();
-        	if ("all".equalsIgnoreCase(MemberName)) {
-        		// select guild members
-        		mates = getMateDao().findByNameLike("%");
-        	} else {
-        		// select only given member with exact matching name.
-        		mates = getMateDao().findByName(MemberName);
-        	}
+            MemberName = mateOrStockOptional.get();
+            if ("all".equalsIgnoreCase(MemberName)) {
+                // select guild members
+                mates = getMateDao().findByNameLike("%");
+            } else {
+                // select only given member with exact matching name.
+                mates = getMateDao().findByName(MemberName);
+            }
         }
         // Delete the stocks from defined members.
         if (!mates.isEmpty()) {
-    		for (Mate mate : mates) {
-        getStockDao().deleteAll(mate);
-    }
-    		clearReaction = Speaker.Reaction.SUCCESS;    
+            for (Mate mate : mates) {
+                getStockDao().deleteAll(mate);
+            }
+            clearReaction = Speaker.Reaction.SUCCESS;
         }
         // Always response to a bot request.
-        message.addReaction(clearReaction).queue();    
+        message.addReaction(clearReaction).queue();
     }
 
     public static void update(Scanner scanner, Message message) {
