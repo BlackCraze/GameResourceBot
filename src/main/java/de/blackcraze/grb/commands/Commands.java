@@ -47,6 +47,7 @@ import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.StockType;
 import de.blackcraze.grb.util.PrintUtils;
 import de.blackcraze.grb.util.wagu.Block;
+import jdk.internal.joptsimple.internal.Strings;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 
@@ -218,20 +219,17 @@ public final class Commands {
     }
 
     public static void users(Scanner scanner, Message message) {
-    	Optional<String> parameters = parseParameters(scanner);
-    	String argument = null;
-    	String MemberName = null;
+    	Optional<String> parameters = parseParameters(scanner);    	
     	List<Mate> mates = null;
     	
     	// Check if users has additional arguments
     	if (parameters.isPresent()) {
-    		argument = parameters.get();
-    		System.out.println("parameter found: " + argument);
-			switch (argument) {
+    		String[] argument = parameters.toString().split(" ");
+    		System.out.println("parameter found: " + argument[0] + "," + argument[1] );
+			switch (argument[0]) {
 				case "delete":
 					System.out.println("want to delete a member.");
-					MemberName = parameters.get();
-					mates = getMateDao().findByName(MemberName);
+					mates = getMateDao().findByName(argument[1]);
 					if (!mates.isEmpty()) {
 						System.out.println("Members found:");
 						// Finally delete the member.
