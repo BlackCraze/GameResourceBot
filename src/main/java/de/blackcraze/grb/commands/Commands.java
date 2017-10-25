@@ -3,6 +3,7 @@ package de.blackcraze.grb.commands;
 import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
 import static de.blackcraze.grb.util.CommandUtils.parseStockName;
 import static de.blackcraze.grb.util.CommandUtils.parseStocks;
+import static de.blackcraze.grb.util.CommandUtils.parseParameters;
 import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
 import static de.blackcraze.grb.util.InjectorUtils.getStockDao;
 import static de.blackcraze.grb.util.InjectorUtils.getStockTypeDao;
@@ -217,14 +218,41 @@ public final class Commands {
     }
 
     public static void users(Scanner scanner, Message message) {
-        List<List<String>> rows = getMateDao().listOrderByOldestStock();
-        Locale locale = getResponseLocale(message);
-        PrintableTable table = new PrintableTable(Resource.getString("USERS_LIST_HEADER", locale),
-                Collections.emptyList(),
-                Arrays.asList(Resource.getString("USER", locale), Resource.getString("POPULATED", locale),
-                        Resource.getString("OLDEST_STOCK", locale)),
-                rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT, Block.DATA_MIDDLE_RIGHT));
-        Speaker.sayCode(message.getTextChannel(), PrintUtils.prettyPrint(table));
+    	Optional<String> parameters = parseParameters(scanner);
+    	String MemberName = null;
+    	List<Mate> mates = null;
+    	
+    	// Check if users has additional arguments
+    	if (parameters.isPresent()) {
+  		  if ("delete".equalsIgnoreCase(parameters.get())) {
+  			// Delete a member?
+			MemberName = parameters.get();
+			mates = getMateDao().findByName(MemberName);
+			if (!mates.isEmpty()) {
+				// Finaly delete the member.
+				for (Mate mate : mates) {
+					 getMateDao().delete(mate);
+				}        	
+				message.addReaction(Speaker.Reaction.SUCCESS).queue();				
+			} else {
+				// No Mate with given name.
+				message.addReaction(Speaker.Reaction.FAILURE).queue();
+			}
+  		  } else {
+  			  // Wrong argument!
+  			  message.addReaction(Speaker.Reaction.FAILURE).queue();
+  		  }    		
+    	} else {
+    		// List Users
+	        List<List<String>> rows = getMateDao().listOrderByOldestStock();
+	        Locale locale = getResponseLocale(message);
+	        PrintableTable table = new PrintableTable(Resource.getString("USERS_LIST_HEADER", locale),
+	                Collections.emptyList(),
+	                Arrays.asList(Resource.getString("USER", locale), Resource.getString("POPULATED", locale),
+	                        Resource.getString("OLDEST_STOCK", locale)),
+	                rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT, Block.DATA_MIDDLE_RIGHT));
+	        Speaker.sayCode(message.getTextChannel(), PrintUtils.prettyPrint(table));
+    	}
     }
 
     public static void clear(Scanner scanner, Message message) {
@@ -255,7 +283,7 @@ public final class Commands {
         }
         // Always response to a bot request.
         message.addReaction(clearReaction).queue();    
-    }
+    }   
 
     public static void update(Scanner scanner, Message message) {
         Locale responseLocale = getResponseLocale(message);

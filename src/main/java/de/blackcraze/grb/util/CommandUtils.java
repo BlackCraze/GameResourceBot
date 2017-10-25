@@ -53,6 +53,19 @@ public class CommandUtils {
         }
         return Optional.of(stockName.toString());
     }
+    
+    public static Optional<String> parseParameters(Scanner scanner) {
+        if (!scanner.hasNext()) {
+            return Optional.empty();
+        }
+        StringBuilder element = new StringBuilder();
+        element.append(scanner.next());
+        while (scanner.hasNext() && !scanner.hasNextLong()) {
+        	element.append(" ");
+        	element.append(scanner.next());
+        }
+        return Optional.of(element.toString());
+    }    
 
     public static Optional<Long> parseAmount(Scanner scanner) {
         if (!scanner.hasNextLong()) {

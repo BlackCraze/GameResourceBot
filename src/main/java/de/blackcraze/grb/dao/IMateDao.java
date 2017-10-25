@@ -11,6 +11,8 @@ import net.dv8tion.jda.core.entities.Member;
 public interface IMateDao extends IBaseDao<Mate> {
 
     void save(Mate mate);
+    
+    void delete(Mate mate);
 
     Optional<Mate> findByDiscord(String discordID);
 
