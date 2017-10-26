@@ -3,7 +3,6 @@ package de.blackcraze.grb.commands;
 import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
 import static de.blackcraze.grb.util.CommandUtils.parseStockName;
 import static de.blackcraze.grb.util.CommandUtils.parseStocks;
-import static de.blackcraze.grb.util.CommandUtils.parseParameters;
 import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
 import static de.blackcraze.grb.util.InjectorUtils.getStockDao;
 import static de.blackcraze.grb.util.InjectorUtils.getStockTypeDao;
@@ -49,7 +48,6 @@ import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.StockType;
 import de.blackcraze.grb.util.PrintUtils;
 import de.blackcraze.grb.util.wagu.Block;
-import jdk.internal.joptsimple.internal.Strings;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 
