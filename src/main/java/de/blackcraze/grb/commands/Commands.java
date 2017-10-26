@@ -56,8 +56,12 @@ public final class Commands {
     private Commands() {
     }
 
+    public static void info(Scanner scanner, Message message) {
+        Speaker.say(message.getTextChannel(), Resource.getString("INFO", getResponseLocale(message)));
+    }
+    
     public static void ping(Scanner scanner, Message message) {
-        Speaker.say(message.getTextChannel(), Resource.getString("PONG", getResponseLocale(message)));
+    	Speaker.say(message.getTextChannel(), Resource.getString("PONG", getResponseLocale(message)));
     }
 
     public static void credits(Scanner scanner, Message message) {
