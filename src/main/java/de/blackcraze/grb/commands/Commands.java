@@ -237,75 +237,84 @@ public final class Commands {
         return result;
     }
 
-    public static void users(Scanner scanner, Message message) {
-    	List<Mate> mates = null;
-    	
-    	// Check if users has additional arguments
-    	if (scanner.hasNext()) {
-    		String action = scanner.next();
-    		System.out.println("action:" + action);
+	public static void users(Scanner scanner, Message message) {
+		List<Mate> mates = null;
+
+		// Check if users has additional arguments
+		if (scanner.hasNext()) {
+			String action = scanner.next();
 			switch (action) {
-				case "delete":
-					String memberName = scanner.next();
-					System.out.println("want to delete a member: " + memberName);					
-					mates = getMateDao().findByName(memberName);
-					if (!mates.isEmpty()) {
-						System.out.println("Member found");
-						// Finally delete the member.
-						for (Mate mate : mates) {
-							getMateDao().delete(mate);
-						}        	
-						message.addReaction(Speaker.Reaction.SUCCESS).queue();				
-					} else {
-						System.out.println("member not there :(.");
-						// No Mate with given name.
-						message.addReaction(Speaker.Reaction.FAILURE).queue();
-					}			
-					break;
-				default:
-					System.out.println("no idea what he wants.");
-					// Wrong argument!
-					message.addReaction(Speaker.Reaction.FAILURE).queue();			
-					break;
+			case "delete":
+				String memberName = scanner.next();
+				mates = getMateDao().findByName(memberName);
+				if (!mates.isEmpty()) {
+					// Finally delete the member.
+					for (Mate mate : mates) {
+						getMateDao().delete(mate);
+					}
+					message.addReaction(Speaker.Reaction.SUCCESS).queue();
+				} else {
+					// No Mate with given name.
+					message.addReaction(Speaker.Reaction.FAILURE).queue();
+				}
+				break;
+			default:
+				// Wrong argument!
+				message.addReaction(Speaker.Reaction.FAILURE).queue();
+				break;
 			}
-    	} else {
-    		// List Users
-        List<List<String>> rows = getMateDao().listOrderByOldestStock();
-        Locale locale = getResponseLocale(message);
-        PrintableTable table = new PrintableTable(Resource.getString("USERS_LIST_HEADER", locale),
-                Collections.emptyList(),
-                Arrays.asList(Resource.getString("USER", locale), Resource.getString("POPULATED", locale),
-                        Resource.getString("OLDEST_STOCK", locale)),
-                rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT, Block.DATA_MIDDLE_RIGHT));
-        Speaker.sayCode(message.getTextChannel(), PrintUtils.prettyPrint(table));
-    }
-    }
+		} else {
+			// List Users
+			
+			List<List<String>> rows = getMateDao().listOrderByOldestStock();
+			Locale locale = getResponseLocale(message);
+			PrintableTable table = new PrintableTable(Resource.getString("USERS_LIST_HEADER", locale),
+					Collections.emptyList(),
+					Arrays.asList(Resource.getString("USER", locale), Resource.getString("POPULATED", locale),
+							Resource.getString("OLDEST_STOCK", locale)),
+					rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT, Block.DATA_MIDDLE_RIGHT));
+			Speaker.sayCode(message.getTextChannel(), PrintUtils.prettyPrint(table));
+		}
+	}
 
     public static void clear(Scanner scanner, Message message) {
         Optional<String> mateOrStockOptional = parseStockName(scanner);
         List<Mate> mates = null;
         String clearReaction = Speaker.Reaction.FAILURE;
-        String MemberName = null;
+        String mateOrStock = null;
 
         if (!mateOrStockOptional.isPresent()) {
             // if no member was selected assume the user of the message.
             mates = getMateDao().findByName(message.getMember().getNickname());
         } else {
-            MemberName = mateOrStockOptional.get();
-            if ("all".equalsIgnoreCase(MemberName)) {
+            mateOrStock = mateOrStockOptional.get();
+            if ("all".equalsIgnoreCase(mateOrStock)) {
                 // select guild members
                 mates = getMateDao().findByNameLike("%");
             } else {
                 // select only given member with exact matching name.
-                mates = getMateDao().findByName(MemberName);
+                mates = getMateDao().findByName(mateOrStock);
             }
         }
         // Delete the stocks from defined members.
+        // otherwise try the parameter as an Item.
         if (!mates.isEmpty()) {
             for (Mate mate : mates) {
                 getStockDao().deleteAll(mate);
             }
             clearReaction = Speaker.Reaction.SUCCESS;
+        } else {
+        	Locale responseLocale = getResponseLocale(message);
+        	String stockIdentifier = Resource.getItemKey(mateOrStock, responseLocale);        	
+        	Optional<StockType> stockType = getStockTypeDao().findByKey(stockIdentifier);        	
+        	mates = getMateDao().findByName(message.getMember().getNickname());
+        	// Try to delete the given name from stocks of current user.
+            if (!mates.isEmpty()) {
+                for (Mate mate : mates) {
+                	getStockDao().delete(mate, stockType.get());
+                }
+                clearReaction = Speaker.Reaction.SUCCESS;
+            }        	        	
         }
         // Always response to a bot request.
         message.addReaction(clearReaction).queue();
