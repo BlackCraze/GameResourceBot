@@ -3,6 +3,7 @@ package de.blackcraze.grb.commands;
 import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
 import static de.blackcraze.grb.util.CommandUtils.parseStockName;
 import static de.blackcraze.grb.util.CommandUtils.parseStocks;
+import static de.blackcraze.grb.util.CommandUtils.parseParameters;
 import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
 import static de.blackcraze.grb.util.InjectorUtils.getStockDao;
 import static de.blackcraze.grb.util.InjectorUtils.getStockTypeDao;
@@ -48,6 +49,7 @@ import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.StockType;
 import de.blackcraze.grb.util.PrintUtils;
 import de.blackcraze.grb.util.wagu.Block;
+import jdk.internal.joptsimple.internal.Strings;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 
@@ -238,6 +240,38 @@ public final class Commands {
     }
 
     public static void users(Scanner scanner, Message message) {
+    	List<Mate> mates = null;
+    	
+    	// Check if users has additional arguments
+    	if (scanner.hasNext()) {
+    		String action = scanner.next();
+    		System.out.println("action:" + action);
+			switch (action) {
+				case "delete":
+					String memberName = scanner.next();
+					System.out.println("want to delete a member: " + memberName);					
+					mates = getMateDao().findByName(memberName);
+					if (!mates.isEmpty()) {
+						System.out.println("Member found");
+						// Finally delete the member.
+						for (Mate mate : mates) {
+							getMateDao().delete(mate);
+						}        	
+						message.addReaction(Speaker.Reaction.SUCCESS).queue();				
+					} else {
+						System.out.println("member not there :(.");
+						// No Mate with given name.
+						message.addReaction(Speaker.Reaction.FAILURE).queue();
+					}			
+					break;
+				default:
+					System.out.println("no idea what he wants.");
+					// Wrong argument!
+					message.addReaction(Speaker.Reaction.FAILURE).queue();			
+					break;
+			}
+    	} else {
+    		// List Users
         List<List<String>> rows = getMateDao().listOrderByOldestStock();
         Locale locale = getResponseLocale(message);
         PrintableTable table = new PrintableTable(Resource.getString("USERS_LIST_HEADER", locale),
@@ -246,6 +280,7 @@ public final class Commands {
                         Resource.getString("OLDEST_STOCK", locale)),
                 rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT, Block.DATA_MIDDLE_RIGHT));
         Speaker.sayCode(message.getTextChannel(), PrintUtils.prettyPrint(table));
+    }
     }
 
     public static void clear(Scanner scanner, Message message) {
@@ -256,8 +291,7 @@ public final class Commands {
 
         if (!mateOrStockOptional.isPresent()) {
             // if no member was selected assume the user of the message.
-            Mate me = getMateDao().getOrCreateMate(message.getMember(), getResponseLocale(message));
-            mates = Collections.singletonList(me);
+            mates = getMateDao().findByName(message.getMember().getNickname());
         } else {
             MemberName = mateOrStockOptional.get();
             if ("all".equalsIgnoreCase(MemberName)) {
