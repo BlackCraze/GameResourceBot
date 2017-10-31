@@ -23,7 +23,7 @@
 	</repositories>
 
 	<dependencies>
-		<!-- discord stuff -->
+		<!-- Discord stuff -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
@@ -34,7 +34,7 @@
 			<artifactId>JDA</artifactId>
 			<version>3.2.0_242</version>
 		</dependency>
-		<!-- Hibernate library dependecy start -->
+		<!-- Hibernate library dependency start -->
 		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
@@ -212,7 +212,7 @@
 				<targetPath>${project.build.directory}/tessdata/</targetPath>
 				<filtering>false</filtering>
 			</resource>
-			<!-- We need to redeclare the project resources again -->
+			<!-- We need to redeclare the project resources -->
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
