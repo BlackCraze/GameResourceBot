@@ -111,11 +111,10 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
     }
 
     public Mate getOrCreateMate(Member member, Locale defaultLocale) {
+
         String name = member.getNickname() != null ? member.getNickname() : member.getUser().getName();
         String discordId = member.getUser().getId();
 
-        System.out.println("name:" + name + " / ID:" + discordId);
-        
         Optional<Mate> mateOptional = findByDiscord(discordId);
         if (!mateOptional.isPresent()) {
             Mate mate = new Mate();

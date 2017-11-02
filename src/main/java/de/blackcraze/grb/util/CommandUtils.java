@@ -91,6 +91,8 @@ public class CommandUtils {
     public static Locale getResponseLocale(Message message) {
         Locale channelLocale = getResponseLocale(message.getTextChannel());
         
+        System.out.println("message.getMember():" + message.getMember() + " - " + message.getAuthor());
+        
         Mate mate = getMateDao().getOrCreateMate(message.getMember(), channelLocale);
         if (mate != null && !StringUtils.isEmpty(mate.getLanguage())) {
             return new Locale(mate.getLanguage());
