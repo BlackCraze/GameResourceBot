@@ -122,7 +122,7 @@ public final class Commands {
     }
 
     public static void config(Scanner scanner, Message message) {
-        BotConfig.ServerConfig instance = BotConfig.getConfig(message.getGuild());
+        BotConfig.ServerConfig instance = BotConfig.getConfig();
         if (!scanner.hasNext()) {
             StringBuilder response = new StringBuilder();
             Field[] fields = BotConfig.ServerConfig.class.getDeclaredFields();

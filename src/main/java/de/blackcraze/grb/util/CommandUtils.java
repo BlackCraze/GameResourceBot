@@ -64,7 +64,7 @@ public class CommandUtils {
 
     public static boolean botMentioned(Message message) {
         SelfUser selfUser = message.getJDA().getSelfUser();
-        String prefix = BotConfig.getConfig(message.getGuild()).PREFIX;
+        String prefix = BotConfig.getConfig().PREFIX;
         String messageStartWord = message.getContent().split(" ")[0];
         boolean prefixCheck = prefix.equalsIgnoreCase(messageStartWord);
         boolean mentionCheck = message.isMentioned(selfUser) && !message.mentionsEveryone();
@@ -103,16 +103,8 @@ public class CommandUtils {
         Mate mate = getMateDao().getOrCreateMate(message.getMember(), channelLocale);
         return mate.getDevice();
     }
-
+    
     public static Locale getResponseLocale(Channel channel) {
-    	Locale locale_setting;
-    	
-    	try {
-    		locale_setting = new Locale(BotConfig.getConfig(channel.getGuild()).LANGUAGE);
-    	} catch (Exception e) {
-    		locale_setting = Locale.ENGLISH;
-    	}
-    	
-        return locale_setting;    	
+        return new Locale(BotConfig.getConfig().LANGUAGE);    	
     }
 }
