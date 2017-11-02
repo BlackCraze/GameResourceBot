@@ -14,6 +14,7 @@ import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.util.CommandUtils;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class MessageListener extends ListenerAdapter {
@@ -63,4 +64,41 @@ public class MessageListener extends ListenerAdapter {
 
     }
 
+    @Override
+    public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
+        Message message = event.getMessage();
+
+        if (!message.getAttachments().isEmpty()) {
+            FileProcessor.ocrImages(message);
+            return;
+        }
+
+        Optional<Scanner> scannerOptional = CommandUtils.commandParser(message);
+        if (!scannerOptional.isPresent()) {
+            return;
+        }
+
+        Scanner scanner = scannerOptional.get();
+
+        Optional<String> actionOptional = parseAction(scanner);
+
+        Optional<Method> methodOptional = Arrays.stream(Commands.class.getDeclaredMethods())
+                .filter(aMethod -> aMethod.getName().equalsIgnoreCase(actionOptional.orElse("help"))).findFirst();
+
+        if (!methodOptional.isPresent()) {
+            message.addReaction(Speaker.Reaction.FAILURE).queue();
+            return;
+        }
+
+        System.out.printf("%s:%s%n", message.getAuthor().getName(), message.getContent());
+
+        try {
+            methodOptional.get().invoke(null, scanner, message);
+        } catch (Exception e) {
+            message.addReaction(Speaker.Reaction.FAILURE).queue();
+            e.printStackTrace();
+        }
+
+    }    
+    
 }
