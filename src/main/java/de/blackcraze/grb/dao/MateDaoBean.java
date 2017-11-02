@@ -134,15 +134,6 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
         }
     }
 
-    public void deleteMate(Member member) {
-        String discordId = member.getUser().getId();
-        Optional<Mate> mateOptional = findByDiscord(discordId);
-        if (!mateOptional.isPresent()) {
-        	Mate mate = mateOptional.get();
-        	delete(mate);        	
-        }
-    }
-    
     @Override
     public List<List<String>> listOrderByOldestStock() {
         Date now = new Date();

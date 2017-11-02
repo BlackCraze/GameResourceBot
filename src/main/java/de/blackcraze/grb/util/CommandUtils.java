@@ -105,14 +105,10 @@ public class CommandUtils {
     }
 
     public static Locale getResponseLocale(Channel channel) {
-    	Locale locale_setting;
-    	
     	try {
-    		locale_setting = new Locale(BotConfig.getConfig(channel.getGuild()).LANGUAGE);
+    		return new Locale(BotConfig.getConfig(channel.getGuild()).LANGUAGE);
     	} catch (Exception e) {
-    		locale_setting = Locale.ENGLISH;
+    		return Locale.ENGLISH;
     	}
-    	
-        return locale_setting;    	
     }
 }

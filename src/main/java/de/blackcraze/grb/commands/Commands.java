@@ -287,9 +287,11 @@ public final class Commands {
         String clearReaction = Speaker.Reaction.FAILURE;
         String mateOrStock = null;
 
+        final Locale locale = getResponseLocale(message);
+        Mate mate = getMateDao().getOrCreateMate(message.getMember(), locale);
         if (!mateOrStockOptional.isPresent()) {
             // if no member was selected assume the user of the message.
-            mates = getMateDao().findByName(message.getMember().getNickname());
+            mates = Collections.singletonList(mate);
         } else {
             mateOrStock = mateOrStockOptional.get();
             if ("all".equalsIgnoreCase(mateOrStock)) {
@@ -303,22 +305,16 @@ public final class Commands {
         // Delete the stocks from defined members.
         // otherwise try the parameter as an Item.
         if (!mates.isEmpty()) {
-            for (Mate mate : mates) {
-                getStockDao().deleteAll(mate);
+            for (Mate aMate : mates) {
+                getStockDao().deleteAll(aMate);
             }
             clearReaction = Speaker.Reaction.SUCCESS;
         } else {
-        	Locale responseLocale = getResponseLocale(message);
-        	String stockIdentifier = Resource.getItemKey(mateOrStock, responseLocale);        	
+        	String stockIdentifier = Resource.getItemKey(mateOrStock, locale);        	
         	Optional<StockType> stockType = getStockTypeDao().findByKey(stockIdentifier);        	
-        	mates = getMateDao().findByName(message.getMember().getNickname());
         	// Try to delete the given name from stocks of current user.
-            if (!mates.isEmpty()) {
-                for (Mate mate : mates) {
-                	getStockDao().delete(mate, stockType.get());
-                }
-                clearReaction = Speaker.Reaction.SUCCESS;
-            }        	        	
+            getStockDao().delete(mate, stockType.get());
+            clearReaction = Speaker.Reaction.SUCCESS;
         }
         // Always response to a bot request.
         message.addReaction(clearReaction).queue();

@@ -12,8 +12,6 @@ public interface IMateDao extends IBaseDao<Mate> {
 
     void save(Mate mate);
     
-    void delete(Mate mate);
-
     Optional<Mate> findByDiscord(String discordID);
 
     List<String> updateStocks(Mate mate, Map<String, Long> newStocks);

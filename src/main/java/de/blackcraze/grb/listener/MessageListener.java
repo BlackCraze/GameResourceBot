@@ -30,44 +30,16 @@ public class MessageListener extends ListenerAdapter {
         if (!listeningChannel.equalsIgnoreCase(messageChannel)) {
             return;
         }
-
-        if (!message.getAttachments().isEmpty()) {
-            FileProcessor.ocrImages(message);
-            return;
-        }
-
-        Optional<Scanner> scannerOptional = CommandUtils.commandParser(message);
-        if (!scannerOptional.isPresent()) {
-            return;
-        }
-
-        Scanner scanner = scannerOptional.get();
-
-        Optional<String> actionOptional = parseAction(scanner);
-
-        Optional<Method> methodOptional = Arrays.stream(Commands.class.getDeclaredMethods())
-                .filter(aMethod -> aMethod.getName().equalsIgnoreCase(actionOptional.orElse("help"))).findFirst();
-
-        if (!methodOptional.isPresent()) {
-            message.addReaction(Speaker.Reaction.FAILURE).queue();
-            return;
-        }
-
-        System.out.printf("%s:%s%n", message.getAuthor().getName(), message.getContent());
-
-        try {
-            methodOptional.get().invoke(null, scanner, message);
-        } catch (Exception e) {
-            message.addReaction(Speaker.Reaction.FAILURE).queue();
-            e.printStackTrace();
-        }
-
+        handleMessage(message);
     }
 
     @Override
     public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
         Message message = event.getMessage();
-
+        handleMessage(message);
+    }
+    
+    private void handleMessage(Message message) {
         if (!message.getAttachments().isEmpty()) {
             FileProcessor.ocrImages(message);
             return;
@@ -98,7 +70,6 @@ public class MessageListener extends ListenerAdapter {
             message.addReaction(Speaker.Reaction.FAILURE).queue();
             e.printStackTrace();
         }
-
-    }    
+    }
     
 }
