@@ -31,5 +31,4 @@
 	</entry>
 	<entry key="INIT">Verbindung hergestellt! Höre auf Befehle mit Prefix </entry>
 	<entry key="BYE_MSG">Ich bin jetzt offline - komme sobald wie möglich zurück.</entry>
-	<entry key="INFO">Ein kleiner Bot der Euch hilft euch besser zu organisieren!</entry>
 </properties>
