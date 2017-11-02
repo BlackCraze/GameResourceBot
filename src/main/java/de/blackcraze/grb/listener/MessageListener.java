@@ -25,7 +25,7 @@ public class MessageListener extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         Message message = event.getMessage();
-        String listeningChannel = BotConfig.getConfig().CHANNEL;
+        String listeningChannel = BotConfig.getConfig(message.getGuild()).CHANNEL;
         String messageChannel = message.getTextChannel().getName();
         if (!listeningChannel.equalsIgnoreCase(messageChannel)) {
             return;

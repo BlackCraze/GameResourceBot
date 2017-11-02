@@ -13,7 +13,7 @@ public class BotConfig {
     public static final String USE_SSL = getEnv("USE_SSL", "");
     public static final String TESS_DATA = getEnv("TESS_DATA", "./tessdata");
 
-    private static Map<String, ServerConfig> servers = new HashMap<>();
+    private static Map<Guild, ServerConfig> servers = new HashMap<>();
 
     public static class ServerConfig {
         public String PREFIX = getEnv("PREFIX", "bot");
@@ -28,10 +28,10 @@ public class BotConfig {
         return envValue.orElse(defaultValue);
     }
 
-    public static ServerConfig getConfig() {
-        if (!servers.containsKey("oneGuildsName")) {
-            servers.put("oneGuildsName", new ServerConfig());
+    public static ServerConfig getConfig(Guild guild) {
+        if (!servers.containsKey(guild)) {
+            servers.put(guild, new ServerConfig());
         }
-        return servers.get("oneGuildsName");
+        return servers.get(guild);
     }
 }
