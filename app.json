@@ -1,7 +1,7 @@
 {
-  "name": "RessourceBot",
-  "description": "A Ressource Management Tool for Guilds",
-  "keywords": ["deeptown", "ressource management", "guild"],
+  "name": "ResourceBot",
+  "description": "A Resource Management Tool for Guilds",
+  "keywords": ["deeptown", "resource management", "guild"],
   "repository": "https://github.com/BlackCraze/GameResourceBot",
   "addons": [
     {
@@ -10,27 +10,27 @@
   ],  
   "env": {
     "GRB_DISCORD_TOKEN": {
-      "description": "This is the 'secret' from you 'App Bot User' you copied before.",
+      "description": "This is the 'Token' you copied from 'App Bot User'.",
       "value": "",
       "required": "true"
     },    
     "CHANNEL": {
-      "description": "The channel the bot will listen to on your discord server",
-      "value": "GuildRessourceBot",
+      "description": "The channel the bot will listen to on your Discord server.",
+      "value": "GuildResourceBot",
       "required": "false"
     },
     "LANGUAGE": {
-      "description": "Language for the ressources, currenlty 'en' or 'de' are valid values.",
+      "description": "Language for the resources ... Valid values: de, en",
       "value": "en",
       "required": "false"
     },
     "OCR_RESULT": {
-      "description": "If set to 'on' the bot will say tell you the result of the OCR",
+      "description": "If set to 'on', the bot will display the results of the OCR.",
       "value": "on",
       "required": "false"
     },
     "DELETE_PICTURE_MESSAGE": {
-      "description": "If set to 'on' the bot will delete the message with pictures right after it has scanned it",
+      "description": "If set to 'on', the bot will delete screenshots immediately after processing them.",
       "value": "off",
       "required": "false"
     },

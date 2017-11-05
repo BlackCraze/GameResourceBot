@@ -2,21 +2,21 @@
 <!DOCTYPE properties SYSTEM
         "http://java.sun.com/dtd/properties.dtd">
 <properties>
-    <entry key="ERROR_UNKNOWN">Uuuuups - found an error - please don't pet! --> "%s"</entry>
-    <entry key="RESOURCE_AND_USER_UNKNOWN">I know neither a user nor a resource with that name</entry>
-    <entry key="ALREADY_KNOW">I already know.</entry>
-    <entry key="RESOURCE_UNKNOWN">I don't know this resource =(</entry>
+    <entry key="ERROR_UNKNOWN">Ooooops - Found an error - Please don't hit me! --> "%s"</entry>
+    <entry key="RESOURCE_AND_USER_UNKNOWN">I know neither a user nor a resource with that name.</entry>
+    <entry key="ALREADY_KNOW">I already know about that.</entry>
+    <entry key="RESOURCE_UNKNOWN">I don't know this resource. =(</entry>
     <entry key="USERS_LIST_HEADER">Guild members</entry>
     <entry key="OLDEST_STOCK">Age</entry>
     <entry key="USER">User</entry>
     <entry key="POPULATED">Populated</entry>
     <entry key="DO_NOT_KNOW_ABOUT">I do not know anything about this: %s</entry>
-    <entry key="RESOURCES_EMPTY">There is nothing here! Why don't you consider updating your resources!</entry>
+    <entry key="RESOURCES_EMPTY">There is nothing here! Why don't you consider updating your resources?</entry>
     <entry key="PONG">Pong!</entry>
-    <entry key="NO_DATA">Sorry, nothing to see here :-(</entry>
+    <entry key="NO_DATA">Sorry, nothing to see here. :-(</entry>
     <entry key="USER_UNKNOWN">I do not know this user =(</entry>
     <entry key="RAW_MATERIAL">Material</entry>
-    <entry key="AMOUNT">Amount</entry>
+    <entry key="AMOUNT">On Hand</entry>
     <entry key="UPDATED">Updated</entry>
     <entry key="COMMANDS">Possible commands:</entry>
     <entry key="TOTAL_RESOURCES">Total Guild Resources</entry>
