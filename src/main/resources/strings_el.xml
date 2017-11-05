@@ -12,5 +12,17 @@
     <entry key="USER_UNKNOWN">Δεν ξέρω αυτόν τον χρήστη =(</entry>
     <entry key="RAW_MATERIAL">Υλικό</entry>
     <entry key="AMOUNT">Ποσότητα</entry>
-    <entry key="UPDATED">Το δήλωσε πριν από</entry>
+    <entry key="UPDATED">Το δήλωσε πριν από</entry>    <entry key="COMMANDS">Possible commands:</entry>
+    <entry key="TOTAL_RESOURCES">Total Guild Resources</entry>
+    <entry key="CDS">Αυτό το bot δημιουργήθηκε από τον BlackCraze,με βοήθεια από τον DangerCrow και τον firewaran.
+            Μεταφράσεις από τον ThatGreekGuy.
+            
+	Πηγαίος Κώδικας:
+	https://github.com/BlackCraze/GameResourceBot/
+
+	Το discord μας:
+	https://discord.gg/e77yjxj
+	</entry>
+    <entry key="INIT">Η σύνδεση επιτεύχθη! Ακούω με prefix </entry>
+    <entry key="BYE_MSG">Πρέπει να κλείσω τώρα. Επανέρχομαι σε λίγο!</entry>
 </properties>
