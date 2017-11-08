@@ -32,4 +32,5 @@
     <entry key="INIT">Connection established! Listening with prefix </entry>
     <entry key="BYE_MSG">I will be offline now. Will be back as soon as possible.</entry>
     <entry key="INFO">I am a little bot who helps you coordinate your guild better!</entry>
+    <entry key="PUBLIC_COMMAND_ONLY">this command only work an the guild channel</entry>
 </properties>

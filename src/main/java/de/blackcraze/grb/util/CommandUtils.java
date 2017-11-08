@@ -14,8 +14,9 @@ import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.i18n.Resource;
 import de.blackcraze.grb.model.Device;
 import de.blackcraze.grb.model.entity.Mate;
-import net.dv8tion.jda.core.entities.Channel;
+import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.SelfUser;
 
 public class CommandUtils {
@@ -54,7 +55,7 @@ public class CommandUtils {
         }
         return Optional.of(stockName.toString());
     }
-    
+
     public static Optional<Long> parseAmount(Scanner scanner) {
         if (!scanner.hasNextLong()) {
             return Optional.empty();
@@ -64,7 +65,7 @@ public class CommandUtils {
 
     public static boolean botMentioned(Message message) {
         SelfUser selfUser = message.getJDA().getSelfUser();
-        String prefix = BotConfig.getConfig(message.getGuild()).PREFIX;
+        String prefix = BotConfig.getConfig().PREFIX;
         String messageStartWord = message.getContent().split(" ")[0];
         boolean prefixCheck = prefix.equalsIgnoreCase(messageStartWord);
         boolean mentionCheck = message.isMentioned(selfUser) && !message.mentionsEveryone();
@@ -72,12 +73,21 @@ public class CommandUtils {
     }
 
     public static Optional<Scanner> commandParser(Message message) {
-        if (!botMentioned(message)) {
+        boolean pm = message.getChannelType().equals(ChannelType.PRIVATE);
+        if (!botMentioned(message) && !pm) {
             return Optional.empty();
         }
         Scanner scanner = new Scanner(message.getContent());
-        String botPrefix = scanner.next();
-        System.out.println("Mentioned with prefix: " + botPrefix);
+        if (pm) {
+            // skip the bot prefix if used
+            if (scanner.hasNext(BotConfig.getConfig().PREFIX)) {
+                scanner.next();
+            }
+            System.out.println("Mentioned with prefix: " + "private message");
+        } else {
+            String botPrefix = scanner.next();
+            System.out.println("Mentioned with prefix: " + botPrefix);
+        }
         return Optional.of(scanner);
     }
 
@@ -89,9 +99,8 @@ public class CommandUtils {
     }
 
     public static Locale getResponseLocale(Message message) {
-        Locale channelLocale = getResponseLocale(message.getTextChannel());
-        
-        Mate mate = getMateDao().getOrCreateMate(message.getMember(), channelLocale);
+        Locale channelLocale = getResponseLocale(message.getChannel());
+        Mate mate = getMateDao().getOrCreateMate(message, channelLocale);
         if (mate != null && !StringUtils.isEmpty(mate.getLanguage())) {
             return new Locale(mate.getLanguage());
         }
@@ -99,16 +108,16 @@ public class CommandUtils {
     }
 
     public static Device getMateDevice(Message message) {
-        Locale channelLocale = getResponseLocale(message.getTextChannel());
-        Mate mate = getMateDao().getOrCreateMate(message.getMember(), channelLocale);
+        Locale channelLocale = getResponseLocale(message.getChannel());
+        Mate mate = getMateDao().getOrCreateMate(message, channelLocale);
         return mate.getDevice();
     }
 
-    public static Locale getResponseLocale(Channel channel) {
-    	try {
-    		return new Locale(BotConfig.getConfig(channel.getGuild()).LANGUAGE);
-    	} catch (Exception e) {
-    		return Locale.ENGLISH;
-    	}
+    public static Locale getResponseLocale(MessageChannel channel) {
+        try {
+            return new Locale(BotConfig.getConfig().LANGUAGE);
+        } catch (Exception e) {
+            return Locale.ENGLISH;
+        }
     }
 }
