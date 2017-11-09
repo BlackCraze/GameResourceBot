@@ -31,6 +31,4 @@
 	</entry>
 	<entry key="INIT">Verbindung hergestellt! Höre auf Befehle mit Prefix </entry>
 	<entry key="BYE_MSG">Ich bin jetzt offline - komme sobald wie möglich zurück.</entry>
-	<entry key="INFO">Ein kleiner Bot der euch hilft euch besser zu organisieren!</entry>
-	<entry key="PUBLIC_COMMAND_ONLY">Dieser Befehl funktioniert nur auf dem Gilden-Kanal</entry>
 </properties>

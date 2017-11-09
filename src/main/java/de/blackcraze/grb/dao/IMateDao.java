@@ -6,11 +6,13 @@ import java.util.Map;
 import java.util.Optional;
 
 import de.blackcraze.grb.model.entity.Mate;
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.Member;
 
 public interface IMateDao extends IBaseDao<Mate> {
 
     void save(Mate mate);
+    
+    void delete(Mate mate);
 
     Optional<Mate> findByDiscord(String discordID);
 
@@ -19,10 +21,10 @@ public interface IMateDao extends IBaseDao<Mate> {
     List<Mate> findAll();
 
     List<Mate> findByNameLike(String name);
+    
+    List<Mate> findByName(String name);    
 
-    List<Mate> findByName(String name);
-
-    Mate getOrCreateMate(Message message, Locale defaultLocale);
+    Mate getOrCreateMate(Member member, Locale defaultLocale);
 
     List<List<String>> listOrderByOldestStock();
 

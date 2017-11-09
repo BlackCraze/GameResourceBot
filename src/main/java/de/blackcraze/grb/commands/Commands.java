@@ -3,6 +3,7 @@ package de.blackcraze.grb.commands;
 import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
 import static de.blackcraze.grb.util.CommandUtils.parseStockName;
 import static de.blackcraze.grb.util.CommandUtils.parseStocks;
+import static de.blackcraze.grb.util.CommandUtils.parseParameters;
 import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
 import static de.blackcraze.grb.util.InjectorUtils.getStockDao;
 import static de.blackcraze.grb.util.InjectorUtils.getStockTypeDao;
@@ -48,29 +49,25 @@ import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.StockType;
 import de.blackcraze.grb.util.PrintUtils;
 import de.blackcraze.grb.util.wagu.Block;
-import net.dv8tion.jda.core.entities.ChannelType;
+import jdk.internal.joptsimple.internal.Strings;
 import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.MessageChannel;
+import net.dv8tion.jda.core.entities.TextChannel;
 
 public final class Commands {
 
     private Commands() {
     }
 
-    public static void info(Scanner scanner, Message message) {
-        Speaker.say(message.getChannel(), Resource.getString("INFO", getResponseLocale(message)));
-    }
-
     public static void ping(Scanner scanner, Message message) {
-        Speaker.say(message.getChannel(), Resource.getString("PONG", getResponseLocale(message)));
+        Speaker.say(message.getTextChannel(), Resource.getString("PONG", getResponseLocale(message)));
     }
 
     public static void credits(Scanner scanner, Message message) {
-        Speaker.say(message.getChannel(), Resource.getString("CDS", getResponseLocale(message)));
+        Speaker.say(message.getTextChannel(), Resource.getString("CDS", getResponseLocale(message)));
     }
 
     public static void userConfig(Scanner scanner, Message message) {
-        Mate mate = getMateDao().getOrCreateMate(message, getResponseLocale(message));
+        Mate mate = getMateDao().getOrCreateMate(message.getMember(), getResponseLocale(message));
         if (!scanner.hasNext()) {
             StringBuilder response = new StringBuilder();
             response.append("language: ");
@@ -87,7 +84,7 @@ public final class Commands {
                 }
             }
             response.append("]\n");
-            Speaker.sayCode(message.getChannel(), response.toString());
+            Speaker.sayCode(message.getTextChannel(), response.toString());
             return;
         }
         String config_action = scanner.next();
@@ -123,8 +120,7 @@ public final class Commands {
     }
 
     public static void config(Scanner scanner, Message message) {
-        checkPublic(message);
-        BotConfig.ServerConfig instance = BotConfig.getConfig();
+        BotConfig.ServerConfig instance = BotConfig.getConfig(message.getGuild());
         if (!scanner.hasNext()) {
             StringBuilder response = new StringBuilder();
             Field[] fields = BotConfig.ServerConfig.class.getDeclaredFields();
@@ -142,7 +138,7 @@ public final class Commands {
                 response.append(value.toString());
                 response.append("\n");
             }
-            Speaker.sayCode(message.getChannel(), response.toString());
+            Speaker.sayCode(message.getTextChannel(), response.toString());
             return;
         }
         String config_action = scanner.next();
@@ -165,17 +161,7 @@ public final class Commands {
         }
     }
 
-    private static void checkPublic(Message message) {
-        if (!ChannelType.TEXT.equals(message.getChannelType())) {
-            message.addReaction(Speaker.Reaction.FAILURE).queue();
-            Speaker.say(message.getChannel(), Resource.getString("PUBLIC_COMMAND_ONLY", getResponseLocale(message)));
-            throw new IllegalStateException("public command only");
-            // TODO MORE SOLID IMPLEMENTATION
-        }
-    }
-
     public static void shutdown(Scanner scanner, Message message) {
-        checkPublic(message);
         System.exit(1);
     }
 
@@ -195,7 +181,7 @@ public final class Commands {
         } catch (UnsatisfiedLinkError e) {
             buffer.append("no physical Data Available");
         }
-        Speaker.sayCode(message.getChannel(), buffer.toString());
+        Speaker.sayCode(message.getTextChannel(), buffer.toString());
     }
 
     public static void status(Scanner scanner, Message message) {
@@ -210,7 +196,7 @@ public final class Commands {
             buffer.append("\tCOMMITED: ").append(FileUtils.byteCountToDisplaySize(usage.getCommitted())).append("\n");
             buffer.append("\tMAX:      ").append(FileUtils.byteCountToDisplaySize(usage.getMax())).append("\n");
         }
-        Speaker.sayCode(message.getChannel(), buffer.toString());
+        Speaker.sayCode(message.getTextChannel(), buffer.toString());
     }
 
     /**
@@ -254,83 +240,73 @@ public final class Commands {
     }
 
     public static void users(Scanner scanner, Message message) {
-        List<Mate> mates = null;
-
-        // Check if users has additional arguments
-        if (scanner.hasNext()) {
-            String action = scanner.next();
-            switch (action) {
-            case "delete":
-                checkPublic(message);
-                String memberName = scanner.next();
-                mates = getMateDao().findByName(memberName);
-                if (!mates.isEmpty()) {
-                    // Finally delete the member.
-                    for (Mate mate : mates) {
-                        getMateDao().delete(mate);
-                    }
-                    message.addReaction(Speaker.Reaction.SUCCESS).queue();
-                } else {
-                    // No Mate with given name.
-                    message.addReaction(Speaker.Reaction.FAILURE).queue();
-                }
-                break;
-            default:
-                // Wrong argument!
-                message.addReaction(Speaker.Reaction.FAILURE).queue();
-                break;
-            }
-        } else {
-            // List Users
-
-            List<List<String>> rows = getMateDao().listOrderByOldestStock();
-            Locale locale = getResponseLocale(message);
-            PrintableTable table = new PrintableTable(Resource.getString("USERS_LIST_HEADER", locale),
-                    Collections.emptyList(),
-                    Arrays.asList(Resource.getString("USER", locale), Resource.getString("POPULATED", locale),
-                            Resource.getString("OLDEST_STOCK", locale)),
-                    rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT, Block.DATA_MIDDLE_RIGHT));
-            Speaker.sayCode(message.getChannel(), PrintUtils.prettyPrint(table));
-        }
+    	List<Mate> mates = null;
+    	
+    	// Check if users has additional arguments
+    	if (scanner.hasNext()) {
+    		String action = scanner.next();
+    		System.out.println("action:" + action);
+			switch (action) {
+				case "delete":
+					String memberName = scanner.next();
+					System.out.println("want to delete a member: " + memberName);					
+					mates = getMateDao().findByName(memberName);
+					if (!mates.isEmpty()) {
+						System.out.println("Member found");
+						// Finally delete the member.
+						for (Mate mate : mates) {
+							getMateDao().delete(mate);
+						}        	
+						message.addReaction(Speaker.Reaction.SUCCESS).queue();				
+					} else {
+						System.out.println("member not there :(.");
+						// No Mate with given name.
+						message.addReaction(Speaker.Reaction.FAILURE).queue();
+					}			
+					break;
+				default:
+					System.out.println("no idea what he wants.");
+					// Wrong argument!
+					message.addReaction(Speaker.Reaction.FAILURE).queue();			
+					break;
+			}
+    	} else {
+    		// List Users
+        List<List<String>> rows = getMateDao().listOrderByOldestStock();
+        Locale locale = getResponseLocale(message);
+        PrintableTable table = new PrintableTable(Resource.getString("USERS_LIST_HEADER", locale),
+                Collections.emptyList(),
+                Arrays.asList(Resource.getString("USER", locale), Resource.getString("POPULATED", locale),
+                        Resource.getString("OLDEST_STOCK", locale)),
+                rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT, Block.DATA_MIDDLE_RIGHT));
+        Speaker.sayCode(message.getTextChannel(), PrintUtils.prettyPrint(table));
+    }
     }
 
     public static void clear(Scanner scanner, Message message) {
         Optional<String> mateOrStockOptional = parseStockName(scanner);
         List<Mate> mates = null;
         String clearReaction = Speaker.Reaction.FAILURE;
-        String mateOrStock = null;
+        String MemberName = null;
 
-        final Locale locale = getResponseLocale(message);
-        Mate mate = getMateDao().getOrCreateMate(message, locale);
         if (!mateOrStockOptional.isPresent()) {
             // if no member was selected assume the user of the message.
-            mates = Collections.singletonList(mate);
+            mates = getMateDao().findByName(message.getMember().getNickname());
         } else {
-            mateOrStock = mateOrStockOptional.get();
-            if ("all".equalsIgnoreCase(mateOrStock)) {
-                checkPublic(message);
+            MemberName = mateOrStockOptional.get();
+            if ("all".equalsIgnoreCase(MemberName)) {
                 // select guild members
                 mates = getMateDao().findByNameLike("%");
             } else {
                 // select only given member with exact matching name.
-                mates = getMateDao().findByName(mateOrStock);
-                if (!mates.isEmpty()) {
-                    checkPublic(message);
-                }
+                mates = getMateDao().findByName(MemberName);
             }
         }
         // Delete the stocks from defined members.
-        // otherwise try the parameter as an Item.
         if (!mates.isEmpty()) {
-            for (Mate aMate : mates) {
-                getStockDao().deleteAll(aMate);
+            for (Mate mate : mates) {
+                getStockDao().deleteAll(mate);
             }
-            clearReaction = Speaker.Reaction.SUCCESS;
-        } else {
-            String stockIdentifier = Resource.getItemKey(mateOrStock, locale);
-            Optional<StockType> stockType = getStockTypeDao().findByKey(stockIdentifier);
-            // Try to delete the given name from stocks of current user.
-            getStockDao().delete(mate, stockType.get());
             clearReaction = Speaker.Reaction.SUCCESS;
         }
         // Always response to a bot request.
@@ -345,7 +321,7 @@ public final class Commands {
 
     static void internalUpdate(Message message, Locale responseLocale, Map<String, Long> stocks) {
         try {
-            Mate mate = getMateDao().getOrCreateMate(message, getResponseLocale(message));
+            Mate mate = getMateDao().getOrCreateMate(message.getMember(), getResponseLocale(message));
             List<String> unknownStocks = getMateDao().updateStocks(mate, stocks);
             if (stocks.size() > 0) {
                 if (!unknownStocks.isEmpty()) {
@@ -370,28 +346,28 @@ public final class Commands {
         Locale locale = getResponseLocale(message);
         List<StockType> stocks = stockNameOptional.isPresent()
                 ? getStockTypeDao().findByNameLike(stockNameOptional.get(), locale) : getStockTypeDao().findAll();
-        Speaker.sayCode(message.getChannel(), prettyPrintStockTypes(stocks, locale));
+        Speaker.sayCode(message.getTextChannel(), prettyPrintStockTypes(stocks, locale));
     }
 
     public static void check(Scanner scanner, Message message) {
         Optional<String> mateOrStockOptional = parseStockName(scanner);
-        MessageChannel channel = message.getChannel();
+        TextChannel textChannel = message.getTextChannel();
         Locale locale = getResponseLocale(message);
         if (!mateOrStockOptional.isPresent()) {
-            Mate mate = getMateDao().getOrCreateMate(message, getResponseLocale(message));
+            Mate mate = getMateDao().getOrCreateMate(message.getMember(), getResponseLocale(message));
             List<Mate> mates = Collections.singletonList(mate);
-            Speaker.sayCode(channel, prettyPrintMate(mates, locale));
+            Speaker.sayCode(textChannel, prettyPrintMate(mates, locale));
         } else {
             List<Mate> mates = getMateDao().findByNameLike(mateOrStockOptional.get());
             if (!mates.isEmpty()) {
-                Speaker.sayCode(channel, prettyPrintMate(mates, locale));
+                Speaker.sayCode(textChannel, prettyPrintMate(mates, locale));
             }
             List<StockType> types = getStockTypeDao().findByNameLike(mateOrStockOptional.get(), locale);
             if (!types.isEmpty()) {
-                Speaker.sayCode(channel, prettyPrintStocks(types, locale));
+                Speaker.sayCode(textChannel, prettyPrintStocks(types, locale));
             }
             if (types.isEmpty() && mates.isEmpty()) {
-                Speaker.say(channel, Resource.getString("RESOURCE_AND_USER_UNKNOWN", locale));
+                Speaker.say(textChannel, Resource.getString("RESOURCE_AND_USER_UNKNOWN", locale));
             }
         }
     }
@@ -400,7 +376,7 @@ public final class Commands {
         Predicate<Method> filter = method -> Modifier.isPublic(method.getModifiers());
         String response = Arrays.stream(Commands.class.getDeclaredMethods()).filter(filter).map(Method::getName)
                 .collect(Collectors.joining("\n"));
-        Speaker.sayCode(message.getChannel(),
+        Speaker.sayCode(message.getTextChannel(),
                 Resource.getString("COMMANDS", getResponseLocale(message)) + "\n" + response);
     }
 
@@ -413,7 +389,7 @@ public final class Commands {
         } else {
             stockTypes = getStockTypeDao().findByNameLike(stockNameOptional.get(), locale);
             if (stockTypes.isEmpty()) {
-                Speaker.say(message.getChannel(), Resource.getString("RESOURCE_UNKNOWN", locale));
+                Speaker.say(message.getTextChannel(), Resource.getString("RESOURCE_UNKNOWN", locale));
                 return;
             }
         }
@@ -431,9 +407,9 @@ public final class Commands {
                     Collections.emptyList(),
                     Arrays.asList(Resource.getString("RAW_MATERIAL", locale), Resource.getString("AMOUNT", locale)),
                     rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT));
-            Speaker.sayCode(message.getChannel(), prettyPrint(total_guild_resources));
+            Speaker.sayCode(message.getTextChannel(), prettyPrint(total_guild_resources));
         } else {
-            Speaker.say(message.getChannel(), Resource.getString("RESOURCES_EMPTY", locale));
+            Speaker.say(message.getTextChannel(), Resource.getString("RESOURCES_EMPTY", locale));
         }
     }
 
