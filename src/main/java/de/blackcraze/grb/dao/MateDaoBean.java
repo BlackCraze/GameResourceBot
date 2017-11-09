@@ -111,9 +111,17 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
                 .setParameter("name", name.toLowerCase()).getResultList();
     }
 
+<<<<<<< HEAD
     @Override
     public Mate getOrCreateMate(Message message, Locale defaultLocale) {
         String discordId = message.getAuthor().getId();
+=======
+    public Mate getOrCreateMate(Member member, Locale defaultLocale) {
+
+        String name = member.getNickname() != null ? member.getNickname() : member.getUser().getName();
+        String discordId = member.getUser().getId();
+
+>>>>>>> refs/heads/master
         Optional<Mate> mateOptional = findByDiscord(discordId);
         String name = message.getAuthor().getName();
         Member member = message.getMember();

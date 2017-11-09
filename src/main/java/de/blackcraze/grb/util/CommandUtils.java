@@ -99,8 +99,13 @@ public class CommandUtils {
     }
 
     public static Locale getResponseLocale(Message message) {
+<<<<<<< HEAD
         Locale channelLocale = getResponseLocale(message.getChannel());
         Mate mate = getMateDao().getOrCreateMate(message, channelLocale);
+=======
+        Locale channelLocale = getResponseLocale(message.getTextChannel());
+        Mate mate = getMateDao().getOrCreateMate(message.getMember(), channelLocale);
+>>>>>>> refs/heads/master
         if (mate != null && !StringUtils.isEmpty(mate.getLanguage())) {
             return new Locale(mate.getLanguage());
         }
@@ -113,11 +118,16 @@ public class CommandUtils {
         return mate.getDevice();
     }
 
+<<<<<<< HEAD
     public static Locale getResponseLocale(MessageChannel channel) {
         try {
             return new Locale(BotConfig.getConfig().LANGUAGE);
         } catch (Exception e) {
             return Locale.ENGLISH;
         }
+=======
+    public static Locale getResponseLocale(Channel channel) {
+        return new Locale(BotConfig.getConfig(channel.getGuild()).LANGUAGE);
+>>>>>>> refs/heads/master
     }
 }
