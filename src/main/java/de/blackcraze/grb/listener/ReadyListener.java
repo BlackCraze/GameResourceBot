@@ -49,8 +49,10 @@ public class ReadyListener extends ListenerAdapter {
 	}
 
 	private void initialise(TextChannel channel) {
-		Speaker.say(channel, Resource.getString("INIT", CommandUtils.getResponseLocale(channel))
-				+ "`" + BotConfig.getConfig().PREFIX + "`");
+		if ("on".equalsIgnoreCase(BotConfig.getConfig().VERBOSE_START_STOP)) {
+			Speaker.say(channel, Resource.getString("INIT", CommandUtils.getResponseLocale(channel))
+					+ "`" + BotConfig.getConfig().PREFIX + "`");
+		}
 	}
 
 	/* Send a goodbye message when the shutting down event is triggered. */
@@ -72,7 +74,9 @@ public class ReadyListener extends ListenerAdapter {
 	}
 	
 	private void goodbyeMessage(TextChannel channel) {
-		Speaker.say(channel, Resource.getString("BYE_MSG", CommandUtils.getResponseLocale(channel))
-				+ "`" + BotConfig.getConfig().PREFIX + "`");
+		if ("on".equalsIgnoreCase(BotConfig.getConfig().VERBOSE_START_STOP)) {
+			Speaker.say(channel, Resource.getString("BYE_MSG", CommandUtils.getResponseLocale(channel))
+					+ "`" + BotConfig.getConfig().PREFIX + "`");
+		}
 	}	
 }
