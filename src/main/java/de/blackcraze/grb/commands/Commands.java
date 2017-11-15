@@ -1,11 +1,13 @@
 package de.blackcraze.grb.commands;
 
 import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
+import static de.blackcraze.grb.util.CommandUtils.parseGroupName;
 import static de.blackcraze.grb.util.CommandUtils.parseStockName;
 import static de.blackcraze.grb.util.CommandUtils.parseStocks;
 import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
 import static de.blackcraze.grb.util.InjectorUtils.getStockDao;
 import static de.blackcraze.grb.util.InjectorUtils.getStockTypeDao;
+import static de.blackcraze.grb.util.InjectorUtils.getStockTypeGroupDao;
 import static de.blackcraze.grb.util.PrintUtils.prettyPrint;
 import static de.blackcraze.grb.util.PrintUtils.prettyPrintMate;
 import static de.blackcraze.grb.util.PrintUtils.prettyPrintStockTypes;
@@ -46,6 +48,7 @@ import de.blackcraze.grb.model.Device;
 import de.blackcraze.grb.model.PrintableTable;
 import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.StockType;
+import de.blackcraze.grb.model.entity.StockTypeGroup;
 import de.blackcraze.grb.util.PrintUtils;
 import de.blackcraze.grb.util.wagu.Block;
 import net.dv8tion.jda.core.entities.ChannelType;
@@ -371,6 +374,114 @@ public final class Commands {
         List<StockType> stocks = stockNameOptional.isPresent()
                 ? getStockTypeDao().findByNameLike(stockNameOptional.get(), locale) : getStockTypeDao().findAll();
         Speaker.sayCode(message.getChannel(), prettyPrintStockTypes(stocks, locale));
+    }
+
+    public static void group(Scanner scanner, Message message) {
+        // create the user if it does not exist - prevent users to directly
+        // message the bot that are not in the guild channel
+        getMateDao().getOrCreateMate(message, getResponseLocale(message));
+        if (scanner.hasNext()) {
+            String subCommand = scanner.next();
+            switch (subCommand) {
+            case "create":
+                groupCreate(scanner, message);
+                break;
+            case "add":
+                groupAdd(scanner, message);
+                break;
+            case "delete":
+                groupDelete(scanner, message);
+                break;
+            case "list":
+                groupList(scanner, message);
+                break;
+            default:
+                Speaker.err(message, Resource.getString("GROUP_SUBCOMMAND_UNKNOWN", getResponseLocale(message)));
+                break;
+            }
+        } else {
+            groupList(scanner, message);
+        }
+    }
+
+    private static void groupCreate(Scanner scanner, Message message) {
+        List<String> groupNames = parseGroupName(scanner);
+        List<String> inUse = new ArrayList<>();
+        for (String groupName : groupNames) {
+            Optional<StockTypeGroup> groupOpt = getStockTypeGroupDao().findByName(groupName);
+            if (groupOpt.isPresent()) {
+                inUse.add(groupName);
+            } else {
+                StockTypeGroup group = new StockTypeGroup();
+                group.setName(groupName);
+                getStockTypeGroupDao().save(group);
+                message.addReaction(Speaker.Reaction.SUCCESS).queue();
+            }
+        }
+        if (groupNames.isEmpty()) {
+            Speaker.err(message, Resource.getString("GROUP_CREATE_UNKNOWN", getResponseLocale(message)));
+        }
+        if (!inUse.isEmpty()) {
+            String msg = String.format(Resource.getString("GROUP_CREATE_IN_USE", getResponseLocale(message)),
+                    inUse.toString());
+            Speaker.err(message, msg);
+        }
+    }
+
+    private static void groupAdd(Scanner scanner, Message message) {
+        if (scanner.hasNext()) {
+            Speaker.err(message, "not yet implemented =(");
+        } else {
+            Speaker.err(message, Resource.getString("GROUP_ADD_UNKNOWN", getResponseLocale(message)));
+        }
+    }
+
+    private static void groupDelete(Scanner scanner, Message message) {
+        List<String> groupNames = parseGroupName(scanner);
+        List<String> unknown = new ArrayList<>();
+        for (String groupName : groupNames) {
+            Optional<StockTypeGroup> group = getStockTypeGroupDao().findByName(groupName);
+            if (group.isPresent()) {
+                getStockTypeGroupDao().delete(group.get());
+                message.addReaction(Speaker.Reaction.SUCCESS).queue();
+            } else {
+                unknown.add(groupName);
+            }
+        }
+        if (groupNames.isEmpty()) {
+            Speaker.err(message, Resource.getString("GROUP_DELETE_UNKNOWN", getResponseLocale(message)));
+        }
+        if (!unknown.isEmpty()) {
+            String msg = String.format(Resource.getString("GROUP_DELETE_UNKNOWN", getResponseLocale(message)),
+                    unknown.toString());
+            Speaker.err(message, msg);
+        }
+    }
+
+    private static void groupList(Scanner scanner, Message message) {
+        List<String> groupNames = parseGroupName(scanner);
+        List<StockTypeGroup> types = Collections.emptyList();
+        if (groupNames.isEmpty()) {
+            types = getStockTypeGroupDao().findAll();
+        } else {
+            types = getStockTypeGroupDao().findByNameLike(groupNames);
+        }
+        List<List<String>> rows = new ArrayList<>();
+        for (StockTypeGroup stockTypeGroup : types) {
+            String amount = String.format("%,d",
+                    stockTypeGroup.getTypes() != null ? stockTypeGroup.getTypes().size() : 0);
+            rows.add(Arrays.asList(stockTypeGroup.getName(), amount));
+        }
+        if (rows.isEmpty()) {
+            rows.add(Arrays.asList(" ", " "));
+        }
+        Locale locale = getResponseLocale(message);
+        List<String> titles = Arrays.asList(Resource.getString("NAME", locale), Resource.getString("AMOUNT", locale));
+        String header = Resource.getString("GROUP_LIST_HEADER", locale);
+        List<Integer> aligns = Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_BOTTOM_RIGHT);
+        List<String> footer = Collections.emptyList();
+        PrintableTable table = new PrintableTable(header, footer, titles, rows, aligns);
+        Speaker.sayCode(message.getChannel(), PrintUtils.prettyPrint(table));
     }
 
     public static void check(Scanner scanner, Message message) {
