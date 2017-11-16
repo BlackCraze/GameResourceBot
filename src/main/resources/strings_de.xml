@@ -33,4 +33,15 @@
 	<entry key="BYE_MSG">Ich bin jetzt offline - komme sobald wie möglich zurück.</entry>
 	<entry key="INFO">Ein kleiner Bot der euch hilft euch besser zu organisieren!</entry>
 	<entry key="PUBLIC_COMMAND_ONLY">Dieser Befehl funktioniert nur auf dem Gilden-Kanal</entry>
+	<entry key="NAME">Name</entry>
+	<entry key="GROUP_LIST_HEADER">Liste der Ressigruppen</entry>
+	<entry key="GROUP_SUBCOMMAND_UNKNOWN">Unbekannter Unterbefehl - [create, add, delete, list (Standard)]</entry>
+		<entry key="GROUP_EMPTY">Diese Ressigruppe ist leer. So kannst du Rohstoffe hinzufügen:
+	`group add %s [rohstoff] "[rohstoff mit leerzeichen]" ...`</entry>
+	<entry key="GROUP_UNKNOWN">Diese Ressigruppe kenne ich nicht: %s</entry>
+	<entry key="GROUP_UNKNOWN_TYPE">Diesen Rohstoff kenne ich nicht: %s</entry>
+	<entry key="GROUP_CREATE_IN_USE">Diese Ressigruppe gibt es schon: %s</entry>
+	<entry key="GROUP_CREATE_UNKNOWN">Du musst mir schon einen Namen nennen ;-)</entry>
+	<entry key="GROUP_ADD_UNKNOWN">Nenne mir den Namen der Ressigruppe und die Namen der Rohstoffe, die du hinzufügen möchtest.</entry>
+	<entry key="GROUP_REMOVE_UNKNOWN">Nenne mir den Namen der Ressigruppe und die Namen der Rohstoffe, die du entfernen möchtest.</entry>
 </properties>

@@ -2,7 +2,9 @@ package de.blackcraze.grb.util;
 
 import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
@@ -41,6 +43,14 @@ public class CommandUtils {
             }
         }
         return stocks;
+    }
+
+    public static List<String> parseGroupName(Scanner scanner) {
+        List<String> result = new ArrayList<>();
+        while (scanner.hasNext()) {
+            result.add(scanner.next());
+        }
+        return result;
     }
 
     public static Optional<String> parseStockName(Scanner scanner) {
