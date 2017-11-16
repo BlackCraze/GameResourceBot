@@ -36,8 +36,12 @@
     <entry key="NAME">Name</entry>
 	<entry key="GROUP_LIST_HEADER">List of resource groups</entry>
 	<entry key="GROUP_SUBCOMMAND_UNKNOWN">unknown sub command [create, add, delete, list (Standard)]</entry>
-	<entry key="GROUP_DELETE_UNKNOWN">I do not know this resource group: %s</entry>
+	<entry key="GROUP_EMPTY">This resource group is empty. Please add some materials to it like that:
+	`group add %s [material] "[material with spaces in name]" ...`</entry>
+	<entry key="GROUP_UNKNOWN">I do not know this resource group: %s</entry>
+	<entry key="GROUP_UNKNOWN_TYPE">I do not know this material: %s</entry>
 	<entry key="GROUP_CREATE_IN_USE">There is allready such a resource group: %s</entry>
 	<entry key="GROUP_CREATE_UNKNOWN">You have to name it ;-)</entry>
 	<entry key="GROUP_ADD_UNKNOWN">Tell me the name of the group and the name of the resources to add</entry>
+	<entry key="GROUP_REMOVE_UNKNOWN">Tell me the name of the group and the name of the resources to remove</entry>
 </properties>
