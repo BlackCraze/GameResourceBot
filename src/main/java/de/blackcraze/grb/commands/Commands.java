@@ -29,6 +29,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -444,9 +445,13 @@ public final class Commands {
             if (!stockTypes.isEmpty()) {
                 List<StockType> types = group.getTypes();
                 if (types == null) {
-                    group.setTypes(new ArrayList<>());
+                    types = new ArrayList<>();
+                    group.setTypes(types);
                 }
-                group.getTypes().addAll(stockTypes);
+                types.addAll(stockTypes);
+                // removing doubles
+                types = new ArrayList<>(new HashSet<>(types));
+                group.setTypes(types);
                 getStockTypeGroupDao().update(group);
                 message.addReaction(Speaker.Reaction.SUCCESS).queue();
             }
