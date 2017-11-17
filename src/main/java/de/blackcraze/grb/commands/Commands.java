@@ -29,6 +29,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -51,6 +52,7 @@ import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.StockType;
 import de.blackcraze.grb.model.entity.StockTypeGroup;
 import de.blackcraze.grb.util.PrintUtils;
+import de.blackcraze.grb.util.StockTypeComparator;
 import de.blackcraze.grb.util.wagu.Block;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
@@ -373,7 +375,7 @@ public final class Commands {
         Optional<String> stockNameOptional = parseStockName(scanner);
         Locale locale = getResponseLocale(message);
         List<StockType> stocks = stockNameOptional.isPresent()
-                ? getStockTypeDao().findByNameLike(stockNameOptional.get(), locale) : getStockTypeDao().findAll();
+                ? getStockTypeDao().findByNameLike(stockNameOptional.get(), locale) : getStockTypeDao().findAll(locale);
         Speaker.sayCode(message.getChannel(), prettyPrintStockTypes(stocks, locale));
     }
 
@@ -444,9 +446,13 @@ public final class Commands {
             if (!stockTypes.isEmpty()) {
                 List<StockType> types = group.getTypes();
                 if (types == null) {
-                    group.setTypes(new ArrayList<>());
+                    types = new ArrayList<>();
+                    group.setTypes(types);
                 }
-                group.getTypes().addAll(stockTypes);
+                types.addAll(stockTypes);
+                // removing doubles
+                types = new ArrayList<>(new HashSet<>(types));
+                group.setTypes(types);
                 getStockTypeGroupDao().update(group);
                 message.addReaction(Speaker.Reaction.SUCCESS).queue();
             }
@@ -565,6 +571,7 @@ public final class Commands {
         List<List<String>> rows = new ArrayList<>();
         for (StockTypeGroup stockTypeGroup : groups) {
             List<StockType> types = stockTypeGroup.getTypes();
+            Collections.sort(types, new StockTypeComparator(locale));
             String amount = String.format("%,d", types != null ? types.size() : 0);
             rows.add(Arrays.asList(stockTypeGroup.getName(), amount));
             if (types != null) {
@@ -610,6 +617,7 @@ public final class Commands {
             if (groupOpt.isPresent()) {
                 List<StockType> groupTypes = groupOpt.get().getTypes();
                 if (!groupTypes.isEmpty()) {
+                    groupTypes.sort(new StockTypeComparator(locale));
                     Speaker.sayCode(channel, prettyPrintStocks(groupTypes, locale));
                 } else {
                     String msg = String.format(Resource.getString("GROUP_EMPTY", locale), nameOptional.get());
@@ -631,13 +639,13 @@ public final class Commands {
 
     public static void total(Scanner scanner, Message message) {
         Optional<String> nameOptional = parseStockName(scanner);
-        List<StockType> stockTypes;
+        List<StockType> types;
         Locale locale = getResponseLocale(message);
         if (!nameOptional.isPresent()) {
-            stockTypes = getStockTypeDao().findAll();
+            types = getStockTypeDao().findAll(locale);
         } else {
-            stockTypes = getStockTypeDao().findByNameLike(nameOptional.get(), locale);
-            if (stockTypes.isEmpty()) {
+            types = getStockTypeDao().findByNameLike(nameOptional.get(), locale);
+            if (types.isEmpty()) {
                 Optional<StockTypeGroup> groupOpt = getStockTypeGroupDao().findByName(nameOptional.get());
                 if (groupOpt.isPresent()) {
                     if (groupOpt.get().getTypes() == null || groupOpt.get().getTypes().isEmpty()) {
@@ -645,7 +653,8 @@ public final class Commands {
                         Speaker.say(message.getChannel(), msg);
                         return;
                     } else {
-                        stockTypes = groupOpt.get().getTypes();
+                        types = groupOpt.get().getTypes();
+                        types.sort(new StockTypeComparator(locale));
                     }
                 } else {
                     Speaker.say(message.getChannel(), Resource.getString("RESOURCE_UNKNOWN", locale));
@@ -655,7 +664,7 @@ public final class Commands {
         }
 
         List<List<String>> rows = new ArrayList<>();
-        for (StockType stockType : stockTypes) {
+        for (StockType stockType : types) {
             long total = getStockDao().getTotalAmount(stockType);
             if (total > 0) {
                 String localisedStockName = Resource.getItem(stockType.getName(), locale);
