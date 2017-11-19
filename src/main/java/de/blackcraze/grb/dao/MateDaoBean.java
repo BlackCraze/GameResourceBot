@@ -14,12 +14,13 @@ import javax.persistence.NonUniqueResultException;
 
 import org.apache.commons.lang3.StringUtils;
 
-import de.blackcraze.grb.model.Device;
 import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.Stock;
 import de.blackcraze.grb.model.entity.StockType;
 import de.blackcraze.grb.util.PrintUtils;
+import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.entities.Message;
 
 public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
 
@@ -102,21 +103,28 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
         return em.createQuery("from Mate where lower(name) like :name order by name")
                 .setParameter("name", "%" + name.toLowerCase() + "%").getResultList();
     }
-    
+
     @SuppressWarnings("unchecked")
     @Override
     public List<Mate> findByName(String name) {
-    	return em.createQuery("from Mate where lower(name) = :name order by name")
-    			.setParameter("name", name.toLowerCase() ).getResultList();
+        return em.createQuery("from Mate where lower(name) = :name order by name")
+                .setParameter("name", name.toLowerCase()).getResultList();
     }
 
-    public Mate getOrCreateMate(Member member, Locale defaultLocale) {
-
-        String name = member.getNickname() != null ? member.getNickname() : member.getUser().getName();
-        String discordId = member.getUser().getId();
-
+    @Override
+    public Mate getOrCreateMate(Message message, Locale defaultLocale) {
+        String discordId = message.getAuthor().getId();
         Optional<Mate> mateOptional = findByDiscord(discordId);
+        String name = message.getAuthor().getName();
+        Member member = message.getMember();
+        //will not work on private messages
+        if (member != null && member.getNickname() != null) {
+            name = member.getNickname();
+        }
         if (!mateOptional.isPresent()) {
+            if (message.getChannelType().equals(ChannelType.PRIVATE)) {
+                throw new IllegalStateException("unknown user can not automatically be created in private messages");
+            }
             Mate mate = new Mate();
             mate.setDiscordId(discordId);
             mate.setName(name);
@@ -125,9 +133,12 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
             return mate;
         } else {
             Mate mate = mateOptional.get();
-            if (!mate.getName().equals(name)) {
-                mate.setName(name);
-                update(mate);
+            //do not update giuld name by private messages
+            if (!message.getChannelType().equals(ChannelType.PRIVATE)) {
+                if (!mate.getName().equals(name)) {
+                    mate.setName(name);
+                    update(mate);
+                }
             }
             return mate;
         }
