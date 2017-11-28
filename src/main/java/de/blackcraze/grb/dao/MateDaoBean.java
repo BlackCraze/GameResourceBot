@@ -73,7 +73,8 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
                     }
                 }
                 if (!found) {
-                    System.out.printf("Creating new stock %s for player %s%n", stockKey, mate.getName());
+                    System.out.printf("Creating new stock %s for player %s%n", stockKey,
+                            mate.getName());
                     Optional<StockType> type = stockTypeDao.findByKey(stockKey);
                     if (type.isPresent()) {
                         Stock stock = new Stock();
@@ -117,13 +118,14 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
         Optional<Mate> mateOptional = findByDiscord(discordId);
         String name = message.getAuthor().getName();
         Member member = message.getMember();
-        //will not work on private messages
+        // will not work on private messages
         if (member != null && member.getNickname() != null) {
             name = member.getNickname();
         }
         if (!mateOptional.isPresent()) {
             if (message.getChannelType().equals(ChannelType.PRIVATE)) {
-                throw new IllegalStateException("unknown user can not automatically be created in private messages");
+                throw new IllegalStateException(
+                        "unknown user can not automatically be created in private messages");
             }
             Mate mate = new Mate();
             mate.setDiscordId(discordId);
@@ -133,7 +135,7 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
             return mate;
         } else {
             Mate mate = mateOptional.get();
-            //do not update giuld name by private messages
+            // do not update giuld name by private messages
             if (!message.getChannelType().equals(ChannelType.PRIVATE)) {
                 if (!mate.getName().equals(name)) {
                     mate.setName(name);
@@ -145,7 +147,7 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
     }
 
     @Override
-    public List<List<String>> listOrderByOldestStock() {
+    public List<List<String>> listOrderByOldestStock(Locale locale) {
         Date now = new Date();
         List<List<String>> result = new ArrayList<>();
         StringBuilder query = new StringBuilder();
@@ -162,7 +164,7 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
             Date updated = (Date) row[2];
             if (!StringUtils.equals(lastMate, mate)) {
                 String updateS = updated != null ? PrintUtils.getDiffFormatted(updated, now) : "-";
-                String amountS = String.format("%d", amount.intValue());
+                String amountS = String.format(locale, "%d", amount.intValue());
                 result.add(Arrays.asList(mate, amountS, updateS));
                 lastMate = mate;
             }
