@@ -63,6 +63,7 @@ public class FileProcessor {
                 message.delete().queue();
             } catch (Exception e) {
                 Speaker.err(message, "Cant delete messages here :( - " + e.getMessage());
+                /* Why is this message hard-coded in one language? Look for new entry CANT_DELETE_MESSAGES in strings.xml. Translate to other strings files, as needed. /*
             }
         }
     }
