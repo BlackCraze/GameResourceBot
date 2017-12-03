@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM
         "http://java.sun.com/dtd/properties.dtd">
 <properties>
-    <entry key="ERROR_UNKNOWN">Ooooops - I found an error - Please don't hit me! --> "%s"</entry>
+    <entry key="ERROR_UNKNOWN">Ooooops... I found an error. Please don't beat me! --> "%s"</entry>
     <entry key="RESOURCE_AND_USER_UNKNOWN">I know neither a user nor a resource with that name.</entry>
     <entry key="ALREADY_KNOW">I already know about that.</entry>
     <entry key="RESOURCE_UNKNOWN">I don't know this resource. =(</entry>
@@ -20,13 +20,13 @@
     <entry key="UPDATED">Updated</entry>
     <entry key="COMMANDS">Available commands:</entry>
     <entry key="TOTAL_RESOURCES">Total Guild Resources</entry>
-    <entry key="CDS">This bot is a creation of BlackCraze and Dangercrow.
-    Translations by babdab9.
+    <entry key="CDS">This bot was created by BlackCraze, with help from Dangercrow and firewaran.
+    Translations by ThatGreekGuy.
 
 	Codebase:
 	https://github.com/BlackCraze/GameResourceBot/
 
-	discord dev channel:
+	Discord dev channel:
 	https://discord.gg/e77yjxj
 	</entry>
     <entry key="INIT">Connection established! Listening with prefix </entry>
@@ -36,12 +36,12 @@
     <entry key="NAME">Name</entry>
 	<entry key="GROUP_LIST_HEADER">List of resource groups</entry>
 	<entry key="GROUP_SUBCOMMAND_UNKNOWN">unknown sub command [list (default), create, add, remove, delete]</entry>
-		<entry key="GROUP_EMPTY">This resource group is empty. Please add some resources to it, using this syntax:
+	<entry key="GROUP_EMPTY">This resource group is empty. Please add some resources to it, using this syntax:
 	`group add %s [material] "[material with spaces in name]" ...`</entry>
 	<entry key="GROUP_UNKNOWN">I do not know this resource group: %s</entry>
 	<entry key="GROUP_UNKNOWN_TYPE">I do not know this resource: %s</entry>
 	<entry key="GROUP_CREATE_IN_USE">I already have a resource group with this name: %s</entry>
 	<entry key="GROUP_CREATE_UNKNOWN">You have to name it. ;-)</entry>
-	<entry key="GROUP_ADD_UNKNOWN">Tell me the name of the group and the name of the resources to add.</entry>
-	<entry key="GROUP_REMOVE_UNKNOWN">Tell me the name of the group and the name of the resources to remove.</entry>
+	<entry key="GROUP_ADD_UNKNOWN">Tell me the name of the group and the name(s) of the resource(s) to add.</entry>
+	<entry key="GROUP_REMOVE_UNKNOWN">Tell me the name of the group and the name of the resource to remove.</entry>
 </properties>
