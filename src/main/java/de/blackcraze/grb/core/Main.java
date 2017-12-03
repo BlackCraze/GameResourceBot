@@ -16,6 +16,7 @@ public class Main {
 		for (String env_var: BotConfig.REQUIRED_ENV_VARS) {
 			if (Objects.isNull(System.getenv(env_var))) {
 				System.err.printf("Missing environment variable: \"%s\"%n", env_var);
+				// replace hard-coded message with MISSING_ENV_VAR
 				System.exit(1);
 			}
 		}
