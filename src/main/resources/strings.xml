@@ -19,9 +19,9 @@
 	<entry key="NO_DATA">Sorry, nothing to see here. :-(</entry>
 	<entry key="USER_UNKNOWN">I do not know this user. =(</entry>
 	<entry key="CANT_DELETE_MESSAGES">I can't delete messages here. No one gave me permission. :'(</entry>
-	<entry key="PUBLIC_COMMAND_ONLY">This command works only in the guild channel.</entry>
+	// <entry key="PUBLIC_COMMAND_ONLY">This command works only in the guild channel.</entry>
 	// The next line would be better for the message above, but I'm not sure it would work.
-	// 	<entry key="PUBLIC_COMMAND_ONLY">This command works only in the BotConfig.getConfig().CHANNEL channel.</entry>
+	<entry key="PUBLIC_COMMAND_ONLY">This command works only in the BotConfig.getConfig().CHANNEL channel.</entry>
 	<entry key="MISSING_ENV_VAR">Missing environment variable: \"%s\"%n"</entry>
 	<entry key="GROUP_SUBCOMMAND_UNKNOWN">Unknown sub-command [list (default), create, add, remove, delete]</entry>
 	<entry key="GROUP_EMPTY">This resource group is empty. Please add some resources to it, using this syntax:
