@@ -11,7 +11,7 @@
 	<entry key="AMBER_CHARGER">Chargeur en Ambre</entry>
 	<entry key="AMBER_INSULATION">Isolant en Ambre</entry>
 	<entry key="AMETHYST">Améthyste</entry>
-	<entry key="BATTERY">Batterie</entry>
+	<entry key="BATTERY">Pile</entry>
 	<entry key="BOMB">Bombe</entry>
 	<entry key="CARVED_PUMPKIN">Citrouille Sculptée</entry>
 	<entry key="CIRCUIT">Circuits</entry>
@@ -38,6 +38,7 @@
 	<entry key="GRAPE">Raison</entry>
 	<entry key="GRAPE_SEED">Graine de Raisin</entry>
 	<entry key="GRAPHITE">Graphite</entry>
+	<entry key="GREEN_CANDY">Bonbon Vert</entry>
 	<entry key="GREEN_LASER">Laser Vert</entry>
 	<entry key="GUNPOWDER">Poudre à Canon</entry>
 	<entry key="HAIR_COMB">Peigne</entry>
@@ -50,6 +51,7 @@
 	<entry key="LIANA">Liane</entry>
 	<entry key="LIANA_SEED">Graine de Liane</entry>
 	<entry key="LIQUID_NITROGEN">Azote Liquide</entry>
+	<entry key="MAGIC_BOX">Bote Magique
 	<entry key="MAYAN_CALENDAR">Calendrier Maya</entry>
 	<entry key="MOTHERBOARD">Carte Mère</entry>
 	<entry key="NITROGEN">Azote</entry>
@@ -70,6 +72,7 @@
 	<entry key="POLISHED_SAPPHIRE">Saphir Poli</entry>
 	<entry key="POLISHED_TOPAZ">Topaze Poli</entry>
 	<entry key="PUMPKIN">Citrouille</entry>
+	<entry key="RED_CANDY">Bonbon Rouge</entry>
 	<entry key="REFINED_OIL">Pétrole Raffiné</entry>
 	<entry key="RUBBER">Caoutchouc</entry>
 	<entry key="RUBY">Rubie</entry>
@@ -93,4 +96,5 @@
 	<entry key="URANIUM_ROD">Barre d'Uranium</entry>
 	<entry key="WATER">Eau</entry>
 	<entry key="WOOD">Bois</entry>
+	<entry key="YELLOW_CANDY">Bonbon Jaune</entry>
 </properties>
