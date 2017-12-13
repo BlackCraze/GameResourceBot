@@ -93,4 +93,8 @@
     <entry key="DEFECTIVE_PUMPKIN">Defective Pumpkin</entry>
     <entry key="CARVED_PUMPKIN">Carved Pumkin</entry>
     <entry key="COPPER_KNIVE">Copper Knive</entry>
+    <entry key="RED_CANDY">Red Candy</entry>
+    <entry key="YELLOW_CANDY">Yellow Candy</entry>
+    <entry key="GREEN_CANDY">Green Candy</entry>
+    <entry key="MAGIC_BOX">Magic Box</entry>
 </properties>
