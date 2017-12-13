@@ -20,7 +20,7 @@
 	<entry key="USER_UNKNOWN">I do not know this user. =(</entry>
 	<entry key="CANT_DELETE_MESSAGES">I can't delete messages here. No one gave me permission. :'(</entry>
 	<entry key="PUBLIC_COMMAND_ONLY">This command works only in the guild channel.</entry>
-	<!-- The next line would be better for the message above, but I'm not sure it would work.
+	<!-- The next line would be better for the message above, but I don't know how to make it work. Li'l help?
 		<entry key="PUBLIC_COMMAND_ONLY">This command works only in the BotConfig.getConfig().CHANNEL channel.</entry> -->
 	<entry key="MISSING_ENV_VAR">Missing environment variable: \"%s\"%n"</entry>
 	<entry key="GROUP_SUBCOMMAND_UNKNOWN">Unknown sub-command [list (default), create, add, remove, delete]</entry>
