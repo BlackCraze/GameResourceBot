@@ -2,14 +2,14 @@
 <!DOCTYPE properties SYSTEM
 		"http://java.sun.com/dtd/properties.dtd">
 <properties>
-	// informational messages
+	<!-- informational messages -->
 	<entry key="INIT">Connection established! Listening with prefix </entry>
 	<entry key="BYE_MSG">I will be offline now. Will be back as soon as possible.</entry>
 	<entry key="PONG">Pong!</entry>
 	<entry key="INIT_STOCK">Initialising stock types: </entry>
 	<entry key="CREATE_STOCK">Created new stock type: </entry>
 	<entry key="DELETE_STOCK">Deleted obsolete stock type: </entry>
-	// error messages
+	<!-- error messages -->
 	<entry key="ERROR_UNKNOWN">Ooooops... I found an error. Please don't beat me! --> "%s"</entry>
 	<entry key="RESOURCE_AND_USER_UNKNOWN">I know neither a user nor a resource with that name.</entry>
 	<entry key="ALREADY_KNOW">I already know about that.</entry>
@@ -20,8 +20,8 @@
 	<entry key="USER_UNKNOWN">I do not know this user. =(</entry>
 	<entry key="CANT_DELETE_MESSAGES">I can't delete messages here. No one gave me permission. :'(</entry>
 	<entry key="PUBLIC_COMMAND_ONLY">This command works only in the guild channel.</entry>
-	// The next line would be better for the message above, but I'm not sure it would work.
-	//	<entry key="PUBLIC_COMMAND_ONLY">This command works only in the BotConfig.getConfig().CHANNEL channel.</entry>
+	<!-- The next line would be better for the message above, but I'm not sure it would work.
+		<entry key="PUBLIC_COMMAND_ONLY">This command works only in the BotConfig.getConfig().CHANNEL channel.</entry> -->
 	<entry key="MISSING_ENV_VAR">Missing environment variable: \"%s\"%n"</entry>
 	<entry key="GROUP_SUBCOMMAND_UNKNOWN">Unknown sub-command [list (default), create, add, remove, delete]</entry>
 	<entry key="GROUP_EMPTY">This resource group is empty. Please add some resources to it, using this syntax:
@@ -32,7 +32,7 @@
 	<entry key="GROUP_CREATE_UNKNOWN">You have to name it. ;-)</entry>
 	<entry key="GROUP_ADD_UNKNOWN">Tell me the name of the group and the name(s) of the resource(s) to add.</entry>
 	<entry key="GROUP_REMOVE_UNKNOWN">Tell me the name of the group and the name of the resource to remove.</entry>
-	// report headers
+	<!-- report headers -->
 	<entry key="USERS_LIST_HEADER">Guild members</entry>
 	<entry key="OLDEST_STOCK">Age</entry>
 	<entry key="USER">User</entry>
@@ -44,7 +44,7 @@
 	<entry key="NAME">Name</entry>
 	<entry key="GROUP_LIST_HEADER">List of resource groups</entry>
 	<entry key="COMMANDS">Available commands:</entry>
-	// bot info and credits
+	<!-- bot info and credits -->
 	<entry key="INFO">I am a little bot who helps you coordinate your guild better!</entry>
 	<entry key="CDS">This bot was created by BlackCraze, with help from Dangercrow and firewaran.
 	Translations by ThatGreekGuy.
