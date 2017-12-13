@@ -93,4 +93,8 @@
     <entry key="DEFECTIVE_PUMPKIN">Beschädigter Kürbis</entry>
     <entry key="CARVED_PUMPKIN">Geschnitzter Kürbis</entry>
     <entry key="COPPER_KNIVE">Kupfermesser</entry>
+    <entry key="RED_CANDY">Rote Süssigkeit</entry>
+    <entry key="YELLOW_CANDY">Gelbe Süssigkeit</entry>
+    <entry key="GREEN_CANDY">Grüne Süssigkeit</entry>
+    <entry key="MAGIC_BOX">Zauberkiste</entry>
 </properties>

@@ -38,6 +38,7 @@
 	<entry key="GRAPE">Grape</entry>
 	<entry key="GRAPE_SEED">Grape Seed</entry>
 	<entry key="GRAPHITE">Graphite</entry>
+	<entry key="GREEN_CANDY">Green Candy</entry>
 	<entry key="GREEN_LASER">Green Laser</entry>
 	<entry key="GUNPOWDER">Gunpowder</entry>
 	<entry key="HAIR_COMB">Haircomb</entry>
@@ -50,6 +51,7 @@
 	<entry key="LIANA">Liana</entry>
 	<entry key="LIANA_SEED">Liana Seed</entry>
 	<entry key="LIQUID_NITROGEN">Liquid Nitrogen</entry>
+	<entry key="MAGIC_BOX">Magic Box</entry>
 	<entry key="MAYAN_CALENDAR">Maya Calendar</entry>
 	<entry key="MOTHERBOARD">Motherboard</entry>
 	<entry key="NITROGEN">Nitrogen</entry>
@@ -70,6 +72,7 @@
 	<entry key="POLISHED_SAPPHIRE">Polished Sapphire</entry>
 	<entry key="POLISHED_TOPAZ">Polished Topaz</entry>
 	<entry key="PUMPKIN">Pumpkin</entry>
+	<entry key="RED_CANDY">Red Candy</entry>
 	<entry key="REFINED_OIL">Refined Oil</entry>
 	<entry key="RUBBER">Rubber</entry>
 	<entry key="RUBY">Ruby</entry>
@@ -93,4 +96,5 @@
 	<entry key="URANIUM_ROD">Uranium Rod</entry>
 	<entry key="WATER">Water</entry>
 	<entry key="WOOD">Tree</entry>
+	<entry key="YELLOW_CANDY">Yellow Candy</entry>
 </properties>

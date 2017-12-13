@@ -591,10 +591,10 @@ public final class Commands {
         List<List<String>> rows = new ArrayList<>();
         for (StockTypeGroup stockTypeGroup : groups) {
             List<StockType> types = stockTypeGroup.getTypes();
-            Collections.sort(types, new StockTypeComparator(locale));
             String amount = String.format(locale, "%,d", types != null ? types.size() : 0);
             rows.add(Arrays.asList(stockTypeGroup.getName(), amount));
             if (types != null) {
+                Collections.sort(types, new StockTypeComparator(locale));
                 for (Iterator<StockType> it2 = types.iterator(); it2.hasNext();) {
                     StockType stockType = it2.next();
                     String localisedStockName = Resource.getItem(stockType.getName(), locale);
