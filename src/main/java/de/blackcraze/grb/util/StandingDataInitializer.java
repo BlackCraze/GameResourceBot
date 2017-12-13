@@ -30,7 +30,7 @@ public class StandingDataInitializer {
             reader = new InputStreamReader(new BOMInputStream(resource), "UTF-8");
             parser = new CSVParser(reader, CSVFormat.EXCEL.withHeader());
             List<CSVRecord> records = parser.getRecords();
-            System.out.println("initializing stock types: " + records.size());
+            System.out.println("initializing stock types: " + records.size()); //replace hard-coded message with INIT_STOCK
             List<StockType> stocks = getStockTypeDao().findAll(new Locale(BotConfig.getConfig().LANGUAGE));
 
             for (CSVRecord record : records) {
@@ -48,7 +48,7 @@ public class StandingDataInitializer {
                 type.setName(name);
                 type.setPrice(Long.valueOf(price));
                 getStockTypeDao().save(type);
-                System.out.println("Created new stock type: " + type.getName());
+                System.out.println("Created new stock type: " + type.getName()); //replace hard-coded message with CREATE_STOCK
             }
 
             for (StockType type : stocks) {
@@ -60,7 +60,7 @@ public class StandingDataInitializer {
                     }
                 }
                 if (!found) {
-                    System.out.println("Delete obsoleth stock type: " + type.getName());
+                    System.out.println("Delete obsolete stock type: " + type.getName()); //replace hard-coded message with DELETE_STOCK
                     getStockTypeDao().delete(type);
                 }
             }
