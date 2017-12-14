@@ -24,6 +24,6 @@ public interface IMateDao extends IBaseDao<Mate> {
 
     Mate getOrCreateMate(Message message, Locale defaultLocale);
 
-    List<List<String>> listOrderByOldestStock();
+    List<List<String>> listOrderByOldestStock(Locale locale);
 
 }

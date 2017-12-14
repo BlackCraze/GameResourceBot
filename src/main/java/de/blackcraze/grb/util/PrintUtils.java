@@ -28,8 +28,7 @@ import de.blackcraze.grb.util.wagu.Table;
 
 public final class PrintUtils {
 
-    private PrintUtils() {
-    }
+    private PrintUtils() {}
 
     public static List<String> prettyPrint(PrintableTable... stocks) {
         List<String> returnHandle = new ArrayList<>(stocks.length);
@@ -44,12 +43,13 @@ public final class PrintUtils {
                 header.setDataAlign(Block.DATA_MIDDLE_LEFT);
                 board.setInitialBlock(header);
 
-                Table table = new Table(board, boardWidth, stock.getTitles(), stock.getRows(), stock.getWidths(),
-                        stock.getAligns());
+                Table table = new Table(board, boardWidth, stock.getTitles(), stock.getRows(),
+                        stock.getWidths(), stock.getAligns());
                 board.appendTableTo(0, Board.APPEND_BELOW, table);
 
                 for (int i = 0; i < stock.getFooter().size(); i++) {
-                    Block footer = new Block(board, stock.getWidths().get(i), 1, stock.getFooter().get(i));
+                    Block footer =
+                            new Block(board, stock.getWidths().get(i), 1, stock.getFooter().get(i));
                     footer.setDataAlign(stock.getAligns().get(i));
                     if (i == 0) {
                         header.getMostBelowBlock().setBelowBlock(footer);
@@ -76,7 +76,7 @@ public final class PrintUtils {
                 String localisedStockName = Resource.getItem(entry.getKey(), locale);
                 b.append(localisedStockName);
                 b.append(": ");
-                b.append(String.format("%,d", entry.getValue()));
+                b.append(String.format(locale, "%,d", entry.getValue()));
                 b.append("\n");
             }
         }
@@ -97,13 +97,14 @@ public final class PrintUtils {
         return Arrays.stream(fullTimeAgo.split(" ")).limit(2).collect(Collectors.joining(" "));
     }
 
-    public static List<String> prettyPrintStocks(List<StockType> stockTypes, Locale responseLocale) {
+    public static List<String> prettyPrintStocks(List<StockType> stockTypes, Locale locale) {
         if (stockTypes.isEmpty()) {
-            return Collections.singletonList(Resource.getString("RESOURCE_UNKNOWN", responseLocale));
+            return Collections.singletonList(Resource.getString("RESOURCE_UNKNOWN", locale));
         }
-        List<String> headers = Arrays.asList(Resource.getString("USER", responseLocale),
-                Resource.getString("AMOUNT", responseLocale), Resource.getString("UPDATED", responseLocale));
-        List<Integer> aligns = Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT, Block.DATA_MIDDLE_RIGHT);
+        List<String> headers = Arrays.asList(Resource.getString("USER", locale),
+                Resource.getString("AMOUNT", locale), Resource.getString("UPDATED", locale));
+        List<Integer> aligns = Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT,
+                Block.DATA_MIDDLE_RIGHT);
 
         PrintableTable[] tables = new PrintableTable[stockTypes.size()];
         for (int i = 0; i < stockTypes.size(); i++) {
@@ -116,14 +117,15 @@ public final class PrintUtils {
             }
             for (Stock stock : stocks) {
                 String mateName = stock.getMate().getName();
-                String amount = String.format("%,d", stock.getAmount());
+                String amount = String.format(locale, "%,d", stock.getAmount());
                 String updated = PrintUtils.getDiffFormatted(stock.getUpdated(), new Date());
                 rows.add(Arrays.asList(mateName, amount, updated));
                 sumAmount += stock.getAmount();
             }
             String resourceKey = type.getName();
-            String resourceName = Resource.getItem(resourceKey, responseLocale);
-            List<String> summary = Arrays.asList(resourceName, String.format("%,d", sumAmount), "");
+            String resourceName = Resource.getItem(resourceKey, locale);
+            List<String> summary =
+                    Arrays.asList(resourceName, String.format(locale, "%,d", sumAmount), "");
             tables[i] = new PrintableTable(resourceName, summary, headers, rows, aligns);
         }
         return PrintUtils.prettyPrint(tables);
@@ -143,13 +145,14 @@ public final class PrintUtils {
         return b.toString();
     }
 
-    public static List<String> prettyPrintMate(List<Mate> mates, Locale responseLocale) {
+    public static List<String> prettyPrintMate(List<Mate> mates, Locale locale) {
         if (mates.isEmpty()) {
-            return Collections.singletonList(Resource.getString("USER_UNKNOWN", responseLocale));
+            return Collections.singletonList(Resource.getString("USER_UNKNOWN", locale));
         }
-        List<String> headers = Arrays.asList(Resource.getString("RAW_MATERIAL", responseLocale),
-                Resource.getString("AMOUNT", responseLocale), Resource.getString("UPDATED", responseLocale));
-        List<Integer> aligns = Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT, Block.DATA_MIDDLE_RIGHT);
+        List<String> headers = Arrays.asList(Resource.getString("RAW_MATERIAL", locale),
+                Resource.getString("AMOUNT", locale), Resource.getString("UPDATED", locale));
+        List<Integer> aligns = Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT,
+                Block.DATA_MIDDLE_RIGHT);
 
         PrintableTable[] tables = new PrintableTable[mates.size()];
         for (int i = 0; i < mates.size(); i++) {
@@ -158,15 +161,16 @@ public final class PrintUtils {
             List<List<String>> rows = new ArrayList<>(stocks.size());
             for (Stock stock : stocks) {
                 String resourceKey = stock.getType().getName();
-                String resourceName = Resource.getItem(resourceKey, responseLocale);
-                String amount = String.format("%,d", stock.getAmount());
+                String resourceName = Resource.getItem(resourceKey, locale);
+                String amount = String.format(locale, "%,d", stock.getAmount());
                 String updated = PrintUtils.getDiffFormatted(stock.getUpdated(), new Date());
                 rows.add(Arrays.asList(resourceName, amount, updated));
             }
             if (stocks.isEmpty()) {
                 rows.add(Arrays.asList("-", "-", "-"));
             }
-            tables[i] = new PrintableTable(mate.getName(), Collections.emptyList(), headers, rows, aligns);
+            tables[i] = new PrintableTable(mate.getName(), Collections.emptyList(), headers, rows,
+                    aligns);
         }
         return PrintUtils.prettyPrint(tables);
     }
