@@ -64,7 +64,7 @@
     <entry key="SULPHURIC_ACID">Schwefelsäure</entry>
     <entry key="SILVER">Silber</entry>
     <entry key="SILVER_BAR">Silberbarren</entry>
-    <entry key="SILICON">Silikon</entry>
+    <entry key="SILICON">Silizium</entry>
     <entry key="EMERALD">Smaragd</entry>
     <entry key="EMERALD_RING">Smaragdring</entry>
     <entry key="SOLAR_PANEL">Solaranlage</entry>
@@ -93,4 +93,8 @@
     <entry key="DEFECTIVE_PUMPKIN">Beschädigter Kürbis</entry>
     <entry key="CARVED_PUMPKIN">Geschnitzter Kürbis</entry>
     <entry key="COPPER_KNIVE">Kupfermesser</entry>
+    <entry key="RED_CANDY">Rote Süssigkeit</entry>
+    <entry key="YELLOW_CANDY">Gelbe Süssigkeit</entry>
+    <entry key="GREEN_CANDY">Grüne Süssigkeit</entry>
+    <entry key="MAGIC_BOX">Zauberkiste</entry>
 </properties>

@@ -11,33 +11,36 @@ import javax.persistence.NoResultException;
 
 import de.blackcraze.grb.i18n.Resource;
 import de.blackcraze.grb.model.entity.StockType;
+import de.blackcraze.grb.util.StockTypeComparator;
 
 public class StockTypeDaoBean extends BaseDaoBean<StockType> implements IStockTypeDao {
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<StockType> findAll() {
-		return em.createQuery("from StockType order by name").getResultList();
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<StockType> findAll(Locale locale) {
+        List<StockType> stocks = em.createQuery("from StockType order by name").getResultList();
+        stocks.sort(new StockTypeComparator(locale));
+        return stocks;
+    }
 
-	@Override
-	public Optional<StockType> findByKey(String key) {
-		try {
-			return Optional
-					.of((StockType) em.createQuery("from StockType where lower(name)=:name order by name, id desc")
-							.setParameter("name", key.toLowerCase()).setMaxResults(1).getSingleResult());
-		} catch (NoResultException e) {
-			return Optional.empty();
-		}
-	}
+    @Override
+    public Optional<StockType> findByKey(String key) {
+        try {
+            return Optional
+                    .of((StockType) em.createQuery("from StockType where lower(name)=:name order by name, id desc")
+                            .setParameter("name", key.toLowerCase()).setMaxResults(1).getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+    }
 
-	@Override
-	public List<StockType> findByNameLike(String name, Locale locale) {
-		List<StockType> stocks = getStockTypeDao().findAll();
-		Predicate<StockType> filter = stock -> !Resource.getItem(stock.getName(), locale).toLowerCase()
-				.contains(name.toLowerCase());
-		stocks.removeIf(filter);
-		return stocks;
-	}
+    @Override
+    public List<StockType> findByNameLike(String name, Locale locale) {
+        List<StockType> stocks = getStockTypeDao().findAll(locale);
+        Predicate<StockType> filter = stock -> !Resource.getItem(stock.getName(), locale).toLowerCase()
+                .contains(name.toLowerCase());
+        stocks.removeIf(filter);
+        return stocks;
+    }
 
 }

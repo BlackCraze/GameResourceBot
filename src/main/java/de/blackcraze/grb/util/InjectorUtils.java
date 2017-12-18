@@ -6,6 +6,7 @@ import com.google.inject.Injector;
 import de.blackcraze.grb.dao.IMateDao;
 import de.blackcraze.grb.dao.IStockDao;
 import de.blackcraze.grb.dao.IStockTypeDao;
+import de.blackcraze.grb.dao.IStockTypeGroupDao;
 
 public class InjectorUtils {
 
@@ -24,6 +25,10 @@ public class InjectorUtils {
 
     public static IStockDao getStockDao() {
         return INJECTOR.getInstance(IStockDao.class);
+    }
+
+    public static IStockTypeGroupDao getStockTypeGroupDao() {
+        return INJECTOR.getInstance(IStockTypeGroupDao.class);
     }
 
 }

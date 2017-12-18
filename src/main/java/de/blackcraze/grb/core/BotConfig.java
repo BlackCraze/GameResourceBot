@@ -1,8 +1,6 @@
 package de.blackcraze.grb.core;
 
-import net.dv8tion.jda.core.entities.Guild;
-
-import java.util.*;
+import java.util.Optional;
 
 public class BotConfig {
 
@@ -13,7 +11,7 @@ public class BotConfig {
     public static final String USE_SSL = getEnv("USE_SSL", "");
     public static final String TESS_DATA = getEnv("TESS_DATA", "./tessdata");
 
-    private static Map<Guild, ServerConfig> servers = new HashMap<>();
+    private static ServerConfig config = new ServerConfig();
 
     public static class ServerConfig {
         public String PREFIX = getEnv("PREFIX", "bot");
@@ -28,10 +26,7 @@ public class BotConfig {
         return envValue.orElse(defaultValue);
     }
 
-    public static ServerConfig getConfig(Guild guild) {
-        if (!servers.containsKey(guild)) {
-            servers.put(guild, new ServerConfig());
-        }
-        return servers.get(guild);
+    public static ServerConfig getConfig() {
+        return config;
     }
 }

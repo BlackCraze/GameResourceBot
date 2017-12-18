@@ -1,6 +1,7 @@
 package de.blackcraze.grb.commands;
 
-import static de.blackcraze.grb.util.CommandUtils.*;
+import static de.blackcraze.grb.util.CommandUtils.getMateDevice;
+import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
 import static de.blackcraze.grb.util.PrintUtils.prettyPrint;
 import static org.bytedeco.javacpp.Pointer.deallocateReferences;
 
@@ -13,11 +14,12 @@ import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 
-import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.core.BotConfig;
+import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
 import de.blackcraze.grb.model.Device;
 import de.blackcraze.grb.ocr.OCR;
+import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.Message.Attachment;
 
@@ -39,8 +41,8 @@ public class FileProcessor {
                     Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, locale, device);
 
                     /* decide if the result is printed into the channel */
-                    if ("on".equalsIgnoreCase(BotConfig.getConfig(message.getGuild()).OCR_RESULT)) {
-                        Speaker.sayCode(message.getTextChannel(), prettyPrint(stocks, locale));
+                    if ("on".equalsIgnoreCase(BotConfig.getConfig().OCR_RESULT)) {
+                        Speaker.sayCode(message.getChannel(), prettyPrint(stocks, locale));
                     }
 
                     Commands.internalUpdate(message, locale, stocks);
@@ -55,7 +57,8 @@ public class FileProcessor {
         }
 
         /* try to delete the message containing the upload images */
-        if ("on".equalsIgnoreCase(BotConfig.getConfig(message.getGuild()).DELETE_PICTURE_MESSAGE)) {
+        if ("on".equalsIgnoreCase(BotConfig.getConfig().DELETE_PICTURE_MESSAGE)
+                && message.getChannelType().equals(ChannelType.TEXT)) {
             try {
                 message.delete().queue();
             } catch (Exception e) {
