@@ -4,7 +4,7 @@
 	<entry key="ACCUMULATOR">Accumulateur</entry>
 	<entry key="ALEXANDRITE">Alexandrite</entry>
 	<entry key="ALUMINIUM">Aluminium</entry>
-	<entry key="ALUMINIUM_BAR">Barre d'Aluminium</entry>
+	<entry key="ALUMINIUM_BAR">Lingot d'Aluminium</entry>
 	<entry key="ALUMINIUM_BOTTLE">Bouteille en Aluminium</entry>
 	<entry key="AMBER">Ambre</entry>
 	<entry key="AMBER_BRACELET">Bracelet en Ambre</entry>
@@ -13,6 +13,7 @@
 	<entry key="AMETHYST">Améthyste</entry>
 	<entry key="BATTERY">Pile</entry>
 	<entry key="BOMB">Bombe</entry>
+	<entry key="CANDY_BATCH">Bonbons</entry>
 	<entry key="CARVED_PUMPKIN">Citrouille Sculptée</entry>
 	<entry key="CIRCUIT">Circuits</entry>
 	<entry key="CLEAN_WATER">Eau Propre</entry>
@@ -23,7 +24,7 @@
 	<entry key="COPPER_KNIVE">Couteau en Cuivre</entry>
 	<entry key="COPPER_NAIL">Clou en Cuivre</entry>
 	<entry key="COPPER_WIRE">Câble</entry>
-	<entry key="DEFECTIVE_PUMPKIN">Citrouille Défectueux</entry>
+	<entry key="DEFECTIVE_PUMPKIN">Citrouille Défectueuse</entry>
 	<entry key="DIAMOND">Diamant</entry>
 	<entry key="DIAMOND_CUTTER">Tailleur de Diamant</entry>
 	<entry key="DIETHYL_ETHER">Éther Diéthylique</entry>
@@ -34,7 +35,7 @@
 	<entry key="GLASS">Verre</entry>
 	<entry key="GLASS_FLASK">Flasque de Labo</entry>
 	<entry key="GOLD">Or</entry>
-	<entry key="GOLD_BAR">Barre en Or</entry>
+	<entry key="GOLD_BAR">Lingot en Or</entry>
 	<entry key="GRAPE">Raison</entry>
 	<entry key="GRAPE_SEED">Graine de Raisin</entry>
 	<entry key="GRAPHITE">Graphite</entry>
@@ -46,7 +47,7 @@
 	<entry key="HYDROGEN">Hydrogène</entry>
 	<entry key="INSULATED_WIRE">Câble Isolé</entry>
 	<entry key="IRON">Fer</entry>
-	<entry key="IRON_BAR">Barre de Fer</entry>
+	<entry key="IRON_BAR">Lingot de Fer</entry>
 	<entry key="LAMP">Ampoule</entry>
 	<entry key="LIANA">Liane</entry>
 	<entry key="LIANA_SEED">Graine de Liane</entry>
@@ -61,7 +62,7 @@
 	<entry key="OPTIC_FIBER">Câble en Fibre Optique</entry>
 	<entry key="OXYGEN">Oxygène</entry>
 	<entry key="PLASTIC">Plastique</entry>
-	<entry key="PLATINUM">Platinium</entry>
+	<entry key="PLATINUM">Platine</entry>
 	<entry key="POLISHED_ALEXANDRITE">Alexandrite Polie</entry>
 	<entry key="POLISHED_AMBER">Ambre Polie</entry>
 	<entry key="POLISHED_AMETHYST">Améthyste Polie</entry>
@@ -75,12 +76,13 @@
 	<entry key="RED_CANDY">Bonbon Rouge</entry>
 	<entry key="REFINED_OIL">Pétrole Raffiné</entry>
 	<entry key="RUBBER">Caoutchouc</entry>
-	<entry key="RUBY">Rubie</entry>
+	<entry key="RUBY">Rubis</entry>
 	<entry key="SAPPHIRE">Saphir</entry>
 	<entry key="SEED">Graine</entry>
-	<entry key="SILICON">Silicon</entry>
+	<entry key="SILICON">Silicium</entry>
 	<entry key="SILVER">Argent</entry>
 	<entry key="SILVER_BAR">Lingot d'Argent</entry>
+	<entry key="SOCK_OF_CANDIES">Chaussette Pleine de Bonbons</entry>
 	<entry key="SODIUM">Sodium</entry>
 	<entry key="SOLAR_PANEL">Panneau Solaire</entry>
 	<entry key="SOLID_PROPELLANT">Carburant Solide</entry>
@@ -89,11 +91,14 @@
 	<entry key="SULPHUR">Soufre</entry>
 	<entry key="SULPHURIC_ACID">Acide Sulfurique</entry>
 	<entry key="TITANIUM">Titane</entry>
-	<entry key="TITANIUM_BAR">Barre de Titane</entry>
+	<entry key="TITANIUM_BAR">Lingot de Titane</entry>
 	<entry key="TITANIUM_ORE">Minerai de Titane</entry>
 	<entry key="TOPAZ">Topaze</entry>
 	<entry key="URANIUM">Uranium</entry>
-	<entry key="URANIUM_ROD">Barre d'Uranium</entry>
+	<entry key="URANIUM_ROD">Lingot d'Uranium</entry>
+	<entry key="WINTER_SOCK">Chaussette de Nol</entry>
+	<entry key="WINTERFEST_GLOBE">Boule à Neige du Conte d'Hiver</entry>
+	<entry key="WINTERFEST_TOY">Jouet du Festival d'Hiver</entry>
 	<entry key="WATER">Eau</entry>
 	<entry key="WOOD">Bois</entry>
 	<entry key="YELLOW_CANDY">Bonbon Jaune</entry>
