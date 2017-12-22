@@ -13,6 +13,7 @@
 	<entry key="AMETHYST">Amethyst</entry>
 	<entry key="BATTERY">Battery</entry>
 	<entry key="BOMB">Bomb</entry>
+	<entry key="CANDY_BATCH">Candy Batch</entry>
 	<entry key="CARVED_PUMPKIN">Carved Pumkin</entry>
 	<entry key="CIRCUIT">Circuits</entry>
 	<entry key="CLEAN_WATER">Clean Water</entry>
@@ -81,6 +82,7 @@
 	<entry key="SILICON">Silicon</entry>
 	<entry key="SILVER">Silver</entry>
 	<entry key="SILVER_BAR">Silver Bar</entry>
+	<entry key="SOCK_OF_CANDIES">Sock of Candies</entry>
 	<entry key="SODIUM">Sodium</entry>
 	<entry key="SOLAR_PANEL">Solar Panel</entry>
 	<entry key="SOLID_PROPELLANT">Solid Propellant</entry>
@@ -95,6 +97,9 @@
 	<entry key="URANIUM">Uranium</entry>
 	<entry key="URANIUM_ROD">Uranium Rod</entry>
 	<entry key="WATER">Water</entry>
+	<entry key="WINTER_SOCK">Winter Sock</entry>
+	<entry key="WINTERFEST_GLOBE">Winterfest Globe</entry>
+	<entry key="WINTERFEST_TOY">Winterfest Toy</entry>
 	<entry key="WOOD">Tree</entry>
 	<entry key="YELLOW_CANDY">Yellow Candy</entry>
 </properties>
