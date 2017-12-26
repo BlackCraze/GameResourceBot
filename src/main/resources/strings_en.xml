@@ -6,7 +6,7 @@
     <entry key="RESOURCE_AND_USER_UNKNOWN">I know neither a user nor a resource with that name</entry>
     <entry key="ALREADY_KNOW">I already know.</entry>
     <entry key="RESOURCE_UNKNOWN">I don't know this resource =(</entry>
-    <entry key="USERS_LIST_HEADER">Guild members</entry>
+    <entry key="USERS_LIST_HEADER">Guild members (%d)</entry>
     <entry key="OLDEST_STOCK">Age</entry>
     <entry key="USER">User</entry>
     <entry key="POPULATED">Populated</entry>

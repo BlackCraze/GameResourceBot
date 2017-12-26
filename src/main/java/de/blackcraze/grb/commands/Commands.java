@@ -299,8 +299,10 @@ public final class Commands {
             // List Users
             Locale locale = getResponseLocale(message);
             List<List<String>> rows = getMateDao().listOrderByOldestStock(locale);
+            String header = Resource.getString("USERS_LIST_HEADER", locale);
+            header = String.format(header, rows.size());
             PrintableTable table = new PrintableTable(
-                    Resource.getString("USERS_LIST_HEADER", locale), Collections.emptyList(),
+                    header, Collections.emptyList(),
                     Arrays.asList(Resource.getString("USER", locale),
                             Resource.getString("POPULATED", locale),
                             Resource.getString("OLDEST_STOCK", locale)),
