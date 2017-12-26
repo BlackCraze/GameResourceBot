@@ -155,9 +155,11 @@ public final class PrintUtils {
                 Block.DATA_MIDDLE_RIGHT);
 
         PrintableTable[] tables = new PrintableTable[mates.size()];
+        StockComparator comp = new StockComparator(locale);
         for (int i = 0; i < mates.size(); i++) {
             Mate mate = mates.get(i);
             List<Stock> stocks = getStockDao().findStocksByMate(mate);
+            stocks.sort(comp);
             List<List<String>> rows = new ArrayList<>(stocks.size());
             for (Stock stock : stocks) {
                 String resourceKey = stock.getType().getName();
