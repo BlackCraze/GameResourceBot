@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<!-- risorse per il gioco del telefono cellulare "Deep Town"
+		Italiano
+	resources for mobile game "Deep Town"
+		Italian -->
+	<entry key="ACCUMULATOR">Accumulatore</entry>
+	<entry key="ALEXANDRITE">Alessandrite</entry>
+	<entry key="ALUMINIUM">Alluminio</entry>
+	<entry key="ALUMINIUM_BAR">Lingotto di Alluminio</entry>
+	<entry key="ALUMINIUM_BOTTLE">Bottiglia di Alluminio</entry>
+	<entry key="AMBER">Ambra</entry>
+	<entry key="AMBER_BRACELET">Bracciale d'Ambra</entry>
+	<entry key="AMBER_CHARGER">Caricatore Ambra</entry>
+	<entry key="AMBER_INSULATION">Isolamento d'Ambra</entry>
+	<entry key="AMETHYST">Ametista</entry>
+	<entry key="BATTERY">Batteria</entry>
+	<entry key="BOMB">Bomba</entry>
+	<entry key="CANDY_BATCH">Dolciumi</entry>
+	<entry key="CARVED_PUMPKIN">Zucca Intagliata</entry>
+	<entry key="CIRCUIT">Circuiti</entry>
+	<entry key="CLEAN_WATER">Acqua Pulita</entry>
+	<entry key="COAL">Carbone</entry>
+	<entry key="COMPRESSOR">Compressore</entry>
+	<entry key="COPPER">Rame</entry>
+	<entry key="COPPER_BAR">Barra di Rame</entry>
+	<entry key="COPPER_KNIVE">Coltello di Rame</entry>
+	<entry key="COPPER_NAIL">Chiodo di Rame</entry>
+	<entry key="COPPER_WIRE">Cavo</entry>
+	<entry key="DEFECTIVE_PUMPKIN">Zucca Difettosa</entry>
+	<entry key="DIAMOND">Diamante</entry>
+	<entry key="DIAMOND_CUTTER">Tagliadiamanti</entry>
+	<entry key="DIETHYL_ETHER">Etere Etilico</entry>
+	<entry key="EMERALD">Smeraldo</entry>
+	<entry key="EMERALD_RING">Anello di Smeraldo</entry>
+	<entry key="ETHANOL">Etanolo</entry>
+	<entry key="GEAR">Ingranaggio</entry>
+	<entry key="GLASS">Vetro</entry>
+	<entry key="GLASS_FLASK">Beuta</entry>
+	<entry key="GOLD">Oro</entry>
+	<entry key="GOLD_BAR">Lingotto d'Oro</entry>
+	<entry key="GRAPE">Uva</entry>
+	<entry key="GRAPE_SEED">Seme di Vite</entry>
+	<entry key="GRAPHITE">Grafite</entry>
+	<entry key="GREEN_CANDY">Dolcetto Verde</entry>
+	<entry key="GREEN_LASER">Laser Verde</entry>
+	<entry key="GUNPOWDER">Polvere da Sparo</entry>
+	<entry key="HAIR_COMB">Pettini</entry>
+	<entry key="HELIUM_3">Elio-3</entry>
+	<entry key="HYDROGEN">Idrogeno</entry>
+	<entry key="INSULATED_WIRE">Cavo Isolato</entry>
+	<entry key="IRON">Ferro</entry>
+	<entry key="IRON_BAR">Lingotto di Ferro</entry>
+	<entry key="LAMP">Lampada</entry>
+	<entry key="LIANA">Liana</entry>
+	<entry key="LIANA_SEED">Seme di Liana</entry>
+	<entry key="LIQUID_NITROGEN">Azoto Liquido</entry>
+	<entry key="MAGIC_BOX">Scatola Magica</entry>
+	<entry key="MAYAN_CALENDAR">Calendario Maya</entry>
+	<entry key="MOTHERBOARD">Scheda Madre</entry>
+	<entry key="NITROGEN">Azoto</entry>
+	<entry key="OBSIDIAN">Ossidiana</entry>
+	<entry key="OBSIDIAN_KNIFE">Coltello di Ossidiana</entry>
+	<entry key="OIL">Petrolio</entry>
+	<entry key="OPTIC_FIBER">Cavo di Fibra Ottica</entry>
+	<entry key="OXYGEN">Ossigeno</entry>
+	<entry key="PLASTIC">Plastica</entry>
+	<entry key="PLATINUM">Platino</entry>
+	<entry key="POLISHED_ALEXANDRITE">Alessandrite Lucidata</entry>
+	<entry key="POLISHED_AMBER">Ambra Lucidata</entry>
+	<entry key="POLISHED_AMETHYST">Ametista Lucidata</entry>
+	<entry key="POLISHED_DIAMOND">Diamante Lucidato</entry>
+	<entry key="POLISHED_EMERALD">Smeraldo Lucidato</entry>
+	<entry key="POLISHED_OBSIDIAN">Ossidiana Lucidata</entry>
+	<entry key="POLISHED_RUBY">Rubino Lucidato</entry>
+	<entry key="POLISHED_SAPPHIRE">Zaffiro Lucidato</entry>
+	<entry key="POLISHED_TOPAZ">Topazio Lucidato</entry>
+	<entry key="PUMPKIN">Zucca</entry>
+	<entry key="RED_CANDY">Dolcetto Rosso</entry>
+	<entry key="REFINED_OIL">Petrolio Raffinato</entry>
+	<entry key="RUBBER">Gomma</entry>
+	<entry key="RUBY">Rubino</entry>
+	<entry key="SAPPHIRE">Zaffiro</entry>
+	<entry key="SEED">Seme</entry>
+	<entry key="SILICON">Silicio</entry>
+	<entry key="SILVER">Argento</entry>
+	<entry key="SILVER_BAR">Lingotto d'Argento</entry>
+	<entry key="SOCK_OF_CANDIES">Calza Piena di Dolcetti</entry>
+	<entry key="SODIUM">Sodio</entry>
+	<entry key="SOLAR_PANEL">Pannello Solare</entry>
+	<entry key="SOLID_PROPELLANT">Propellente Solido</entry>
+	<entry key="STEEL_BAR">Lingotto d'Acciaio</entry>
+	<entry key="STEEL_PLATE">Piastra di Acciaio</entry>
+	<entry key="SULPHUR">Zolfo</entry>
+	<entry key="SULPHURIC_ACID">Acido Solforico</entry>
+	<entry key="TITANIUM">Titanio</entry>
+	<entry key="TITANIUM_BAR">Barra di Titanio</entry>
+	<!-- The translation for Titanium Ore, below, is incorrect.
+	The translation below matches the game. The error has been reported to the developers. -->
+	<entry key="TITANIUM_ORE">Barra di Titanio</entry>
+	<entry key="TOPAZ">Topazio</entry>
+	<entry key="URANIUM">Uranio</entry>
+	<entry key="URANIUM_ROD">Barra di Uranio</entry>
+	<entry key="WATER">Acqua</entry>
+	<entry key="WINTER_SOCK">Calza di Natale</entry>
+	<entry key="WINTERFEST_GLOBE">Sfera delle Fiabe Invernali</entry>
+	<entry key="WINTERFEST_TOY">Giocattolo Festa Invernale</entry>
+	<entry key="WOOD">Legno</entry>
+	<entry key="YELLOW_CANDY">Dolcetto Giallo</entry>
+</properties>
+

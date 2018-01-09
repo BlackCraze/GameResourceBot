@@ -11,8 +11,8 @@ import net.dv8tion.jda.core.entities.MessageChannel;
 public class Speaker {
 
     public static class Reaction {
-        public final static String SUCCESS = "✔";
-        public final static String FAILURE = "✖";
+        public final static String SUCCESS = "✅";
+        public final static String FAILURE = "❌";
     }
 
     public static void say(MessageChannel channel, String text) {

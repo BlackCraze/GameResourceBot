@@ -60,8 +60,7 @@ import net.dv8tion.jda.core.entities.MessageChannel;
 
 public final class Commands {
 
-    private Commands() {
-    }
+    private Commands() {}
 
     public static void info(Scanner scanner, Message message) {
         Speaker.say(message.getChannel(), Resource.getString("INFO", getResponseLocale(message)));
@@ -160,7 +159,8 @@ public final class Commands {
                 return;
             }
             try {
-                Field declaredField = BotConfig.ServerConfig.class.getDeclaredField(field.toUpperCase());
+                Field declaredField =
+                        BotConfig.ServerConfig.class.getDeclaredField(field.toUpperCase());
                 assert String.class.equals(declaredField.getType());
                 declaredField.set(instance, value);
                 message.addReaction(Speaker.Reaction.SUCCESS).queue();
@@ -174,7 +174,8 @@ public final class Commands {
     private static void checkPublic(Message message) {
         if (!ChannelType.TEXT.equals(message.getChannelType())) {
             message.addReaction(Speaker.Reaction.FAILURE).queue();
-            Speaker.say(message.getChannel(), Resource.getString("PUBLIC_COMMAND_ONLY", getResponseLocale(message)));
+            Speaker.say(message.getChannel(),
+                    Resource.getString("PUBLIC_COMMAND_ONLY", getResponseLocale(message)));
             throw new IllegalStateException("public command only");
             // TODO MORE SOLID IMPLEMENTATION
         }
@@ -191,11 +192,14 @@ public final class Commands {
         buffer.append("memory tracked by deallocators: " + formatBytes(totalBytes()) + "\n");
         buffer.append("maximum memory allowed to be tracked: " + formatBytes(maxBytes()) + "\n");
         try {
-            buffer.append("physical memory installed according to the operating system, or 0 if unknown: "
-                    + formatBytes(totalPhysicalBytes()) + "\n");
-            buffer.append("maximum physical memory that should be used: " + formatBytes(maxPhysicalBytes()) + "\n");
-            buffer.append("physical memory that is free according to the operating system, or 0 if unknown: "
-                    + formatBytes(availablePhysicalBytes()) + "\n");
+            buffer.append(
+                    "physical memory installed according to the operating system, or 0 if unknown: "
+                            + formatBytes(totalPhysicalBytes()) + "\n");
+            buffer.append("maximum physical memory that should be used: "
+                    + formatBytes(maxPhysicalBytes()) + "\n");
+            buffer.append(
+                    "physical memory that is free according to the operating system, or 0 if unknown: "
+                            + formatBytes(availablePhysicalBytes()) + "\n");
             buffer.append("physical memory currently used by the whole process, or 0 if unknown: "
                     + formatBytes(physicalBytes()) + "\n");
         } catch (UnsatisfiedLinkError e) {
@@ -211,10 +215,14 @@ public final class Commands {
         for (MemPool pool : getPools()) {
             MemoryUsage usage = pool.getUsage();
             buffer.append(pool.getName()).append("\n");
-            buffer.append("\tINIT:     ").append(FileUtils.byteCountToDisplaySize(usage.getInit())).append("\n");
-            buffer.append("\tUSED:     ").append(FileUtils.byteCountToDisplaySize(usage.getUsed())).append("\n");
-            buffer.append("\tCOMMITED: ").append(FileUtils.byteCountToDisplaySize(usage.getCommitted())).append("\n");
-            buffer.append("\tMAX:      ").append(FileUtils.byteCountToDisplaySize(usage.getMax())).append("\n");
+            buffer.append("\tINIT:     ").append(FileUtils.byteCountToDisplaySize(usage.getInit()))
+                    .append("\n");
+            buffer.append("\tUSED:     ").append(FileUtils.byteCountToDisplaySize(usage.getUsed()))
+                    .append("\n");
+            buffer.append("\tCOMMITED: ")
+                    .append(FileUtils.byteCountToDisplaySize(usage.getCommitted())).append("\n");
+            buffer.append("\tMAX:      ").append(FileUtils.byteCountToDisplaySize(usage.getMax()))
+                    .append("\n");
         }
         Speaker.sayCode(message.getChannel(), buffer.toString());
     }
@@ -252,7 +260,8 @@ public final class Commands {
         List<MemoryPoolMXBean> poolMXBeans = ManagementFactory.getMemoryPoolMXBeans();
         List<MemPool> result = new ArrayList<MemPool>(poolMXBeans.size() + 2);
         result.add(new MemPool("Heap", ManagementFactory.getMemoryMXBean().getHeapMemoryUsage()));
-        result.add(new MemPool("Non-Heap", ManagementFactory.getMemoryMXBean().getNonHeapMemoryUsage()));
+        result.add(new MemPool("Non-Heap",
+                ManagementFactory.getMemoryMXBean().getNonHeapMemoryUsage()));
         for (MemoryPoolMXBean poolMXBean : poolMXBeans) {
             result.add(new MemPool(poolMXBean.getName(), poolMXBean.getUsage()));
         }
@@ -266,36 +275,39 @@ public final class Commands {
         if (scanner.hasNext()) {
             String action = scanner.next();
             switch (action) {
-            case "delete":
-                checkPublic(message);
-                String memberName = scanner.next();
-                mates = getMateDao().findByName(memberName);
-                if (!mates.isEmpty()) {
-                    // Finally delete the member.
-                    for (Mate mate : mates) {
-                        getMateDao().delete(mate);
+                case "delete":
+                    checkPublic(message);
+                    String memberName = scanner.next();
+                    mates = getMateDao().findByName(memberName);
+                    if (!mates.isEmpty()) {
+                        // Finally delete the member.
+                        for (Mate mate : mates) {
+                            getMateDao().delete(mate);
+                        }
+                        message.addReaction(Speaker.Reaction.SUCCESS).queue();
+                    } else {
+                        // No Mate with given name.
+                        message.addReaction(Speaker.Reaction.FAILURE).queue();
                     }
-                    message.addReaction(Speaker.Reaction.SUCCESS).queue();
-                } else {
-                    // No Mate with given name.
+                    break;
+                default:
+                    // Wrong argument!
                     message.addReaction(Speaker.Reaction.FAILURE).queue();
-                }
-                break;
-            default:
-                // Wrong argument!
-                message.addReaction(Speaker.Reaction.FAILURE).queue();
-                break;
+                    break;
             }
         } else {
             // List Users
-
-            List<List<String>> rows = getMateDao().listOrderByOldestStock();
             Locale locale = getResponseLocale(message);
-            PrintableTable table = new PrintableTable(Resource.getString("USERS_LIST_HEADER", locale),
-                    Collections.emptyList(),
-                    Arrays.asList(Resource.getString("USER", locale), Resource.getString("POPULATED", locale),
+            List<List<String>> rows = getMateDao().listOrderByOldestStock(locale);
+            String header = Resource.getString("USERS_LIST_HEADER", locale);
+            header = String.format(header, rows.size());
+            PrintableTable table = new PrintableTable(
+                    header, Collections.emptyList(),
+                    Arrays.asList(Resource.getString("USER", locale),
+                            Resource.getString("POPULATED", locale),
                             Resource.getString("OLDEST_STOCK", locale)),
-                    rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT, Block.DATA_MIDDLE_RIGHT));
+                    rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT,
+                            Block.DATA_MIDDLE_RIGHT));
             Speaker.sayCode(message.getChannel(), PrintUtils.prettyPrint(table));
         }
     }
@@ -349,20 +361,21 @@ public final class Commands {
         internalUpdate(message, responseLocale, stocks);
     }
 
-    static void internalUpdate(Message message, Locale responseLocale, Map<String, Long> stocks) {
+    static void internalUpdate(Message message, Locale locale, Map<String, Long> stocks) {
         try {
             Mate mate = getMateDao().getOrCreateMate(message, getResponseLocale(message));
             List<String> unknownStocks = getMateDao().updateStocks(mate, stocks);
             if (stocks.size() > 0) {
                 if (!unknownStocks.isEmpty()) {
-                    Speaker.err(message, String.format(Resource.getString("DO_NOT_KNOW_ABOUT", responseLocale),
-                            unknownStocks.toString()));
+                    Speaker.err(message,
+                            String.format(Resource.getString("DO_NOT_KNOW_ABOUT", locale),
+                                    unknownStocks.toString()));
                 }
                 if (unknownStocks.size() != stocks.size()) {
                     message.addReaction(Speaker.Reaction.SUCCESS).queue();
                 }
             } else {
-                Speaker.err(message, Resource.getString("RESOURCES_EMPTY", responseLocale));
+                Speaker.err(message, Resource.getString("RESOURCES_EMPTY", locale));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -375,7 +388,8 @@ public final class Commands {
         Optional<String> stockNameOptional = parseStockName(scanner);
         Locale locale = getResponseLocale(message);
         List<StockType> stocks = stockNameOptional.isPresent()
-                ? getStockTypeDao().findByNameLike(stockNameOptional.get(), locale) : getStockTypeDao().findAll(locale);
+                ? getStockTypeDao().findByNameLike(stockNameOptional.get(), locale)
+                : getStockTypeDao().findAll(locale);
         Speaker.sayCode(message.getChannel(), prettyPrintStockTypes(stocks, locale));
     }
 
@@ -386,28 +400,29 @@ public final class Commands {
         if (scanner.hasNext()) {
             String subCommand = scanner.next();
             switch (subCommand) {
-            case "create":
-                checkPublic(message);
-                groupCreate(scanner, message);
-                break;
-            case "delete":
-                checkPublic(message);
-                groupDelete(scanner, message);
-                break;
-            case "add":
-                checkPublic(message);
-                groupAdd(scanner, message);
-                break;
-            case "remove":
-                checkPublic(message);
-                groupRemove(scanner, message);
-                break;
-            case "list":
-                groupList(scanner, message);
-                break;
-            default:
-                Speaker.err(message, Resource.getString("GROUP_SUBCOMMAND_UNKNOWN", getResponseLocale(message)));
-                break;
+                case "create":
+                    checkPublic(message);
+                    groupCreate(scanner, message);
+                    break;
+                case "delete":
+                    checkPublic(message);
+                    groupDelete(scanner, message);
+                    break;
+                case "add":
+                    checkPublic(message);
+                    groupAdd(scanner, message);
+                    break;
+                case "remove":
+                    checkPublic(message);
+                    groupRemove(scanner, message);
+                    break;
+                case "list":
+                    groupList(scanner, message);
+                    break;
+                default:
+                    Speaker.err(message, Resource.getString("GROUP_SUBCOMMAND_UNKNOWN",
+                            getResponseLocale(message)));
+                    break;
             }
         } else {
             groupList(scanner, message);
@@ -429,10 +444,12 @@ public final class Commands {
             }
         }
         if (groupNames.isEmpty()) {
-            Speaker.err(message, Resource.getString("GROUP_CREATE_UNKNOWN", getResponseLocale(message)));
+            Speaker.err(message,
+                    Resource.getString("GROUP_CREATE_UNKNOWN", getResponseLocale(message)));
         }
         if (!inUse.isEmpty()) {
-            String msg = String.format(Resource.getString("GROUP_CREATE_IN_USE", getResponseLocale(message)),
+            String msg = String.format(
+                    Resource.getString("GROUP_CREATE_IN_USE", getResponseLocale(message)),
                     inUse.toString());
             Speaker.err(message, msg);
         }
@@ -476,7 +493,8 @@ public final class Commands {
         }
     }
 
-    private static Optional<StockTypeGroup> getTargetGroup(Scanner scanner, Message message, String operation) {
+    private static Optional<StockTypeGroup> getTargetGroup(Scanner scanner, Message message,
+            String operation) {
         Locale locale = getResponseLocale(message);
         if (scanner.hasNext()) {
             String groupName = scanner.next();
@@ -492,7 +510,8 @@ public final class Commands {
         return Optional.empty();
     }
 
-    private static List<StockType> getTargetStockTypes(Scanner scanner, Message message, String operation) {
+    private static List<StockType> getTargetStockTypes(Scanner scanner, Message message,
+            String operation) {
         Locale locale = getResponseLocale(message);
         List<StockType> stockTypes = new ArrayList<>();
         List<String> unknownStockTypes = new ArrayList<>();
@@ -531,7 +550,8 @@ public final class Commands {
             }
         }
         if (!unknownStockTypes.isEmpty()) {
-            String msg = String.format(Resource.getString("GROUP_UNKNOWN_TYPE", locale), unknownStockTypes.toString());
+            String msg = String.format(Resource.getString("GROUP_UNKNOWN_TYPE", locale),
+                    unknownStockTypes.toString());
             Speaker.err(message, msg);
         }
         return stockTypes;
@@ -550,10 +570,12 @@ public final class Commands {
             }
         }
         if (groupNames.isEmpty()) {
-            Speaker.err(message, Resource.getString("GROUP_DELETE_UNKNOWN", getResponseLocale(message)));
+            Speaker.err(message,
+                    Resource.getString("GROUP_DELETE_UNKNOWN", getResponseLocale(message)));
         }
         if (!unknown.isEmpty()) {
-            String msg = String.format(Resource.getString("GROUP_DELETE_UNKNOWN", getResponseLocale(message)),
+            String msg = String.format(
+                    Resource.getString("GROUP_DELETE_UNKNOWN", getResponseLocale(message)),
                     unknown.toString());
             Speaker.err(message, msg);
         }
@@ -571,10 +593,10 @@ public final class Commands {
         List<List<String>> rows = new ArrayList<>();
         for (StockTypeGroup stockTypeGroup : groups) {
             List<StockType> types = stockTypeGroup.getTypes();
-            Collections.sort(types, new StockTypeComparator(locale));
-            String amount = String.format("%,d", types != null ? types.size() : 0);
+            String amount = String.format(locale, "%,d", types != null ? types.size() : 0);
             rows.add(Arrays.asList(stockTypeGroup.getName(), amount));
             if (types != null) {
+                Collections.sort(types, new StockTypeComparator(locale));
                 for (Iterator<StockType> it2 = types.iterator(); it2.hasNext();) {
                     StockType stockType = it2.next();
                     String localisedStockName = Resource.getItem(stockType.getName(), locale);
@@ -586,7 +608,8 @@ public final class Commands {
         if (rows.isEmpty()) {
             rows.add(Arrays.asList(" ", " "));
         }
-        List<String> titles = Arrays.asList(Resource.getString("NAME", locale), Resource.getString("AMOUNT", locale));
+        List<String> titles = Arrays.asList(Resource.getString("NAME", locale),
+                Resource.getString("AMOUNT", locale));
         String header = Resource.getString("GROUP_LIST_HEADER", locale);
         List<Integer> aligns = Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_BOTTOM_RIGHT);
         List<String> footer = Collections.emptyList();
@@ -608,19 +631,23 @@ public final class Commands {
                 Speaker.sayCode(channel, prettyPrintMate(mates, locale));
                 return;
             }
+            final StockTypeComparator comp = new StockTypeComparator(locale);
             List<StockType> types = getStockTypeDao().findByNameLike(nameOptional.get(), locale);
+            types.sort(comp);
             if (!types.isEmpty()) {
                 Speaker.sayCode(channel, prettyPrintStocks(types, locale));
                 return;
             }
-            Optional<StockTypeGroup> groupOpt = getStockTypeGroupDao().findByName(nameOptional.get());
+            Optional<StockTypeGroup> groupOpt =
+                    getStockTypeGroupDao().findByName(nameOptional.get());
             if (groupOpt.isPresent()) {
                 List<StockType> groupTypes = groupOpt.get().getTypes();
                 if (!groupTypes.isEmpty()) {
-                    groupTypes.sort(new StockTypeComparator(locale));
+                    groupTypes.sort(comp);
                     Speaker.sayCode(channel, prettyPrintStocks(groupTypes, locale));
                 } else {
-                    String msg = String.format(Resource.getString("GROUP_EMPTY", locale), nameOptional.get());
+                    String msg = String.format(Resource.getString("GROUP_EMPTY", locale),
+                            nameOptional.get());
                     Speaker.say(channel, msg);
                 }
             } else {
@@ -631,8 +658,8 @@ public final class Commands {
 
     public static void help(Scanner scanner, Message message) {
         Predicate<Method> filter = method -> Modifier.isPublic(method.getModifiers());
-        String response = Arrays.stream(Commands.class.getDeclaredMethods()).filter(filter).map(Method::getName)
-                .collect(Collectors.joining("\n"));
+        String response = Arrays.stream(Commands.class.getDeclaredMethods()).filter(filter)
+                .map(Method::getName).collect(Collectors.joining("\n"));
         Speaker.sayCode(message.getChannel(),
                 Resource.getString("COMMANDS", getResponseLocale(message)) + "\n" + response);
     }
@@ -646,10 +673,12 @@ public final class Commands {
         } else {
             types = getStockTypeDao().findByNameLike(nameOptional.get(), locale);
             if (types.isEmpty()) {
-                Optional<StockTypeGroup> groupOpt = getStockTypeGroupDao().findByName(nameOptional.get());
+                Optional<StockTypeGroup> groupOpt =
+                        getStockTypeGroupDao().findByName(nameOptional.get());
                 if (groupOpt.isPresent()) {
                     if (groupOpt.get().getTypes() == null || groupOpt.get().getTypes().isEmpty()) {
-                        String msg = String.format(Resource.getString("GROUP_EMPTY", locale), nameOptional.get());
+                        String msg = String.format(Resource.getString("GROUP_EMPTY", locale),
+                                nameOptional.get());
                         Speaker.say(message.getChannel(), msg);
                         return;
                     } else {
@@ -657,7 +686,8 @@ public final class Commands {
                         types.sort(new StockTypeComparator(locale));
                     }
                 } else {
-                    Speaker.say(message.getChannel(), Resource.getString("RESOURCE_UNKNOWN", locale));
+                    Speaker.say(message.getChannel(),
+                            Resource.getString("RESOURCE_UNKNOWN", locale));
                     return;
                 }
             }
@@ -668,13 +698,14 @@ public final class Commands {
             long total = getStockDao().getTotalAmount(stockType);
             if (total > 0) {
                 String localisedStockName = Resource.getItem(stockType.getName(), locale);
-                rows.add(Arrays.asList(localisedStockName, String.format("%,d", total)));
+                rows.add(Arrays.asList(localisedStockName, String.format(locale, "%,d", total)));
             }
         }
         if (!rows.isEmpty()) {
-            PrintableTable total_guild_resources = new PrintableTable(Resource.getString("TOTAL_RESOURCES", locale),
-                    Collections.emptyList(),
-                    Arrays.asList(Resource.getString("RAW_MATERIAL", locale), Resource.getString("AMOUNT", locale)),
+            PrintableTable total_guild_resources = new PrintableTable(
+                    Resource.getString("TOTAL_RESOURCES", locale), Collections.emptyList(),
+                    Arrays.asList(Resource.getString("RAW_MATERIAL", locale),
+                            Resource.getString("AMOUNT", locale)),
                     rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT));
             Speaker.sayCode(message.getChannel(), prettyPrint(total_guild_resources));
         } else {

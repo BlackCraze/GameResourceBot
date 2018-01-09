@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<!-- recursos para el juego de teléfono móvil "Deep Town"
+		Español
+	resources for mobile game "Deep Town"
+		Spanish -->
+	<entry key="ACCUMULATOR">Acumulador</entry>
+	<!-- The translation for Alexandrite, below, is incorrect, but matches the game.
+	The correct translation is "Alejandrita". -->
+	<entry key="ALEXANDRITE">Alexandrino</entry>
+	<entry key="ALUMINIUM">Aluminio</entry>
+	<entry key="ALUMINIUM_BAR">Barra de Aluminio</entry>
+	<entry key="ALUMINIUM_BOTTLE">Botella de Aluminio</entry>
+	<entry key="AMBER">Ámbar</entry>
+	<entry key="AMBER_BRACELET">Brazalete Ámbar</entry>
+	<entry key="AMBER_CHARGER">Cargador Ámbar</entry>
+	<entry key="AMBER_INSULATION">Aislante Ámbar</entry>
+	<entry key="AMETHYST">Amatista</entry>
+	<entry key="BATTERY">Batería</entry>
+	<entry key="BOMB">Bomba</entry>
+	<entry key="CANDY_BATCH">Lote de Caramelos</entry>
+	<entry key="CARVED_PUMPKIN">Calabaza Tallada</entry>
+	<entry key="CIRCUIT">Circuitos</entry>
+	<entry key="CLEAN_WATER">Agua Limpia</entry>
+	<entry key="COAL">Carbón</entry>
+	<entry key="COMPRESSOR">Compresor</entry>
+	<entry key="COPPER">Cobre</entry>
+	<entry key="COPPER_BAR">Barra de Cobre</entry>
+	<entry key="COPPER_KNIVE">Cuchillo de Cobre</entry>
+	<entry key="COPPER_NAIL">Clavo de Cobre</entry>
+	<entry key="COPPER_WIRE">Cable</entry>
+	<entry key="DEFECTIVE_PUMPKIN">Calabaza Defectuosa</entry>
+	<entry key="DIAMOND">Diamante</entry>
+	<entry key="DIAMOND_CUTTER">Cortador de Diamante</entry>
+	<entry key="DIETHYL_ETHER">Éter Etílico</entry>
+	<entry key="EMERALD">Esmeralda</entry>
+	<entry key="EMERALD_RING">Anillo de Esmeralda</entry>
+	<entry key="ETHANOL">Etanol</entry>
+	<entry key="GEAR">Engranaje</entry>
+	<entry key="GLASS">Vidrio</entry>
+	<entry key="GLASS_FLASK">Frasco de Laboratorio</entry>
+	<entry key="GOLD">Oro</entry>
+	<entry key="GOLD_BAR">Barra de Oro</entry>
+	<entry key="GRAPE">Uva</entry>
+	<entry key="GRAPE_SEED">Semilla de Uva</entry>
+	<entry key="GRAPHITE">Grafito</entry>
+	<entry key="GREEN_CANDY">Caramelo Verde</entry>
+	<entry key="GREEN_LASER">Láser Verde</entry>
+	<entry key="GUNPOWDER">Pólvora</entry>
+	<entry key="HAIR_COMB">Peine</entry>
+	<entry key="HELIUM_3">Helio-3</entry>
+	<entry key="HYDROGEN">Hidrógeno</entry>
+	<entry key="INSULATED_WIRE">Cable Aislado</entry>
+	<entry key="IRON">Hierro</entry>
+	<entry key="IRON_BAR">Barra de Hierro</entry>
+	<entry key="LAMP">Lampara</entry>
+	<entry key="LIANA">Liana</entry>
+	<entry key="LIANA_SEED">Semilla de Liana</entry>
+	<entry key="LIQUID_NITROGEN">Nitrógeno Líquido</entry>
+	<entry key="MAGIC_BOX">Caja Mágica</entry>
+	<entry key="MAYAN_CALENDAR">Calendario Maya</entry>
+	<!-- The translation for Motherboard, below is incorrect, but matches the game.
+	The correct translation is "Placa Base". -->
+	<entry key="MOTHERBOARD">Tarjeta Madre</entry>
+	<entry key="NITROGEN">Nitrógeno</entry>
+	<entry key="OBSIDIAN">Obsidiana</entry>
+	<entry key="OBSIDIAN_KNIFE">Cuchillo de Obsidiana</entry>
+	<entry key="OIL">Petróleo</entry>
+	<entry key="OPTIC_FIBER">Cable de Fibra Óptica</entry>
+	<entry key="OXYGEN">Oxígeno</entry>
+	<entry key="PLASTIC">Plástico</entry>
+	<entry key="PLATINUM">Platino</entry>
+	<entry key="POLISHED_ALEXANDRITE">Alejandrita Pulida</entry>
+	<entry key="POLISHED_AMBER">Ámbar Pulido</entry>
+	<entry key="POLISHED_AMETHYST">Amatista Pulida</entry>
+	<entry key="POLISHED_DIAMOND">Diamante Pulido</entry>
+	<entry key="POLISHED_EMERALD">Esmeralda Pulida</entry>
+	<entry key="POLISHED_OBSIDIAN">Obsidiana Pulida</entry>
+	<entry key="POLISHED_RUBY">Rubí Polido</entry>
+	<entry key="POLISHED_SAPPHIRE">Safiro Pulido</entry>
+	<entry key="POLISHED_TOPAZ">Topacio Pulido</entry>
+	<entry key="PUMPKIN">Calabaza</entry>
+	<entry key="RED_CANDY">Caramelo Rojo</entry>
+	<entry key="REFINED_OIL">Petróleo Refinado</entry>
+	<entry key="RUBBER">Hule</entry>
+	<entry key="RUBY">Rubí</entry>
+	<entry key="SAPPHIRE">Safiro</entry>
+	<entry key="SEED">Semilla</entry>
+	<entry key="SILICON">Silicón</entry>
+	<entry key="SILVER">Plata</entry>
+	<entry key="SILVER_BAR">Barra de Plata</entry>
+	<entry key="SOCK_OF_CANDIES">Calcetín Lleno de Caramelos</entry>
+	<entry key="SODIUM">Sodio</entry>
+	<entry key="SOLAR_PANEL">Panel Solar</entry>
+	<entry key="SOLID_PROPELLANT">Propulsor Sólido</entry>
+	<entry key="STEEL_BAR">Barra de Acero</entry>
+	<entry key="STEEL_PLATE">Plancha de Acero</entry>
+	<entry key="SULPHUR">Sulfuro</entry>
+	<entry key="SULPHURIC_ACID">Ácido Sulfúrico</entry>
+	<entry key="TITANIUM">Titanio</entry>
+	<entry key="TITANIUM_BAR">Lingote de Titanio</entry>
+	<entry key="TITANIUM_ORE">Mineral de Titanio</entry>
+	<entry key="TOPAZ">Topacio</entry>
+	<entry key="URANIUM">Uranio</entry>
+	<entry key="URANIUM_ROD">Barra de Uranio</entry>
+	<entry key="WATER">Agua</entry>
+	<entry key="WINTER_SOCK">Calcetín Navideño</entry>
+	<entry key="WINTERFEST_GLOBE">Bola Cuento Invernal</entry>
+	<entry key="WINTERFEST_TOY">Juguete Cuento Invernal</entry>
+	<entry key="WOOD">Madera</entry>
+	<entry key="YELLOW_CANDY">Caramelo Amarillo</entry>
+</properties>
+
