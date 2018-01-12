@@ -251,7 +251,7 @@ public final class Commands {
             switch (action) {
                 case "delete":
                     checkPublic(message);
-                    String memberName = scanner.nextLine();
+                    String memberName = scanner.nextLine().trim();
                     mates = getMateDao().findByName(memberName);
                     if (!mates.isEmpty()) {
                         // Finally delete the member.
