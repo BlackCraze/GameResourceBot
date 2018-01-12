@@ -1,48 +1,5 @@
 package de.blackcraze.grb.commands;
 
-import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
-import static de.blackcraze.grb.util.CommandUtils.parseGroupName;
-import static de.blackcraze.grb.util.CommandUtils.parseStockName;
-import static de.blackcraze.grb.util.CommandUtils.parseStocks;
-import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
-import static de.blackcraze.grb.util.InjectorUtils.getStockDao;
-import static de.blackcraze.grb.util.InjectorUtils.getStockTypeDao;
-import static de.blackcraze.grb.util.InjectorUtils.getStockTypeGroupDao;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrint;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrintMate;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrintStockTypes;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrintStocks;
-import static org.bytedeco.javacpp.Pointer.availablePhysicalBytes;
-import static org.bytedeco.javacpp.Pointer.formatBytes;
-import static org.bytedeco.javacpp.Pointer.maxBytes;
-import static org.bytedeco.javacpp.Pointer.maxPhysicalBytes;
-import static org.bytedeco.javacpp.Pointer.physicalBytes;
-import static org.bytedeco.javacpp.Pointer.totalBytes;
-import static org.bytedeco.javacpp.Pointer.totalPhysicalBytes;
-
-import java.lang.management.ManagementFactory;
-import java.lang.management.MemoryPoolMXBean;
-import java.lang.management.MemoryUsage;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Scanner;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
@@ -57,6 +14,23 @@ import de.blackcraze.grb.util.wagu.Block;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryPoolMXBean;
+import java.lang.management.MemoryUsage;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import static de.blackcraze.grb.util.CommandUtils.*;
+import static de.blackcraze.grb.util.InjectorUtils.*;
+import static de.blackcraze.grb.util.PrintUtils.*;
+import static org.bytedeco.javacpp.Pointer.*;
 
 public final class Commands {
 
@@ -277,7 +251,7 @@ public final class Commands {
             switch (action) {
                 case "delete":
                     checkPublic(message);
-                    String memberName = scanner.next();
+                    String memberName = scanner.nextLine();
                     mates = getMateDao().findByName(memberName);
                     if (!mates.isEmpty()) {
                         // Finally delete the member.
