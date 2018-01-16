@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE properties SYSTEM
-        "http://java.sun.com/dtd/properties.dtd">
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-    <entry key="RESOURCE_AND_USER_UNKNOWN">Δεν ξέρω ούτε κάποιον χρήστη ούτε κάποιο υλικό με αυτό το όνομα.</entry>
-    <entry key="ALREADY_KNOW">Το ξέρω ήδη.</entry>
-    <entry key="RESOURCE_UNKNOWN">Δεν γνωρίζω αυτό το υλικό =(</entry>
-    <entry key="USER">Χρήστης</entry>
-    <entry key="DO_NOT_KNOW_ABOUT">Εγώ δεν το ξέρω αυτό: %s</entry>
-    <entry key="RESOURCES_EMPTY">Δεν υπάρχει τίποτα να δεις! Μήπως να ενημέρωνες το απόθεμά σου?</entry>
-    <entry key="NO_DATA">Συγνώμη, αλλά δεν υπάρχουν δεδομένα:-(</entry>
-    <entry key="USER_UNKNOWN">Δεν ξέρω αυτόν τον χρήστη =(</entry>
-    <entry key="RAW_MATERIAL">Υλικό</entry>
-    <entry key="AMOUNT">Ποσότητα</entry>
-    <entry key="UPDATED">Το δήλωσε πριν από</entry>
+	<entry key="RESOURCE_AND_USER_UNKNOWN">Δεν ξέρω ούτε κάποιον χρήστη ούτε κάποιο υλικό με αυτό το όνομα.</entry>
+	<entry key="ALREADY_KNOW">Το ξέρω ήδη.</entry>
+	<entry key="RESOURCE_UNKNOWN">Δεν γνωρίζω αυτό το υλικό =(</entry>
+	<entry key="USER">Χρήστης</entry>
+	<entry key="DO_NOT_KNOW_ABOUT">Εγώ δεν το ξέρω αυτό: %s</entry>
+	<entry key="RESOURCES_EMPTY">Δεν υπάρχει τίποτα να δεις! Μήπως να ενημέρωνες το απόθεμά σου?</entry>
+	<entry key="NO_DATA">Συγνώμη, αλλά δεν υπάρχουν δεδομένα:-(</entry>
+	<entry key="USER_UNKNOWN">Δεν ξέρω αυτόν τον χρήστη =(</entry>
+	<entry key="RAW_MATERIAL">Υλικό</entry>
+	<entry key="AMOUNT">Ποσότητα</entry>
+	<entry key="UPDATED">Το δήλωσε πριν από</entry>
+	<entry key="COMMANDS">Διαθέσιμες εντολές</entry>
+	<entry key="TOTAL_RESOURCES">Συνολικό συντεχνία των πόρων</entry>
+	<entry key="CDS">Αυτό το bot δημιουργήθηκε από τον BlackCraze, με βοήθεια από τον DangerCrow και τον firewaran.
+	Ελληνικές μεταφράσεις από τον ThatGreekGuy.
+	
+	Πηγαίος Κώδικας:
+	https://github.com/BlackCraze/GameResourceBot/
+	
+	Το Discord μας:
+	https://discord.gg/e77yjxj
+	</entry>
+	<entry key="INIT">Η σύνδεση επιτεύχθη! Ακούω με prefix </entry>
+	<entry key="BYE_MSG">Πρέπει να κλείσω τώρα. Επανέρχομαι σε λίγο!</entry>
 </properties>

@@ -1,3 +1,3 @@
 # GameResourceBot
-a discord bot for managing guild resources
+a Discord bot for managing guild resources
 
