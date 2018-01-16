@@ -1,48 +1,5 @@
 package de.blackcraze.grb.commands;
 
-import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
-import static de.blackcraze.grb.util.CommandUtils.parseGroupName;
-import static de.blackcraze.grb.util.CommandUtils.parseStockName;
-import static de.blackcraze.grb.util.CommandUtils.parseStocks;
-import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
-import static de.blackcraze.grb.util.InjectorUtils.getStockDao;
-import static de.blackcraze.grb.util.InjectorUtils.getStockTypeDao;
-import static de.blackcraze.grb.util.InjectorUtils.getStockTypeGroupDao;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrint;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrintMate;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrintStockTypes;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrintStocks;
-import static org.bytedeco.javacpp.Pointer.availablePhysicalBytes;
-import static org.bytedeco.javacpp.Pointer.formatBytes;
-import static org.bytedeco.javacpp.Pointer.maxBytes;
-import static org.bytedeco.javacpp.Pointer.maxPhysicalBytes;
-import static org.bytedeco.javacpp.Pointer.physicalBytes;
-import static org.bytedeco.javacpp.Pointer.totalBytes;
-import static org.bytedeco.javacpp.Pointer.totalPhysicalBytes;
-
-import java.lang.management.ManagementFactory;
-import java.lang.management.MemoryPoolMXBean;
-import java.lang.management.MemoryUsage;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Scanner;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
@@ -57,6 +14,23 @@ import de.blackcraze.grb.util.wagu.Block;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryPoolMXBean;
+import java.lang.management.MemoryUsage;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import static de.blackcraze.grb.util.CommandUtils.*;
+import static de.blackcraze.grb.util.InjectorUtils.*;
+import static de.blackcraze.grb.util.PrintUtils.*;
+import static org.bytedeco.javacpp.Pointer.*;
 
 public final class Commands {
 
@@ -275,32 +249,34 @@ public final class Commands {
         if (scanner.hasNext()) {
             String action = scanner.next();
             switch (action) {
-            case "delete":
-                checkPublic(message);
-                String memberName = scanner.next();
-                mates = getMateDao().findByName(memberName);
-                if (!mates.isEmpty()) {
-                    // Finally delete the member.
-                    for (Mate mate : mates) {
-                        getMateDao().delete(mate);
+                case "delete":
+                    checkPublic(message);
+                    String memberName = scanner.nextLine().trim();
+                    mates = getMateDao().findByName(memberName);
+                    if (!mates.isEmpty()) {
+                        // Finally delete the member.
+                        for (Mate mate : mates) {
+                            getMateDao().delete(mate);
+                        }
+                        message.addReaction(Speaker.Reaction.SUCCESS).queue();
+                    } else {
+                        // No Mate with given name.
+                        message.addReaction(Speaker.Reaction.FAILURE).queue();
                     }
-                    message.addReaction(Speaker.Reaction.SUCCESS).queue();
-                } else {
-                    // No Mate with given name.
+                    break;
+                default:
+                    // Wrong argument!
                     message.addReaction(Speaker.Reaction.FAILURE).queue();
-                }
-                break;
-            default:
-                // Wrong argument!
-                message.addReaction(Speaker.Reaction.FAILURE).queue();
-                break;
+                    break;
             }
         } else {
             // List Users
             Locale locale = getResponseLocale(message);
             List<List<String>> rows = getMateDao().listOrderByOldestStock(locale);
+            String header = Resource.getString("USERS_LIST_HEADER", locale);
+            header = String.format(header, rows.size());
             PrintableTable table = new PrintableTable(
-                    Resource.getString("USERS_LIST_HEADER", locale), Collections.emptyList(),
+                    header, Collections.emptyList(),
                     Arrays.asList(Resource.getString("USER", locale),
                             Resource.getString("POPULATED", locale),
                             Resource.getString("OLDEST_STOCK", locale)),
@@ -398,29 +374,29 @@ public final class Commands {
         if (scanner.hasNext()) {
             String subCommand = scanner.next();
             switch (subCommand) {
-            case "create":
-                checkPublic(message);
-                groupCreate(scanner, message);
-                break;
-            case "delete":
-                checkPublic(message);
-                groupDelete(scanner, message);
-                break;
-            case "add":
-                checkPublic(message);
-                groupAdd(scanner, message);
-                break;
-            case "remove":
-                checkPublic(message);
-                groupRemove(scanner, message);
-                break;
-            case "list":
-                groupList(scanner, message);
-                break;
-            default:
-                Speaker.err(message,
-                        Resource.getString("GROUP_SUBCOMMAND_UNKNOWN", getResponseLocale(message)));
-                break;
+                case "create":
+                    checkPublic(message);
+                    groupCreate(scanner, message);
+                    break;
+                case "delete":
+                    checkPublic(message);
+                    groupDelete(scanner, message);
+                    break;
+                case "add":
+                    checkPublic(message);
+                    groupAdd(scanner, message);
+                    break;
+                case "remove":
+                    checkPublic(message);
+                    groupRemove(scanner, message);
+                    break;
+                case "list":
+                    groupList(scanner, message);
+                    break;
+                default:
+                    Speaker.err(message, Resource.getString("GROUP_SUBCOMMAND_UNKNOWN",
+                            getResponseLocale(message)));
+                    break;
             }
         } else {
             groupList(scanner, message);
@@ -629,7 +605,9 @@ public final class Commands {
                 Speaker.sayCode(channel, prettyPrintMate(mates, locale));
                 return;
             }
+            final StockTypeComparator comp = new StockTypeComparator(locale);
             List<StockType> types = getStockTypeDao().findByNameLike(nameOptional.get(), locale);
+            types.sort(comp);
             if (!types.isEmpty()) {
                 Speaker.sayCode(channel, prettyPrintStocks(types, locale));
                 return;
@@ -639,7 +617,7 @@ public final class Commands {
             if (groupOpt.isPresent()) {
                 List<StockType> groupTypes = groupOpt.get().getTypes();
                 if (!groupTypes.isEmpty()) {
-                    groupTypes.sort(new StockTypeComparator(locale));
+                    groupTypes.sort(comp);
                     Speaker.sayCode(channel, prettyPrintStocks(groupTypes, locale));
                 } else {
                     String msg = String.format(Resource.getString("GROUP_EMPTY", locale),
