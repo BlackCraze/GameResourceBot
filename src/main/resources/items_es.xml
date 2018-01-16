@@ -34,6 +34,7 @@
 	<entry key="DIAMOND">Diamante</entry>
 	<entry key="DIAMOND_CUTTER">Cortador de Diamante</entry>
 	<entry key="DIETHYL_ETHER">Éter Etílico</entry>
+	<entry key="DRY_ICE">Hielo Seco</entry>
 	<entry key="EMERALD">Esmeralda</entry>
 	<entry key="EMERALD_RING">Anillo de Esmeralda</entry>
 	<entry key="ETHANOL">Etanol</entry>
@@ -79,7 +80,7 @@
 	<entry key="POLISHED_OBSIDIAN">Obsidiana Pulida</entry>
 	<entry key="POLISHED_RUBY">Rubí Polido</entry>
 	<entry key="POLISHED_SAPPHIRE">Safiro Pulido</entry>
-	<entry key="POLISHED_TOPAZ">Topacio Pulido</entry>
+	<entry key="POLISHED_TOPAZ">Tapacio Pulido</entry>
 	<entry key="PUMPKIN">Calabaza</entry>
 	<entry key="RED_CANDY">Caramelo Rojo</entry>
 	<entry key="REFINED_OIL">Petróleo Refinado</entry>

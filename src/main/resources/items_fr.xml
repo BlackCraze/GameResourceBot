@@ -32,6 +32,7 @@
 	<entry key="DIAMOND">Diamant</entry>
 	<entry key="DIAMOND_CUTTER">Tailleur de Diamant</entry>
 	<entry key="DIETHYL_ETHER">Éther Diéthylique</entry>
+	<entry key="DRY_ICE">Glace Sèche</entry>
 	<entry key="EMERALD">Émeraude</entry>
 	<entry key="EMERALD_RING">Bague en Émeraude</entry>
 	<entry key="ETHANOL">Éthanol</entry>
@@ -107,4 +108,3 @@
 	<entry key="WOOD">Bois</entry>
 	<entry key="YELLOW_CANDY">Bonbon Jaune</entry>
 </properties>
-
