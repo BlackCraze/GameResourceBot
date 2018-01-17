@@ -15,7 +15,7 @@
 	<!-- mensagens de erro para os utilizadores -->
 	<!-- error messages for users -->
 	<entry key="ERROR_UNKNOWN">Ooooops... Eu encontrei um erro. Por favor não me bata! --> "%s"</entry>
-	<entry key="RESOURCE_AND_USER_UNKNOWN">Eu não conheço nem um utilizador nem um recurso com esse nome.</entry>
+	<entry key="RESOURCE_AND_USER_UNKNOWN">Eu não conheço nem um utilizador nem um recurso com esse nome. =(</entry>
 	<entry key="ALREADY_KNOW">Eu já sei disso.</entry>
 	<entry key="RESOURCE_UNKNOWN">Eu não conheço este recurso. =(</entry>
 	<entry key="DO_NOT_KNOW_ABOUT">Eu não sei nada acerca disto: %s</entry>
@@ -46,7 +46,7 @@
 	<!-- -->
 	<!-- cabeçalhos de relatório -->
 	<!-- report headers -->
-	<entry key="USERS_LIST_HEADER">Membros da guilda</entry>
+	<entry key="USERS_LIST_HEADER">Membros da guilda (%d)</entry>
 	<entry key="OLDEST_STOCK">Idade</entry>
 	<entry key="USER">Utilizador</entry>
 	<entry key="POPULATED">Indexados</entry>
