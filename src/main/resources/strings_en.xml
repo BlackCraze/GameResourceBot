@@ -37,7 +37,7 @@
 	<entry key="GROUP_REMOVE_UNKNOWN">Tell me the name of the group and the name of the resource to remove.</entry>
 	<!-- -->
 	<!-- report headers -->
-	<entry key="USERS_LIST_HEADER">Guild members</entry>
+	<entry key="USERS_LIST_HEADER">Guild members (%d)</entry>
 	<entry key="OLDEST_STOCK">Age</entry>
 	<entry key="USER">User</entry>
 	<entry key="POPULATED">Populated</entry>
