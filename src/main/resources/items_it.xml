@@ -2,8 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<!-- risorse per il gioco del telefono cellulare "Deep Town"
-		Italiano
-	resources for mobile game "Deep Town"
+		Italiano -->
+	<!-- resources for mobile game "Deep Town"
 		Italian -->
 	<entry key="ACCUMULATOR">Accumulatore</entry>
 	<entry key="ALEXANDRITE">Alessandrite</entry>
