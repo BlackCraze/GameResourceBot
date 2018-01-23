@@ -2,8 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<!-- Ressourcen für das Handy-Spiel "Deep Town"
-		Deutsch
-	resources for mobile game "Deep Town"
+		Deutsch -->
+	<!-- resources for mobile game "Deep Town"
 		German -->
 	<entry key="ACCUMULATOR">Akkumulator</entry>
 	<entry key="ALEXANDRITE">Alexandrit</entry>
@@ -17,7 +17,7 @@
 	<entry key="AMETHYST">Amethyst</entry>
 	<entry key="BATTERY">Batterie</entry>
 	<entry key="BOMB">Bombe</entry>
-	<entry key="CANDY_BATCH">Schachtel mit Süssigkeiten</entry>
+	<entry key="CANDY_BATCH">Schachtel mit Süßigkeiten</entry>
 	<entry key="CARVED_PUMPKIN">Geschnitzter Kürbis</entry>
 	<entry key="CIRCUIT">Schaltkreise</entry>
 	<entry key="CLEAN_WATER">Sauberes Wasser</entry>
@@ -44,11 +44,11 @@
 	<entry key="GRAPE">Traube</entry>
 	<entry key="GRAPE_SEED">Traubenkern</entry>
 	<entry key="GRAPHITE">Graphit</entry>
-	<entry key="GREEN_CANDY">Grüne Süssigkeit</entry>
+	<entry key="GREEN_CANDY">Grüne Süßigkeit</entry>
 	<entry key="GREEN_LASER">Grüner Laser</entry>
-	<entry key="GUNPOWDER">Schiesspulver</entry>
+	<entry key="GUNPOWDER">Schießpulver</entry>
 	<entry key="HAIR_COMB">Haarkamm</entry>
-	<entry key="HELIUM_3">Helium-3</entry>
+	<entry key="HELIUM_3">Helium 3</entry>
 	<entry key="HYDROGEN">Wasserstoff</entry>
 	<entry key="INSULATED_WIRE">Isolierter Draht</entry>
 	<entry key="IRON">Eisen</entry>
@@ -78,7 +78,7 @@
 	<entry key="POLISHED_SAPPHIRE">Polierter Saphir</entry>
 	<entry key="POLISHED_TOPAZ">Polierter Topas</entry>
 	<entry key="PUMPKIN">Kürbis</entry>
-	<entry key="RED_CANDY">Rote Süssigkeit</entry>
+	<entry key="RED_CANDY">Rote Süßigkeit</entry>
 	<entry key="REFINED_OIL">Raffiniertes Öl</entry>
 	<entry key="RUBBER">Gummi</entry>
 	<entry key="RUBY">Rubin</entry>
@@ -87,7 +87,7 @@
 	<entry key="SILICON">Silizium</entry>
 	<entry key="SILVER">Silber</entry>
 	<entry key="SILVER_BAR">Silberbarren</entry>
-	<entry key="SOCK_OF_CANDIES">Strumpf mit Süssigkeiten</entry>
+	<entry key="SOCK_OF_CANDIES">Strumpf mit Süßigkeiten</entry>
 	<entry key="SODIUM">Natrium</entry>
 	<entry key="SOLAR_PANEL">Solaranlage</entry>
 	<entry key="SOLID_PROPELLANT">Fester Treibstoff</entry>
@@ -106,5 +106,6 @@
 	<entry key="WINTERFEST_GLOBE">Wintertale-Globus</entry>
 	<entry key="WINTERFEST_TOY">Winterfest-Spielzeug</entry>
 	<entry key="WOOD">Holz</entry>
-	<entry key="YELLOW_CANDY">Gelbe Süssigkeit</entry>
+	<entry key="YELLOW_CANDY">Gelbe Süßigkeit</entry>
 </properties>
+
