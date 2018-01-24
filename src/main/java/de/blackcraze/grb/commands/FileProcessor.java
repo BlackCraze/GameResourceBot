@@ -11,7 +11,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Locale;
 import java.util.Map;
-
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 
 import de.blackcraze.grb.core.BotConfig;
@@ -32,6 +32,11 @@ public class FileProcessor {
             if (att.isImage()) {
                 InputStream stream = null;
                 try {
+                    // check if the filename ends with png (only working image format)
+                    if(!FilenameUtils.getExtension(att.getFileName()).equalsIgnoreCase("png")){
+                        Speaker.err(message, String.format(Resource.getString("ONLY_PNG_IMAGES", locale)));
+                        continue;
+                    }
                     URLConnection conn = new URL(att.getProxyUrl()).openConnection();
                     conn.setRequestProperty("User-Agent",
                             "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");

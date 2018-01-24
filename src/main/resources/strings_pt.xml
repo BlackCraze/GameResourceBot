@@ -65,20 +65,20 @@
 	<!-- IMPORTANT NOTE: The text of these entries MUST be 2,000 characters or shorter.
 		Otherwise, they will fail to send. This limit is set by Discord. -->
 	<entry key="HELP_USERS">**GERAL**
-	
+
 	Para permitir que o bot atualize o seu inventário, envie capturas de ecrã do seu ecrã de inventário, ou introduza um comando (veja abaixo).
-	
+
 	OPCIONAL: Envie comandos e/ou capturas de ecrã via DM: __Utilize o ID de @menção do bot.__
-	
+
 	O bot reage a comandos!
 	✅ Sucesso!
 	❌ Falhou!
-	
+
 	=====
 
 	Para obter ajuda com comandos específicos, introduza:
 	`bot help [comando]`
-	
+
 	**COMANDOS**
 	userconfig (opções)
 	clear
@@ -191,5 +191,6 @@
 	<!-- DESENVOLVEDORES: mensagens de erro -->
 	<!-- DEVELOPERS: error messages -->
 	<entry key="MISSING_ENV_VAR">Variável de ambiente perdida: \"%s\"%n"</entry>
+	<entry key="ONLY_PNG_IMAGES">Eu apenas posso processar imagens PNG</entry>
 </properties>
 
