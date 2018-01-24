@@ -7,7 +7,7 @@
 	<artifactId>grb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Game Resource Bot</name>
-	<description>some test bot</description>
+	<description>a Discord bot for managing guild resources</description>
 
 	<repositories>
 		<repository>
@@ -23,7 +23,7 @@
 	</repositories>
 
 	<dependencies>
-		<!-- discord stuff -->
+		<!-- Discord stuff -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
@@ -34,7 +34,7 @@
 			<artifactId>JDA</artifactId>
 			<version>3.2.0_242</version>
 		</dependency>
-		<!-- Hibernate library dependecy start -->
+		<!-- start Hibernate library dependency -->
 		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
@@ -53,7 +53,7 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.4.1211</version>
 		</dependency>
-		<!-- Hibernate library dependency end -->
+		<!-- end Hibernate library dependency -->
 		<!-- utility stuff -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -194,7 +194,6 @@
 			<version>4.4</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
 	<properties>
@@ -203,7 +202,7 @@
 
 	<build>
 		<resources>
-			<!-- The resources in the lib folder -->
+			<!-- the resources in the lib folder -->
 			<resource>
 				<directory>tessdata</directory>
 				<includes>
@@ -212,7 +211,7 @@
 				<targetPath>${project.build.directory}/tessdata/</targetPath>
 				<filtering>false</filtering>
 			</resource>
-			<!-- We need to redeclare the project resources again -->
+			<!-- We need to redeclare the project resources. -->
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
@@ -265,6 +264,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>

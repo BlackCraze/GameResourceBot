@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<!-- ressources pour le jeu de téléphone portable "Deep Town"
-		Français
-	resources for mobile game "Deep Town"
+	<!-- resources for mobile game "Deep Town"
 		French -->
+	<!-- ALL TRANSLATIONS MATCH THE GAME. TRANSLATIONS MAY OR MAY
+		NOT BE ACCURATE IN FRENCH. -->
 	<entry key="ACCUMULATOR">Accumulateur</entry>
 	<entry key="ALEXANDRITE">Alexandrite</entry>
 	<entry key="ALUMINIUM">Aluminium</entry>
@@ -46,9 +46,9 @@
 	<entry key="GRAPHITE">Graphite</entry>
 	<entry key="GREEN_CANDY">Bonbon Vert</entry>
 	<entry key="GREEN_LASER">Laser Vert</entry>
-	<entry key="GUNPOWDER">Poudre à Canon</entry>
+	<entry key="GUNPOWDER">Poudre À Canon</entry>
 	<entry key="HAIR_COMB">Peigne</entry>
-	<entry key="HELIUM_3">Hélium-3</entry>
+	<entry key="HELIUM_3">Hélium 3</entry>
 	<entry key="HYDROGEN">Hydrogène</entry>
 	<entry key="INSULATED_WIRE">Câble Isolé</entry>
 	<entry key="IRON">Fer</entry>
@@ -57,7 +57,7 @@
 	<entry key="LIANA">Liane</entry>
 	<entry key="LIANA_SEED">Graine de Liane</entry>
 	<entry key="LIQUID_NITROGEN">Azote Liquide</entry>
-	<entry key="MAGIC_BOX">Bote Magique</entry>
+	<entry key="MAGIC_BOX">Boîte Magique</entry>
 	<entry key="MAYAN_CALENDAR">Calendrier Maya</entry>
 	<entry key="MOTHERBOARD">Carte Mère</entry>
 	<entry key="NITROGEN">Azote</entry>
@@ -101,10 +101,11 @@
 	<entry key="TOPAZ">Topaze</entry>
 	<entry key="URANIUM">Uranium</entry>
 	<entry key="URANIUM_ROD">Lingot d'Uranium</entry>
-	<entry key="WINTER_SOCK">Chaussette de Nol</entry>
-	<entry key="WINTERFEST_GLOBE">Boule à Neige du Conte d'Hiver</entry>
-	<entry key="WINTERFEST_TOY">Jouet du Festival d'Hiver</entry>
 	<entry key="WATER">Eau</entry>
+	<entry key="WINTER_SOCK">Chaussette de Noël</entry>
+	<entry key="WINTERFEST_GLOBE">Boule À Neige du Conte d'Hiver</entry>
+	<entry key="WINTERFEST_TOY">Jouet du Festival d'Hiver</entry>
 	<entry key="WOOD">Bois</entry>
 	<entry key="YELLOW_CANDY">Bonbon Jaune</entry>
 </properties>
+
