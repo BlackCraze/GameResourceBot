@@ -31,8 +31,10 @@
 	<entry key="DIAMOND_CUTTER">Diamond Cutter</entry>
 	<entry key="DIETHYL_ETHER">Diethyl Ether</entry>
 	<entry key="DRY_ICE">Dry Ice</entry>
+	<entry key="ELECTRICAL_ENGINE">Electrical Engine</entry>
 	<entry key="EMERALD">Emerald</entry>
 	<entry key="EMERALD_RING">Emerald Ring</entry>
+	<entry key="ENHANCED_HELIUM_3">Enhanced Helium 3</entry>
 	<entry key="ETHANOL">Ethanol</entry>
 	<entry key="GEAR">Gear</entry>
 	<entry key="GLASS">Glass</entry>
@@ -56,6 +58,9 @@
 	<entry key="LIANA_SEED">Liana Seed</entry>
 	<entry key="LIQUID_NITROGEN">Liquid Nitrogen</entry>
 	<entry key="MAGIC_BOX">Magic Box</entry>
+	<entry key="MAGNET">Magnet</entry>
+	<entry key="MAGNETITE_BAR">Magnetite Bar</entry>
+	<entry key="MAGNETITE_ORE">Magnetite Ore</entry>
 	<entry key="MAYAN_CALENDAR">Maya Calendar</entry>
 	<entry key="MOTHERBOARD">Motherboard</entry>
 	<entry key="NITROGEN">Nitrogen</entry>
@@ -97,6 +102,7 @@
 	<entry key="TITANIUM_BAR">Titanium Bar</entry>
 	<entry key="TITANIUM_ORE">Titanium Ore</entry>
 	<entry key="TOPAZ">Topaz</entry>
+	<entry key="TOXIC_BOMB">Toxic Bomb</entry>
 	<entry key="URANIUM">Uranium</entry>
 	<entry key="URANIUM_ROD">Uranium Rod</entry>
 	<entry key="WATER">Water</entry>

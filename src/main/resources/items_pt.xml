@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<!-- recursos para o jogo de telefone móvel "Deep Town"
-		Português -->
-	<!-- TODAS AS TRADUÇÕES COMBINAM O JOGO. AS TRADUÇÕES PODEM OU NÃO
-		SER PRECISAS EM PORTUGUÊS. -->
 	<!-- resources for mobile game "Deep Town"
 		Portuguese -->
 	<!-- ALL TRANSLATIONS MATCH THE GAME. TRANSLATIONS MAY OR MAY
@@ -14,10 +10,10 @@
 	<entry key="ALUMINIUM">Alumínio</entry>
 	<entry key="ALUMINIUM_BAR">Barra de Alumínio</entry>
 	<entry key="ALUMINIUM_BOTTLE">Garrafa de Alumínio</entry>
-	<entry key="AMBER">Âmbar</entry>
+	<entry key="AMBER">Âmber</entry>
 	<entry key="AMBER_BRACELET">Bracelete de Âmbar</entry>
 	<entry key="AMBER_CHARGER">Carregador de Âmbar</entry>
-	<entry key="AMBER_INSULATION">Isolamento de Âmber</entry>
+	<entry key="AMBER_INSULATION">Isolamento de Âmbar</entry>
 	<entry key="AMETHYST">Ametista</entry>
 	<entry key="BATTERY">Bateria</entry>
 	<entry key="BOMB">Bomba</entry>
@@ -37,8 +33,10 @@
 	<entry key="DIAMOND_CUTTER">Cortador de Diamantes</entry>
 	<entry key="DIETHYL_ETHER">Éter Etílico</entry>
 	<entry key="DRY_ICE">Gelo Seco</entry>
+	<entry key="ELECTRICAL_ENGINE">Motor Elétrico</entry>
 	<entry key="EMERALD">Esmeralda</entry>
 	<entry key="EMERALD_RING">Anel de Esmeralda</entry>
+	<entry key="ENHANCED_HELIUM_3">Hélio-3 Aprimorado</entry>
 	<entry key="ETHANOL">Etanol</entry>
 	<entry key="GEAR">Engrenagem</entry>
 	<entry key="GLASS">Vidro</entry>
@@ -52,7 +50,7 @@
 	<entry key="GREEN_LASER">Laser Verde</entry>
 	<entry key="GUNPOWDER">Pólvora</entry>
 	<entry key="HAIR_COMB">Escova de Cabelo</entry>
-	<entry key="HELIUM_3">Hélio-3</entry>
+	<entry key="HELIUM_3">Hélio 3</entry>
 	<entry key="HYDROGEN">Hidrogãnio</entry>
 	<entry key="INSULATED_WIRE">Fio Isolado</entry>
 	<entry key="IRON">Ferro</entry>
@@ -62,6 +60,9 @@
 	<entry key="LIANA_SEED">Semente de Cipã</entry>
 	<entry key="LIQUID_NITROGEN">Nitrogênio Líquido</entry>
 	<entry key="MAGIC_BOX">Caixa Mágica</entry>
+	<entry key="MAGNET">Ímã</entry>
+	<entry key="MAGNETITE_BAR">Barra de Magnetita</entry>
+	<entry key="MAGNETITE_ORE">Minério de Magnetita</entry>
 	<entry key="MAYAN_CALENDAR">Calendário Maia</entry>
 	<entry key="MOTHERBOARD">Placa Mãe</entry>
 	<entry key="NITROGEN">Nitrogênio</entry>
@@ -69,7 +70,7 @@
 	<entry key="OBSIDIAN_KNIFE">Faca de Obsidiana</entry>
 	<entry key="OIL">Óleo</entry>
 	<entry key="OPTIC_FIBER">Cabo de Fibra Ótica</entry>
-	<entry key="OXYGEN">Oxígãnio</entry>
+	<entry key="OXYGEN">Oxigãnio</entry>
 	<entry key="PLASTIC">Plástico</entry>
 	<entry key="PLATINUM">Platina</entry>
 	<entry key="POLISHED_ALEXANDRITE">Alexandrita Polida</entry>
@@ -78,9 +79,9 @@
 	<entry key="POLISHED_DIAMOND">Diamante Polido</entry>
 	<entry key="POLISHED_EMERALD">Esmeralda Lapidada</entry>
 	<entry key="POLISHED_OBSIDIAN">Obsidiana Polida</entry>
-	<entry key="POLISHED_RUBY">Rubí Polido</entry>
+	<entry key="POLISHED_RUBY">Rubi Polido</entry>
 	<entry key="POLISHED_SAPPHIRE">Safira Polida</entry>
-	<entry key="POLISHED_TOPAZ">Topã¡zio Polido</entry>
+	<entry key="POLISHED_TOPAZ">Topã¡Zio Polido</entry>
 	<entry key="PUMPKIN">Abóbora</entry>
 	<entry key="RED_CANDY">Doce Vermelho</entry>
 	<entry key="REFINED_OIL">Petróleo Refinado</entry>
@@ -88,7 +89,7 @@
 	<entry key="RUBY">Rubi</entry>
 	<entry key="SAPPHIRE">Safira</entry>
 	<entry key="SEED">Sementes</entry>
-	<entry key="SILICON">Silãcio</entry>
+	<entry key="SILICON">Silã­cio</entry>
 	<entry key="SILVER">Prata</entry>
 	<entry key="SILVER_BAR">Barra de Prata</entry>
 	<entry key="SOCK_OF_CANDIES">Meia Cheia de Doces</entry>
@@ -103,6 +104,7 @@
 	<entry key="TITANIUM_BAR">Barra de Titânio</entry>
 	<entry key="TITANIUM_ORE">Minério de Titânio</entry>
 	<entry key="TOPAZ">Topázio</entry>
+	<entry key="TOXIC_BOMB">Bomba Tóxica</entry>
 	<entry key="URANIUM">Urânio</entry>
 	<entry key="URANIUM_ROD">Barra de Urânio</entry>
 	<entry key="WATER">Água</entry>
@@ -112,3 +114,4 @@
 	<entry key="WOOD">Madeira</entry>
 	<entry key="YELLOW_CANDY">Doce Amarelo</entry>
 </properties>
+

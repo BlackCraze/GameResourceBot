@@ -13,7 +13,7 @@
 	<entry key="AMBER">Ámbar</entry>
 	<entry key="AMBER_BRACELET">Brazalete Ámbar</entry>
 	<entry key="AMBER_CHARGER">Cargador Ámbar</entry>
-	<entry key="AMBER_INSULATION"> Aislante Ámbar</entry>
+	<entry key="AMBER_INSULATION">Aislante Ámbar</entry>
 	<entry key="AMETHYST">Amatista</entry>
 	<entry key="BATTERY">Batería</entry>
 	<entry key="BOMB">Bomba</entry>
@@ -33,8 +33,10 @@
 	<entry key="DIAMOND_CUTTER">Cortador de Diamante</entry>
 	<entry key="DIETHYL_ETHER">Éter Etílico</entry>
 	<entry key="DRY_ICE">Hielo Seco</entry>
+	<entry key="ELECTRICAL_ENGINE">Motor Eléctrico</entry>
 	<entry key="EMERALD">Esmeralda</entry>
 	<entry key="EMERALD_RING">Anillo de Esmeralda</entry>
+	<entry key="ENHANCED_HELIUM_3">Helio-3 Potenciado</entry>
 	<entry key="ETHANOL">Etanol</entry>
 	<entry key="GEAR">Engranaje</entry>
 	<entry key="GLASS">Vidrio</entry>
@@ -58,6 +60,9 @@
 	<entry key="LIANA_SEED">Semilla de Liana</entry>
 	<entry key="LIQUID_NITROGEN">Nitrógeno Líquido</entry>
 	<entry key="MAGIC_BOX">Caja Mágica</entry>
+	<entry key="MAGNET">Imán</entry>
+	<entry key="MAGNETITE_BAR">Lingote de Magnetita</entry>
+	<entry key="MAGNETITE_ORE">Mineral de Magnetita</entry>
 	<entry key="MAYAN_CALENDAR">Calendario Maya</entry>
 	<entry key="MOTHERBOARD">Tarjeta Madre</entry>
 	<entry key="NITROGEN">Nitrógeno</entry>
@@ -99,6 +104,7 @@
 	<entry key="TITANIUM_BAR">Lingote de Titanio</entry>
 	<entry key="TITANIUM_ORE">Mineral de Titanio</entry>
 	<entry key="TOPAZ">Topacio</entry>
+	<entry key="TOXIC_BOMB">Bomba Tóxica</entry>
 	<entry key="URANIUM">Uranio</entry>
 	<entry key="URANIUM_ROD">Barra de Uranio</entry>
 	<entry key="WATER">Agua</entry>
