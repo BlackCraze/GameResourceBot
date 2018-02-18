@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+	<!-- recursos para o jogo de telefone móvel "Deep Town"
+-		Português -->
+-	<!-- TODAS AS TRADUÇÕES COMBINAM O JOGO. AS TRADUÇÕES PODEM OU NÃO
+-		SER PRECISAS EM PORTUGUÊS. -->
 	<!-- resources for mobile game "Deep Town"
 		Portuguese -->
 	<!-- ALL TRANSLATIONS MATCH THE GAME. TRANSLATIONS MAY OR MAY
