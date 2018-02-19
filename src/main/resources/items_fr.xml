@@ -33,8 +33,10 @@
 	<entry key="DIAMOND_CUTTER">Tailleur de Diamant</entry>
 	<entry key="DIETHYL_ETHER">Éther Diéthylique</entry>
 	<entry key="DRY_ICE">Glace Sèche</entry>
+	<entry key="ELECTRICAL_ENGINE">Moteur Électrique</entry>
 	<entry key="EMERALD">Émeraude</entry>
 	<entry key="EMERALD_RING">Bague en Émeraude</entry>
+	<entry key="ENHANCED_HELIUM_3">Hélium 3 Amélioré</entry>
 	<entry key="ETHANOL">Éthanol</entry>
 	<entry key="GEAR">Engrenage</entry>
 	<entry key="GLASS">Verre</entry>
@@ -46,7 +48,7 @@
 	<entry key="GRAPHITE">Graphite</entry>
 	<entry key="GREEN_CANDY">Bonbon Vert</entry>
 	<entry key="GREEN_LASER">Laser Vert</entry>
-	<entry key="GUNPOWDER">Poudre À Canon</entry>
+	<entry key="GUNPOWDER">Poudre à Canon</entry>
 	<entry key="HAIR_COMB">Peigne</entry>
 	<entry key="HELIUM_3">Hélium 3</entry>
 	<entry key="HYDROGEN">Hydrogène</entry>
@@ -58,6 +60,9 @@
 	<entry key="LIANA_SEED">Graine de Liane</entry>
 	<entry key="LIQUID_NITROGEN">Azote Liquide</entry>
 	<entry key="MAGIC_BOX">Boîte Magique</entry>
+	<entry key="MAGNET">Aimant</entry>
+	<entry key="MAGNETITE_BAR">Barre de Magnétite</entry>
+	<entry key="MAGNETITE_ORE">Minerai de Magnétite</entry>
 	<entry key="MAYAN_CALENDAR">Calendrier Maya</entry>
 	<entry key="MOTHERBOARD">Carte Mère</entry>
 	<entry key="NITROGEN">Azote</entry>
@@ -99,11 +104,12 @@
 	<entry key="TITANIUM_BAR">Lingot de Titane</entry>
 	<entry key="TITANIUM_ORE">Minerai de Titane</entry>
 	<entry key="TOPAZ">Topaze</entry>
+	<entry key="TOXIC_BOMB">Bombe Toxique</entry>
 	<entry key="URANIUM">Uranium</entry>
 	<entry key="URANIUM_ROD">Lingot d'Uranium</entry>
 	<entry key="WATER">Eau</entry>
 	<entry key="WINTER_SOCK">Chaussette de Noël</entry>
-	<entry key="WINTERFEST_GLOBE">Boule À Neige du Conte d'Hiver</entry>
+	<entry key="WINTERFEST_GLOBE">Boule à Neige du Conte d'Hiver</entry>
 	<entry key="WINTERFEST_TOY">Jouet du Festival d'Hiver</entry>
 	<entry key="WOOD">Bois</entry>
 	<entry key="YELLOW_CANDY">Bonbon Jaune</entry>

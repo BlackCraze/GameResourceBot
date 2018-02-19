@@ -33,8 +33,10 @@
 	<entry key="DIAMOND_CUTTER">Tagliadiamanti</entry>
 	<entry key="DIETHYL_ETHER">Etere Etilico</entry>
 	<entry key="DRY_ICE">Ghiaccio Secco</entry>
+	<entry key="ELECTRICAL_ENGINE">Motore Elettrico</entry>
 	<entry key="EMERALD">Smeraldo</entry>
 	<entry key="EMERALD_RING">Anello di Smeraldo</entry>
+	<entry key="ENHANCED_HELIUM_3">Elio-3 Potenziato</entry>
 	<entry key="ETHANOL">Etanolo</entry>
 	<entry key="GEAR">Ingranaggio</entry>
 	<entry key="GLASS">Vetro</entry>
@@ -58,6 +60,9 @@
 	<entry key="LIANA_SEED">Seme di Liana</entry>
 	<entry key="LIQUID_NITROGEN">Azoto Liquido</entry>
 	<entry key="MAGIC_BOX">Scatola Magica</entry>
+	<entry key="MAGNET">Magnete</entry>
+	<entry key="MAGNETITE_BAR">Barra di Magnetite</entry>
+	<entry key="MAGNETITE_ORE">Blocco di Magnetite</entry>
 	<entry key="MAYAN_CALENDAR">Calendario Maya</entry>
 	<entry key="MOTHERBOARD">Scheda Madre</entry>
 	<entry key="NITROGEN">Azoto</entry>
@@ -99,6 +104,7 @@
 	<entry key="TITANIUM_BAR">Barra di Titanio</entry>
 	<entry key="TITANIUM_ORE">Barra di Titanio</entry>
 	<entry key="TOPAZ">Topazio</entry>
+	<entry key="TOXIC_BOMB">Bomba Tossica</entry>
 	<entry key="URANIUM">Uranio</entry>
 	<entry key="URANIUM_ROD">Barra di Uranio</entry>
 	<entry key="WATER">Acqua</entry>
