@@ -5,6 +5,7 @@ import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
 import net.dv8tion.jda.core.entities.Message;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -15,7 +16,21 @@ public class Help implements BaseCommand {
         if (!scanner.hasNext()) {
             commandList(message);
         } else {
+            String command = scanner.next();
+            try {
+                List<Class<BaseCommand>> commandClasses = BaseCommand.getCommandClasses()
+                        .stream()
+                        .filter(cls -> cls.getSimpleName().equals(command))
+                        .collect(Collectors.toList());
 
+                assert commandClasses.size() == 1;
+
+                BaseCommand fakeInstance = commandClasses.get(0).getConstructor().newInstance();
+                String helpText = (String) commandClasses.get(0).getMethod("help").invoke(fakeInstance);
+                Speaker.say(message.getChannel(), helpText);
+            } catch (Exception e) {
+                Speaker.err(message, "No such command `" + command + "`");
+            }
         }
     }
 

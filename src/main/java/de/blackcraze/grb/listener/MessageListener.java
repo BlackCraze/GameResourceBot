@@ -69,7 +69,7 @@ public class MessageListener extends ListenerAdapter {
             System.out.printf("%s:%s%n", message.getAuthor().getName(), message.getContent());
             try {
                 Class<? extends BaseCommand> commandClass = commandClassOptional.get();
-                Object fakeInstance = commandClass.getConstructor().newInstance();
+                BaseCommand fakeInstance = commandClass.getConstructor().newInstance();
                 commandClass
                         .getMethod("run", Scanner.class, Message.class)
                         .invoke(fakeInstance, scanner, message);
