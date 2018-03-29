@@ -18,6 +18,9 @@ import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
 public interface BaseCommand {
 
     void run(Scanner scanner, Message message);
+    default String help() {
+        return "";
+    }
 
     static void checkPublic(Message message) {
         if (!ChannelType.TEXT.equals(message.getChannelType())) {
