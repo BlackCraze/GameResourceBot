@@ -13,4 +13,10 @@ public class Ping implements BaseCommand {
     public void run(Scanner scanner, Message message) {
         Speaker.say(message.getChannel(), Resource.getString("PONG", getResponseLocale(message)));
     }
+
+    @Override
+    public String help() {
+        return "Let the bot say something to check if it is able to respond\n" +
+                "`bot ping`";
+    }
 }

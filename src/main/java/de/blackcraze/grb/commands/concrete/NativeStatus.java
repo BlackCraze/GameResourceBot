@@ -30,4 +30,10 @@ public class NativeStatus implements BaseCommand {
         }
         Speaker.sayCode(message.getChannel(), sb.toString());
     }
+
+    @Override
+    public String help() {
+        return "let the bot show his native memory status (useful for troubleshooting)\n" +
+                "`bot nativeStatus`";
+    }
 }

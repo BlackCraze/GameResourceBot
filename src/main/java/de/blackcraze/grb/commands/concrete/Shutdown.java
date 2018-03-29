@@ -10,4 +10,10 @@ public class Shutdown implements BaseCommand {
         BaseCommand.checkPublic(message);
         System.exit(1);
     }
+
+    @Override
+    public String help() {
+        return "let the bot shutdown (on a heroku server this will lead to a restart - usefull in case of a OutOfMemoryError)\n" +
+                "`bot shutdown`";
+    }
 }

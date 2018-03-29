@@ -53,4 +53,20 @@ public class Config implements BaseCommand {
             }
         }
     }
+
+    @Override
+    public String help() {
+        return "let the bot show you its active configuration\n" +
+                "`bot config`\n" +
+                "change the bot configuration on runtime (will be lost when it is restarted)\n" +
+                "`bot config set [config] [value]`\n" +
+                "\n" +
+                "`bot config set language en`\n" +
+                "show the parsing result after a user uploaded pictures\n" +
+                "`bot config set OCR_RESULT [off|on]`\n" +
+                " \n" +
+                "\n" +
+                "bot will delete the message with the uploaded pictures after reading it\n" +
+                "`bot config set DELETE_PICTURE_MESSAGE [off|on]`";
+    }
 }
