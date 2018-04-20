@@ -15,7 +15,7 @@
 	<!-- mensagens de erro para os utilizadores -->
 	<!-- error messages for users -->
 	<entry key="ERROR_UNKNOWN">Ooooops... Eu encontrei um erro. Por favor não me bata! --> "%s"</entry>
-	<entry key="RESOURCE_AND_USER_UNKNOWN">Eu não conheço nem um utilizador nem um recurso com esse nome.</entry>
+	<entry key="RESOURCE_AND_USER_UNKNOWN">Eu não conheço nem um utilizador nem um recurso com esse nome. =(</entry>
 	<entry key="ALREADY_KNOW">Eu já sei disso.</entry>
 	<entry key="RESOURCE_UNKNOWN">Eu não conheço este recurso. =(</entry>
 	<entry key="DO_NOT_KNOW_ABOUT">Eu não sei nada acerca disto: %s</entry>
@@ -46,7 +46,7 @@
 	<!-- -->
 	<!-- cabeçalhos de relatório -->
 	<!-- report headers -->
-	<entry key="USERS_LIST_HEADER">Membros da guilda</entry>
+	<entry key="USERS_LIST_HEADER">Membros da guilda (%d)</entry>
 	<entry key="OLDEST_STOCK">Idade</entry>
 	<entry key="USER">Utilizador</entry>
 	<entry key="POPULATED">Indexados</entry>
@@ -65,20 +65,20 @@
 	<!-- IMPORTANT NOTE: The text of these entries MUST be 2,000 characters or shorter.
 		Otherwise, they will fail to send. This limit is set by Discord. -->
 	<entry key="HELP_USERS">**GERAL**
-	
+
 	Para permitir que o bot atualize o seu inventário, envie capturas de ecrã do seu ecrã de inventário, ou introduza um comando (veja abaixo).
-	
+
 	OPCIONAL: Envie comandos e/ou capturas de ecrã via DM: __Utilize o ID de @menção do bot.__
-	
+
 	O bot reage a comandos!
 	✅ Sucesso!
 	❌ Falhou!
-	
+
 	=====
 
 	Para obter ajuda com comandos específicos, introduza:
 	`bot help [comando]`
-	
+
 	**COMANDOS**
 	userconfig (opções)
 	clear
@@ -191,5 +191,6 @@
 	<!-- DESENVOLVEDORES: mensagens de erro -->
 	<!-- DEVELOPERS: error messages -->
 	<entry key="MISSING_ENV_VAR">Variável de ambiente perdida: \"%s\"%n"</entry>
+	<entry key="ONLY_PNG_IMAGES">Eu apenas posso processar imagens PNG</entry>
 </properties>
 

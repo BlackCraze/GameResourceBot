@@ -44,4 +44,5 @@
 	<entry key="GROUP_CREATE_UNKNOWN">Du musst mir schon einen Namen nennen ;-)</entry>
 	<entry key="GROUP_ADD_UNKNOWN">Nenne mir den Namen der Ressigruppe und die Namen der Rohstoffe, die du hinzufügen möchtest.</entry>
 	<entry key="GROUP_REMOVE_UNKNOWN">Nenne mir den Namen der Ressigruppe und die Namen der Rohstoffe, die du entfernen möchtest.</entry>
+	<entry key="ONLY_PNG_IMAGES">Ich kann leider nur PNG-Bilder verarbeiten</entry>
 </properties>

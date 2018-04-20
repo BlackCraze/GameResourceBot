@@ -37,7 +37,7 @@
 	<entry key="GROUP_REMOVE_UNKNOWN">Tell me the name of the group and the name of the resource to remove.</entry>
 	<!-- -->
 	<!-- report headers -->
-	<entry key="USERS_LIST_HEADER">Guild members</entry>
+	<entry key="USERS_LIST_HEADER">Guild members (%d)</entry>
 	<entry key="OLDEST_STOCK">Age</entry>
 	<entry key="USER">User</entry>
 	<entry key="POPULATED">Populated</entry>
@@ -53,20 +53,20 @@
 	<!-- IMPORTANT NOTE: The text of these entries MUST be 2,000 characters or shorter.
 		Otherwise, they will fail to send. This limit is set by Discord. -->
 	<entry key="HELP_USERS">**GENERAL**
-	
+
 	To let the bot update your inventory, post screenshots of your inventory screen, or type a command (see below).
-	
+
 	OPTIONAL: Send commands and/or screenshots via DM: __Use bot's @mention ID.__
-	
+
 	The bot reacts to commands!
 	✅ Success!
 	❌ Fail!
-	
+
 	=====
-	
+
 	For help with specific commands, type:
 	`bot help [command]`
-	
+
 	**COMMANDS**
 	userconfig (options)
 	clear
@@ -171,4 +171,5 @@
 	<!-- -->
 	<!-- DEVELOPERS: error messages -->
 	<entry key="MISSING_ENV_VAR">Missing environment variable: \"%s\"%n"</entry>
+	<entry key="ONLY_PNG_IMAGES">I can only process PNG images</entry>
 </properties>
