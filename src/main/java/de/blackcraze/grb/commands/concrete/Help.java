@@ -20,7 +20,7 @@ public class Help implements BaseCommand {
             try {
                 List<Class<BaseCommand>> commandClasses = BaseCommand.getCommandClasses()
                         .stream()
-                        .filter(cls -> cls.getSimpleName().equals(command))
+                        .filter(cls -> cls.getSimpleName().equalsIgnoreCase(command))
                         .collect(Collectors.toList());
 
                 assert commandClasses.size() == 1;
