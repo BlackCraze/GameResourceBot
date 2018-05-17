@@ -1,19 +1,6 @@
 package de.blackcraze.grb.commands;
 
-import static de.blackcraze.grb.util.CommandUtils.getMateDevice;
-import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrint;
-import static org.bytedeco.javacpp.Pointer.deallocateReferences;
-
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.Locale;
-import java.util.Map;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
-
+import de.blackcraze.grb.commands.concrete.Update;
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
@@ -22,6 +9,20 @@ import de.blackcraze.grb.ocr.OCR;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.Message.Attachment;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Locale;
+import java.util.Map;
+
+import static de.blackcraze.grb.util.CommandUtils.getMateDevice;
+import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
+import static de.blackcraze.grb.util.PrintUtils.prettyPrint;
+import static org.bytedeco.javacpp.Pointer.deallocateReferences;
 
 public class FileProcessor {
 
@@ -50,7 +51,7 @@ public class FileProcessor {
                         Speaker.sayCode(message.getChannel(), prettyPrint(stocks, locale));
                     }
 
-                    Commands.internalUpdate(message, locale, stocks);
+                    Update.internalUpdate(message, locale, stocks);
                 } catch (Throwable e) {
                     Speaker.err(message, String.format(Resource.getString("ERROR_UNKNOWN", locale), e.getMessage()));
                     e.printStackTrace();
