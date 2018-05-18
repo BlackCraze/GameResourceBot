@@ -167,7 +167,7 @@ public class Group implements BaseCommand {
             rows.add(Arrays.asList(stockTypeGroup.getName(), amount));
             if (types != null) {
                 types.sort(new StockTypeComparator(locale));
-                for (Iterator<StockType> it2 = types.iterator(); it2.hasNext(); ) {
+                for (Iterator<StockType> it2 = types.iterator(); it2.hasNext();) {
                     StockType stockType = it2.next();
                     String localisedStockName = Resource.getItem(stockType.getName(), locale);
                     String tree = it2.hasNext() ? "├─ " : "└─ ";
@@ -188,7 +188,7 @@ public class Group implements BaseCommand {
     };
 
     static Optional<StockTypeGroup> getTargetGroup(Scanner scanner, Message message,
-                                                   String operation) {
+            String operation) {
         Locale locale = getResponseLocale(message);
         if (scanner.hasNext()) {
             String groupName = scanner.next();
@@ -204,8 +204,7 @@ public class Group implements BaseCommand {
         return Optional.empty();
     }
 
-    static List<StockType> getTargetStockTypes(Scanner scanner, Message message,
-                                               String operation) {
+    static List<StockType> getTargetStockTypes(Scanner scanner, Message message, String operation) {
         Locale locale = getResponseLocale(message);
         List<StockType> stockTypes = new ArrayList<>();
         List<String> unknownStockTypes = new ArrayList<>();
@@ -251,21 +250,4 @@ public class Group implements BaseCommand {
         return stockTypes;
     }
 
-    @Override
-    public String help() {
-        return "Delete a group\n" +
-                "`bot group delete [group-name]`\n" +
-                "\n" +
-                "Add a group\n" +
-                "`bot group create [group-name]`\n" +
-                "\n" +
-                "Add a ressource to a group\n" +
-                "`bot group add [group-name] \"[item]\"`\n" +
-                "\n" +
-                "Remove a ressource to a group\n" +
-                "`bot group remove [group-name] \"[item]\"`\n" +
-                "\n" +
-                "Give all the ressouces from guild for a specific item group\n" +
-                "`bot total [group-name]`";
-    }
 }

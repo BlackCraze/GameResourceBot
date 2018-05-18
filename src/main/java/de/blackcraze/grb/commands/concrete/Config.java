@@ -3,11 +3,10 @@ package de.blackcraze.grb.commands.concrete;
 import de.blackcraze.grb.commands.BaseCommand;
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.core.Speaker;
-import net.dv8tion.jda.core.entities.Message;
-
 import java.lang.reflect.Field;
 import java.util.Objects;
 import java.util.Scanner;
+import net.dv8tion.jda.core.entities.Message;
 
 public class Config implements BaseCommand {
     public void run(Scanner scanner, Message message) {
@@ -54,19 +53,4 @@ public class Config implements BaseCommand {
         }
     }
 
-    @Override
-    public String help() {
-        return "let the bot show you its active configuration\n" +
-                "`bot config`\n" +
-                "change the bot configuration on runtime (will be lost when it is restarted)\n" +
-                "`bot config set [config] [value]`\n" +
-                "\n" +
-                "`bot config set language en`\n" +
-                "show the parsing result after a user uploaded pictures\n" +
-                "`bot config set OCR_RESULT [off|on]`\n" +
-                " \n" +
-                "\n" +
-                "bot will delete the message with the uploaded pictures after reading it\n" +
-                "`bot config set DELETE_PICTURE_MESSAGE [off|on]`";
-    }
 }

@@ -25,9 +25,4 @@ public class CheckTypes implements BaseCommand {
         Speaker.sayCode(message.getChannel(), prettyPrintStockTypes(stocks, locale));
     }
 
-    @Override
-    public String help() {
-        return "print a list of known resource types\n" +
-                "`bot checkTypes`";
-    }
 }

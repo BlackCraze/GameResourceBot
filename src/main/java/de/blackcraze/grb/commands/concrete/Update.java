@@ -44,20 +44,4 @@ public class Update implements BaseCommand {
         }
     }
 
-    @Override
-    public String help() {
-        return "Updating your stock\n" +
-                "bot update [resourceName] [amount]\n" +
-                "\n" +
-                "Example:\n" +
-                "bot update coal 500000\n" +
-                "\n" +
-                "updating several stocks\n" +
-                "```\n" +
-                "bot update [resourceName] [amount] [resourceName] [amount]\n" +
-                "[resourceName] [amount]\n" +
-                "[resourceName] [amount]\n" +
-                "...\n" +
-                "```";
-    }
 }

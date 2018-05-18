@@ -63,9 +63,4 @@ public class Status implements BaseCommand{
         return result;
     }
 
-    @Override
-    public String help() {
-        return "let the bot show his java memory status (useful for troubleshooting)\n" +
-                "`bot status`";
-    }
 }
