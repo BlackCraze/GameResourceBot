@@ -250,22 +250,4 @@ public class Group implements BaseCommand {
         }
         return stockTypes;
     }
-
-    @Override
-    public String help() {
-        return "Delete a group\n" +
-                "`bot group delete [group-name]`\n" +
-                "\n" +
-                "Add a group\n" +
-                "`bot group create [group-name]`\n" +
-                "\n" +
-                "Add a ressource to a group\n" +
-                "`bot group add [group-name] \"[item]\"`\n" +
-                "\n" +
-                "Remove a ressource to a group\n" +
-                "`bot group remove [group-name] \"[item]\"`\n" +
-                "\n" +
-                "Give all the ressouces from guild for a specific item group\n" +
-                "`bot total [group-name]`";
-    }
 }

@@ -60,16 +60,4 @@ public class Clear implements BaseCommand {
         // Always response to a bot request.
         message.addReaction(clearReaction).queue();
     }
-
-    @Override
-    public String help() {
-        return "Reset all the information in your bot inventory:\n" +
-                "`bot clear`\n" +
-                "\n" +
-                "Reset the information for a member:\n" +
-                "`bot clear [membername]`\n" +
-                "\n" +
-                "Reset all the infromation for the whole guild\n" +
-                "`bot clear all`";
-    }
 }

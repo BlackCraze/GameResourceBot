@@ -6,6 +6,7 @@ import de.blackcraze.grb.i18n.Resource;
 import net.dv8tion.jda.core.entities.Message;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -20,13 +21,14 @@ public class Help implements BaseCommand {
             try {
                 List<Class<BaseCommand>> commandClasses = BaseCommand.getCommandClasses()
                         .stream()
-                        .filter(cls -> cls.getSimpleName().equals(command))
+                        .filter(cls -> cls.getSimpleName().equalsIgnoreCase(command))
                         .collect(Collectors.toList());
 
                 assert commandClasses.size() == 1;
 
                 BaseCommand fakeInstance = commandClasses.get(0).getConstructor().newInstance();
-                String helpText = (String) commandClasses.get(0).getMethod("help").invoke(fakeInstance);
+                Locale locale = getResponseLocale(message);
+                String helpText = (String) commandClasses.get(0).getMethod("help").invoke(fakeInstance, locale);
                 Speaker.say(message.getChannel(), helpText);
             } catch (Exception e) {
                 Speaker.err(message, "No such command `" + command + "`");

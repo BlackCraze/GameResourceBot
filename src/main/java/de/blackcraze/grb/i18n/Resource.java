@@ -1,11 +1,12 @@
 package de.blackcraze.grb.i18n;
 
+import com.sksamuel.diffpatch.DiffMatchPatch;
+import com.sksamuel.diffpatch.DiffMatchPatch.Diff;
+import de.blackcraze.grb.commands.BaseCommand;
+
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
-import com.sksamuel.diffpatch.DiffMatchPatch;
-import com.sksamuel.diffpatch.DiffMatchPatch.Diff;
 
 public class Resource {
 
@@ -74,4 +75,7 @@ public class Resource {
         return resourceBundle.getString(key);
     }
 
+    public static String getHelp(Class<? extends BaseCommand> aClass, Locale locale) {
+        return getResource(aClass.getSimpleName(), locale, "command_help");
+    }
 }

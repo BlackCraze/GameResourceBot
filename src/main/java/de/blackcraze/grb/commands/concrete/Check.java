@@ -63,22 +63,4 @@ public class Check implements BaseCommand {
             }
         }
     }
-
-    @Override
-    public String help() {
-        return "Printing out your stocks\n" +
-                "`bot check`\n" +
-                "\n" +
-                "printing out detailed stock information about a stock or all stocks of a member\n" +
-                "`bot check [userName]`\n" +
-                "\n" +
-                "Example:\n" +
-                "`bot check BlackCraze`\n" +
-                "\n" +
-                "printing out the overall guild stock from guild members\n" +
-                "`bot check [resourceName]`\n" +
-                "\n" +
-                "Example:\n" +
-                "`bot check coal`";
-    }
 }
