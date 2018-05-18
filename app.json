@@ -1,7 +1,7 @@
 {
-  "name": "ResourceBot",
-  "description": "A resource management tool for guilds",
-  "keywords": ["deeptown", "deep town", "resource management", "guild"],
+  "name": "RessourceBot",
+  "description": "A Ressource Management Tool for Guilds",
+  "keywords": ["deeptown", "ressource management", "guild"],
   "repository": "https://github.com/BlackCraze/GameResourceBot",
   "addons": [
     {
@@ -10,37 +10,37 @@
   ],  
   "env": {
     "GRB_DISCORD_TOKEN": {
-      "description": "In Discord's developer area, reveal and copy 'Token'. Paste it here.",
+      "description": "This is the 'secret' from you 'App Bot User' you copied before.",
       "value": "",
       "required": "true"
     },    
     "CHANNEL": {
-      "description": "Enter the name of your bot's channel on your Discord server, WITHOUT THE #.",
-      "value": "bot",
+      "description": "The channel the bot will listen to on your discord server",
+      "value": "GuildRessourceBot",
       "required": "false"
     },
     "LANGUAGE": {
-      "description": "guildwide default language setting [de, en, es, fr, it, pt]",
+      "description": "Language for the ressources, currenlty 'en' or 'de' are valid values.",
       "value": "en",
       "required": "false"
     },
     "OCR_RESULT": {
-      "description": "If set to 'on', the bot will show the results after processing screenshots.",
+      "description": "If set to 'on' the bot will say tell you the result of the OCR",
       "value": "on",
       "required": "false"
     },
     "DELETE_PICTURE_MESSAGE": {
-      "description": "If set to 'on', the bot will delete screenshots after processing them.",
+      "description": "If set to 'on' the bot will delete the message with pictures right after it has scanned it",
       "value": "off",
       "required": "false"
     },
     "JAVA_TOOL_OPTIONS": {
-      "description": "memory instructions so this project can run on a free Heroku plan; DO NOT CHANGE!!",
+      "description": "Memory instructions so this project can run on a free heroku plan",
       "value": "-Xms400m -Xmx400m -Xss512k -XX:MaxMetaspaceSize=80m",
       "required": "true"
     },    
     "TESS_DATA": {
-      "description": "path for the tessdata files; DO NOT CHANGE!!",
+      "description": "Path for the tessdata files",
       "value": "./target/tessdata",
       "required": "true"
     }    
