@@ -76,7 +76,7 @@ public class CommandUtils {
     public static boolean botMentioned(Message message) {
         SelfUser selfUser = message.getJDA().getSelfUser();
         String prefix = BotConfig.getConfig().PREFIX;
-        String messageStartWord = message.getContent().split(" ")[0];
+        String messageStartWord = message.getContentRaw().split(" ")[0];
         boolean prefixCheck = prefix.equalsIgnoreCase(messageStartWord);
         boolean mentionCheck = message.isMentioned(selfUser) && !message.mentionsEveryone();
         return prefixCheck || mentionCheck;
@@ -87,7 +87,7 @@ public class CommandUtils {
         if (!botMentioned(message) && !pm) {
             return Optional.empty();
         }
-        Scanner scanner = new Scanner(message.getContent());
+        Scanner scanner = new Scanner(message.getContentRaw());
         if (pm) {
             // skip the bot prefix if used
             if (scanner.hasNext(BotConfig.getConfig().PREFIX)) {
