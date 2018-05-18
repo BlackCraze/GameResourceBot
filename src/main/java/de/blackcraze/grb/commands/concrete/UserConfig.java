@@ -67,13 +67,4 @@ public class UserConfig implements BaseCommand {
             }
         }
     }
-
-    @Override
-    public String help() {
-        return "The bot uses the default language of the guild - you can switch it to your ingame" +
-                " language if you are using another language like that (supported languages are `de` and `en`):\n" +
-                "`bot userConfig set language de`\n" +
-                "Change OCR settings (beta)\n" +
-                "`bot userconfig set device [iphone|android]`";
-    }
 }

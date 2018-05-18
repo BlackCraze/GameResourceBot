@@ -74,17 +74,4 @@ public class Total implements BaseCommand {
             Speaker.say(message.getChannel(), Resource.getString("RESOURCES_EMPTY", locale));
         }
     }
-
-    @Override
-    public String help() {
-        return "An overview about actual resource amounts hold by the entire guild\n" +
-                "Example (all resources):\n" +
-                "`bot total`\n" +
-                "\n" +
-                "Example (coal):\n" +
-                "`bot total coal`\n" +
-                "\n" +
-                "Example (all polished stuff):\n" +
-                "`bot total polished`";
-    }
 }

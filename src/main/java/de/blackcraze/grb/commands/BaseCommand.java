@@ -9,6 +9,7 @@ import net.dv8tion.jda.core.entities.Message;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -18,8 +19,9 @@ import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
 public interface BaseCommand {
 
     void run(Scanner scanner, Message message);
-    default String help() {
-        return "";
+
+    default String help(Locale locale) {
+        return Resource.getHelp(this.getClass(), locale);
     }
 
     static void checkPublic(Message message) {
