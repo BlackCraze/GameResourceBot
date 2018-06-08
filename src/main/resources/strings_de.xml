@@ -8,6 +8,11 @@
 	<entry key="RESOURCE_UNKNOWN">Diese Ressource kenne ich nicht =(</entry>
 	<entry key="USER">Benutzer</entry>
 	<entry key="USERS_LIST_HEADER">Gildenmitglieder (%d)</entry>
+	<entry key="USERS_SYNC_ACTION">Aktion</entry>
+    <entry key="USERS_SYNC_ADD">Hinzugefügt</entry>
+	<entry key="USERS_SYNC_HEADER">Nutzersynchronisierung</entry>
+    <entry key="USERS_SYNC_NOTHING">Die Nutzerdatenbank is aktuell</entry>
+    <entry key="USERS_SYNC_REMOVE">Gelöscht</entry>
     <entry key="OLDEST_STOCK">Alter</entry>
     <entry key="POPULATED">Anzahl</entry>
 	<entry key="DO_NOT_KNOW_ABOUT">Das hier kenne ich nicht: %s</entry>
