@@ -35,6 +35,7 @@
 	<entry key="GROUP_CREATE_UNKNOWN">You have to name it. ;-)</entry>
 	<entry key="GROUP_ADD_UNKNOWN">Tell me the name of the group and the name(s) of the resource(s) to add.</entry>
 	<entry key="GROUP_REMOVE_UNKNOWN">Tell me the name of the group and the name of the resource to remove.</entry>
+	<entry key="GROUP_RENAME_UNKNOWN">Tell me the name of the existing group you want to rename and then the new name.</entry>
 	<!-- -->
 	<!-- users sync command -->
 	<entry key="USERS_SYNC_ACTION">Action</entry>

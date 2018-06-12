@@ -37,29 +37,33 @@ public class Group implements BaseCommand {
         if (scanner.hasNext()) {
             String subCommand = scanner.next();
             switch (subCommand) {
-                case "create":
-                    BaseCommand.checkPublic(message);
-                    groupCreate.run(scanner, message);
-                    break;
-                case "delete":
-                    BaseCommand.checkPublic(message);
-                    groupDelete.run(scanner, message);
-                    break;
-                case "add":
-                    BaseCommand.checkPublic(message);
-                    groupAdd.run(scanner, message);
-                    break;
-                case "remove":
-                    BaseCommand.checkPublic(message);
-                    groupRemove.run(scanner, message);
-                    break;
-                case "list":
-                    groupList.run(scanner, message);
-                    break;
-                default:
-                    Speaker.err(message, Resource.getString("GROUP_SUBCOMMAND_UNKNOWN",
-                            getResponseLocale(message)));
-                    break;
+            case "create":
+                BaseCommand.checkPublic(message);
+                groupCreate.run(scanner, message);
+                break;
+            case "delete":
+                BaseCommand.checkPublic(message);
+                groupDelete.run(scanner, message);
+                break;
+            case "add":
+                BaseCommand.checkPublic(message);
+                groupAdd.run(scanner, message);
+                break;
+            case "remove":
+                BaseCommand.checkPublic(message);
+                groupRemove.run(scanner, message);
+                break;
+            case "rename":
+                groupRename.run(scanner, message);
+                BaseCommand.checkPublic(message);
+                break;
+            case "list":
+                groupList.run(scanner, message);
+                break;
+            default:
+                Speaker.err(message,
+                        Resource.getString("GROUP_SUBCOMMAND_UNKNOWN", getResponseLocale(message)));
+                break;
             }
         } else {
             groupList.run(scanner, message);
@@ -151,6 +155,30 @@ public class Group implements BaseCommand {
             Speaker.err(message, msg);
         }
     };
+    public static final BaseCommand groupRename = (Scanner scanner, Message message) -> {
+        Locale locale = getResponseLocale(message);
+        Optional<StockTypeGroup> groupOpt = getTargetGroup(scanner, message, "RENAME");
+        if (groupOpt.isPresent()) {
+            if (scanner.hasNext()) {
+                String groupName = scanner.next();
+                Optional<StockTypeGroup> newName = getStockTypeGroupDao().findByName(groupName);
+                if (newName.isPresent()) {
+                    String msg = String.format(
+                            /* TODO maybe a standalone error message? */
+                            Resource.getString("GROUP_CREATE_IN_USE", locale), groupName);
+                    Speaker.err(message, msg);
+                } else {
+                    StockTypeGroup group = groupOpt.get();
+                    group.setName(groupName);
+                    getStockTypeGroupDao().update(group);
+                    message.addReaction(Speaker.Reaction.SUCCESS).queue();
+                }
+            } else {
+                Speaker.err(message, Resource.getString("GROUP_RENAME_UNKNOWN", locale));
+            }
+        }
+    };
+
     public static final BaseCommand groupList = (Scanner scanner, Message message) -> {
         Locale locale = getResponseLocale(message);
         List<String> groupNames = parseGroupName(scanner);
@@ -196,6 +224,8 @@ public class Group implements BaseCommand {
             if (groupOpt.isPresent()) {
                 return groupOpt;
             } else {
+                // TODO
+                // Standalone error message in case the user wanted to use group that does not exist
                 Speaker.err(message, Resource.getString("GROUP_" + operation + "_UNKNOWN", locale));
             }
         } else {
