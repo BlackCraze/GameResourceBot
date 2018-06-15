@@ -2,6 +2,10 @@ package de.blackcraze.grb.util;
 
 import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
 
+import de.blackcraze.grb.core.BotConfig;
+import de.blackcraze.grb.i18n.Resource;
+import de.blackcraze.grb.model.Device;
+import de.blackcraze.grb.model.entity.Mate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,17 +13,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
-
-import org.apache.commons.lang3.StringUtils;
-
-import de.blackcraze.grb.core.BotConfig;
-import de.blackcraze.grb.i18n.Resource;
-import de.blackcraze.grb.model.Device;
-import de.blackcraze.grb.model.entity.Mate;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.SelfUser;
+import org.apache.commons.lang3.StringUtils;
 
 public class CommandUtils {
 
@@ -76,7 +73,7 @@ public class CommandUtils {
     public static boolean botMentioned(Message message) {
         SelfUser selfUser = message.getJDA().getSelfUser();
         String prefix = BotConfig.getConfig().PREFIX;
-        String messageStartWord = message.getContent().split(" ")[0];
+        String messageStartWord = message.getContentRaw().split(" ")[0];
         boolean prefixCheck = prefix.equalsIgnoreCase(messageStartWord);
         boolean mentionCheck = message.isMentioned(selfUser) && !message.mentionsEveryone();
         return prefixCheck || mentionCheck;
@@ -87,7 +84,7 @@ public class CommandUtils {
         if (!botMentioned(message) && !pm) {
             return Optional.empty();
         }
-        Scanner scanner = new Scanner(message.getContent());
+        Scanner scanner = new Scanner(message.getContentRaw());
         if (pm) {
             // skip the bot prefix if used
             if (scanner.hasNext(BotConfig.getConfig().PREFIX)) {
@@ -109,7 +106,7 @@ public class CommandUtils {
     }
 
     public static Locale getResponseLocale(Message message) {
-        Locale channelLocale = getResponseLocale(message.getChannel());
+        Locale channelLocale = getDefaultLocale();
         Mate mate = getMateDao().getOrCreateMate(message, channelLocale);
         if (mate != null && !StringUtils.isEmpty(mate.getLanguage())) {
             return new Locale(mate.getLanguage());
@@ -118,16 +115,16 @@ public class CommandUtils {
     }
 
     public static Device getMateDevice(Message message) {
-        Locale channelLocale = getResponseLocale(message.getChannel());
-        Mate mate = getMateDao().getOrCreateMate(message, channelLocale);
+        Mate mate = getMateDao().getOrCreateMate(message, getDefaultLocale());
         return mate.getDevice();
     }
 
-    public static Locale getResponseLocale(MessageChannel channel) {
+    public static Locale getDefaultLocale() {
         try {
             return new Locale(BotConfig.getConfig().LANGUAGE);
         } catch (Exception e) {
             return Locale.ENGLISH;
         }
     }
+
 }

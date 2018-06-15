@@ -35,9 +35,17 @@
 	<entry key="GROUP_CREATE_UNKNOWN">You have to name it. ;-)</entry>
 	<entry key="GROUP_ADD_UNKNOWN">Tell me the name of the group and the name(s) of the resource(s) to add.</entry>
 	<entry key="GROUP_REMOVE_UNKNOWN">Tell me the name of the group and the name of the resource to remove.</entry>
+	<entry key="GROUP_RENAME_UNKNOWN">Tell me the name of the existing group you want to rename and then the new name.</entry>
 	<!-- -->
+	<!-- users sync command -->
+	<entry key="USERS_SYNC_ACTION">Action</entry>
+    <entry key="USERS_SYNC_ADD">Added</entry>
+	<entry key="USERS_SYNC_HEADER">User synchronization</entry>
+    <entry key="USERS_SYNC_NOTHING">The user database is up to date</entry>
+    <entry key="USERS_SYNC_REMOVE">Deleted</entry>
+    <!--  -->
 	<!-- report headers -->
-	<entry key="USERS_LIST_HEADER">Guild members</entry>
+	<entry key="USERS_LIST_HEADER">Guild members (%d)</entry>
 	<entry key="OLDEST_STOCK">Age</entry>
 	<entry key="USER">User</entry>
 	<entry key="POPULATED">Populated</entry>
@@ -173,4 +181,3 @@
 	<entry key="MISSING_ENV_VAR">Missing environment variable: \"%s\"%n"</entry>
 	<entry key="ONLY_PNG_IMAGES">I can only process PNG images</entry>
 </properties>
-

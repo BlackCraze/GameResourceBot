@@ -37,29 +37,33 @@ public class Group implements BaseCommand {
         if (scanner.hasNext()) {
             String subCommand = scanner.next();
             switch (subCommand) {
-                case "create":
-                    BaseCommand.checkPublic(message);
-                    groupCreate.run(scanner, message);
-                    break;
-                case "delete":
-                    BaseCommand.checkPublic(message);
-                    groupDelete.run(scanner, message);
-                    break;
-                case "add":
-                    BaseCommand.checkPublic(message);
-                    groupAdd.run(scanner, message);
-                    break;
-                case "remove":
-                    BaseCommand.checkPublic(message);
-                    groupRemove.run(scanner, message);
-                    break;
-                case "list":
-                    groupList.run(scanner, message);
-                    break;
-                default:
-                    Speaker.err(message, Resource.getString("GROUP_SUBCOMMAND_UNKNOWN",
-                            getResponseLocale(message)));
-                    break;
+            case "create":
+                BaseCommand.checkPublic(message);
+                groupCreate.run(scanner, message);
+                break;
+            case "delete":
+                BaseCommand.checkPublic(message);
+                groupDelete.run(scanner, message);
+                break;
+            case "add":
+                BaseCommand.checkPublic(message);
+                groupAdd.run(scanner, message);
+                break;
+            case "remove":
+                BaseCommand.checkPublic(message);
+                groupRemove.run(scanner, message);
+                break;
+            case "rename":
+                groupRename.run(scanner, message);
+                BaseCommand.checkPublic(message);
+                break;
+            case "list":
+                groupList.run(scanner, message);
+                break;
+            default:
+                Speaker.err(message,
+                        Resource.getString("GROUP_SUBCOMMAND_UNKNOWN", getResponseLocale(message)));
+                break;
             }
         } else {
             groupList.run(scanner, message);
@@ -151,6 +155,30 @@ public class Group implements BaseCommand {
             Speaker.err(message, msg);
         }
     };
+    public static final BaseCommand groupRename = (Scanner scanner, Message message) -> {
+        Locale locale = getResponseLocale(message);
+        Optional<StockTypeGroup> groupOpt = getTargetGroup(scanner, message, "RENAME");
+        if (groupOpt.isPresent()) {
+            if (scanner.hasNext()) {
+                String groupName = scanner.next();
+                Optional<StockTypeGroup> newName = getStockTypeGroupDao().findByName(groupName);
+                if (newName.isPresent()) {
+                    String msg = String.format(
+                            /* TODO maybe a standalone error message? */
+                            Resource.getString("GROUP_CREATE_IN_USE", locale), groupName);
+                    Speaker.err(message, msg);
+                } else {
+                    StockTypeGroup group = groupOpt.get();
+                    group.setName(groupName);
+                    getStockTypeGroupDao().update(group);
+                    message.addReaction(Speaker.Reaction.SUCCESS).queue();
+                }
+            } else {
+                Speaker.err(message, Resource.getString("GROUP_RENAME_UNKNOWN", locale));
+            }
+        }
+    };
+
     public static final BaseCommand groupList = (Scanner scanner, Message message) -> {
         Locale locale = getResponseLocale(message);
         List<String> groupNames = parseGroupName(scanner);
@@ -167,7 +195,7 @@ public class Group implements BaseCommand {
             rows.add(Arrays.asList(stockTypeGroup.getName(), amount));
             if (types != null) {
                 types.sort(new StockTypeComparator(locale));
-                for (Iterator<StockType> it2 = types.iterator(); it2.hasNext(); ) {
+                for (Iterator<StockType> it2 = types.iterator(); it2.hasNext();) {
                     StockType stockType = it2.next();
                     String localisedStockName = Resource.getItem(stockType.getName(), locale);
                     String tree = it2.hasNext() ? "├─ " : "└─ ";
@@ -188,7 +216,7 @@ public class Group implements BaseCommand {
     };
 
     static Optional<StockTypeGroup> getTargetGroup(Scanner scanner, Message message,
-                                                   String operation) {
+            String operation) {
         Locale locale = getResponseLocale(message);
         if (scanner.hasNext()) {
             String groupName = scanner.next();
@@ -196,6 +224,8 @@ public class Group implements BaseCommand {
             if (groupOpt.isPresent()) {
                 return groupOpt;
             } else {
+                // TODO
+                // Standalone error message in case the user wanted to use group that does not exist
                 Speaker.err(message, Resource.getString("GROUP_" + operation + "_UNKNOWN", locale));
             }
         } else {
@@ -204,8 +234,7 @@ public class Group implements BaseCommand {
         return Optional.empty();
     }
 
-    static List<StockType> getTargetStockTypes(Scanner scanner, Message message,
-                                               String operation) {
+    static List<StockType> getTargetStockTypes(Scanner scanner, Message message, String operation) {
         Locale locale = getResponseLocale(message);
         List<StockType> stockTypes = new ArrayList<>();
         List<String> unknownStockTypes = new ArrayList<>();
@@ -251,21 +280,4 @@ public class Group implements BaseCommand {
         return stockTypes;
     }
 
-    @Override
-    public String help() {
-        return "Delete a group\n" +
-                "`bot group delete [group-name]`\n" +
-                "\n" +
-                "Add a group\n" +
-                "`bot group create [group-name]`\n" +
-                "\n" +
-                "Add a ressource to a group\n" +
-                "`bot group add [group-name] \"[item]\"`\n" +
-                "\n" +
-                "Remove a ressource to a group\n" +
-                "`bot group remove [group-name] \"[item]\"`\n" +
-                "\n" +
-                "Give all the ressouces from guild for a specific item group\n" +
-                "`bot total [group-name]`";
-    }
 }

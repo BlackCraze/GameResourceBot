@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<!-- @formatter:off -->
+<properties>
+	<entry key="check">Check
+
+		The primary purpose of the check command is to
+		verify that I read your
+		screenshots correctly.
+		The secondary purpose of
+		the check command is to search the database for
+		all information that
+		matches a search term you specify.
+
+
+		*************
+		ATTENTION
+		*************
+		This is a complex command. This command gives two different types of
+		output, depending on how you use it. In addition, the output of this
+		command can be VERY LONG. Please take the time to understand the check
+		command before you use it.
+
+		In most cases, you should use bot total
+		instead.
+
+		=====
+
+		Primary purpose
+		Check all of your own inventory.
+		bot check
+
+		OUTPUT: a list of all resource types currently in your inventory list
+		in my
+		database, plus the quantity you have on hand of each type, plus
+		how
+		long ago you updated each resource type.
+
+		=====
+
+		Primary purpose
+		Check
+		all of another user's inventory.
+		bot check [userName]
+		The userName must
+		be spelled correctly.
+		The userName must be an exact match. For more
+		information, type:
+		bot help users
+
+		OUTPUT: a list of all resource types
+		currently in userName's inventory list
+		in my database, plus the
+		quantity userName has on hand of each type,
+		plus how long ago userName
+		updated each resource type.
+
+		=====
+
+		For more information on how to use the
+		check command, type:
+		bot help check2
+
+
+		See also:
+		+ bot help check2
+		+ bot
+		help screenshot
+		+ bot help update
+		+ bot help total
+		+ bot help users</entry>
+	<entry key="checkTypes">print a list of known resource types
+		`bot checkTypes`
+	</entry>
+	<entry key="clear">Reset all the information in your bot inventory:
+		`bot
+		clear`
+		Reset the information for a member:
+		`bot clear [membername]`
+
+		Reset all the infromation for the whole guild
+		`bot clear all`
+	</entry>
+	<entry key="config">let the bot show you its active configuration
+		`bot
+		config`
+		change the bot configuration on runtime (will be lost when it
+		is restarted)
+		`bot config set [config] [value]`
+
+		`bot config set language
+		en`
+		show the parsing result after a user uploaded pictures
+		`bot config
+		set OCR_RESULT [off|on]`
+
+
+		bot will delete the message with the uploaded
+		pictures after reading it
+		`bot config set DELETE_PICTURE_MESSAGE
+		[off|on]`
+	</entry>
+	<entry key="credits">The bot is an open source project - this will show the
+		source code location and a invitation link
+		to the dev channel
+		`bot
+		credits`
+	</entry>
+	<entry key="group">Delete a group
+		`bot group delete [group-name]`
+
+		Add a
+		group
+		`bot group create [group-name]`
+
+		Add a ressource to a group
+		`bot
+		group add [group-name] "[item]"`
+
+		Remove a ressource to a group
+		`bot
+		group remove [group-name] "[item]"`
+
+		Give all the ressouces from guild
+		for a specific item group
+		`bot total [group-name]`</entry>
+	<entry key="help" />
+	<entry key="info">
+	</entry>
+	<entry key="nativeStatus">let the bot show his native memory status (useful for
+		troubleshooting)
+		`bot nativeStatus`
+	</entry>
+	<entry key="ping">Let the bot say something to check if it is able to
+		respond
+		`bot ping`
+	</entry>
+	<entry key="shutdown">let the bot shutdown (on a heroku server this will
+		lead to a restart - usefull in case of a
+		OutOfMemoryError)
+		`bot
+		shutdown`
+	</entry>
+	<entry key="status">let the bot show his java memory status (useful for
+		troubleshooting)
+		`bot status`
+	</entry>
+	<entry key="total">Total
+
+		The purpose of the total command is to display
+		the total amount of one or
+		more resources currently held by the entire
+		guild.
+
+		=====
+
+		Display total quantities of all resources currently on
+		hand.
+		bot total
+
+		=====
+
+		Display total quantity of one resource currently on
+		hand.
+		bot total [resourceName]
+
+		=====
+
+		Display total quantities of multiple
+		resources with parts of their names in
+		common.
+		EXAMPLES
+		bot total
+		polished
+		OR
+		bot total bar
+		OR
+		You get the point.
+
+		=====
+
+		Display total
+		quantities of all resources in a group.
+		bot total [groupName]
+
+
+		See also:
+		+ bot help check
+		+ bot help group</entry>
+	<entry key="update">Updating your stock
+		bot update [resourceName] [amount]
+
+		Example:
+		bot update coal 500000
+
+		updating several stocks
+		```
+		bot update
+		[resourceName] [amount] [resourceName] [amount]
+		[resourceName] [amount]
+		[resourceName] [amount]
+		...
+		```
+	</entry>
+	<entry key="userConfig">The bot uses the default language of the guild - you
+		can switch it to your ingame
+		language if you are using another language
+		like that (supported languages are
+		`de` and `en`):
+		`bot userConfig set
+		language de`
+		Change OCR settings (beta)
+		`bot userconfig set device
+		[iphone|android]`
+	</entry>
+	<entry key="users" />
+</properties>
+<!-- @formatter:on -->

@@ -1,5 +1,9 @@
 package de.blackcraze.grb.dao;
 
+import de.blackcraze.grb.model.entity.Mate;
+import de.blackcraze.grb.model.entity.Stock;
+import de.blackcraze.grb.model.entity.StockType;
+import de.blackcraze.grb.util.PrintUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -7,20 +11,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
-
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
-
-import org.apache.commons.lang3.StringUtils;
-
-import de.blackcraze.grb.model.entity.Mate;
-import de.blackcraze.grb.model.entity.Stock;
-import de.blackcraze.grb.model.entity.StockType;
-import de.blackcraze.grb.util.PrintUtils;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
+import org.apache.commons.lang3.StringUtils;
 
 public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
 
@@ -33,9 +30,8 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
     @Override
     public Optional<Mate> findByDiscord(String discordID) {
         try {
-            return Optional.of((Mate) em
-                    .createQuery(
-                            "select m from Mate m left join fetch m.stocks left join fetch m.buildings where m.discordId = :discordId")
+            return Optional.of((Mate) em.createQuery(
+                    "select m from Mate m left join fetch m.stocks left join fetch m.buildings where m.discordId = :discordId")
                     .setParameter("discordId", discordID).getSingleResult());
         } catch (NoResultException e) {
             return Optional.empty();
@@ -113,7 +109,7 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
     }
 
     @Override
-    public Mate getOrCreateMate(Message message, Locale defaultLocale) {
+    public Mate getOrCreateMate(Message message, Locale locale) {
         String discordId = message.getAuthor().getId();
         Optional<Mate> mateOptional = findByDiscord(discordId);
         String name = message.getAuthor().getName();
@@ -127,12 +123,7 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
                 throw new IllegalStateException(
                         "unknown user can not automatically be created in private messages");
             }
-            Mate mate = new Mate();
-            mate.setDiscordId(discordId);
-            mate.setName(name);
-            mate.setLanguage(defaultLocale.getLanguage());
-            save(mate);
-            return mate;
+            return createMate(locale, discordId, name);
         } else {
             Mate mate = mateOptional.get();
             // do not update giuld name by private messages
@@ -144,6 +135,16 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
             }
             return mate;
         }
+    }
+
+    @Override
+    public Mate createMate(Locale locale, String discordId, String name) {
+        Mate mate = new Mate();
+        mate.setDiscordId(discordId);
+        mate.setName(name);
+        mate.setLanguage(locale.getLanguage());
+        save(mate);
+        return mate;
     }
 
     @Override
@@ -175,6 +176,14 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
     // TODO more power
     private boolean isStockMent(Stock stock, String name) {
         return stock.getType().getName().equalsIgnoreCase(name);
+    }
+
+    @Override
+    public void delete(String discordId) {
+        em.getTransaction().begin();
+        em.createQuery("delete Mate where discordId = :id").setParameter("id", discordId)
+                .executeUpdate();
+        em.getTransaction().commit();
     }
 
 }

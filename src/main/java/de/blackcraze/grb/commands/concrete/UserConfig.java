@@ -1,18 +1,17 @@
 package de.blackcraze.grb.commands.concrete;
 
+import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
+import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
+
 import de.blackcraze.grb.commands.BaseCommand;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.model.Device;
 import de.blackcraze.grb.model.entity.Mate;
-import net.dv8tion.jda.core.entities.Message;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
-
-import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
-import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
+import net.dv8tion.jda.core.entities.Message;
+import org.apache.commons.lang3.StringUtils;
 
 public class UserConfig implements BaseCommand {
     public void run(Scanner scanner, Message message) {
@@ -68,12 +67,4 @@ public class UserConfig implements BaseCommand {
         }
     }
 
-    @Override
-    public String help() {
-        return "The bot uses the default language of the guild - you can switch it to your ingame" +
-                " language if you are using another language like that (supported languages are `de` and `en`):\n" +
-                "`bot userConfig set language de`\n" +
-                "Change OCR settings (beta)\n" +
-                "`bot userconfig set device [iphone|android]`";
-    }
 }

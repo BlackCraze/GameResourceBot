@@ -1,25 +1,25 @@
 package de.blackcraze.grb.commands;
 
+import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
+
 import com.google.common.reflect.ClassPath;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
-import net.dv8tion.jda.core.entities.ChannelType;
-import net.dv8tion.jda.core.entities.Message;
-
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import net.dv8tion.jda.core.entities.ChannelType;
+import net.dv8tion.jda.core.entities.Message;
 
-import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
-
-@SuppressWarnings("unused")
 public interface BaseCommand {
 
     void run(Scanner scanner, Message message);
-    default String help() {
-        return "";
+
+    default String help(Message message) {
+        return Resource.getHelp(this.getClass().getSimpleName(),
+                getResponseLocale(message));
     }
 
     static void checkPublic(Message message) {
@@ -41,14 +41,12 @@ public interface BaseCommand {
             return Collections.emptyList();
         }
 
-        @SuppressWarnings("unchecked") Collection<Class<BaseCommand>> classes = classPath
-                .getTopLevelClassesRecursive("de.blackcraze.grb.commands")
-                .stream()
-                .map(aClassInfo -> ((Class<BaseCommand>) aClassInfo.load()))
-                .collect(Collectors.toList());
-        return classes
-                .stream()
-                .filter(BaseCommand.class::isAssignableFrom)
+        @SuppressWarnings("unchecked")
+        Collection<Class<BaseCommand>> classes =
+                classPath.getTopLevelClassesRecursive("de.blackcraze.grb.commands").stream()
+                        .map(aClassInfo -> ((Class<BaseCommand>) aClassInfo.load()))
+                        .collect(Collectors.toList());
+        return classes.stream().filter(BaseCommand.class::isAssignableFrom)
                 .collect(Collectors.toList());
     }
 }

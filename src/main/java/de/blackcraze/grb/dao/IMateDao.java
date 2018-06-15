@@ -24,6 +24,10 @@ public interface IMateDao extends IBaseDao<Mate> {
 
     Mate getOrCreateMate(Message message, Locale defaultLocale);
 
+    Mate createMate(Locale locale, String discordId, String name);
+
     List<List<String>> listOrderByOldestStock(Locale locale);
+
+    void delete(String discordId);
 
 }

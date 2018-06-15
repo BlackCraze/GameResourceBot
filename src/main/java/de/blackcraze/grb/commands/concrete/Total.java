@@ -1,5 +1,12 @@
 package de.blackcraze.grb.commands.concrete;
 
+import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
+import static de.blackcraze.grb.util.CommandUtils.parseStockName;
+import static de.blackcraze.grb.util.InjectorUtils.getStockDao;
+import static de.blackcraze.grb.util.InjectorUtils.getStockTypeDao;
+import static de.blackcraze.grb.util.InjectorUtils.getStockTypeGroupDao;
+import static de.blackcraze.grb.util.PrintUtils.prettyPrint;
+
 import de.blackcraze.grb.commands.BaseCommand;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
@@ -8,8 +15,6 @@ import de.blackcraze.grb.model.entity.StockType;
 import de.blackcraze.grb.model.entity.StockTypeGroup;
 import de.blackcraze.grb.util.StockTypeComparator;
 import de.blackcraze.grb.util.wagu.Block;
-import net.dv8tion.jda.core.entities.Message;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,13 +22,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Scanner;
-
-import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
-import static de.blackcraze.grb.util.CommandUtils.parseStockName;
-import static de.blackcraze.grb.util.InjectorUtils.getStockDao;
-import static de.blackcraze.grb.util.InjectorUtils.getStockTypeDao;
-import static de.blackcraze.grb.util.InjectorUtils.getStockTypeGroupDao;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrint;
+import net.dv8tion.jda.core.entities.Message;
 
 public class Total implements BaseCommand {
     public void run(Scanner scanner, Message message) {
@@ -73,18 +72,5 @@ public class Total implements BaseCommand {
         } else {
             Speaker.say(message.getChannel(), Resource.getString("RESOURCES_EMPTY", locale));
         }
-    }
-
-    @Override
-    public String help() {
-        return "An overview about actual resource amounts hold by the entire guild\n" +
-                "Example (all resources):\n" +
-                "`bot total`\n" +
-                "\n" +
-                "Example (coal):\n" +
-                "`bot total coal`\n" +
-                "\n" +
-                "Example (all polished stuff):\n" +
-                "`bot total polished`";
     }
 }

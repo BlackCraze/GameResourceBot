@@ -46,7 +46,7 @@ public class MessageListener extends ListenerAdapter {
     }
 
     private void handleMessage(Message message) {
-        if (StringUtils.isNotEmpty(message.getContent())) {
+        if (StringUtils.isNotEmpty(message.getContentRaw())) {
             Optional<Scanner> scannerOptional = CommandUtils.commandParser(message);
             if (!scannerOptional.isPresent()) {
                 return;
@@ -66,7 +66,7 @@ public class MessageListener extends ListenerAdapter {
                 return;
             }
 
-            System.out.printf("%s:%s%n", message.getAuthor().getName(), message.getContent());
+            System.out.printf("%s:%s%n", message.getAuthor().getName(), message.getContentRaw());
             try {
                 Class<? extends BaseCommand> commandClass = commandClassOptional.get();
                 BaseCommand fakeInstance = commandClass.getConstructor().newInstance();

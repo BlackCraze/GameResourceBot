@@ -8,6 +8,11 @@
 	<entry key="RESOURCE_UNKNOWN">Diese Ressource kenne ich nicht =(</entry>
 	<entry key="USER">Benutzer</entry>
 	<entry key="USERS_LIST_HEADER">Gildenmitglieder (%d)</entry>
+	<entry key="USERS_SYNC_ACTION">Aktion</entry>
+    <entry key="USERS_SYNC_ADD">Hinzugefügt</entry>
+	<entry key="USERS_SYNC_HEADER">Nutzersynchronisierung</entry>
+    <entry key="USERS_SYNC_NOTHING">Die Nutzerdatenbank is aktuell</entry>
+    <entry key="USERS_SYNC_REMOVE">Gelöscht</entry>
     <entry key="OLDEST_STOCK">Alter</entry>
     <entry key="POPULATED">Anzahl</entry>
 	<entry key="DO_NOT_KNOW_ABOUT">Das hier kenne ich nicht: %s</entry>
@@ -44,5 +49,6 @@
 	<entry key="GROUP_CREATE_UNKNOWN">Du musst mir schon einen Namen nennen ;-)</entry>
 	<entry key="GROUP_ADD_UNKNOWN">Nenne mir den Namen der Ressigruppe und die Namen der Rohstoffe, die du hinzufügen möchtest.</entry>
 	<entry key="GROUP_REMOVE_UNKNOWN">Nenne mir den Namen der Ressigruppe und die Namen der Rohstoffe, die du entfernen möchtest.</entry>
+	<entry key="GROUP_RENAME_UNKNOWN">Nenne mir den Namen der vorhandenen Ressigruppe, die du umbenennen möchtest und dann den neuen Namen.</entry>
 	<entry key="ONLY_PNG_IMAGES">Ich kann leider nur PNG-Bilder verarbeiten</entry>
 </properties>
