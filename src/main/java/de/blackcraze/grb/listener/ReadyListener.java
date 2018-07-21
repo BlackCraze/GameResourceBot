@@ -49,7 +49,7 @@ public class ReadyListener extends ListenerAdapter {
 	}
 
 	private void initialise(TextChannel channel) {
-		if ("off".equalsIgnoreCase(BotConfig.getConfig().VERBOSE_BOT)) {
+		if ("on".equalsIgnoreCase(BotConfig.getConfig().VERBOSE_BOT)) {
 		Speaker.say(channel, Resource.getString("INIT", CommandUtils.getDefaultLocale())
 				+ "`" + BotConfig.getConfig().PREFIX + "`");
 		}
@@ -74,7 +74,7 @@ public class ReadyListener extends ListenerAdapter {
 	}
 
 	private void goodbyeMessage(TextChannel channel) {
-		if ("off".equalsIgnoreCase(BotConfig.getConfig().VERBOSE_BOT)) {
+		if ("on".equalsIgnoreCase(BotConfig.getConfig().VERBOSE_BOT)) {
 		Speaker.say(channel, Resource.getString("BYE_MSG", CommandUtils.getDefaultLocale())
 				+ "`" + BotConfig.getConfig().PREFIX + "`");
 		}
