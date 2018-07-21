@@ -19,6 +19,7 @@ public class BotConfig {
         public String LANGUAGE = getEnv("LANGUAGE", "en");
         public String OCR_RESULT = getEnv("OCR_RESULT", "on");
         public String DELETE_PICTURE_MESSAGE = getEnv("DELETE_PICTURE_MESSAGE", "off");
+        public String VERBOSE_BOT = getEnv("VERBOSE_BOT", "off");
     }
 
     private static String getEnv(String envVar, String defaultValue) {
