@@ -79,7 +79,9 @@ public class Board {
             block.setBelowBlock(tableBlock);
             rearranegCoordinates(block);
         } else {
-            throw new RuntimeException("Invalid block appending direction given");
+            throw new RuntimeException(Resource.getError("BLOCK_DIRECTION", locale));
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+            throw new RuntimeException("Invalid block appending direction given"); */
         }
         return this;
     }
@@ -130,7 +132,9 @@ public class Board {
         if (blockIndex >= 0) {
             return getBlock(blockIndex, initialBlock);
         } else {
-            throw new RuntimeException("Block index cannot be negative. " + blockIndex + " given.");
+            throw new RuntimeException(Resource.getError("BLOCK_NEGATIVE", locale), blockIndex);
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+            throw new RuntimeException("Block index cannot be negative. " + blockIndex + " given."); */
         }
     }
 

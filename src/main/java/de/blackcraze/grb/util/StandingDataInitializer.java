@@ -30,8 +30,10 @@ public class StandingDataInitializer {
             reader = new InputStreamReader(new BOMInputStream(resource), "UTF-8");
             parser = new CSVParser(reader, CSVFormat.EXCEL.withHeader());
             List<CSVRecord> records = parser.getRecords();
-            System.out.println("initializing stock types: " + records.size()); //replace hard-coded message with INIT_STOCK
-            List<StockType> stocks = getStockTypeDao().findAll(new Locale(BotConfig.getConfig().LANGUAGE));
+            System.out.println(Resource.getInfo("INIT_STOCK", locale), records.size());
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+            System.out.println("initializing stock types: " + records.size()); */
+            List<StockType> stocks = getStockTypeDao().findAll(new Locale(BotConfig.ServerConfig().LANGUAGE));
 
             for (CSVRecord record : records) {
                 String name = record.get(0);
@@ -48,7 +50,9 @@ public class StandingDataInitializer {
                 type.setName(name);
                 type.setPrice(Long.valueOf(price));
                 getStockTypeDao().save(type);
-                System.out.println("Created new stock type: " + type.getName()); //replace hard-coded message with CREATE_STOCK
+                System.out.println(Resource.getInfo("CREATE_STOCK", locale), type.getName());
+                /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+                System.out.println("Created new stock type: " + type.getName()); */
             }
 
             for (StockType type : stocks) {
@@ -60,7 +64,9 @@ public class StandingDataInitializer {
                     }
                 }
                 if (!found) {
-                    System.out.println("Delete obsolete stock type: " + type.getName()); //replace hard-coded message with DELETE_STOCK
+                    System.out.println(Resource.getInfo("DELETE_STOCK", locale), type.getName());
+                    /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+                    System.out.println("Delete obsolete stock type: " + type.getName()); */
                     getStockTypeDao().delete(type);
                 }
             }

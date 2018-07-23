@@ -28,15 +28,15 @@ public class Clear implements BaseCommand {
         final Locale locale = getResponseLocale(message);
         Mate mate = getMateDao().getOrCreateMate(message, locale);
         if (!mateOrStockOptional.isPresent()) {
-            // if no member was selected assume the user of the message.
+            // If no member was selected, assume the user of the message.
             mates = Collections.singletonList(mate);
         } else {
             if ("all".equalsIgnoreCase(mateOrStockOptional.get())) {
                 BaseCommand.checkPublic(message);
-                // select guild members
+                // Select guild members.
                 mates = getMateDao().findByNameLike("%");
             } else {
-                // select only given member with exact matching name.
+                // Select only given member with exactly matching name.
                 mates = getMateDao().findByName(mateOrStockOptional.get());
                 if (!mates.isEmpty()) {
                     BaseCommand.checkPublic(message);
@@ -44,7 +44,7 @@ public class Clear implements BaseCommand {
             }
         }
         // Delete the stocks from defined members.
-        // otherwise try the parameter as an Item.
+        // ELSE try the parameter as an Item.
         if (!mates.isEmpty()) {
             for (Mate aMate : mates) {
                 getStockDao().deleteAll(aMate);
@@ -57,7 +57,7 @@ public class Clear implements BaseCommand {
             stockType.ifPresent(aStockType -> getStockDao().delete(mate, aStockType));
             clearReaction = Speaker.Reaction.SUCCESS;
         }
-        // Always response to a bot request.
+        // Always respond to a bot request.
         message.addReaction(clearReaction).queue();
     }
 

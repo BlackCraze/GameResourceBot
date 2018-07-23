@@ -19,7 +19,7 @@ public class StockComparator implements Comparator<Stock> {
 
     public StockComparator(Locale locale) {
         this.locale = locale;
-        // for correct placement of german umlauts
+        // for correct placement of German umlauts
         this.collator = Collator.getInstance(locale);
         this.collator.setStrength(Collator.SECONDARY);// a == A, a < Ä
     }

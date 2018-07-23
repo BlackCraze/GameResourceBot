@@ -18,7 +18,9 @@ public class PrintableTable {
 		// integrity check
 		for (List<String> row : rows) {
 			if (row.size() != titles.size() || (!footer.isEmpty() && footer.size() != titles.size())) {
-				throw new IllegalArgumentException("header columns does not match data columns");
+				throw new IllegalArgumentException(Resource.getError("COLUMN_MISMATCH", locale));
+				/* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+				throw new IllegalArgumentException("header columns does not match data columns"); */
 			}
 		}
 		for (List<String> list : rows) {

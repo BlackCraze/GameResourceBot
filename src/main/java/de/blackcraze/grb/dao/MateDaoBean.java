@@ -48,12 +48,14 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
 
         newStocks.forEach((stockKey, stockAmount) -> {
             if (Long.MIN_VALUE == stockAmount) {
-                // in this case it is the misspelled name see
+                // In this case, it is the misspelled name. See
                 // de.blackcraze.grb.util.CommandUtils.parseStocks(Scanner,
                 // Locale)
                 unknown.add(stockKey);
             } else if (0 == stockAmount.longValue()) {
-                System.out.printf("clearing stock %s for player %s%n", stockKey, mate.getName());
+                System.out.printf(Resource.getInfo("CLEAR_PLAYER_STOCK", locale), stockKey, mate.getName());
+                /* ORIGINAL VERSION OF PREVIOUSA LINE BELOW
+                System.out.printf("clearing stock %s for player %s%n", stockKey, mate.getName()); */
                 Optional<StockType> type = stockTypeDao.findByKey(stockKey);
                 if (type.isPresent()) {
                     stockDao.delete(mate, type.get());
@@ -69,8 +71,11 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
                     }
                 }
                 if (!found) {
-                    System.out.printf("Creating new stock %s for player %s%n", stockKey,
+                    System.out.printf(Resource.getInfo("CREATE_PLAYER_STOCK", locale), stockKey,
                             mate.getName());
+                    /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+                    System.out.printf("Creating new stock %s for player %s%n", stockKey,
+                            mate.getName()); */
                     Optional<StockType> type = stockTypeDao.findByKey(stockKey);
                     if (type.isPresent()) {
                         Stock stock = new Stock();
@@ -80,7 +85,9 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
                         stockDao.save(stock);
                     } else {
                         unknown.add(stockKey);
-                        System.err.println("Unknown stock type: " + stockKey);
+                        System.err.println(Resource.getError("UNKNOWN_STOCK", locale), stockKey);
+                        /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+                        System.err.println("Unknown stock type: " + stockKey); */
                     }
                 }
             }
@@ -114,19 +121,21 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
         Optional<Mate> mateOptional = findByDiscord(discordId);
         String name = message.getAuthor().getName();
         Member member = message.getMember();
-        // will not work on private messages
+        // This will not work on direct messages.
         if (member != null && member.getNickname() != null) {
             name = member.getNickname();
         }
         if (!mateOptional.isPresent()) {
             if (message.getChannelType().equals(ChannelType.PRIVATE)) {
+                throw new IllegalStateException(Resource.getError("PCO_EXCEPTION", locale));
+                /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
                 throw new IllegalStateException(
-                        "unknown user can not automatically be created in private messages");
+                        "unknown user can not automatically be created in private messages"); */
             }
             return createMate(locale, discordId, name);
         } else {
             Mate mate = mateOptional.get();
-            // do not update giuld name by private messages
+            // Do not update guild name via direct messages.
             if (!message.getChannelType().equals(ChannelType.PRIVATE)) {
                 if (!mate.getName().equals(name)) {
                     mate.setName(name);

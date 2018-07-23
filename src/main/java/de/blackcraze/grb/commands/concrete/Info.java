@@ -11,6 +11,6 @@ import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
 
 public class Info implements BaseCommand {
     public void run(Scanner scanner, Message message) {
-        Speaker.say(message.getChannel(), Resource.getString("INFO", getResponseLocale(message)));
+        Speaker.say(message.getChannel(), Resource.getInfo("INFO", getResponseLocale(message)));
     }
 }

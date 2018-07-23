@@ -26,10 +26,10 @@ public class MessageListener extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         if (isFromMyself(event)) {
-            return; // cancel on own messages
+            return; // Cancel input for own output messages.
         }
         Message message = event.getMessage();
-        String listeningChannel = BotConfig.getConfig().CHANNEL;
+        String listeningChannel = BotConfig.ServerConfig().CHANNEL;
         String messageChannel = message.getChannel().getName();
         if (!listeningChannel.equalsIgnoreCase(messageChannel)) {
             return;
@@ -40,7 +40,7 @@ public class MessageListener extends ListenerAdapter {
     @Override
     public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
         if (isFromMyself(event)) {
-            return; // cancel on own messages
+            return; // Cancel input for own output messages.
         }
         handleMessage(event.getMessage());
     }

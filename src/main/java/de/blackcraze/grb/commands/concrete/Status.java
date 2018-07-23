@@ -15,19 +15,33 @@ import java.util.Scanner;
 public class Status implements BaseCommand{
     public void run(Scanner scanner, Message message) {
         StringBuilder sb = new StringBuilder();
-        sb.append("My Memory:\n\n");
+        sb.append(Resource.getHeader("MY_MEM", locale));
+        /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+        sb.append("My Memory:\n\n"); */
         sb.append("\n\n");
         for (MemPool pool : getPools()) {
             MemoryUsage usage = pool.getUsage();
-            sb.append(pool.getName()).append("\n");
+            sb.append(pool.getName());
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+            sb.append(pool.getName()).append("\n"); */
+            sb.append(Resource.getHeader("INIT_HEAD", locale)).append(FileUtils.byteCountToDisplaySize(usage.getInit()));
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
             sb.append("\tINIT:     ").append(FileUtils.byteCountToDisplaySize(usage.getInit()))
-                    .append("\n");
+                    .append("\n"); */
+            sb.append(Resource.getHeader("USED", locale)).append(FileUtils.byteCountToDisplaySize(usage.getUsed()));
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
             sb.append("\tUSED:     ").append(FileUtils.byteCountToDisplaySize(usage.getUsed()))
-                    .append("\n");
+                    .append("\n"); */
+            sb.append(Resource.getHeader("COMMITTED", locale))
+                    .append(FileUtils.byteCountToDisplaySize(usage.getCommitted()));
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
             sb.append("\tCOMMITED: ")
-                    .append(FileUtils.byteCountToDisplaySize(usage.getCommitted())).append("\n");
-            sb.append("\tMAX:      ").append(FileUtils.byteCountToDisplaySize(usage.getMax()))
+                    .append(FileUtils.byteCountToDisplaySize(usage.getCommitted())).append("\n"); */
+            sb.append(Resource.getHeader("MAX", locale)).append(FileUtils.byteCountToDisplaySize(usage.getMax()))
                     .append("\n");
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+            sb.append("\tMAX:      ").append(FileUtils.byteCountToDisplaySize(usage.getMax()))
+                    .append("\n"); */
         }
         Speaker.sayCode(message.getChannel(), sb.toString());
     }

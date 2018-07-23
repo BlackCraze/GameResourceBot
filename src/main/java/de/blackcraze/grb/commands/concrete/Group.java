@@ -31,8 +31,8 @@ import static de.blackcraze.grb.util.InjectorUtils.getStockTypeGroupDao;
 public class Group implements BaseCommand {
 
     public void run(Scanner scanner, Message message) {
-        // create the user if it does not exist - prevent users to directly
-        // message the bot that are not in the guild channel
+        // Create the user if it does not exist.
+        // Block this command within DMs.
         getMateDao().getOrCreateMate(message, getResponseLocale(message));
         if (scanner.hasNext()) {
             String subCommand = scanner.next();
@@ -62,7 +62,7 @@ public class Group implements BaseCommand {
                 break;
             default:
                 Speaker.err(message,
-                        Resource.getString("GROUP_SUBCOMMAND_UNKNOWN", getResponseLocale(message)));
+                        Resource.getError("GROUP_SUBCOMMAND_UNKNOWN", getResponseLocale(message)));
                 break;
             }
         } else {
@@ -86,11 +86,11 @@ public class Group implements BaseCommand {
         }
         if (groupNames.isEmpty()) {
             Speaker.err(message,
-                    Resource.getString("GROUP_CREATE_UNKNOWN", getResponseLocale(message)));
+                    Resource.getError("GROUP_CREATE_UNKNOWN", getResponseLocale(message)));
         }
         if (!inUse.isEmpty()) {
             String msg = String.format(
-                    Resource.getString("GROUP_CREATE_IN_USE", getResponseLocale(message)),
+                    Resource.getError("GROUP_CREATE_IN_USE", getResponseLocale(message)),
                     inUse.toString());
             Speaker.err(message, msg);
         }
@@ -146,11 +146,11 @@ public class Group implements BaseCommand {
         }
         if (groupNames.isEmpty()) {
             Speaker.err(message,
-                    Resource.getString("GROUP_DELETE_UNKNOWN", getResponseLocale(message)));
+                    Resource.getError("GROUP_DELETE_UNKNOWN", getResponseLocale(message)));
         }
         if (!unknown.isEmpty()) {
             String msg = String.format(
-                    Resource.getString("GROUP_DELETE_UNKNOWN", getResponseLocale(message)),
+                    Resource.getError("GROUP_DELETE_UNKNOWN", getResponseLocale(message)),
                     unknown.toString());
             Speaker.err(message, msg);
         }
@@ -165,7 +165,7 @@ public class Group implements BaseCommand {
                 if (newName.isPresent()) {
                     String msg = String.format(
                             /* TODO maybe a standalone error message? */
-                            Resource.getString("GROUP_CREATE_IN_USE", locale), groupName);
+                            Resource.getError("GROUP_CREATE_IN_USE", locale), groupName);
                     Speaker.err(message, msg);
                 } else {
                     StockTypeGroup group = groupOpt.get();
@@ -174,7 +174,7 @@ public class Group implements BaseCommand {
                     message.addReaction(Speaker.Reaction.SUCCESS).queue();
                 }
             } else {
-                Speaker.err(message, Resource.getString("GROUP_RENAME_UNKNOWN", locale));
+                Speaker.err(message, Resource.getError("GROUP_RENAME_UNKNOWN", locale));
             }
         }
     };
@@ -206,9 +206,9 @@ public class Group implements BaseCommand {
         if (rows.isEmpty()) {
             rows.add(Arrays.asList(" ", " "));
         }
-        List<String> titles = Arrays.asList(Resource.getString("NAME", locale),
-                Resource.getString("AMOUNT", locale));
-        String header = Resource.getString("GROUP_LIST_HEADER", locale);
+        List<String> titles = Arrays.asList(Resource.getHeader("NAME", locale),
+                Resource.getHeader("QUANTITY", locale));
+        String header = Resource.getHeader("GROUP_LIST_HEADER", locale);
         List<Integer> aligns = Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_BOTTOM_RIGHT);
         List<String> footer = Collections.emptyList();
         PrintableTable table = new PrintableTable(header, footer, titles, rows, aligns);
@@ -226,10 +226,10 @@ public class Group implements BaseCommand {
             } else {
                 // TODO
                 // Standalone error message in case the user wanted to use group that does not exist
-                Speaker.err(message, Resource.getString("GROUP_" + operation + "_UNKNOWN", locale));
+                Speaker.err(message, Resource.getError("GROUP_" + operation + "_UNKNOWN", locale));
             }
         } else {
-            Speaker.err(message, Resource.getString("GROUP_" + operation + "_UNKNOWN", locale));
+            Speaker.err(message, Resource.getError("GROUP_" + operation + "_UNKNOWN", locale));
         }
         return Optional.empty();
     }
@@ -260,7 +260,7 @@ public class Group implements BaseCommand {
         }
         for (String inputName : inputNames) {
             try {
-                // may throws IllegalArgumentException if there is no
+                // May throw IllegalArgumentException if argument does not exist.
                 String key = Resource.getItemKey(inputName, locale);
                 Optional<StockType> stockOpt = getStockTypeDao().findByKey(key);
                 if (!stockOpt.isPresent()) {
@@ -273,7 +273,7 @@ public class Group implements BaseCommand {
             }
         }
         if (!unknownStockTypes.isEmpty()) {
-            String msg = String.format(Resource.getString("GROUP_UNKNOWN_TYPE", locale),
+            String msg = String.format(Resource.getError("RESOURCE_UNKNOWN", locale),
                     unknownStockTypes.toString());
             Speaker.err(message, msg);
         }

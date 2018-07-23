@@ -37,6 +37,9 @@ public class Help implements BaseCommand {
         String commandsList = BaseCommand.getCommandClasses().stream().map(Class::getSimpleName)
                 .collect(Collectors.joining("\n"));
         Speaker.sayCode(message.getChannel(),
-                Resource.getString("COMMANDS", getResponseLocale(message)) + "\n" + commandsList);
-    }
+                Resource.getHelp("COMMANDS", getResponseLocale(message)));
+        /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+        Speaker.sayCode(message.getChannel(),
+                Resource.getString("COMMANDS", getResponseLocale(message)) + "\n" + commandsList); */
+    }    }
 }

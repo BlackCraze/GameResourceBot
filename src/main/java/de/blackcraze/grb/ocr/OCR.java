@@ -62,9 +62,9 @@ public class OCR {
                     }
                     itemName = Resource.getItemKey(itemName, locale);
                 } catch (Exception e) {
-                    // we add the clear text stock name with an identifier value
-                    // this way we can show the user an error message showing
-                    // errored type names
+                    // We add the clear text stock name with an identifier value.
+                    // This way, we can show the user an error message that
+                    // includes incorrect type names.
                     stocks.put(itemName, Long.MIN_VALUE);
                     continue;
                 } finally {
@@ -79,7 +79,9 @@ public class OCR {
                     Long valueOf = Long.valueOf(valueCorrected);
                     stocks.put(itemName, valueOf);
                 } catch (NumberFormatException e) {
-                    System.err.println("could not convert to number: '" + value + "'");
+                    System.err.println(Resource.getError("CANT_CONVERT", locale));
+                    /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+                    System.err.println("could not convert to number: '" + value + "'"); */
                     stocks.put(itemName + ": '" + value + "'", Long.MIN_VALUE);
                 } finally {
                     if (number != null) {
@@ -125,6 +127,8 @@ public class OCR {
             api = new TessBaseAPI();
             int init = api.Init(BotConfig.TESS_DATA, "deu");
             if (init != 0) {
+                throw new RuntimeException(Resource.getError("TESSERACT", locale));
+                /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
                 throw new RuntimeException("Could not initialize tesseract.");
             }
         }

@@ -32,9 +32,9 @@ public class CommandUtils {
                 String stockIdentifier = Resource.getItemKey(stockName.get(), responseLocale);
                 stocks.put(stockIdentifier, stockAmount.get());
             } catch (Exception e) {
-                // we add the clear text stock name with an identifier value
-                // this way we can show the user an error message showing
-                // errored type names
+                // We add the clear text stock name with an identifier value.
+                // This way, we can show the user an error message that
+                // displays the errored type names.
                 stocks.put(stockName.get(), Long.MIN_VALUE);
                 System.err.println(e);
             }
@@ -72,7 +72,7 @@ public class CommandUtils {
 
     public static boolean botMentioned(Message message) {
         SelfUser selfUser = message.getJDA().getSelfUser();
-        String prefix = BotConfig.getConfig().PREFIX;
+        String prefix = BotConfig.ServerConfig().PREFIX;
         String messageStartWord = message.getContentRaw().split(" ")[0];
         boolean prefixCheck = prefix.equalsIgnoreCase(messageStartWord);
         boolean mentionCheck = message.isMentioned(selfUser) && !message.mentionsEveryone();
@@ -86,14 +86,18 @@ public class CommandUtils {
         }
         Scanner scanner = new Scanner(message.getContentRaw());
         if (pm) {
-            // skip the bot prefix if used
-            if (scanner.hasNext(BotConfig.getConfig().PREFIX)) {
+            // Skip the bot prefix, if used.
+            if (scanner.hasNext(BotConfig.ServerConfig().PREFIX)) {
                 scanner.next();
             }
-            System.out.println("Mentioned with prefix: " + "private message");
+            System.out.println(Resource.getInfo("MENTIONED_1", locale));
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+            System.out.println("Mentioned with prefix: " + "private message"); */
         } else {
             String botPrefix = scanner.next();
-            System.out.println("Mentioned with prefix: " + botPrefix);
+            System.out.println(Resource.getInfo("MENTIONED_2", locale), botPrefix);
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+            System.out.println("Mentioned with prefix: " + botPrefix); */
         }
         return Optional.of(scanner);
     }
@@ -121,7 +125,7 @@ public class CommandUtils {
 
     public static Locale getDefaultLocale() {
         try {
-            return new Locale(BotConfig.getConfig().LANGUAGE);
+            return new Locale(BotConfig.ServerConfig().LANGUAGE);
         } catch (Exception e) {
             return Locale.ENGLISH;
         }

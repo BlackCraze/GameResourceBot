@@ -33,9 +33,9 @@ public class FileProcessor {
             if (att.isImage()) {
                 InputStream stream = null;
                 try {
-                    // check if the filename ends with png (only working image format)
+                    // Check if the filename ends with .png (only working image format).
                     if(!FilenameUtils.getExtension(att.getFileName()).equalsIgnoreCase("png")){
-                        Speaker.err(message, String.format(Resource.getString("ONLY_PNG_IMAGES", locale)));
+                        Speaker.err(message, String.format(Resource.getError("ONLY_PNG_IMAGES", locale)));
                         continue;
                     }
                     URLConnection conn = new URL(att.getProxyUrl()).openConnection();
@@ -46,14 +46,14 @@ public class FileProcessor {
                     stream = new BufferedInputStream(conn.getInputStream());
                     Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, locale, device);
 
-                    /* decide if the result is printed into the channel */
-                    if ("on".equalsIgnoreCase(BotConfig.getConfig().OCR_RESULT)) {
+                    // Decide whether the result is printed into the channel.
+                    if ("on".equalsIgnoreCase(BotConfig.ServerConfig().OCR_RESULT)) {
                         Speaker.sayCode(message.getChannel(), prettyPrint(stocks, locale));
                     }
 
                     Update.internalUpdate(message, locale, stocks);
                 } catch (Throwable e) {
-                    Speaker.err(message, String.format(Resource.getString("ERROR_UNKNOWN", locale), e.getMessage()));
+                    Speaker.err(message, String.format(Resource.getError("ERROR_UNKNOWN", locale), e.getMessage()));
                     e.printStackTrace();
                 } finally {
                     IOUtils.closeQuietly(stream);
@@ -62,14 +62,13 @@ public class FileProcessor {
             }
         }
 
-        /* try to delete the message containing the upload images */
-        if ("on".equalsIgnoreCase(BotConfig.getConfig().DELETE_PICTURE_MESSAGE)
+        // Try to delete the message containing the upload images.
+        if ("on".equalsIgnoreCase(BotConfig.ServerConfig().DELETE_PICTURE_MESSAGE)
                 && message.getChannelType().equals(ChannelType.TEXT)) {
             try {
                 message.delete().queue();
             } catch (Exception e) {
-                Speaker.err(message, "Cant delete messages here :( - " + e.getMessage());
-                /* Why is this message hard-coded in one language? Look for new entry CANT_DELETE_MESSAGES in strings.xml. Translate to other strings files, as needed. */
+                Speaker.err(message, String.format(Resource.getError("CANT_DELETE_MESSAGES", locale) + e.getMessage());
             }
         }
     }

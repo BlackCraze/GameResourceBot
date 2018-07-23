@@ -94,7 +94,9 @@ public final class Block {
         if (width <= board.boardWidth) {
             this.width = width;
         } else {
-            throw new RuntimeException("Block " + toString() + " exceeded the board width " + board.boardWidth);
+            throw new RuntimeException(Resource.getError("BLOCK_WIDTH", locale), toString(), board.boardWidth);
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+            throw new RuntimeException("Block " + toString() + " exceeded the board width " + board.boardWidth); */
         }
         this.height = height;
         this.allowGrid = true;
@@ -169,7 +171,9 @@ public final class Block {
         if (blockAlign == BLOCK_LEFT || blockAlign == BLOCK_CENTRE || blockAlign == BLOCK_RIGHT) {
             this.blockAlign = blockAlign;
         } else {
-            throw new RuntimeException("Invalid block align mode. " + dataAlign + " given.");
+            throw new RuntimeException(Resource.getError("BLOCK_ALIGN", locale), dataAlign);
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+            throw new RuntimeException("Invalid block align mode. " + dataAlign + " given."); */
         }
         return this;
     }
@@ -193,7 +197,9 @@ public final class Block {
                 || dataAlign == DATA_BOTTOM_LEFT || dataAlign == DATA_BOTTOM_MIDDLE || dataAlign == DATA_BOTTOM_RIGHT) {
             this.dataAlign = dataAlign;
         } else {
-            throw new RuntimeException("Invalid data align mode. " + dataAlign + " given.");
+            throw new RuntimeException(Resource.getError("DATA_ALIGN", locale), dataAlign);
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+            throw new RuntimeException("Invalid data align mode. " + dataAlign + " given."); */
         }
         return this;
     }
@@ -206,7 +212,9 @@ public final class Block {
         if (x + getWidth() + (isGridAllowed() ? 2 : 0) <= board.boardWidth) {
             this.x = x;
         } else {
-            throw new RuntimeException("Block " + toString() + " exceeded the board width " + board.boardWidth);
+            throw new RuntimeException(Resource.getError("BLOCK_WIDTH", locale), toString(), board.boardWidth);
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+            throw new RuntimeException("Block " + toString() + " exceeded the board width " + board.boardWidth); */
         }
         return this;
     }
