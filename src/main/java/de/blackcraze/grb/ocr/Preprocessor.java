@@ -60,8 +60,8 @@ public class Preprocessor {
     }
 
     public static List<File> cropMasked(BufferedImage image) throws IOException {
-        // now we iterate over the rows and remove the masked areas since the
-        // text we want to read is underneath it
+        // Iterate over the rows and remove the masked areas, since the
+        // text we want to read is underneath it/
         WritableRaster raster = image.getRaster();
         List<Integer> rowsToRemove = new ArrayList<>();
         for (int yy = 0; yy < image.getHeight(); yy++) {
@@ -107,28 +107,28 @@ public class Preprocessor {
     public static BufferedImage cropCenterScreen(BufferedImage image) {
         int width = image.getWidth();
         int height = image.getHeight();
-        // a fourth of screen wide is reserved for header stuff (level, coins,
-        // gems ...)
+        // One-fourth of screen width is reserved for header stuff (level, coins,
+        // gems, etc.)
         int headerHeight = width / 4;
         int footerHeight = width / 2;
-        // a half of screen width is reserved for details stuff at the bottom
-        // screen (sell bar, price and such stuff)
+        // One-half of screen width is reserved for footer stuff (sell bar, price,
+        // etc.)
         return image.getSubimage(0, headerHeight, width, height - headerHeight - footerHeight);
     }
 
     /**
      * This is a try to mask the icon images from the game screen. Icons do
-     * often have white or black in it (shadows and lights). This areas would be
-     * left over with {@link #monochrome(int, int, WritableRaster)} and are
-     * disturbing the ocr. But since the black and white parts are in the near
-     * of colored areas (blue or red or green). We mask an area around the
+     * often have white or black in them (shadows and lights). These areas would be
+     * left over from {@link #monochrome(int, int, WritableRaster)} and are
+     * disturbing the OCR. But since the black and white parts are near
+     * colored areas (blue or red or green), we mask an area around the
      * colored pixels and overpaint the shadows and lights with it.
      *
      * @param image
      * @throws IOException
      */
     public static void maskIconRing(BufferedImage image) throws IOException {
-        // resolution independent mask box size (720 pixels --> boxsize 10)
+        // resolution-independent mask box size (720 pixels --> boxsize 10)
         WritableRaster raster = image.getRaster();
         int boxWidth = image.getWidth() / 100;
         for (int xx = 0; xx < image.getWidth(); xx++) {
@@ -142,7 +142,7 @@ public class Preprocessor {
     }
 
     /**
-     * change an area of pixels around a pixel to a specified color
+     * Change an area of pixels around a pixel to a specified color.
      */
     private static void paintOverArea(int centerX, int centerY, int areaSize, Color color, WritableRaster raster) {
         for (int x = centerX - areaSize; x < raster.getWidth() && x < centerX + areaSize; x++) {
@@ -201,7 +201,9 @@ public class Preprocessor {
     private static void saveToDisk(Mat mat, String name) throws IOException {
         if (debug()) {
             File output = new File(TMP_FILE_DIR, name + ".png");
-            System.out.println("debug file: " + output.getAbsolutePath());
+            System.out.println(Resource.getHeader("DEBUG", locale + output.getAbsolutePath());
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+            System.out.println("debug file: " + output.getAbsolutePath()); */
             imwrite(output.getAbsolutePath(), mat);
         }
     }
@@ -209,7 +211,9 @@ public class Preprocessor {
     public static void saveToDisk(BufferedImage image, String name) throws IOException {
         if (debug()) {
             File output = new File(TMP_FILE_DIR, name + ".png");
-            System.out.println("debug file: " + output.getAbsolutePath());
+            System.out.println(Resource.getHeader("DEBUG", locale) + output.getAbsolutePath());
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+            System.out.println("debug file: " + output.getAbsolutePath()); */
             ImageIO.write(image, "png", output);
         }
     }
@@ -305,8 +309,12 @@ public class Preprocessor {
             contour.close();
         }
         if (debug()) {
-            System.out.println("found contours: " + contours.size());
-            System.out.println("valid contours: " + validContours);
+            System.out.println(Resource.getHeader("FOUND", locale) + contours.size());
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+            System.out.println("found contours: " + contours.size()); */
+            System.out.println(Resource.getHeader("VALID", locale) + validContours);
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+            System.out.println("valid contours: " + validContours); */
         }
         contours.close();
         dist_8u.close();

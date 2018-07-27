@@ -18,16 +18,20 @@ public interface BaseCommand {
     void run(Scanner scanner, Message message);
 
     default String help(Message message) {
-        return Resource.getHelp(this.getClass().getSimpleName(),
-                getResponseLocale(message));
+        // NEXT 3 LINES CREATED BY @DANGERCROW TO MAKE DESCRIPTIVE HELP SYSTEM WORK
+        String className = this.getClass().getSimpleName();
+        String key = className.toUpperCase();
+        return Resource.getHelp(key, getResponseLocale(message));
     }
 
     static void checkPublic(Message message) {
         if (!ChannelType.TEXT.equals(message.getChannelType())) {
             message.addReaction(Speaker.Reaction.FAILURE).queue();
             Speaker.say(message.getChannel(),
-                    Resource.getString("PUBLIC_COMMAND_ONLY", getResponseLocale(message)));
-            throw new IllegalStateException("public command only");
+                    Resource.getError("PUBLIC_COMMAND_ONLY", getResponseLocale(message)));
+            throw new IllegalStateException(Resource.getError("PCO", getResponseLocale(message)));
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
+            throw new IllegalStateException("public command only"); */
             // TODO MORE SOLID IMPLEMENTATION
         }
     }

@@ -41,7 +41,7 @@ public class ReadyListener extends ListenerAdapter {
 
 	private void initialiseServers(JDA jda) {
 		for (Guild guild : jda.getGuilds()) {
-			String listenChannel = BotConfig.getConfig().CHANNEL;
+			String listenChannel = BotConfig.ServerConfig().CHANNEL;
 			for (TextChannel channel : guild.getTextChannelsByName(listenChannel, true)) {
 				initialise(channel);
 			}
@@ -49,30 +49,29 @@ public class ReadyListener extends ListenerAdapter {
 	}
 
 	private void initialise(TextChannel channel) {
-		Speaker.say(channel, Resource.getString("INIT", CommandUtils.getResponseLocale(channel))
-				+ "`" + BotConfig.getConfig().PREFIX + "`");
+		Speaker.say(channel, Resource.getInfo("INIT", CommandUtils.getDefaultLocale())
+				+ "`" + BotConfig.ServerConfig().PREFIX + "`");
 	}
 
 	/* Send a goodbye message when the shutting down event is triggered. */
-	
+
 	@Override
 	public void onStatusChange(StatusChangeEvent event) {
-		if (event.getStatus() == Status.SHUTTING_DOWN) {
-			goodbyeServers(event.getJDA());	
+		if (event.getNewStatus() == Status.SHUTTING_DOWN) {
+			goodbyeServers(event.getJDA());
 		}
-	}	
-	
+	}
+
 	private void goodbyeServers(JDA jda) {
 		for (Guild guild : jda.getGuilds()) {
-			String listenChannel = BotConfig.getConfig().CHANNEL;
+			String listenChannel = BotConfig.ServerConfig().CHANNEL;
 			for (TextChannel channel : guild.getTextChannelsByName(listenChannel, true)) {
 				goodbyeMessage(channel);
 			}
 		}
 	}
-	
+
 	private void goodbyeMessage(TextChannel channel) {
-		Speaker.say(channel, Resource.getString("BYE_MSG", CommandUtils.getResponseLocale(channel))
-				+ "`" + BotConfig.getConfig().PREFIX + "`");
-	}	
+		Speaker.say(channel, Resource.getInfo("BYE_MSG", CommandUtils.getDefaultLocale()));
+	}
 }
