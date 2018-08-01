@@ -45,12 +45,12 @@ In addition to the accounts listed above, you must have the Manage Server permis
 	* Optional: APP ICON
 	* Ignore: everything else
 
-1. Invite the bot https://discordapp.com/oauth2/authorize?client_id=**[ClientID]**&scope=bot&permissions=66186303 on a new tab.
+4. Invite the bot https://discordapp.com/oauth2/authorize?client_id=**[ClientID]**&scope=bot&permissions=66186303 on a new tab.
 
 1. GitHub (Tab #1) 
 - [ ] Fork the code to a new repository on your account.	https://github.com/BlackCraze/GameResourceBot
 
-1. Heroku (Tab #2) 
+6. Heroku (Tab #2) 
 - [ ] Deploy the bot app.	https://heroku.com/deploy?template=https://github.com/BlackCraze/GameResourceBot
 - [ ] Variables in 
   - [ ] *italic* can only be set on Heroku-Interface.
@@ -70,16 +70,16 @@ DELETE_PICTURE_MESSAGE | **off** | remove picture from channel after processing 
 
 - [ ] Connect to GitHub and Deploy.
 
-6. Heroku
+7. Heroku
 - [ ] Configure for automatic updates
 - [ ] Start the bot. Configure dynos
 - [ ] Enable Automatic Deploys
 - [ ] "Resources" tab > Turn the switch on
 
-7. Heroku 
+8. Heroku 
 - [ ] Verify your account on https://devcenter.heroku.com/articles/account-verification
 
-1. GitHub 
+9. GitHub 
 * Configure computer for source code updates.
   * GRB_update_MSWin
   * GRB_update_MacOS
