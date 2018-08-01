@@ -1,9 +1,5 @@
 package de.blackcraze.grb.dao;
 
-import de.blackcraze.grb.model.entity.Mate;
-import de.blackcraze.grb.model.entity.Stock;
-import de.blackcraze.grb.model.entity.StockType;
-import de.blackcraze.grb.util.PrintUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -11,13 +7,21 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
+
+import org.apache.commons.lang3.StringUtils;
+
+import de.blackcraze.grb.i18n.Resource;
+import de.blackcraze.grb.model.entity.Mate;
+import de.blackcraze.grb.model.entity.Stock;
+import de.blackcraze.grb.model.entity.StockType;
+import de.blackcraze.grb.util.PrintUtils;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
-import org.apache.commons.lang3.StringUtils;
 
 public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
 
@@ -30,8 +34,9 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
     @Override
     public Optional<Mate> findByDiscord(String discordID) {
         try {
-            return Optional.of((Mate) em.createQuery(
-                    "select m from Mate m left join fetch m.stocks left join fetch m.buildings where m.discordId = :discordId")
+            return Optional.of((Mate) em
+                    .createQuery(
+                            "select m from Mate m left join fetch m.stocks left join fetch m.buildings where m.discordId = :discordId")
                     .setParameter("discordId", discordID).getSingleResult());
         } catch (NoResultException e) {
             return Optional.empty();
@@ -53,9 +58,7 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
                 // Locale)
                 unknown.add(stockKey);
             } else if (0 == stockAmount.longValue()) {
-                System.out.printf(Resource.getInfo("CLEAR_PLAYER_STOCK", locale), stockKey, mate.getName());
-                /* ORIGINAL VERSION OF PREVIOUSA LINE BELOW
-                System.out.printf("clearing stock %s for player %s%n", stockKey, mate.getName()); */
+                System.out.printf("clearing stock %s for player %s%n", stockKey, mate.getName());
                 Optional<StockType> type = stockTypeDao.findByKey(stockKey);
                 if (type.isPresent()) {
                     stockDao.delete(mate, type.get());
@@ -71,11 +74,8 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
                     }
                 }
                 if (!found) {
-                    System.out.printf(Resource.getInfo("CREATE_PLAYER_STOCK", locale), stockKey,
-                            mate.getName());
-                    /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
                     System.out.printf("Creating new stock %s for player %s%n", stockKey,
-                            mate.getName()); */
+                            mate.getName());
                     Optional<StockType> type = stockTypeDao.findByKey(stockKey);
                     if (type.isPresent()) {
                         Stock stock = new Stock();
@@ -85,9 +85,7 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
                         stockDao.save(stock);
                     } else {
                         unknown.add(stockKey);
-                        System.err.println(Resource.getError("UNKNOWN_STOCK", locale), stockKey);
-                        /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
-                        System.err.println("Unknown stock type: " + stockKey); */
+                        System.err.printf("Unknown stock type: %s%n", stockKey);
                     }
                 }
             }
@@ -128,9 +126,10 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
         if (!mateOptional.isPresent()) {
             if (message.getChannelType().equals(ChannelType.PRIVATE)) {
                 throw new IllegalStateException(Resource.getError("PCO_EXCEPTION", locale));
-                /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
-                throw new IllegalStateException(
-                        "unknown user can not automatically be created in private messages"); */
+                /*
+                 * ORIGINAL VERSION OF PREVIOUS LINE BELOW throw new IllegalStateException(
+                 * "unknown user can not automatically be created in private messages");
+                 */
             }
             return createMate(locale, discordId, name);
         } else {
@@ -173,7 +172,8 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
             Number amount = (Number) row[1];
             Date updated = (Date) row[2];
             if (!StringUtils.equals(lastMate, mate)) {
-                String updateS = updated != null ? PrintUtils.getDiffFormatted(updated, now) : "-";
+                String updateS =
+                        updated != null ? PrintUtils.getDiffFormatted(updated, now, locale) : "-";
                 String amountS = String.format(locale, "%d", amount.intValue());
                 result.add(Arrays.asList(mate, amountS, updateS));
                 lastMate = mate;

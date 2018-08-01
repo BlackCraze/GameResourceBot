@@ -39,7 +39,8 @@ public class OCR {
      *
      * @throws IOException
      */
-    public Map<String, Long> convertToStocks(InputStream stream, Locale locale, Device device) throws IOException {
+    public Map<String, Long> convertToStocks(InputStream stream, Locale locale, Device device)
+            throws IOException {
         Map<String, Long> stocks = new HashMap<>();
         List<File> frames = Preprocessor.load(stream);
         for (File frame : frames) {
@@ -79,9 +80,7 @@ public class OCR {
                     Long valueOf = Long.valueOf(valueCorrected);
                     stocks.put(itemName, valueOf);
                 } catch (NumberFormatException e) {
-                    System.err.println(Resource.getError("CANT_CONVERT", locale));
-                    /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
-                    System.err.println("could not convert to number: '" + value + "'"); */
+                    System.err.println("could not convert to number: '" + value + "'");
                     stocks.put(itemName + ": '" + value + "'", Long.MIN_VALUE);
                 } finally {
                     if (number != null) {
@@ -127,9 +126,7 @@ public class OCR {
             api = new TessBaseAPI();
             int init = api.Init(BotConfig.TESS_DATA, "deu");
             if (init != 0) {
-                throw new RuntimeException(Resource.getError("TESSERACT", locale));
-                /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
-                throw new RuntimeException("Could not initialize tesseract.");
+                throw new RuntimeException(Resource.getError("TESSERACT", Locale.getDefault()));
             }
         }
     }
