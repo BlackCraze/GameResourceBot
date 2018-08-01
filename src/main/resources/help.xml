@@ -462,8 +462,8 @@ Display a list of all active users, __plus__ the number of resources each user h
 **==========**
 
 Synchronise the list of users in my database with the list of current users on your Discord server.
-I will delete from my database all users who no longer have access to the %s channel on your Discord server.
-Then I will add to my database any new users who have access to the %s channel on your Discord server.
+I will delete from my database all users who no longer have access to the %2$s channel on your Discord server.
+Then I will add to my database any new users who have access to the %2$s channel on your Discord server.
 ```%1$s users sync```
 
 **See also:**

@@ -25,14 +25,15 @@ public interface BaseCommand {
         String className = this.getClass().getSimpleName();
         String key = className.toUpperCase();
         return String.format(Resource.getHelp(key, getResponseLocale(message)),
-                BotConfig.getConfig().PREFIX);
+                BotConfig.getConfig().PREFIX, "#" + BotConfig.getConfig().CHANNEL);
     }
 
     static void checkPublic(Message message) {
         if (!ChannelType.TEXT.equals(message.getChannelType())) {
-            message.addReaction(Speaker.Reaction.FAILURE).queue();
-            Speaker.say(message.getChannel(),
-                    Resource.getError("PUBLIC_COMMAND_ONLY", getResponseLocale(message)));
+            Speaker.err(message,
+                    String.format(
+                            Resource.getError("PUBLIC_COMMAND_ONLY", getResponseLocale(message)),
+                            "#" + BotConfig.getConfig().CHANNEL));
             throw new IllegalStateException("public command only");
         }
     }

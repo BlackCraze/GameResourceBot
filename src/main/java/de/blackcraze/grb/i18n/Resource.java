@@ -1,6 +1,5 @@
 package de.blackcraze.grb.i18n;
 
-import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -88,12 +87,6 @@ public class Resource {
     private static String getResource(String key, Locale locale, String baseName) {
         ResourceBundle resourceBundle =
                 ResourceBundle.getBundle(baseName, locale, new XMLResourceBundleControl());
-//        Enumeration<String> keys = resourceBundle.getKeys();
-//        System.out.println("RESOURCEBUNDLE: " + baseName);
-//        while (keys.hasMoreElements()) {
-//            String aKey = keys.nextElement();
-//            System.out.println(aKey + ": " + resourceBundle.getString(aKey));
-//        }
         return resourceBundle.getString(key);
     }
 
