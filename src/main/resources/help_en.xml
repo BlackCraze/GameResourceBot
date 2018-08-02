@@ -379,7 +379,7 @@ The purpose of the `shutdown` command is to make me shut down and restart. This 
 
 **==========**
 
-Shut down and restart this app.
+Shut down and restart the GameResourceBot.
 ```%1$s shutdown```</entry>
 	<entry key="STATUS">**Status**
 
