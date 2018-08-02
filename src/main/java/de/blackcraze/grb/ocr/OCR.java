@@ -50,8 +50,8 @@ public class OCR {
                 File number = pair[1];
 
                 if (text == null && number == null) {
-                    // thats okay - empty fragment
-                    // nothing to do
+                    // That's okay - empty fragment
+                    // Nothing to do.
                     continue;
                 }
 
@@ -80,7 +80,7 @@ public class OCR {
                     Long valueOf = Long.valueOf(valueCorrected);
                     stocks.put(itemName, valueOf);
                 } catch (NumberFormatException e) {
-                    System.err.println("could not convert to number: '" + value + "'");
+                    System.err.println("Could not convert to number: '" + value + "'");
                     stocks.put(itemName + ": '" + value + "'", Long.MIN_VALUE);
                 } finally {
                     if (number != null) {
@@ -126,7 +126,8 @@ public class OCR {
             api = new TessBaseAPI();
             int init = api.Init(BotConfig.TESS_DATA, "deu");
             if (init != 0) {
-                throw new RuntimeException(Resource.getError("TESSERACT", Locale.getDefault()));
+                // Another case where I failed to save the original. I hope it's right.
+                throw new RuntimeException("Could not initialise tesseract.");
             }
         }
     }

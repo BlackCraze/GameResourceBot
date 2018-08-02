@@ -63,7 +63,7 @@ public class Preprocessor {
 
     public static List<File> cropMasked(BufferedImage image) throws IOException {
         // Iterate over the rows and remove the masked areas, since the
-        // text we want to read is underneath it/
+        // text we want to read is underneath it.
         WritableRaster raster = image.getRaster();
         List<Integer> rowsToRemove = new ArrayList<>();
         for (int yy = 0; yy < image.getHeight(); yy++) {
@@ -273,14 +273,14 @@ public class Preprocessor {
         saveToDisk(colorFilter, prefix + "_04_thresh");
         distanceTransform(colorFilter, colorFilter, CV_DIST_L2, 3);
         // Normalize the distance image for range = {0.0, 1.0}
-        // so we can visualize and threshold it
+        // so we can visualize and threshold it.
         normalize(colorFilter, colorFilter, 0, 1., NORM_MINMAX, -1, null);
         threshold(colorFilter, colorFilter, thresh, 1, CV_THRESH_BINARY);
 
         Mat dist_8u = new Mat();
         colorFilter.convertTo(dist_8u, CV_8U);
         colorFilter.close();
-        // Find total markers
+        // Find total markers.
         MatVector contours = new MatVector();
         Mat hierarchy = new Mat();
         dist_8u = applyBorders(dist_8u, borderSize, Scalar.WHITE); // to prevent
@@ -311,8 +311,8 @@ public class Preprocessor {
             contour.close();
         }
         if (debug()) {
-            System.out.println("found contours: " + contours.size());
-            System.out.println("valid contours: " + validContours);
+            System.out.println("Found contours: " + contours.size());
+            System.out.println("Valid contours: " + validContours);
         }
         contours.close();
         dist_8u.close();

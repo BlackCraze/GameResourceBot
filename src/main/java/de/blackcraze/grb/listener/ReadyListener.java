@@ -48,8 +48,11 @@ public class ReadyListener extends ListenerAdapter {
     }
 
     private void initialise(TextChannel channel) {
+        Speaker.say(channel, Resource.getInfo("INIT", CommandUtils.getDefaultLocale()), BotConfig.getConfig().PREFIX);
+        /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
         Speaker.say(channel, Resource.getInfo("INIT", CommandUtils.getDefaultLocale()) + "`"
-                + BotConfig.getConfig().PREFIX + "`");
+                + BotConfig.getConfig().PREFIX + "`.");
+        */
     }
 
     /* Send a goodbye message when the shutting down event is triggered. */

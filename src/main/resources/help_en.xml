@@ -4,6 +4,8 @@
 <properties>
 	<entry key="GENERAL">**GENERAL HELP INFORMATION**
 
+Greetings! I am the GameResourceBot.
+
 I can understand only one command at a time.
 Commands are NOT case-sensitive, unless otherwise noted.
 DO NOT send one message with multiple commands on separate lines.
@@ -189,7 +191,7 @@ Display the current global settings.
 
 **==========**
 
-Tell me the language of the guild's screenshots.
+Tell me the most common language of the guild's screenshots.
 ```%1$s config set language [de, en, es, fr, it, pt]```
 __Options configured with the `userConfig` command always take priority over global options.__
 
@@ -210,7 +212,7 @@ __The default setting is "off".__
 **==========**
 
 I cannot change the settings for PREFIX or CHANNEL. These can be changed only at Heroku's website.
-For more information, please contact your guild's bot administrator.
+For more information, please contact your guild's GameResourceBot administrator.
 
 
 **See also:**
@@ -220,6 +222,7 @@ For more information, please contact your guild's bot administrator.
 Greek translations by ThatGreekGuy.
 Portuguese translations by Benur21.
 Documentation assistance by PellaAndroid.
+i18n coordination by PellaAndroid.
 
 Codebase:
 https://github.com/BlackCraze/GameResourceBot/
@@ -267,6 +270,28 @@ List all groups and their resources.
 
 **See also:**
 + `%1$s help total`</entry>
+	<!-- If you agree with me that `bot help help` should display the list of commands, I've done it for you.
+	If you disagree, simply delete this entry. No blood, no foul. -->
+	<entry key="HELP">**Available Commands**
+
+`help`
+`help [command]`
+
+`check`
+`checkTypes`
+`clear`
+`config`
+`credits`
+`group`
+`info`
+`nativeStatus`
+`ping`
+`shutdown`
+`status`
+`total`
+`update`
+`userConfig`
+`users`</entry>
 	<entry key="INFO">I am a little bot who helps you coordinate your Discord guild better! Specifically, I have been designed to assist guilds who play the mobile game "Deep Town".</entry>
 	<entry key="NATIVESTATUS">**NativeStatus**
 
@@ -322,8 +347,8 @@ __Method #2__: Upload the unaltered screenshot. Then use a command to delete the
 __TIPS__
 + You may upload screenshots to update your entire inventory at once, or only part of your inventory.
 + When updating your inventory, I will __always__:
-+ ADD each resource in your screenshots to your inventory list, unless the resource is already there from a previous update.
-+ REPLACE the old amount of each resource with the new amount.
+		+ ADD each resource in your screenshots to your inventory list, unless the resource is already there from a previous update.
+		+ REPLACE the old amount of each resource with the new amount.
 + When updating your inventory, I will __never__ remove a resource from your inventory list.
 + Example:
 __old inventory list__
@@ -462,8 +487,8 @@ Display a list of all active users, __plus__ the number of resources each user h
 **==========**
 
 Synchronise the list of users in my database with the list of current users on your Discord server.
-I will delete from my database all users who no longer have access to the %2$s channel on your Discord server.
-Then I will add to my database any new users who have access to the %2$s channel on your Discord server.
+I will delete from my database all users who no longer have access to the `#%2$s` channel on your Discord server.
+Then I will add to my database any new users who have access to the `#%2$s` channel on your Discord server.
 ```%1$s users sync```
 
 **See also:**

@@ -31,7 +31,7 @@ public class StandingDataInitializer {
             reader = new InputStreamReader(new BOMInputStream(resource), "UTF-8");
             parser = new CSVParser(reader, CSVFormat.EXCEL.withHeader());
             List<CSVRecord> records = parser.getRecords();
-            System.out.println("initializing stock types: " + records.size());
+            System.out.println("Initializing stock types: " + records.size());
             List<StockType> stocks = getStockTypeDao().findAll(new Locale(BotConfig.getConfig().LANGUAGE));
 
             for (CSVRecord record : records) {
@@ -61,7 +61,7 @@ public class StandingDataInitializer {
                     }
                 }
                 if (!found) {
-                    System.out.println("Delete obsolete stock type: " + type.getName());
+                    System.out.println("Deleted obsolete stock type: " + type.getName());
                     getStockTypeDao().delete(type);
                 }
             }
