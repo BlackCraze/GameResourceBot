@@ -1,10 +1,11 @@
 package de.blackcraze.grb.i18n;
 
-import com.sksamuel.diffpatch.DiffMatchPatch;
-import com.sksamuel.diffpatch.DiffMatchPatch.Diff;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import com.sksamuel.diffpatch.DiffMatchPatch;
+import com.sksamuel.diffpatch.DiffMatchPatch.Diff;
 
 public class Resource {
 
@@ -39,11 +40,12 @@ public class Resource {
         if (scoreIsGood(itemTyped, diffScore)) {
             return bestMatch;
         } else {
-            throw new RuntimeException(String.format(Resource.getError("CANT_FIND_KEY", locale), item, baseName,
-                    locale.toLanguageTag()));
-            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
-            throw new RuntimeException(String.format("Can't find %s in %s %s", item, baseName,
-                    locale.toLanguageTag())); */
+            throw new RuntimeException(String.format(Resource.getError("CANT_FIND_KEY", locale),
+                    item, baseName, locale.toLanguageTag()));
+            /*
+             * ORIGINAL VERSION OF PREVIOUS LINE BELOW throw new RuntimeException(String.format(
+             * "Can't find %s in %s %s", item, baseName, locale.toLanguageTag()));
+             */
         }
     }
 
@@ -85,11 +87,6 @@ public class Resource {
     private static String getResource(String key, Locale locale, String baseName) {
         ResourceBundle resourceBundle =
                 ResourceBundle.getBundle(baseName, locale, new XMLResourceBundleControl());
-        if (!resourceBundle.containsKey(key)) {
-            System.err.printf(Resource.getError("CANT_FIND_KEY", locale), key, locale.toLanguageTag());
-            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
-            System.err.printf("Can't find key %s in locale %s%n", key, locale.toLanguageTag()); */
-        }
         return resourceBundle.getString(key);
     }
 

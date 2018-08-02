@@ -14,13 +14,13 @@ DO read the help for the command you want to use. Sometimes, I can do multiple t
 
 To let me update your inventory, you may:
 + post screenshots of your inventory screen. For details, type:
-```%s help screenshot```
+```%1$s help screenshot```
 + use commands. For details, type:
-```%s help update```
+```%1$s help update```
 
 OPTIONAL: Send commands and/or screenshots via DM: __Use my @mention ID.__
 
-OPTIONAL: When sending commands via DM, you may omit the `%s` prefix.
+OPTIONAL: When sending commands via DM, you may omit the `%1$s` prefix.
 
 **==========**
 
@@ -33,7 +33,7 @@ If a command has multiple tasks for me, it is possible for both reactions to app
 **==========**
 
 For help with specific commands, type:
-```%s help [command]```
+```%1$s help [command]```
 
 __Commands__
 ```fix
@@ -66,13 +66,13 @@ ATTENTION
 \*\*\*\*\*\*\*\*\*\*\*\*\***
 This is a complex command. This command gives two different types of output, depending on how you use it. In addition, the output of this command can be __VERY LONG__. Please take the time to understand the `check` command before you use it.
 
-*In most cases, you should use `%s total` instead.*
+*In most cases, you should use `%1$s total` instead.*
 
 **==========**
 
 *Primary purpose*
 Check all of your own inventory.
-`%s check`
+`%1$s check`
 
 OUTPUT: a list of all resource types currently in your inventory list in my database, __plus__ the quantity you have on hand of each type, __plus__ how long ago you updated each resource type.
 
@@ -80,10 +80,10 @@ OUTPUT: a list of all resource types currently in your inventory list in my data
 
 *Primary purpose*
 Check all of one other user's inventory.
-`%s check [userName]`
+`%1$s check [userName]`
 __The `userName` must be spelled correctly.
 The `userName` must be an exact match.__ For more information, type:
-`%s help users`
+`%1$s help users`
 
 OUTPUT: a list of all resource types currently in `userName`'s inventory list in my database, __plus__ the quantity `userName` has on hand of each type, __plus__ how long ago `userName` updated each resource type.
 
@@ -92,7 +92,7 @@ OUTPUT: a list of all resource types currently in `userName`'s inventory list in
 *Primary purpose* **AND** *Secondary purpose*
 Check all items, __anywhere__ in my database, that match a search term you specify.
 __The `searchTerm` may appear *anywhere* in a name, and it is *not* case-sensitive.__
-`%s check [searchTerm]`
+`%1$s check [searchTerm]`
 
 
 OUTPUT (PART 1): a list of all users who currently have on hand any non-zero quantity of a resource type matching the `searchTerm`, __plus__ the quantity of that resource type each user has on hand, __plus__ how long ago each user updated that resource type, __plus__ the total quantity of that resource type currently held by the entire guild.
@@ -102,15 +102,15 @@ __Example__: `searchTerm` "alumin" will match Aluminium AND Aluminium Bar AND Al
 
 
 OUTPUT (PART 2): a list of all resource types currently in the inventory list for a user whose `userName` contains the `searchTerm`, __plus__ the quantity that user has on hand of each type, __plus__ how long ago that user updated each resource type.
-__This is identical to the output of `%s check [userName]`.__
+__This is identical to the output of `%1$s check [userName]`.__
 
 If more than one `userName` contains `searchTerm`, I will show you OUTPUT (PART 2) __separately__ for __each__ such user.
 
 
 **See also:**
-+ `%s help screenshot`
-+ `%s help total`
-+ `%s help users`</entry>
++ `%1$s help screenshot`
++ `%1$s help total`
++ `%1$s help users`</entry>
 	<entry key="CHECKTYPES">**CheckTypes**
 
 The purpose of the `checkTypes` command is to display the items (or "types" of resources) I can recognise in screenshots and list in my database.
@@ -118,12 +118,12 @@ The purpose of the `checkTypes` command is to display the items (or "types" of r
 **==========**
 
 Display all known item types, arranged in alphabetical order using the currently selected language.
-```%s checkTypes```
+```%1$s checkTypes```
 
 
 **See also:**
-+ `%s help userConfig`
-+ `%s help screenshot`</entry>
++ `%1$s help userConfig`
++ `%1$s help screenshot`</entry>
 	<entry key="CLEAR">**Clear**
 
 The purpose of the `clear` command is to remove resources from the inventory list. You can do several different things with this command.
@@ -132,30 +132,30 @@ The purpose of the `clear` command is to remove resources from the inventory lis
 
 Clear all of your own inventory.
 __Use this command before uploading screenshots that update your *entire* inventory.__
-```%s clear```
+```%1$s clear```
 
 **==========**
 
 Clear one resource from your own inventory.
-```%s clear [resourceName]```
+```%1$s clear [resourceName]```
 
 **==========**
 
 Clear all of one other user's inventory.
-```%s clear [userName]```
+```%1$s clear [userName]```
 __The userName must be spelled correctly.__ For more information, type:
-```%s help users```
+```%1$s help users```
 
 **==========**
 
 Clear the entire guild's inventory.
-```%s clear all```
+```%1$s clear all```
 
 
 **See also:**
-+ `%s help screenshot`
-+ `%s help users`
-+ `%s help update`</entry>
++ `%1$s help screenshot`
++ `%1$s help users`
++ `%1$s help update`</entry>
 	<entry key="COMMANDS">**Available Commands**
 
 `help`
@@ -180,31 +180,31 @@ Clear the entire guild's inventory.
 
 The purpose of the `config` command is to display and configure global options--that is, options that apply to everyone in the guild at the same time.
 For information about options that apply only to you, type:
-```%s help userConfig```
+```%1$s help userConfig```
 
 **==========**
 
 Display the current global settings.
-```%s config```
+```%1$s config```
 
 **==========**
 
 Tell me the language of the guild's screenshots.
-```%s config set language [de, en, es, fr, it, pt]```
+```%1$s config set language [de, en, es, fr, it, pt]```
 __Options configured with the `userConfig` command always take priority over global options.__
 
 **==========**
 
 After I read a screenshot, I can list the resources I found and the quantity of each.
 Tell me whether or not you want me to list resources after reading screenshots.
-```%s config set OCR_RESULT [on, off]```
+```%1$s config set OCR_RESULT [on, off]```
 __The default setting is "on".__
 
 **==========**
 
 After I read a screenshot, I can delete the screenshot from the message history.
 Tell me whether or not you want me to delete screenshots after reading them.
-```%s config set DELETE_PICTURE_MESSAGE [on, off]```
+```%1$s config set DELETE_PICTURE_MESSAGE [on, off]```
 __The default setting is "off".__
 
 **==========**
@@ -214,8 +214,8 @@ For more information, please contact your guild's bot administrator.
 
 
 **See also:**
-+ `%s help userConfig`
-+ `%s help screenshot`</entry>
++ `%1$s help userConfig`
++ `%1$s help screenshot`</entry>
 	<entry key="CREDITS">This bot was created by BlackCraze, with help from Dangercrow and firewaran.
 Greek translations by ThatGreekGuy.
 Portuguese translations by Benur21.
@@ -233,40 +233,40 @@ The purpose of the `group` command is to display and manage groups of resources.
 **==========**
 
 Create one or more new groups.
-```%s group create [groupName] [groupName] [groupName]...```
+```%1$s group create [groupName] [groupName] [groupName]...```
 __Group names are case-sensitive.__
 
 **==========**
 
 Add one or more resources to one group that already exists.
-```%s group add [groupName] "[resourceName]" "[resourceName]" "[resourceName]"...```
+```%1$s group add [groupName] "[resourceName]" "[resourceName]" "[resourceName]"...```
 __Quotation marks are REQUIRED for any [resourceName] containing a space.__
 
 **==========**
 
 Remove one resource from one group.
-```%s group remove [groupName] "[resourceName]"```
+```%1$s group remove [groupName] "[resourceName]"```
 
 **==========**
 
 Rename one group.
-```%s group rename [currentName] [newName]```
+```%1$s group rename [currentName] [newName]```
 
 **==========**
 
 Delete one group.
-```%s group delete [groupName]```
+```%1$s group delete [groupName]```
 
 **==========**
 
 List all groups and their resources.
-```%s group list```
+```%1$s group list```
 ***OR***
-```%s group```
+```%1$s group```
 
 
 **See also:**
-+ `%s help total`</entry>
++ `%1$s help total`</entry>
 	<entry key="INFO">I am a little bot who helps you coordinate your Discord guild better! Specifically, I have been designed to assist guilds who play the mobile game "Deep Town".</entry>
 	<entry key="NATIVESTATUS">**NativeStatus**
 
@@ -275,11 +275,11 @@ The purpose of the `nativeStatus` command is to display my native memory status.
 **==========**
 
 Display the native memory status.
-```%s nativeStatus```
+```%1$s nativeStatus```
 
 
 **See also:**
-`%s help status`</entry>
+`%1$s help status`</entry>
 	<entry key="PING">**Ping**
 
 The purpose of the `ping` command is to check whether I am able to respond to your commands.
@@ -287,15 +287,15 @@ The purpose of the `ping` command is to check whether I am able to respond to yo
 **==========**
 
 Test my responsiveness.
-```%s ping```</entry>
+```%1$s ping```</entry>
 	<entry key="SCREENSHOT">**Uploading Screenshots**
-IMPORTANT: __There is no `%s screenshot` command. This information is to assist you with the process of uploading screenshots to get the best results.__
+IMPORTANT: __There is no `%1$s screenshot` command. This information is to assist you with the process of uploading screenshots to get the best results.__
 
 **==========**
 
 To update your inventory using screenshots:
 1) Ensure your language setting matches the language of your screenshots. For details, type:
-```%s help userConfig```
+```%1$s help userConfig```
 
 2) Use your preferred method to take screenshots of your inventory screen in the game.
 + Both the resource name and the amount must be clearly visible.
@@ -315,7 +315,7 @@ Occasionally, you may want me to ignore a resource in your inventory. For exampl
 There are two different ways to handle this situation.
 __Method #1__: Before uploading the screenshot that shows the resource you want to keep, use a photo editor to edit the screenshot. Scribble over the resource to make it impossible for me to read it.
 __Method #2__: Upload the unaltered screenshot. Then use a command to delete the resource. For details, type:
-```%s help clear```
+```%1$s help clear```
 
 **==========**
 
@@ -340,14 +340,14 @@ copper 10,000
 iron 12,000
 
 If all your copper were gone, your new inventory list would be inaccurate.
-To prevent errors like this, send `%s clear` BEFORE updating your __entire__ inventory.
+To prevent errors like this, send `%1$s clear` BEFORE updating your __entire__ inventory.
 
 
 **See also:**
-+ `%s help update`
-+ `%s help clear`
-+ `%s help check`
-+ `%s help userConfig`</entry>
++ `%1$s help update`
++ `%1$s help clear`
++ `%1$s help check`
++ `%1$s help userConfig`</entry>
 	<entry key="SHUTDOWN">**Shutdown**
 
 The purpose of the `shutdown` command is to make me shut down and restart. This can be useful if you experience an OutOfMemoryError.
@@ -355,7 +355,7 @@ The purpose of the `shutdown` command is to make me shut down and restart. This 
 **==========**
 
 Shut down and restart this app.
-```%s shutdown```</entry>
+```%1$s shutdown```</entry>
 	<entry key="STATUS">**Status**
 
 The purpose of the `status` command is to display my Java memory status. Developers sometimes find this information useful during a troubleshooting process.
@@ -363,11 +363,11 @@ The purpose of the `status` command is to display my Java memory status. Develop
 **==========**
 
 Display the Java memory status.
-```%s status```
+```%1$s status```
 
 
 **See also:**
-`%s help nativeStatus`</entry>
+`%1$s help nativeStatus`</entry>
 	<entry key="TOTAL">**Total**
 
 The purpose of the `total` command is to display the total amount of one or more resources currently held by __the entire guild__.
@@ -375,32 +375,32 @@ The purpose of the `total` command is to display the total amount of one or more
 **==========**
 
 Display total quantities of all resources currently on hand.
-```%s total```
+```%1$s total```
 
 **==========**
 
 Display total quantity of one resource currently on hand.
-```%s total [resourceName]```
+```%1$s total [resourceName]```
 
 **==========**
 
 Display total quantities of multiple resources with parts of their names in common.
 __EXAMPLES__
-```%s total polished```
+```%1$s total polished```
 **OR**
-```%s total bar```
+```%1$s total bar```
 **OR**
 You get the point.
 
 **==========**
 
 Display total quantities of all resources in one group.
-```%s total [groupName]```
+```%1$s total [groupName]```
 
 
 **See also:**
-+ `%s help check`
-+ `%s help group`</entry>
++ `%1$s help check`
++ `%1$s help group`</entry>
 	<entry key="UPDATE">**Update**
 
 The purpose of the `update` command is add resources to your inventory list, or to change the quantities of existing resources in your inventory list. You may use this command:
@@ -411,7 +411,7 @@ The purpose of the `update` command is add resources to your inventory list, or 
 **==========**
 
 The `update` command will accept multiple resources at the same time, if desired.
-```%s update [resourceName] [quantity] [resourceName] [quantity] [resourceName] [quantity]...```
+```%1$s update [resourceName] [quantity] [resourceName] [quantity] [resourceName] [quantity]...```
 
 **==========**
 
@@ -421,8 +421,8 @@ The `update` command will accept multiple resources at the same time, if desired
 
 
 **See also:**
-+ `%s help screenshot`
-+ `%s help clear`</entry>
++ `%1$s help screenshot`
++ `%1$s help clear`</entry>
 	<entry key="USERCONFIG">**UserConfig**
 
 The purpose of the `userConfig` command is to display and configure options that apply to a single user--namely, you.
@@ -430,26 +430,26 @@ The purpose of the `userConfig` command is to display and configure options that
 **==========**
 
 Display your current settings.
-```%s userConfig```
+```%1$s userConfig```
 
 **==========**
 
 Tell me the language of your screenshots, if it is different from your guild's default setting.
 I will respond to you in that same language (if I have learned it).
 You must continue to type all commands to me in English.
-```%s userConfig set language [de, en, es, fr, it, pt]```
+```%1$s userConfig set language [de, en, es, fr, it, pt]```
 __Options configured with the `userConfig` command always take priority over global options.__
 
 **==========**
 
 Tell me your type of device.
 __Fixes most errors reading screenshots.__
-```%s userConfig set device [ANDROID, IPHONE]```
+```%1$s userConfig set device [ANDROID, IPHONE]```
 
 
 **See also:**
-+ `%s help config`
-+ `%s help screenshot`</entry>
++ `%1$s help config`
++ `%1$s help screenshot`</entry>
 	<entry key="USERS">**Users**
 
 The purpose of the `users` command is to display and manage the active users in your guild.
@@ -457,16 +457,16 @@ The purpose of the `users` command is to display and manage the active users in 
 **==========**
 
 Display a list of all active users, __plus__ the number of resources each user has in the database, __plus__ how long ago each user made their most recent update.
-```%s users```
+```%1$s users```
 
 **==========**
 
 Synchronise the list of users in my database with the list of current users on your Discord server.
-I will delete from my database all users who no longer have access to the %s channel on your Discord server.
-Then I will add to my database any new users who have access to the %s channel on your Discord server.
-```%s users sync```
+I will delete from my database all users who no longer have access to the %2$s channel on your Discord server.
+Then I will add to my database any new users who have access to the %2$s channel on your Discord server.
+```%1$s users sync```
 
 **See also:**
-+ `%s help update`</entry>
++ `%1$s help update`</entry>
 </properties>
 <!-- @formatter:on -->

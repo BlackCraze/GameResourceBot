@@ -2,14 +2,17 @@ package de.blackcraze.grb.commands;
 
 import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
 
-import com.google.common.reflect.ClassPath;
-import de.blackcraze.grb.core.Speaker;
-import de.blackcraze.grb.i18n.Resource;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import com.google.common.reflect.ClassPath;
+
+import de.blackcraze.grb.core.BotConfig;
+import de.blackcraze.grb.core.Speaker;
+import de.blackcraze.grb.i18n.Resource;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
 
@@ -21,18 +24,17 @@ public interface BaseCommand {
         // NEXT 3 LINES CREATED BY @DANGERCROW TO MAKE DESCRIPTIVE HELP SYSTEM WORK
         String className = this.getClass().getSimpleName();
         String key = className.toUpperCase();
-        return Resource.getHelp(key, getResponseLocale(message));
+        return String.format(Resource.getHelp(key, getResponseLocale(message)),
+                BotConfig.getConfig().PREFIX, "#" + BotConfig.getConfig().CHANNEL);
     }
 
     static void checkPublic(Message message) {
         if (!ChannelType.TEXT.equals(message.getChannelType())) {
-            message.addReaction(Speaker.Reaction.FAILURE).queue();
-            Speaker.say(message.getChannel(),
-                    Resource.getError("PUBLIC_COMMAND_ONLY", getResponseLocale(message)));
-            throw new IllegalStateException(Resource.getError("PCO", getResponseLocale(message)));
-            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
-            throw new IllegalStateException("public command only"); */
-            // TODO MORE SOLID IMPLEMENTATION
+            Speaker.err(message,
+                    String.format(
+                            Resource.getError("PUBLIC_COMMAND_ONLY", getResponseLocale(message)),
+                            "#" + BotConfig.getConfig().CHANNEL));
+            throw new IllegalStateException("public command only");
         }
     }
 

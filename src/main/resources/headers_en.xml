@@ -37,9 +37,5 @@
 	<entry key="MAX">%n%tMAX:       </entry>
 	<entry key="HEAP">Heap</entry>
 	<entry key="NON-HEAP">Non-Heap</entry>
-	<!-- other headers -->
-	<entry key="DEBUG">debug file: </entry>
-	<entry key="FOUND">found contours: </entry>
-	<entry key="VALID">valid contours: </entry>
 </properties>
 <!-- @formatter:on -->

@@ -4,20 +4,14 @@
 <properties>
 	<entry key="ADDED">Added</entry>
 	<entry key="BYE_MSG">I am going offline now. I will be back as soon as possible.</entry>
-	<entry key="CLEAR_PLAYER_STOCK">Clearing stock %s for player %s.%n</entry>
-	<entry key="CREATE_PLAYER_STOCK">Creating new stock %s for player %s.%n</entry>
-	<entry key="CREATE_STOCK">Created new stock type: %s</entry>
-	<entry key="DELETE_STOCK">Deleted obsolete stock type: %s</entry>
+	<entry key="CREATE_STOCK">Created new stock type: %s%n</entry>
+	<entry key="DELETE_STOCK">Deleted obsolete stock type: %s%n</entry>
 	<entry key="DELETED">Deleted</entry>
 	<entry key="INFO">I am a little bot who helps you coordinate your Discord guild better! Specifically, I have been designed to assist guilds who play the mobile game "Deep Town".</entry>
 	<entry key="INIT">Connection established! Listening for prefix </entry>
-	<entry key="INIT_STOCK">Initialising stock types: %d</entry>
+	<entry key="INIT_STOCK">Initialising stock types: %d%n</entry>
 	<entry key="PONG">Pong!</entry>
 	<entry key="UP_TO_DATE">The user database is up to date.</entry>
-	<!-- -->
-	<!-- MESSAGES SHOWN MOSTLY TO DEVELOPERS APPEAR BELOW -->
-	<entry key="MENTIONED_1">Mentioned with prefix: Direct Message</entry>
-	<entry key="MENTIONED_2">Mentioned with prefix: %s</entry>
 	<!-- -->
 	<!-- The keys above are arranged in alphabetical order within their respective sections. The credits are listed last, below. -->
 	<entry key="CREDITS">This bot was created by BlackCraze, with help from Dangercrow and firewaran.

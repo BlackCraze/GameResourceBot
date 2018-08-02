@@ -83,7 +83,7 @@ public final class PrintUtils {
         return Collections.singletonList(b.toString());
     }
 
-    public static String getDiffFormatted(Date from, Date to) {
+    public static String getDiffFormatted(Date from, Date to, Locale locale) {
         Duration duration = new Duration(to.getTime() - from.getTime()); // in
                                                                          // milliseconds
         PeriodFormatter formatter = new PeriodFormatterBuilder().printZeroNever()//
@@ -128,7 +128,7 @@ public final class PrintUtils {
             for (Stock stock : stocks) {
                 String mateName = stock.getMate().getName();
                 String amount = String.format(locale, "%,d", stock.getAmount());
-                String updated = PrintUtils.getDiffFormatted(stock.getUpdated(), new Date());
+                String updated = PrintUtils.getDiffFormatted(stock.getUpdated(), new Date(), locale);
                 rows.add(Arrays.asList(mateName, amount, updated));
                 sumAmount += stock.getAmount();
             }
@@ -175,7 +175,7 @@ public final class PrintUtils {
                 String resourceKey = stock.getType().getName();
                 String resourceName = Resource.getItem(resourceKey, locale);
                 String amount = String.format(locale, "%,d", stock.getAmount());
-                String updated = PrintUtils.getDiffFormatted(stock.getUpdated(), new Date());
+                String updated = PrintUtils.getDiffFormatted(stock.getUpdated(), new Date(), locale);
                 rows.add(Arrays.asList(resourceName, amount, updated));
             }
             if (stocks.isEmpty()) {

@@ -3,9 +3,7 @@
 <!-- @formatter:off -->
 <properties>
 	<entry key="ALREADY_KNOW">I already know about that.</entry>
-	<entry key="CANT_CONVERT">Could not convert to number: `%s`</entry>
 	<entry key="CANT_DELETE_MESSAGES">I can't delete messages here. No one gave me permission. :'(</entry>
-	<entry key="CANT_FIND_KEY">I can't find the key \"%s\" in `%s_%s.xml`.</entry>
 	<entry key="COLUMN_MISMATCH">The number of header columns does not match the number of data columns.</entry>
 	<entry key="DO_NOT_KNOW_ABOUT">I do not know anything about this: %s</entry>
 	<entry key="ERROR_UNKNOWN">Ooooops... I found an error. Please don't beat me! --> "%s"</entry>
@@ -26,24 +24,11 @@
 	<entry key="RESOURCE_AND_USER_UNKNOWN">I know neither a user nor a resource with that name.</entry>
 	<entry key="RESOURCE_UNKNOWN">I don't know this resource. =(</entry>
 	<entry key="TESSERACT">Could not initialise tesseract.</entry>
-	<entry key="UNKNOWN_STOCK">Unknown stock type: %s</entry>
 	<entry key="USER_UNKNOWN">I do not know this user. =(</entry>
 	<!-- -->
 	<!-- MESSAGES SHOWN MOSTLY TO DEVELOPERS APPEAR BELOW -->
-	<entry key="BLOCK_ALIGN">Invalid block align mode. %d given.</entry>
-	<entry key="BLOCK_DIRECTION">Invalid block appending direction given.</entry>
-	<entry key="BLOCK_NEGATIVE">Block index cannot be negative. %d given.</entry>
-	<entry key="BLOCK_WIDTH">Block %s exceeded the board width %d.</entry>
-	<entry key="BOARD_ZERO">Board width must be larger than zero. %d given.</entry>
-	<entry key="COLUMN_ALIGN_UNEQUAL">Column align count (%d) and header size (%d) are not equal.</entry>
-	<entry key="COLUMN_WIDTH_UNEQUAL">Column width count (%d) and header size (%d) are not equal.</entry>
-	<entry key="DATA_ALIGN">Invalid data align mode. %d given.</entry>
-	<entry key="HEADER_ZERO">Header size must be larger than zero. %d given.</entry>
-	<entry key="INVALID_GRID_MODE">Invalid grid mode. %d given.</entry>
-	<entry key="MISSING_ENV_VAR">Missing environment variable: \"%s\"%n</entry>
 	<entry key="NO_PHYS_DATA">No physical data available</entry>
 	<entry key="PCO">Public command only</entry>
 	<entry key="PCO_EXCEPTION">An unknown user cannot automatically be created with a direct message.</entry>
-	<entry key="SIZE_UNEQUAL">Row %d size (%d) and header size (%d) are not equal.</entry>
 </properties>
 <!-- @formatter:on -->
