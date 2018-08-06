@@ -94,6 +94,7 @@ See the section, "Updating GameResourceBot", in this `README` file, below.
 
 #### How this guide works
 42. Lines starting with numbers are actions. You must do these to set up GRB successfully.
+    12. Sometimes, numbers appear as lowercase Roman numerals. These also are actions.
 
 
 - Lines starting with bullets (or with nothing at all!) contain additional information. This information could be:
@@ -371,7 +372,7 @@ The bad news: Before you reach the Promised Land of Two-Minute Synchronisation, 
 The good news: That setup process is much shorter than this one.
 
 
-## Updating GameResourceBot
+## **Updating GameResourceBot**
 #### Updating GRB (MS Windows)
 ##### v1.0, by PellaAndroid
 
