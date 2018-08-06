@@ -371,7 +371,7 @@ The bad news: Before you reach the Promised Land of Two-Minute Synchronisation, 
 The good news: That setup process is much shorter than this one.
 
 
-## Updating GameResourceBot
+## **Updating GameResourceBot**
 #### Updating GRB (MS Windows)
 ##### v1.0, by PellaAndroid
 
