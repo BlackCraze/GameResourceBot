@@ -49,7 +49,7 @@ BEFORE YOU BEGIN, please understand what this setup requires.
 
 ==========
 
-###### 0. Launch your web browser.
+###### 0. Start your web browser.
 1. Tab #1 - Log in to [GitHub](https://www.github.com).
 2. Tab #2 - Log in to [Heroku](https://www.heroku.com).
 3. Tab #3 - Log in to the [developer area for Discord](https://discordapp.com/developers/applications/me).
@@ -161,7 +161,7 @@ If you're still reading, you want to make this happen. That, or someone else cho
 
 *NOTE: We begin with Step 0 because it's not really part of the setup process. It's actually preliminary work that prepares us for the setup process. You know, the stuff that comes before 1....*
 
-###### 0. Launch your web browser. We will OPEN several tabs during this process. Closing them is not our style.
+###### 0. Start your web browser. We will OPEN several tabs during this process. Closing them is not our style.
 1. Tab #1 - Log in to [GitHub](https://www.github.com).
 	1. If you do not already have an account on GitHub, create it now. Then leave the tab open.  
 No step-by-step instructions here. We assume you're bright enough to figure out a signup process for a website.
@@ -183,14 +183,14 @@ Obviously, Discord is where we will interact with GRB and see all the cool thing
 Therefore, let's get things started by creating an app on Discord. We also need to create a bot user for the app, for obvious reasons.  
 In a later step, we'll tell Heroku how to talk with this app. In turn, Discord will use this app to direct your GRB to your server.
 1. Tab #3
-    - Great big button on the right side: New App
-    - Required: APP NAME
-    - Optional: APP DESCRIPTION
-        - In addition to describing GRB and its function, this is an excellent place to give credit to GRB's developer.
-    	- Recommended text: `Developed by Discord user BlackCraze#4294`
-    - Optional: APP ICON
-    - Ignore: everything else
-    - Blue button at the bottom: Create App
+    1. Great big button on the right side: New App
+        - Required: APP NAME
+        - Optional: APP DESCRIPTION
+            - In addition to describing GRB and its function, this is an excellent place to give credit to GRB's developer.
+            - Recommended text: `Developed by Discord user BlackCraze#4294`
+        - Optional: APP ICON
+        - Ignore: everything else
+        - Blue button at the bottom: Create App
 2. Now you should see: GREAT SUCCESS!
     1. If not, use whatever information the website gives you to solve the error.
 3. Scroll down to section: Bot
@@ -200,18 +200,21 @@ In a later step, we'll tell Heroku how to talk with this app. In turn, Discord w
 
 We have an app. The app has a bot. GRB wants to move in to its new home, but it doesn't know where home is.  
 We must create a special link that will act like GPS for GRB.
-1. First, copy this link: `https://discordapp.com/oauth2/authorize?client_id=[ClientID]&scope=bot&permissions=66186303`
+1. First, copy this link:  
+```
+https://discordapp.com/oauth2/authorize?client_id=[ClientID]&scope=bot&permissions=66186303
+```
 2. Tab #4 - This one is new. Open it now.
- 	1. Paste the link into Tab #4's address bar. DO NOT PRESS [ENTER]!!
- 	2. Our link isn't quite ready to do its job yet. Look closely at it. Roughly in the centre of it is this text: [ClientID]  
+ 	1. Paste the link into Tab #4's address bar. DO NOT PRESS \[ENTER\]!!
+ 	2. Our link isn't quite ready to do its job yet. Look closely at it. Roughly in the centre of it is this text: \[ClientID\]  
 We need to replace that text--including the square brackets--with the Client ID of our new Discord app.
 3. Tab #3
  	1. On the right side, scroll to the top.
  	2. Find the Client ID. It's an 18-digit number right at the top. You can't miss it.
  	3. Copy all the digits.
 4. Tab #4
- 	1. Delete [ClientID] from the link, and paste your number in the same spot.
- 	2. NOW press [Enter].
+ 	1. Delete "\[ClientID\]" from the link, and paste your number in the same spot.
+ 	2. NOW press \[Enter\].
  	3. When the page loads, select the correct Discord server from the drop-down list. Then authorise GRB.
  	4. We no longer need Tab #4. Shut it down, or let it ride. Your call.
 5. Go to your guild's Discord server.
@@ -300,7 +303,7 @@ GRB and Heroku have made formal introductions and are ready to begin sending dat
 
 And you will, very soon. But first, we have a bit of unfinished business to complete.
 - Occasionally, BlackCraze updates the master source code with new features, bug fixes, and other things.
-- When that happens, you will need to update your GitHub repository with the new source code. [See section 3, "Updating GameResourceBot".]
+- When that happens, you will need to update your GitHub repository with the new source code. \[See section 3, "Updating GameResourceBot".\]
 - When that happens, Heroku must retrieve the new source code, compile it, and redeploy the app.
 - Here's the cool part: Heroku can do all of that automatically, without any human interaction.
 
@@ -410,7 +413,7 @@ This is because GitHub is a really busy place. Imagine if someone attempted to s
 	2. Large button in the centre: Download for Windows (64bit)  
 Setup app will download.
 	3. Locate the file you just downloaded (GitHubDesktopSetup.exe). Double-click it to start the setup.  
-After setup, the GitHub Desktop app will launch automatically.
+After setup, the GitHub Desktop app will start automatically.
 
 ###### STEP 2: LOG IN TO GITHUB
 There are two different ways to log in. You need only one (if it is successful).
