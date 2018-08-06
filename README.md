@@ -93,8 +93,8 @@ See the section, "Updating GameResourceBot", in this `README` file, below.
 ###### v1.2, by PellaAndroid
 
 #### How this guide works
-42. Lines starting with numbers are actions. You must do these to set up GRB successfully.
-    12. Sometimes, numbers appear as lowercase Roman numerals. These also are actions.
+42. Lines starting with numbers are actions. You must do these to set up GRB successfully.  
+    xii. Sometimes, numbers appear as lowercase Roman numerals. These also are actions.
 
 
 - Lines starting with bullets (or with nothing at all!) contain additional information. This information could be:
