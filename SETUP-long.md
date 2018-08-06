@@ -114,6 +114,7 @@ In a later step, we'll tell Heroku how to talk with this app. In turn, Discord w
 
 We have an app. The app has a bot. GRB wants to move in to its new home, but it doesn't know where home is.  
 We must create a special link that will act like GPS for GRB.
+
 4. To begin making our GPS, copy this link:  
 ```
 https://discordapp.com/oauth2/authorize?client_id=[ClientID]&scope=bot&permissions=66186303
@@ -194,6 +195,7 @@ Every application on the Web requires a host. The host has several functions.
 	3. Purple button: Deploy app
 
 On the next screen, we will tell Heroku where to find the source code, so it can compile it.
+
 4. Find the second section: "Deployment method". Click the GitHub button.
 5. Ideally, Heroku will sense that you are logged in to GitHub and find you automatically. If it does not, it will ask for your GitHub username and password.
 6. Purple button: Connect to GitHub
@@ -230,6 +232,7 @@ And you will, very soon. But first, we have a bit of unfinished business to comp
 The unfinished business is now finished business.
 
 And now, we start GRB!
+
 2. Scroll to the top of the browser window. Click the tab: "Resources".
 	- The first section is "Free Dynos".
 		- Dynos are like small plastic containers in a refrigerator.
@@ -239,6 +242,7 @@ And now, we start GRB!
 
 On the far right side of "Free Dynos", from right to left, are: pencil icon, zero money, on/off switch.  
 The on/off switch is off. We need to switch it on, but we can't because it's greyed out.
+
 3. Click the pencil icon to un-grey the on/off switch.
 4. Click the switch to turn it on.
 5. Purple button: Confirm
@@ -246,6 +250,7 @@ The on/off switch is off. We need to switch it on, but we can't because it's gre
 **\*\*\*\*\*\*\*\*\*\* \*\*\*\*\*\*\*\*\*\* \*\*\*\*\*\*\*\*\*\* \*\*\*\*\*\*\*\*\*\* \*\*\*\*\*\*\*\*\*\* \*\*\*\*\*\*\*\*\*\* \*\*\*\*\*\*\*\*\*\* \*\*\*\*\*\*\*\*\*\* \*\*\*\*\*\*\*\*\*\***
 
 YOU DID IT!! Your GRB is now awake and waiting for you to tour its new home.
+
 6. Use your normal method to access your guild's server on Discord.
 7. Verify that GRB is online. If you added an APP ICON earlier, it should be visible now.
 
