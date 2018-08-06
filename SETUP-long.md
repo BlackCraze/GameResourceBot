@@ -285,8 +285,8 @@ Step 4 mentioned a separate guide titled "Updating GameResourceBot". The instruc
 For more information about this process, see "Updating GameResourceBot" in the [README](./README.md) file.  
 ***OR*** go directly to the set of instructions for your computer's operating system.
 - [MS Windows](./UPDATE-MSWin.md)
-- [MacOS](./UPDATE-MacOS.md)
-- [Linux](./UPDATE-Linux.md)
+- [MacOS](./UPDATE-MacOS.md) - ***COMING SOON***
+- [Linux](./UPDATE-Linux.md) - ***COMING SOON***
 
 This section also is a warning.  
 The NOT FIRST time you need to synchronise your forked repository with BlackCraze's master repository, you can accomplish the task in two minutes or less.
