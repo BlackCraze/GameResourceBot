@@ -12,6 +12,7 @@
 ## About This Guide
 42. Lines--like this one--that start with numbers are actions. You must do these actions to set up GRB successfully.  
     xii. Sometimes, numbers appear as lowercase Roman numerals. These also are actions required for successful setup.
+        a. A couple of ordinary letters slipped in here, too. These are required actions, as well.
 
 
 - Lines--like this one--starting with bullets (or with nothing at all!) contain additional information. This information could be:
@@ -185,12 +186,14 @@ Every application on the Web requires a host. The host has several functions.
 		- GRB_DISCORD_TOKEN - Paste your token into the box provided.
 		- CHANNEL - Enter the name of your GRB's channel on your Discord server, WITHOUT THE #
 		- §§ LANGUAGE - This will be your GRB's default language.
-			- de - Deutsch (German)
-			- en - English
-			- pt - Português (Portuguese)
-			- More languages coming soon!
+			1. If some members of your guild have a primary language different from other members of your guild, select the language most of them use.
+			2. The others can ~~deal with it~~ ~~learn everyone else's language~~ change their own language settings later.
+				- de - Deutsch (German)
+				- en - English
+				- pt - Português (Portuguese)
+				- More languages coming soon!
 		- §§ OCR_RESULT - After it processes a screenshot, GRB will list the results so you can verify they are correct. If you change this to "off", it won't.
-		- §§ DELETE_PICTURE_MESSAGE - If you change this to "on", GRB will delete a screenshot after it processes it.
+		- §§ DELETE_PICTURE_MESSAGE - If you change this to "on", GRB will delete a screenshot from the CHANNEL after it processes it.
 		- Ignore: everything else.
 	3. Purple button: Deploy app
 
