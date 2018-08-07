@@ -20,6 +20,8 @@
 	- explaining something above it, to help you understand what you're doing.
 - Either way, it's definitely important!!
 
+Finally, all the main step numbers (the ones in heading-size font) in this guide use sentence case--that is, they are capitalised like any ordinary sentence would be. This will become an important clue for you later.
+
 ## ***SUPER-SPECIAL, SUPER-IMPORTANT NOTE***
 
 During this process, you WILL encounter technical terms, both within this guide and without.

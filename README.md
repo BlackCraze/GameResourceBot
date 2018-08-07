@@ -49,6 +49,6 @@ v1.1
     [no changes yet]
 
 ## Editor's Note
-The Setup files use section headers in normal case.  
-The Update files use section headers in all caps.  
-This is intentional. It provides a visual difference so users (especially first-timers and non-techies) can be sure they're using a different guide.
+The main steps in the Setup files use sentence case.
+The main steps in the Update files use all caps.
+This is intentional. It provides a visual difference to assure users (especially first-timers and non-techies) they are using a different guide.

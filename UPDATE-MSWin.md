@@ -3,9 +3,9 @@
 
 *GameResourceBot has a nickname. It likes to be called "GRB", so we call it that most of the time.*
 
-***FOR NOT-FIRST-TIMERS ONLY***  
+***FIRST-TIMERS: SKIP THIS PART***
 If you previously completed all steps in this guide and need to update again, please jump to the end now and do *only* STEP 4.  
-***FOR NOT-FIRST-TIMERS ONLY***
+***FIRST-TIMERS: SKIP THIS PART***
 
 ### CONTENTS
 1. About This Guide
@@ -19,6 +19,8 @@ If your computer's operating system is Microsoft Windows 7 or later (64-bit), th
 If your computer's operating system is something else, please see "Updating GameResourceBot" in the [README](./README.md) file.
 
 This guide assumes you are familiar with the guide titled "Setting Up GameResourceBot", meaning you have gone through all the steps in that guide and have a general understanding of all the technical terms in that guide. Otherwise, why would you even be reading this guide? Therefore, if you encounter something in this guide that you do not understand and is not explained in this guide, please refer to that guide.
+
+Finally, all the main step numbers (the ones in heading-size font) in this guide use ALL CAPS. (See? We didn't forget about the important clue we promised you!) This helps you make sure you're actually using the guide you want to be using.
 
 ## Important Background Information
 During Step 4 of the GRB Setup, we mentioned briefly that BlackCraze occasionally updates the master source code, which is in his master repository.  
