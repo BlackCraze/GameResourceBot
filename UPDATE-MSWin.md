@@ -3,22 +3,26 @@
 
 *GameResourceBot has a nickname. It likes to be called "GRB", so we call it that most of the time.*
 
-***FIRST-TIMERS: SKIP THIS PART***
-If you previously completed all steps in this guide and need to update again, please jump to the end now and do *only* STEP 4.  
+***FIRST-TIMERS: SKIP THIS PART***  
+If you previously completed all steps in this guide and need to update again, please [skip to STEP 4](#step-4-synchronise-your-repository-aka-the-actual-update-process).  
 ***FIRST-TIMERS: SKIP THIS PART***
 
 ### CONTENTS
-1. About This Guide
-2. Important Background Information
-3. The (Setup to) Update Process
+1. [About This Guide](#about-this-guide)
+2. [Important Background Information](#important-background-information)
+3. [The (Setup to) Update Process](#the-setup-to-update-process)  
+    (1) [STEP 1](#step-1-install-github-desktop)  
+    (2) [STEP 2](#step-2-log-in-to-github)  
+    (3) [STEP 3](#step-3-clone-your-repository)  
+    (4) [STEP 4](#step-4-synchronise-your-repository-aka-the-actual-update-process)
 
 ## About This Guide
 The GRB setup process you already encountered is the same for everyone. The GRB update process here is not.  
 Which GRB update process you will use depends on the operating system your computer uses.  
 If your computer's operating system is Microsoft Windows 7 or later (64-bit), this guide is for you.
-If your computer's operating system is something else, please see "Updating GameResourceBot" in the [README](./README.md) file.
+If your computer's operating system is something else, please see ["Updating GameResourceBot"](./README.md#updating-gameresourcebot).
 
-This guide assumes you are familiar with the guide titled "Setting Up GameResourceBot", meaning you have gone through all the steps in that guide and have a general understanding of all the technical terms in that guide. Otherwise, why would you even be reading this guide? Therefore, if you encounter something in this guide that you do not understand and is not explained in this guide, please refer to that guide.
+This guide assumes you are familiar with the guide titled ["Setting Up GameResourceBot"](./SETUP-long.md), meaning you have gone through all the steps in that guide and have a general understanding of all the technical terms in that guide. Otherwise, why would you even be reading this guide? Therefore, if you encounter something in this guide that you do not understand and is not explained in this guide, please refer to that guide.
 
 Finally, all the main step numbers (the ones in heading-size font) in this guide use ALL CAPS. (See? We didn't forget about the important clue we promised you!) This helps you make sure you're actually using the guide you want to be using.
 
@@ -44,7 +48,7 @@ After setup, the GitHub Desktop app will start automatically.
 #### STEP 2: LOG IN TO GITHUB
 There are two different ways to log in. You need only one (if it is successful).
     
-SUPER-EASY METHOD
+##### SUPER-EASY METHOD
 1. Start GitHub Desktop.
 	1. Menu bar: File > Options...
 	2. Top left: Accounts
@@ -56,10 +60,10 @@ ATTENTION: Specifics will vary, depending on the browser you are using.
 	3. Bottom right: Open link
 3. Switch to GitHub Desktop.
 	1. Menu bar: File > Options...
-	2. If you see your GitHub username here, you're good. Skip to STEP 3.
-	3. If you don't see your GitHub username here, proceed with EASY METHOD (next).
+	2. If you see your GitHub username here, you're good. Skip to [STEP 3](#step-3-clone-your-repository).
+	3. If you don't see your GitHub username here, proceed with [EASY METHOD](#easy-method).
 
-EASY METHOD
+##### EASY METHOD
 1. Start GitHub Desktop.
 	1. Menu bar: File > Options...
 	2. Top left: Accounts
@@ -67,8 +71,8 @@ EASY METHOD
 	4. Enter your GitHub login credentials.
 	5. Blue button at bottom: Sign in
 	6. Menu bar: File > Options...
-	7. If you see your GitHub username here, you're good. Skip to STEP 3.
-	8. If you don't see your GitHub username here, something is wrong. Begin STEP 2 again.
+	7. If you see your GitHub username here, you're good. Skip to [STEP 3](#step-3-clone-your-repository).
+	8. If you don't see your GitHub username here, something is wrong. Begin [STEP 2](#step-2-log-in-to-github) again.
 
 #### STEP 3: CLONE YOUR REPOSITORY
 Because of the unique ways that GitHub works, the only way to synchronise your forked repository with BlackCraze's master repository is to create a duplicate of your repository on your computer's hard drive.
@@ -87,7 +91,7 @@ Because of the unique ways that GitHub works, the only way to synchronise your f
 	4. Far right: Green button: Clone or download
 	5. Bottom left of small pop-up window: Open in Desktop
 2. GitHub Desktop (Windows should switch here automatically. If not, go there.)  
-Local path: The default local path begins with your user directory, then adds \\Documents\\GitHub\\GameResourceBot
+Local path: The default local path begins with your user directory, then adds `\Documents\GitHub\GameResourceBot`
 	1. Recommended: Keep the default.
 	2. ***OR*** If you prefer a different path, click Choose... and select the folder you prefer.
 	3. Blue button: Clone

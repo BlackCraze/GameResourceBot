@@ -4,9 +4,9 @@
 *GameResourceBot has a nickname. It likes to be called "GRB", so we call it that most of the time.*
 
 ### CONTENTS
-1. About This Guide
-2. Getting Ready
-3. The Setup Process
+1. [About This Guide](#about-this-guide)
+2. [Getting Ready](#getting-ready)
+3. [The Setup Process](#the-setup-process)
 
 ## About This Guide
 - This guide is intended to be used as a quick reference only, usually by someone who's done this setup before.  
@@ -62,7 +62,7 @@ https://discordapp.com/oauth2/authorize?client_id=[ClientID]&scope=bot&permissio
 #### 5. Heroku - [Verify your account.](https://devcenter.heroku.com/articles/account-verification)
 
 #### 6. GitHub - Configure computer for source code updates.
-See "Updating GameResourceBot" in the [README](./README.md) file.  
+See ["Updating GameResourceBot"](./README.md#updating-gameresourcebot).
 ***OR*** go directly to the set of instructions for your computer's operating system.
 - [MS Windows](./UPDATE-MSWin.md)
 - [MacOS](./UPDATE-MacOS.md) - ***COMING SOON***

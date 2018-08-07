@@ -1,13 +1,20 @@
-# Setting Up GRB - long version
+# Setting Up GameResourceBot - long version
 ######  v1.2, by PellaAndroid
 
 *GameResourceBot has a nickname. It likes to be called "GRB", so we call it that most of the time.*
 
 ### CONTENTS
-1. About This Guide
-2. Super-Special, Super-Important Note
-3. Getting Ready
-4. The Setup Process
+1. [About This Guide](#about-this-guide)
+2. [Super-Special, Super-Important Note](#super-special-super-important-note)
+3. [Getting Ready](#getting-ready)
+4. [The Setup Process](#the-setup-process)  
+    (0) [Step 0](#step-0-start-your-web-browser-we-will-open-several-tabs-during-this-process-closing-them-is-not-really-our-style)  
+    (1) [Step 1](#step-1-discord---create-a-new-app)  
+    (2) [Step 2](#step-2-github---fork-the-code-to-a-new-repository-on-your-account)  
+    (3) [Step 3](#step-3-heroku---deploy-the-grb-app)  
+    (4) [Step 4](#step-4-heroku---configure-for-automatic-updates-start-grb-configure-dynos)  
+    (5) [Step-5](#step-5-heroku---verify-your-account-to-spend-more-time-with-your-new-grb)  
+    (6) [Step 6](#step-6-github---configure-computer-for-source-code-updates)
 
 ## About This Guide
 42. Lines--like this one--that start with numbers are actions. You must do these actions to set up GRB successfully.  
@@ -77,7 +84,7 @@ If you're still reading, you want to make this happen. That, or someone else cho
 ## The Setup Process
 *NOTE: We begin with Step 0 because it's not really part of the setup process. It's actually one more piece of "getting ready" stuff, but it works better here than in the section above. Trust us; you'll see.*
 
-#### 0. Start your web browser. We will OPEN several tabs during this process. Closing them is not really our style.
+#### Step 0. Start your web browser. We will OPEN several tabs during this process. Closing them is not really our style.
 1. Tab #1 - Log in to [GitHub](https://www.github.com).
 	1. If you do not already have an account on GitHub, create it now. Then leave the tab open.  
 No step-by-step instructions here. We assume you're bright enough to figure out a signup process for a website.
@@ -95,7 +102,7 @@ GRB will need a home, a place where you can upload screenshots, type commands, a
 	1. Use your normal method to access your guild's server on Discord. (web, desktop app, mobile app, whatever)
 	2. Create a new text channel. Name the channel whatever you like. (The most common name people use is `#bot`. Go figure.)
 
-#### 1. Discord - Create a new app.  
+#### Step 1. Discord - Create a new app.  
 Obviously, Discord is where we will interact with GRB and see all the cool things it can do.  
 Therefore, let's get things started by creating an app on Discord. We also need to create a bot user for the app, for obvious reasons.  
 In a later step, we'll tell Heroku how to talk with this app. In turn, Discord will use this app to direct your GRB to your server.
@@ -141,7 +148,7 @@ We need to replace that text--including the square brackets--with the Client ID 
 	- If you added an APP ICON earlier, you will not see it yet. GRB will hang its pictures when it wakes up.
 	- Unfortunately, the moving van did not bring GRB's brain. We will build its brain in Step 2.
 
-#### 2. GitHub - Fork the code to a new repository on your account.
+#### Step 2. GitHub - Fork the code to a new repository on your account.
 	https://github.com/BlackCraze/GameResourceBot
 
 Our sleeping GRB needs a brain, a set of instructions for its duties. Those instructions are in the source code.  
@@ -285,9 +292,9 @@ This section's title is misleading.
 This section contains no instructions at all.
 
 This section is a reminder.  
-Step 4 mentioned a separate guide titled "Updating GameResourceBot". The instructions you need are in that guide.  
-"Updating GameResourceBot" is available in three different flavours, for different operating systems.  
-For more information about this process, see "Updating GameResourceBot" in the [README](./README.md) file.  
+Step 4 mentioned a separate guide titled ["Updating GameResourceBot"](./README.md#updating-gameresourcebot). The instructions you need are in that guide.
+["Updating GameResourceBot"](./README.md#updating-gameresourcebot) is available in three different flavours, for different operating systems.
+For more information about this process, see ["Updating GameResourceBot"](./README.md#updating-gameresourcebot).
 ***OR*** go directly to the set of instructions for your computer's operating system.
 - [MS Windows](./UPDATE-MSWin.md)
 - [MacOS](./UPDATE-MacOS.md) - ***COMING SOON***
@@ -299,3 +306,5 @@ The NOT FIRST time you need to synchronise your forked repository with BlackCraz
 OK, to be honest, the FIRST time you do this, you still can accomplish the task in two minutes or less.  
 The bad news: Before you reach the Promised Land of Two-Minute Synchronisation, you must tread through another setup process.  
 The good news: That setup process is *much* shorter than this one.
+
+[test link](#v12-by-pellaandroid)
