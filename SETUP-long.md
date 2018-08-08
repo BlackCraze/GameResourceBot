@@ -8,17 +8,17 @@
 2. [Super-Special, Super-Important Note](#super-special-super-important-note)
 3. [Getting Ready](#getting-ready)
 4. [The Setup Process](#the-setup-process)  
-    (0) [Step 0](#step-0-start-your-web-browser-we-will-open-several-tabs-during-this-process-closing-them-is-not-really-our-style)  
-    (1) [Step 1](#step-1-discord---create-a-new-app)  
-    (2) [Step 2](#step-2-github---fork-the-code-to-a-new-repository-on-your-account)  
-    (3) [Step 3](#step-3-heroku---deploy-the-grb-app)  
-    (4) [Step 4](#step-4-heroku---configure-for-automatic-updates-start-grb-configure-dynos)  
-    (5) [Step-5](#step-5-heroku---verify-your-account-to-spend-more-time-with-your-new-grb)  
-    (6) [Step 6](#step-6-github---configure-computer-for-source-code-updates)
+    (0) [Step 0. Start your web browser.](#step-0-start-your-web-browser-we-will-open-several-tabs-during-this-process-closing-them-is-not-really-our-style)  
+    (1) [Step 1. Discord - Create a new app.](#step-1-discord---create-a-new-app)  
+    (2) [Step 2. GitHub - Fork the code.](#step-2-github---fork-the-code-to-a-new-repository-on-your-account)  
+    (3) [Step 3. Heroku - Deploy the GRB app.](#step-3-heroku---deploy-the-grb-app)  
+    (4) [Step 4. Heroku - Configure for automatic updates.](#step-4-heroku---configure-for-automatic-updates-start-grb-configure-dynos)  
+    (5) [Step-5. Heroku - Verify your account.](#step-5-heroku---verify-your-account-to-spend-more-time-with-your-new-grb)  
+    (6) [Step 6. GitHub - Prepare for updates.](#step-6-github---configure-computer-for-source-code-updates)
 
 ## About This Guide
 42. Lines--like this one--that start with numbers are actions. You must do these actions to set up GRB successfully.  
-    xii. Sometimes, numbers appear as lowercase Roman numerals. These also are actions required for successful setup.
+    xii. Sometimes, numbers appear as lowercase Roman numerals. These also are actions required for successful setup.  
         a. A couple of ordinary letters slipped in here, too. These are required actions, as well.
 
 
@@ -27,7 +27,7 @@
 	- explaining something above it, to help you understand what you're doing.
 - Either way, it's definitely important!!
 
-Finally, all the main step numbers (the ones in heading-size font) in this guide use sentence case--that is, they are capitalised like any ordinary sentence would be. This will become an important clue for you later.
+Finally, all the headers for the primary step numbers in this guide (the final seven lines of [CONTENTS](#contents)) use sentence case--that is, they are capitalised like any ordinary sentence would be. This will become an important clue for you later.
 
 ## ***SUPER-SPECIAL, SUPER-IMPORTANT NOTE***
 
@@ -114,7 +114,7 @@ In a later step, we'll tell Heroku how to talk with this app. In turn, Discord w
             - Recommended text: `Developed by Discord user BlackCraze#4294`
         - Optional: APP ICON
         - Ignore: everything else
-        - Blue button at the bottom: Create App
+    2. Blue button at the bottom: Create App
 2. Now you should see: GREAT SUCCESS!
     1. If not, use whatever information the website gives you to solve the error.
 3. Scroll down to section: Bot
@@ -189,11 +189,13 @@ Every application on the Web requires a host. The host has several functions.
 	2. Next to "Token" is a link that reads, "Click to reveal". Click it. It will reveal something.
 	3. Now your token is revealed. This long string of random characters is your GRB's GPS address on Discord.
 	4. Highlight all the characters in the token and copy it.
+###### (This line does not exist. You are not reading this. Please move on.)
 3. Tab #2
-	1. Scroll down to the section "Config Variables".
-	2. GRB will configure itself using these variables when it wakes up. Variables marked §§ can be changed on Discord later.
-		- GRB_DISCORD_TOKEN - Paste your token into the box provided.
+	1. Scroll down to the section "Config Vars".
+	2. GRB will configure itself using these variables when it wakes up. Variables marked §§ can be changed on Discord later. (BUT not without consequences, which [this footnote](#footnote-for-step-3) discusses.)
 		- CHANNEL - Enter the name of your GRB's channel on your Discord server, WITHOUT THE #
+		- §§ DELETE_PICTURE_MESSAGE - If you change this to "on", GRB will delete a screenshot from the CHANNEL after it processes it. Otherwise, the screenshots stay put.
+		- GRB_DISCORD_TOKEN - Paste your token into the box provided.
 		- §§ LANGUAGE - This will be your GRB's default language.
 			1. If some members of your guild have a primary language different from other members of your guild, select the language most of them use.
 			2. The others can ~~deal with it~~ ~~learn everyone else's language~~ change their own language settings later.
@@ -202,7 +204,6 @@ Every application on the Web requires a host. The host has several functions.
 				- pt - Português (Portuguese)
 				- More languages coming soon!
 		- §§ OCR_RESULT - After it processes a screenshot, GRB will list the results so you can verify they are correct. If you change this to "off", it won't.
-		- §§ DELETE_PICTURE_MESSAGE - If you change this to "on", GRB will delete a screenshot from the CHANNEL after it processes it.
 		- Ignore: everything else.
 	3. Purple button: Deploy app
 
@@ -251,9 +252,9 @@ And now, we start GRB!
 		- All the different apps on Heroku are like food in the containers.
 		- The dynos protect the apps from external things that can cause problems, and from each other.
 		- Dynos come in two main categories: Free and Not Free. GRB LOVES the Free ones!
+    - On the far right side of "Free Dynos", from right to left, are: pencil icon, zero money, on/off switch.  
+    - The on/off switch is off. We need to switch it on, but we can't because it's greyed out.
 
-On the far right side of "Free Dynos", from right to left, are: pencil icon, zero money, on/off switch.  
-The on/off switch is off. We need to switch it on, but we can't because it's greyed out.
 
 3. Click the pencil icon to un-grey the on/off switch.
 4. Click the switch to turn it on.
@@ -292,10 +293,10 @@ This section's title is misleading.
 This section contains no instructions at all.
 
 This section is a reminder.  
-Step 4 mentioned a separate guide titled ["Updating GameResourceBot"](./README.md#updating-gameresourcebot). The instructions you need are in that guide.
-["Updating GameResourceBot"](./README.md#updating-gameresourcebot) is available in three different flavours, for different operating systems.
-For more information about this process, see ["Updating GameResourceBot"](./README.md#updating-gameresourcebot).
-***OR*** go directly to the set of instructions for your computer's operating system.
+Step 4 mentioned a separate guide titled "Updating GameResourceBot". The instructions you need to complete Step 6 are not here, but in that guide.  
+The guide is available in three different flavours, for different operating systems.  
+For more details, please see ["Updating GameResourceBot"](./README.md#updating-gameresourcebot).  
+***OR*** go directly to the set of instructions for your computer's operating system:
 - [MS Windows](./UPDATE-MSWin.md)
 - [MacOS](./UPDATE-MacOS.md) - ***COMING SOON***
 - [Linux](./UPDATE-Linux.md) - ***COMING SOON***
@@ -307,4 +308,22 @@ OK, to be honest, the FIRST time you do this, you still can accomplish the task 
 The bad news: Before you reach the Promised Land of Two-Minute Synchronisation, you must tread through another setup process.  
 The good news: That setup process is *much* shorter than this one.
 
-[test link](#v12-by-pellaandroid)
+[Back to top](#setting-up-gameresourcebot---long-version)
+
+[Back to main `README` file](./README.md)
+
+###### Footnote for Step 3
+The Config Vars on Heroku are large and in charge. (That's why they're in ALL CAPS.)  
+As mentioned in Step 3, a few of the Config Vars can be changed on Discord.  
+But everybody needs a break occasionally, and GRB is no different.
+
+Sometimes, GRB reboots. This could be because:
+- you updated the source code to give it new features (Later. [Much later.](./README.md#updating-gameresourcebot)); or
+- you commanded it to shutdown and restart; or
+- it jolly well felt like it. So there.
+
+The point is, whenever GRB restarts, it always needs to know what its Config Vars are, and it always asks Heroku for this information. If you changed one or more of them on Discord before GRB rebooted, it will have no memory of this. (In that respect, restarting is like a really bad hangover. You know you need to remember what your buddy told you last night, but there's no way it's going to happen.) 
+
+Therefore, if you do change one of the Config Vars on Discord later, think about whether you need that change to be permanent or not. If you do, then you'll probably want to return to Heroku and update that Config Var to match your changing need. If you don't, then don't say we didn't warn you.
+
+[Click here to pick up where you left off.](#this-line-does-not-exist-you-are-not-reading-this-please-move-on)

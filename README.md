@@ -4,11 +4,11 @@
 *GameResourceBot has a nickname. It likes to be called "GRB", so we call it that most of the time.*
 
 ### CONTENTS
-1. [Getting Help with GameResourceBot](#getting-help-with-gameresourcebot)
-2. [Setting Up GameResourceBot](#setting-up-gameresourcebot)
-3. [Updating GameResourceBot](#updating-gameresourcebot)
-4. [Changelogs](#changelogs)
-5. [Editor's Note](#editors-note)
+1. Getting Help with GameResourceBot
+2. Setting Up GameResourceBot
+3. Updating GameResourceBot
+4. Changelogs
+5. Editor's Note
 
 ## Getting Help with GameResourceBot
 For help on any subject concerning GRB at any time while using GRB, type:  
@@ -52,3 +52,5 @@ v1.1
 The main steps in the Setup files use sentence case.
 The main steps in the Update files use all caps.
 This is intentional. It provides a visual difference to assure users (especially first-timers and non-techies) they are using a different guide.
+
+[Back to top](#gameresourcebot)

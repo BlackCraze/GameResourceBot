@@ -11,23 +11,23 @@ If you previously completed all steps in this guide and need to update again, pl
 1. [About This Guide](#about-this-guide)
 2. [Important Background Information](#important-background-information)
 3. [The (Setup to) Update Process](#the-setup-to-update-process)  
-    (1) [STEP 1](#step-1-install-github-desktop)  
-    (2) [STEP 2](#step-2-log-in-to-github)  
-    (3) [STEP 3](#step-3-clone-your-repository)  
-    (4) [STEP 4](#step-4-synchronise-your-repository-aka-the-actual-update-process)
+    (1) [STEP 1. INSTALL GITHUB DESKTOP](#step-1-install-github-desktop)  
+    (2) [STEP 2. LOG IN TO GITHUB](#step-2-log-in-to-github)  
+    (3) [STEP 3. CLONE YOUR REPOSITORY](#step-3-clone-your-repository)  
+    (4) [STEP 4. SYNC YOUR REPOSITORY](#step-4-synchronise-your-repository-aka-the-actual-update-process)
 
 ## About This Guide
 The GRB setup process you already encountered is the same for everyone. The GRB update process here is not.  
 Which GRB update process you will use depends on the operating system your computer uses.  
-If your computer's operating system is Microsoft Windows 7 or later (64-bit), this guide is for you.
+If your computer's operating system is Microsoft Windows 7 or later (64-bit), this guide is for you.  
 If your computer's operating system is something else, please see ["Updating GameResourceBot"](./README.md#updating-gameresourcebot).
 
 This guide assumes you are familiar with the guide titled ["Setting Up GameResourceBot"](./SETUP-long.md), meaning you have gone through all the steps in that guide and have a general understanding of all the technical terms in that guide. Otherwise, why would you even be reading this guide? Therefore, if you encounter something in this guide that you do not understand and is not explained in this guide, please refer to that guide.
 
-Finally, all the main step numbers (the ones in heading-size font) in this guide use ALL CAPS. (See? We didn't forget about the important clue we promised you!) This helps you make sure you're actually using the guide you want to be using.
+Finally, all the headers for the primary step numbers in this guide (the final four lines of [CONTENTS](#contents)) use ALL CAPS. (See? We didn't forget about the important clue we promised you!) This helps you make sure you're actually using the guide you want to be using.
 
 ## Important Background Information
-During Step 4 of the GRB Setup, we mentioned briefly that BlackCraze occasionally updates the master source code, which is in his master repository.  
+During [Step 4 of "Setting Up GRB"](./SETUP-long.md#step-4-heroku---configure-for-automatic-updates-start-grb-configure-dynos), we mentioned briefly that BlackCraze occasionally updates the master source code, which is in his master repository.  
 During that same step, we configured Heroku to deploy a shiny new version of GRB every time the source code on GitHub changes. But there's a catch.
 
 Your Heroku account is not connected to BlackCraze's GitHub account. It's connected to YOUR GitHub account.  
@@ -42,8 +42,9 @@ This is because GitHub is a really busy place. Imagine if someone attempted to s
 	1. Go to https://desktop.github.com/
 	2. Large button in the centre: Download for Windows (64bit)  
 Setup app will download.
-	3. Locate the file you just downloaded (GitHubDesktopSetup.exe). Double-click it to start the setup.  
-After setup, the GitHub Desktop app will start automatically.
+	3. Locate the file you just downloaded (GitHubDesktopSetup.exe).
+	    1. Double-click the file to begin the setup.
+	    2. After setup, the GitHub Desktop app should start automatically. If it doesn't, start it yourself.
 
 #### STEP 2: LOG IN TO GITHUB
 There are two different ways to log in. You need only one (if it is successful).
@@ -99,7 +100,7 @@ Local path: The default local path begins with your user directory, then adds `\
 
 Congratulations! The hardest part is done. In the next step, we will synchronise your forked repository with the master repository. For future updates, the next step is the only step you will need to do.
 
-#### STEP 4: SYNCHRONISE YOUR REPOSITORY (a.k.a. THE ACTUAL UPDATE PROCESS)
+#### STEP 4: SYNCHRONISE YOUR REPOSITORY  (a.k.a. THE ACTUAL UPDATE PROCESS)
 1. Start or Switch to GitHub Desktop (if needed).
 	1. Below the menu bar, second button should read: Current branch: master
 		1. If it does not, click it and select "master".
@@ -113,3 +114,7 @@ Congratulations! The hardest part is done. In the next step, we will synchronise
 
 That's it! Heroku will now see the changes and update your GRB.  
 Enjoy!
+
+[Back to top](#updating-gameresourcebot-ms-windows)
+
+[Back to main `README` file](./README.md)

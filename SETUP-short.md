@@ -30,11 +30,13 @@ BEFORE YOU BEGIN, please understand what this setup requires.
 3. Tab #3 - Log in to the [developer area for Discord](https://discordapp.com/developers/applications/me).
 4. Create a channel for GRB on your Discord server.
 
-#### 1. Discord (Tab #3) - Create a new app. Create a bot user.
-- Required: APP NAME
-- Optional: APP DESCRIPTION
-	- Recommended text: `Developed by Discord user BlackCraze#4294`
-- Optional: APP ICON
+#### 1. Discord (Tab #3) - Create a new app.
+1. Create the app.
+    - Required: APP NAME
+    - Optional: APP DESCRIPTION
+        - Recommended text: `Developed by Discord user BlackCraze#4294`
+    - Optional: APP ICON
+2. Create a bot user. Invite the bot:
 ```
 https://discordapp.com/oauth2/authorize?client_id=[ClientID]&scope=bot&permissions=66186303
 ```
@@ -43,15 +45,15 @@ https://discordapp.com/oauth2/authorize?client_id=[ClientID]&scope=bot&permissio
 
 #### 3. Heroku (Tab #2) - [Deploy the GRB app.](https://heroku.com/deploy?template=https://github.com/BlackCraze/GameResourceBot)
 1. Variables marked §§ can be changed on Discord later.
-	- GRB_DISCORD_TOKEN - Paste your token (from Tab #3) into the box provided.
 	- CHANNEL - Enter the name of your GRB's channel on your Discord server, WITHOUT THE #
+	- §§ DELETE_PICTURE_MESSAGE - default setting: "off"
+	- GRB_DISCORD_TOKEN - Paste your token (from Tab #3) into the box provided.
 	- §§ LANGUAGE
 		- de - Deutsch (German)
 		- en - English
 		- pt - Português (Portuguese)
 		- More languages coming soon!
 	- §§ OCR_RESULT - default setting: "on"
-	- §§ DELETE_PICTURE_MESSAGE - default setting: "off"
 	- Ignore: everything else.
 2. Connect to GitHub. Deploy.
 
@@ -67,3 +69,7 @@ See ["Updating GameResourceBot"](./README.md#updating-gameresourcebot).
 - [MS Windows](./UPDATE-MSWin.md)
 - [MacOS](./UPDATE-MacOS.md) - ***COMING SOON***
 - [Linux](./UPDATE-Linux.md) - ***COMING SOON***
+
+[Back to top](#setting-up-gameresourcebot---short-version)
+
+[Back to main `README` file](./README.md)
