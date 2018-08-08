@@ -2,16 +2,16 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <!-- @formatter:off -->
 <properties>
-<entry key="ADDED">Added</entry>
-<entry key="BYE_MSG">I am going offline now. I will be back as soon as possible.</entry>
-<entry key="DELETED">Deleted</entry>
-<entry key="INFO">I am a little bot who helps you coordinate your Discord guild better! Specifically, I have been designed to assist guilds who play the mobile game "Deep Town".</entry>
-<entry key="INIT">Connection established! Listening for prefix `%s`.</entry>
-<entry key="PONG">Pong!</entry>
-<entry key="UP_TO_DATE">The user database is up to date.</entry>
-<!-- -->
-<!-- The keys above are arranged in alphabetical order. The credits are listed last, below. -->
-<entry key="CREDITS">This bot was created by BlackCraze, with help from Dangercrow and firewaran.
+	<entry key="ADDED">Added</entry>
+	<entry key="BYE_MSG">I am going offline now. I will be back as soon as possible.</entry>
+	<entry key="DELETED">Deleted</entry>
+	<entry key="INFO">I am a little bot who helps you coordinate your Discord guild better! Specifically, I have been designed to assist guilds who play the mobile game "Deep Town".</entry>
+	<entry key="INIT">Connection established! Listening for prefix `%s`.</entry>
+	<entry key="PONG">Pong!</entry>
+	<entry key="UP_TO_DATE">The user database is up to date.</entry>
+	<!-- -->
+	<!-- The keys above are arranged in alphabetical order. The credits are listed last, below. -->
+	<entry key="CREDITS">This bot was created by BlackCraze, with help from Dangercrow and firewaran.
 Greek translations by ThatGreekGuy.
 Portuguese translations by Benur21.
 Documentation assistance by PellaAndroid.

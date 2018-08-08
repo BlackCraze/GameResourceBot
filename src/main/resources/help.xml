@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <!-- @formatter:off -->
 <properties>
-<entry key="GENERAL">**GENERAL HELP INFORMATION**
+	<entry key="GENERAL">**GENERAL HELP INFORMATION**
 
 Greetings! I am the GameResourceBot.
 
@@ -57,7 +57,7 @@ status
 nativeStatus
 shutdown```</entry>
 <!-- Key "GENERAL" is listed first, for obvious reasons. All remaining keys are listed in alphabetical order. -->
-<entry key="CHECK">**Check**
+	<entry key="CHECK">**Check**
 
 The *primary* purpose of the `check` command is to verify that I read your screenshots correctly.
 The *secondary* purpose of the `check` command is to search the database for all information that matches a search term you specify.
@@ -113,7 +113,7 @@ If more than one `userName` contains `searchTerm`, I will show you OUTPUT (PART 
 + `%1$s help screenshot`
 + `%1$s help total`
 + `%1$s help users`</entry>
-<entry key="CHECKTYPES">**CheckTypes**
+	<entry key="CHECKTYPES">**CheckTypes**
 
 The purpose of the `checkTypes` command is to display the items (or "types" of resources) I can recognise in screenshots and list in my database.
 
@@ -126,7 +126,7 @@ Display all known item types, arranged in alphabetical order using the currently
 **See also:**
 + `%1$s help userConfig`
 + `%1$s help screenshot`</entry>
-<entry key="CLEAR">**Clear**
+	<entry key="CLEAR">**Clear**
 
 The purpose of the `clear` command is to remove resources from the inventory list. You can do several different things with this command.
 
@@ -158,10 +158,12 @@ Clear the entire guild's inventory.
 + `%1$s help screenshot`
 + `%1$s help users`
 + `%1$s help update`</entry>
-<entry key="COMMANDS">**Available Commands**
+	<entry key="COMMANDS">**Available Commands**
 
 `help`
 `help [command]`
+`help screenshot`
+	- Please note that `$1$s screenshot` is NOT A COMMAND, but help with screenshots is available.
 
 `check`
 `checkTypes`
@@ -178,7 +180,7 @@ Clear the entire guild's inventory.
 `update`
 `userConfig`
 `users`</entry>
-<entry key="CONFIG">**Config**
+	<entry key="CONFIG">**Config**
 
 The purpose of the `config` command is to display and configure global options--that is, options that apply to everyone in the guild at the same time.
 For information about options that apply only to you, type:
@@ -218,7 +220,7 @@ For more information, please contact your guild's GameResourceBot administrator.
 **See also:**
 + `%1$s help userConfig`
 + `%1$s help screenshot`</entry>
-<entry key="CREDITS">This bot was created by BlackCraze, with help from Dangercrow and firewaran.
+	<entry key="CREDITS">This bot was created by BlackCraze, with help from Dangercrow and firewaran.
 Greek translations by ThatGreekGuy.
 Portuguese translations by Benur21.
 Documentation assistance by PellaAndroid.
@@ -229,7 +231,7 @@ https://github.com/BlackCraze/GameResourceBot/
 
 Discord server (for developers and users):
 https://discord.gg/e77yjxj</entry>
-<entry key="GROUP">**Group**
+	<entry key="GROUP">**Group**
 
 The purpose of the `group` command is to display and manage groups of resources. Groups have many uses.
 
@@ -272,7 +274,7 @@ List all groups and their resources.
 + `%1$s help total`</entry>
 <!-- If you agree with me that `bot help help` should display the list of commands, I've done it for you.
 If you disagree, simply delete this entry. No blood, no foul. -->
-<entry key="HELP">**Available Commands**
+	<entry key="HELP">**Available Commands**
 
 `help`
 `help [command]`
@@ -292,8 +294,8 @@ If you disagree, simply delete this entry. No blood, no foul. -->
 `update`
 `userConfig`
 `users`</entry>
-<entry key="INFO">I am a little bot who helps you coordinate your Discord guild better! Specifically, I have been designed to assist guilds who play the mobile game "Deep Town".</entry>
-<entry key="NATIVESTATUS">**NativeStatus**
+	<entry key="INFO">I am a little bot who helps you coordinate your Discord guild better! Specifically, I have been designed to assist guilds who play the mobile game "Deep Town".</entry>
+	<entry key="NATIVESTATUS">**NativeStatus**
 
 The purpose of the `nativeStatus` command is to display my native memory status. Developers sometimes find this information useful during a troubleshooting process.
 
@@ -305,7 +307,7 @@ Display the native memory status.
 
 **See also:**
 `%1$s help status`</entry>
-<entry key="PING">**Ping**
+	<entry key="PING">**Ping**
 
 The purpose of the `ping` command is to check whether I am able to respond to your commands.
 
@@ -313,7 +315,7 @@ The purpose of the `ping` command is to check whether I am able to respond to yo
 
 Test my responsiveness.
 ```%1$s ping```</entry>
-<entry key="SCREENSHOT">**Uploading Screenshots**
+	<entry key="SCREENSHOT">**Uploading Screenshots**
 IMPORTANT: __There is no `%1$s screenshot` command. This information is to assist you with the process of uploading screenshots to get the best results.__
 
 **==========**
@@ -373,7 +375,7 @@ To prevent errors like this, send `%1$s clear` BEFORE updating your __entire__ i
 + `%1$s help clear`
 + `%1$s help check`
 + `%1$s help userConfig`</entry>
-<entry key="SHUTDOWN">**Shutdown**
+	<entry key="SHUTDOWN">**Shutdown**
 
 The purpose of the `shutdown` command is to make me shut down and restart. This can be useful if you experience an OutOfMemoryError.
 
@@ -381,7 +383,7 @@ The purpose of the `shutdown` command is to make me shut down and restart. This 
 
 Shut down and restart the GameResourceBot.
 ```%1$s shutdown```</entry>
-<entry key="STATUS">**Status**
+	<entry key="STATUS">**Status**
 
 The purpose of the `status` command is to display my Java memory status. Developers sometimes find this information useful during a troubleshooting process.
 
@@ -393,7 +395,7 @@ Display the Java memory status.
 
 **See also:**
 `%1$s help nativeStatus`</entry>
-<entry key="TOTAL">**Total**
+	<entry key="TOTAL">**Total**
 
 The purpose of the `total` command is to display the total amount of one or more resources currently held by __the entire guild__.
 
@@ -426,7 +428,7 @@ Display total quantities of all resources in one group.
 **See also:**
 + `%1$s help check`
 + `%1$s help group`</entry>
-<entry key="UPDATE">**Update**
+	<entry key="UPDATE">**Update**
 
 The purpose of the `update` command is add resources to your inventory list, or to change the quantities of existing resources in your inventory list. You may use this command:
 + *instead* of uploading screenshots;
@@ -448,7 +450,7 @@ The `update` command will accept multiple resources at the same time, if desired
 **See also:**
 + `%1$s help screenshot`
 + `%1$s help clear`</entry>
-<entry key="USERCONFIG">**UserConfig**
+	<entry key="USERCONFIG">**UserConfig**
 
 The purpose of the `userConfig` command is to display and configure options that apply to a single user--namely, you.
 
@@ -475,7 +477,7 @@ __Fixes most errors reading screenshots.__
 **See also:**
 + `%1$s help config`
 + `%1$s help screenshot`</entry>
-<entry key="USERS">**Users**
+	<entry key="USERS">**Users**
 
 The purpose of the `users` command is to display and manage the active users in your guild.
 

@@ -162,6 +162,8 @@ Clear the entire guild's inventory.
 
 `help`
 `help [command]`
+`help screenshot`
+	- Please note that `$1$s screenshot` is NOT A COMMAND, but help with screenshots is available.
 
 `check`
 `checkTypes`
