@@ -18,12 +18,16 @@ public class UserConfig implements BaseCommand {
         Mate mate = getMateDao().getOrCreateMate(message, getResponseLocale(message));
         if (!scanner.hasNext()) {
             StringBuilder response = new StringBuilder();
+            response.append(Resource.getHeader("LANGUAGE", getResponseLocale(message)), mate.getLanguage());
+            response.append(Resource.getHeader("DEVICE", getResponseLocale(message)), mate.getDevice());
+            /* ORIGINAL VERSION OF PREVIOUS 6 LINES BELOW
             response.append("language: ");
             response.append(mate.getLanguage());
             response.append("\n");
             response.append("device: ");
             response.append(mate.getDevice());
             response.append(" [");
+            */
             Device[] devices = Device.values();
             for (int i = 0; i < devices.length; i++) {
                 response.append(devices[i].name());
@@ -45,7 +49,7 @@ public class UserConfig implements BaseCommand {
             }
             try {
                 if ("language".equalsIgnoreCase(field)) {
-                    new Locale(value); // may throw an exception
+                    new Locale(value); // May throw an exception
                     mate.setLanguage(value);
                     getMateDao().update(mate);
                     message.addReaction(Speaker.Reaction.SUCCESS).queue();
@@ -58,7 +62,7 @@ public class UserConfig implements BaseCommand {
                     throw new IllegalStateException();
                 }
             } catch (IllegalArgumentException e) {
-                // when setting an unknown device
+                // When setting an unknown device
                 message.addReaction(Speaker.Reaction.FAILURE).queue();
             } catch (Exception e) {
                 message.addReaction(Speaker.Reaction.FAILURE).queue();

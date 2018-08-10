@@ -15,6 +15,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.BOMInputStream;
 
 import de.blackcraze.grb.core.BotConfig;
+import de.blackcraze.grb.i18n.Resource;
 import de.blackcraze.grb.model.entity.StockType;
 
 public class StandingDataInitializer {
@@ -30,7 +31,7 @@ public class StandingDataInitializer {
             reader = new InputStreamReader(new BOMInputStream(resource), "UTF-8");
             parser = new CSVParser(reader, CSVFormat.EXCEL.withHeader());
             List<CSVRecord> records = parser.getRecords();
-            System.out.println("initializing stock types: " + records.size()); //replace hard-coded message with INIT_STOCK
+            System.out.println("Initializing stock types: " + records.size());
             List<StockType> stocks = getStockTypeDao().findAll(new Locale(BotConfig.getConfig().LANGUAGE));
 
             for (CSVRecord record : records) {
@@ -48,7 +49,7 @@ public class StandingDataInitializer {
                 type.setName(name);
                 type.setPrice(Long.valueOf(price));
                 getStockTypeDao().save(type);
-                System.out.println("Created new stock type: " + type.getName()); //replace hard-coded message with CREATE_STOCK
+                System.out.println("Created new stock type: " + type.getName());
             }
 
             for (StockType type : stocks) {
@@ -60,7 +61,7 @@ public class StandingDataInitializer {
                     }
                 }
                 if (!found) {
-                    System.out.println("Delete obsolete stock type: " + type.getName()); //replace hard-coded message with DELETE_STOCK
+                    System.out.println("Deleted obsolete stock type: " + type.getName());
                     getStockTypeDao().delete(type);
                 }
             }

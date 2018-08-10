@@ -10,7 +10,7 @@ import net.dv8tion.jda.core.entities.Message;
 
 public class Credits implements BaseCommand {
     public void run(Scanner scanner, Message message) {
-        Speaker.say(message.getChannel(), Resource.getString("CDS", getResponseLocale(message)));
+        Speaker.say(message.getChannel(), Resource.getInfo("CREDITS", getResponseLocale(message)));
     }
 
 }

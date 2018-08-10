@@ -70,7 +70,7 @@ public final class PrintUtils {
         StringBuilder b = new StringBuilder();
         for (Entry<String, Long> entry : stocks.entrySet()) {
             if (Long.MIN_VALUE != entry.getValue()) {
-                // in this case it is the misspelled name see
+                // In this case, it is the misspelled name. See
                 // de.blackcraze.grb.util.CommandUtils.parseStocks(Scanner,
                 // Locale)
                 String localisedStockName = Resource.getItem(entry.getKey(), locale);
@@ -83,15 +83,22 @@ public final class PrintUtils {
         return Collections.singletonList(b.toString());
     }
 
-    public static String getDiffFormatted(Date from, Date to) {
+    public static String getDiffFormatted(Date from, Date to, Locale locale) {
         Duration duration = new Duration(to.getTime() - from.getTime()); // in
                                                                          // milliseconds
         PeriodFormatter formatter = new PeriodFormatterBuilder().printZeroNever()//
+                .appendWeeks().appendSuffix(Resource.getHeader("WEEKS", locale)).appendSeparator(" ")//
+                .appendDays().appendSuffix(Resource.getHeader("DAYS", locale)).appendSeparator(" ")//
+                .appendHours().appendSuffix(Resource.getHeader("HOURS", locale)).appendSeparator(" ")//
+                .appendMinutes().appendSuffix(Resource.getHeader("MINUTES", locale)).appendSeparator(" ")//
+                .appendSeconds().appendSuffix(Resource.getHeader("SECONDS", locale))//
+                /* ORIGINAL VERSION OF PREVIOUS 5 LINES BELOW
                 .appendWeeks().appendSuffix("w").appendSeparator(" ")//
                 .appendDays().appendSuffix("d").appendSeparator(" ")//
                 .appendHours().appendSuffix("h").appendSeparator(" ")//
                 .appendMinutes().appendSuffix("m").appendSeparator(" ")//
                 .appendSeconds().appendSuffix("s")//
+                */
                 .toFormatter();
         String fullTimeAgo = formatter.print(duration.toPeriod(PeriodType.yearMonthDayTime()));
         return Arrays.stream(fullTimeAgo.split(" ")).limit(2).collect(Collectors.joining(" "));
@@ -99,10 +106,10 @@ public final class PrintUtils {
 
     public static List<String> prettyPrintStocks(List<StockType> stockTypes, Locale locale) {
         if (stockTypes.isEmpty()) {
-            return Collections.singletonList(Resource.getString("RESOURCE_UNKNOWN", locale));
+            return Collections.singletonList(Resource.getError("RESOURCE_UNKNOWN", locale));
         }
-        List<String> headers = Arrays.asList(Resource.getString("USER", locale),
-                Resource.getString("AMOUNT", locale), Resource.getString("UPDATED", locale));
+        List<String> headers = Arrays.asList(Resource.getHeader("USER", locale),
+                Resource.getHeader("QUANTITY", locale), Resource.getHeader("UPDATED", locale));
         List<Integer> aligns = Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT,
                 Block.DATA_MIDDLE_RIGHT);
 
@@ -118,7 +125,7 @@ public final class PrintUtils {
             for (Stock stock : stocks) {
                 String mateName = stock.getMate().getName();
                 String amount = String.format(locale, "%,d", stock.getAmount());
-                String updated = PrintUtils.getDiffFormatted(stock.getUpdated(), new Date());
+                String updated = PrintUtils.getDiffFormatted(stock.getUpdated(), new Date(), locale);
                 rows.add(Arrays.asList(mateName, amount, updated));
                 sumAmount += stock.getAmount();
             }
@@ -134,7 +141,7 @@ public final class PrintUtils {
     public static String prettyPrintStockTypes(List<StockType> stockTypes, Locale responseLocale) {
         StringBuilder b = new StringBuilder();
         if (stockTypes.isEmpty()) {
-            b.append(Resource.getString("NO_DATA", responseLocale));
+            b.append(Resource.getError("NO_DATA", responseLocale));
         }
         for (StockType type : stockTypes) {
             String resourceKey = type.getName();
@@ -147,10 +154,10 @@ public final class PrintUtils {
 
     public static List<String> prettyPrintMate(List<Mate> mates, Locale locale) {
         if (mates.isEmpty()) {
-            return Collections.singletonList(Resource.getString("USER_UNKNOWN", locale));
+            return Collections.singletonList(Resource.getError("USER_UNKNOWN", locale));
         }
-        List<String> headers = Arrays.asList(Resource.getString("RAW_MATERIAL", locale),
-                Resource.getString("AMOUNT", locale), Resource.getString("UPDATED", locale));
+        List<String> headers = Arrays.asList(Resource.getHeader("RAW_MATERIAL", locale),
+                Resource.getHeader("QUANTITY", locale), Resource.getHeader("UPDATED", locale));
         List<Integer> aligns = Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT,
                 Block.DATA_MIDDLE_RIGHT);
 
@@ -165,7 +172,7 @@ public final class PrintUtils {
                 String resourceKey = stock.getType().getName();
                 String resourceName = Resource.getItem(resourceKey, locale);
                 String amount = String.format(locale, "%,d", stock.getAmount());
-                String updated = PrintUtils.getDiffFormatted(stock.getUpdated(), new Date());
+                String updated = PrintUtils.getDiffFormatted(stock.getUpdated(), new Date(), locale);
                 rows.add(Arrays.asList(resourceName, amount, updated));
             }
             if (stocks.isEmpty()) {

@@ -29,7 +29,8 @@ public class Users implements BaseCommand {
 
     private BaseCommand syncUser = (Scanner scanner, Message message) -> {
         if (!(message.getChannel() instanceof TextChannel)) {
-            throw new IllegalStateException("only for text channels");
+            // I'm not sure if this ISE needs to be hard-coded or not. Plus, as you can see, I didn't save it. :'(
+            throw new IllegalStateException(Resource.getError("ONLY_TEXT", CommandUtils.getResponseLocale(message)));
         }
         Locale locale = CommandUtils.getResponseLocale(message);
         Locale defaultLocale = getDefaultLocale();
@@ -38,32 +39,32 @@ public class Users implements BaseCommand {
             return StringUtils.isBlank(m.getNickname()) ? m.getUser().getName() : m.getNickname();
         };
 
-        // all users actually stored in the bots database
+        // All users are stored in the bot's database.
         final List<Mate> storedMates = getMateDao().findAll();
         final List<String> storedIds =
                 storedMates.stream().map(Mate::getDiscordId).collect(Collectors.toList());
         final List<Member> members = ((TextChannel) message.getChannel()).getMembers().stream()
                 .filter(m -> !m.getUser().isBot()).collect(Collectors.toList());
 
-        // collect the users that are not in the channel anymore
+        // Collect the users who are not in the channel anymore.
         List<Mate> toDelete = storedMates.stream()
                 .filter(mate -> members.stream()
                         .noneMatch(m -> m.getUser().getId().equals(mate.getDiscordId())))
                 .collect(Collectors.toList());
-        // delete them from the bots database
+        // Delete collected users from the bot's database.
         toDelete.forEach(id -> getMateDao().delete(id));
 
-        // collect users that are in the channel but not in the bots user database
+        // Collect users who are in the channel but not in the bot's user database.
         List<Member> toCreate = members.stream()
                 .filter(m -> !storedIds.contains(m.getUser().getId())).collect(Collectors.toList());
-        // create them to the bots database
+        // Create collected users in the bot's database.
         toCreate.stream().forEach(
                 m -> getMateDao().createMate(defaultLocale, m.getUser().getId(), getName.apply(m)));
 
-        // printing the result
-        String header = Resource.getString("USERS_SYNC_HEADER", locale);
-        String action = Resource.getString("USERS_SYNC_ACTION", locale);
-        String user = Resource.getString("USER", locale);
+        // Display the result.
+        String header = Resource.getHeader("USERS_SYNC_HEADER", locale);
+        String action = Resource.getHeader("ACTION", locale);
+        String user = Resource.getHeader("USER", locale);
 
         List<String> headers = Arrays.asList(new String[] {user, action});
         List<Integer> aligns =
@@ -71,8 +72,8 @@ public class Users implements BaseCommand {
         List<List<String>> rows = new ArrayList<>();
         List<String> footer = Collections.emptyList();
 
-        String add = Resource.getString("USERS_SYNC_ADD", locale);
-        String remove = Resource.getString("USERS_SYNC_REMOVE", locale);
+        String add = Resource.getInfo("ADDED", locale);
+        String remove = Resource.getInfo("DELETED", locale);
         toCreate.stream().map(m -> Arrays.asList(new String[] {getName.apply(m), add}))
                 .forEach(row -> rows.add(row));
         toDelete.stream().map(m -> Arrays.asList(new String[] {m.getName(), remove}))
@@ -82,7 +83,7 @@ public class Users implements BaseCommand {
             PrintableTable result = new PrintableTable(header, footer, headers, rows, aligns);
             Speaker.sayCode(message.getChannel(), PrintUtils.prettyPrint(result));
         } else {
-            Speaker.sayCode(message.getChannel(), Resource.getString("USERS_SYNC_NOTHING", locale));
+            Speaker.sayCode(message.getChannel(), Resource.getInfo("UP_TO_DATE", locale));
         }
         message.addReaction(Speaker.Reaction.SUCCESS).queue();
     };
@@ -125,12 +126,12 @@ public class Users implements BaseCommand {
             // List Users
             Locale locale = getResponseLocale(message);
             List<List<String>> rows = getMateDao().listOrderByOldestStock(locale);
-            String header = Resource.getString("USERS_LIST_HEADER", locale);
+            String header = Resource.getHeader("USERS_LIST_HEADER", locale);
             header = String.format(header, rows.size());
             PrintableTable table = new PrintableTable(header, Collections.emptyList(),
-                    Arrays.asList(Resource.getString("USER", locale),
-                            Resource.getString("POPULATED", locale),
-                            Resource.getString("OLDEST_STOCK", locale)),
+                    Arrays.asList(Resource.getHeader("USER", locale),
+                            Resource.getHeader("POPULATED", locale),
+                            Resource.getHeader("OLDEST_STOCK", locale)),
                     rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT,
                             Block.DATA_MIDDLE_RIGHT));
             Speaker.sayCode(message.getChannel(), PrintUtils.prettyPrint(table));

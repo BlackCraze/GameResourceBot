@@ -39,7 +39,8 @@ public class OCR {
      *
      * @throws IOException
      */
-    public Map<String, Long> convertToStocks(InputStream stream, Locale locale, Device device) throws IOException {
+    public Map<String, Long> convertToStocks(InputStream stream, Locale locale, Device device)
+            throws IOException {
         Map<String, Long> stocks = new HashMap<>();
         List<File> frames = Preprocessor.load(stream);
         for (File frame : frames) {
@@ -49,8 +50,8 @@ public class OCR {
                 File number = pair[1];
 
                 if (text == null && number == null) {
-                    // thats okay - empty fragment
-                    // nothing to do
+                    // That's okay - empty fragment
+                    // Nothing to do.
                     continue;
                 }
 
@@ -62,9 +63,9 @@ public class OCR {
                     }
                     itemName = Resource.getItemKey(itemName, locale);
                 } catch (Exception e) {
-                    // we add the clear text stock name with an identifier value
-                    // this way we can show the user an error message showing
-                    // errored type names
+                    // We add the clear text stock name with an identifier value.
+                    // This way, we can show the user an error message that
+                    // includes incorrect type names.
                     stocks.put(itemName, Long.MIN_VALUE);
                     continue;
                 } finally {
@@ -79,7 +80,7 @@ public class OCR {
                     Long valueOf = Long.valueOf(valueCorrected);
                     stocks.put(itemName, valueOf);
                 } catch (NumberFormatException e) {
-                    System.err.println("could not convert to number: '" + value + "'");
+                    System.err.println("Could not convert to number: '" + value + "'");
                     stocks.put(itemName + ": '" + value + "'", Long.MIN_VALUE);
                 } finally {
                     if (number != null) {
@@ -125,7 +126,8 @@ public class OCR {
             api = new TessBaseAPI();
             int init = api.Init(BotConfig.TESS_DATA, "deu");
             if (init != 0) {
-                throw new RuntimeException("Could not initialize tesseract.");
+                // Another case where I failed to save the original. I hope it's right.
+                throw new RuntimeException("Could not initialise tesseract.");
             }
         }
     }

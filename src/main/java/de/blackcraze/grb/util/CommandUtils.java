@@ -2,10 +2,6 @@ package de.blackcraze.grb.util;
 
 import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
 
-import de.blackcraze.grb.core.BotConfig;
-import de.blackcraze.grb.i18n.Resource;
-import de.blackcraze.grb.model.Device;
-import de.blackcraze.grb.model.entity.Mate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,10 +9,16 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
+
+import org.apache.commons.lang3.StringUtils;
+
+import de.blackcraze.grb.core.BotConfig;
+import de.blackcraze.grb.i18n.Resource;
+import de.blackcraze.grb.model.Device;
+import de.blackcraze.grb.model.entity.Mate;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.SelfUser;
-import org.apache.commons.lang3.StringUtils;
 
 public class CommandUtils {
 
@@ -32,9 +34,9 @@ public class CommandUtils {
                 String stockIdentifier = Resource.getItemKey(stockName.get(), responseLocale);
                 stocks.put(stockIdentifier, stockAmount.get());
             } catch (Exception e) {
-                // we add the clear text stock name with an identifier value
-                // this way we can show the user an error message showing
-                // errored type names
+                // We add the clear text stock name with an identifier value.
+                // This way, we can show the user an error message that
+                // displays the errored type names.
                 stocks.put(stockName.get(), Long.MIN_VALUE);
                 System.err.println(e);
             }
@@ -86,14 +88,16 @@ public class CommandUtils {
         }
         Scanner scanner = new Scanner(message.getContentRaw());
         if (pm) {
-            // skip the bot prefix if used
+            // Skip the bot prefix, if used.
             if (scanner.hasNext(BotConfig.getConfig().PREFIX)) {
                 scanner.next();
             }
-            System.out.println("Mentioned with prefix: " + "private message");
+            // Why does the next line have a + in it? Wouldn't it do the same thing without it?
+            System.out.println("Mentioned with prefix: " + "direct message.");
         } else {
             String botPrefix = scanner.next();
-            System.out.println("Mentioned with prefix: " + botPrefix);
+            // Added punctuation to next line.
+            System.out.println("Mentioned with prefix: " + botPrefix + ".");
         }
         return Optional.of(scanner);
     }

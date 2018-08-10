@@ -10,11 +10,11 @@
 	<entry key="NO_DATA">Συγνώμη, αλλά δεν υπάρχουν δεδομένα:-(</entry>
 	<entry key="USER_UNKNOWN">Δεν ξέρω αυτόν τον χρήστη =(</entry>
 	<entry key="RAW_MATERIAL">Υλικό</entry>
-	<entry key="AMOUNT">Ποσότητα</entry>
+	<entry key="QUANTITY">Ποσότητα</entry>
 	<entry key="UPDATED">Το δήλωσε πριν από</entry>
 	<entry key="COMMANDS">Διαθέσιμες εντολές</entry>
 	<entry key="TOTAL_RESOURCES">Συνολικό συντεχνία των πόρων</entry>
-	<entry key="CDS">Αυτό το bot δημιουργήθηκε από τον BlackCraze, με βοήθεια από τον DangerCrow και τον firewaran.
+	<entry key="CREDITS">Αυτό το bot δημιουργήθηκε από τον BlackCraze, με βοήθεια από τον DangerCrow και τον firewaran.
 	Ελληνικές μεταφράσεις από τον ThatGreekGuy.
 	
 	Πηγαίος Κώδικας:

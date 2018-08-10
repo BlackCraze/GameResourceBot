@@ -29,7 +29,11 @@ public class Check implements BaseCommand {
         MessageChannel channel = message.getChannel();
         Locale locale = getResponseLocale(message);
         if (!nameOptional.isPresent()) {
+            // Didn't you define this variable already?
+            Mate mate = getMateDao().getOrCreateMate(message, locale);
+            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
             Mate mate = getMateDao().getOrCreateMate(message, getResponseLocale(message));
+            */
             List<Mate> mates = Collections.singletonList(mate);
             Speaker.sayCode(channel, prettyPrintMate(mates, locale));
         } else {
@@ -53,12 +57,12 @@ public class Check implements BaseCommand {
                     groupTypes.sort(comp);
                     Speaker.sayCode(channel, prettyPrintStocks(groupTypes, locale));
                 } else {
-                    String msg = String.format(Resource.getString("GROUP_EMPTY", locale),
+                    String msg = String.format(Resource.getError("GROUP_EMPTY", locale),
                             nameOptional.get());
                     Speaker.say(channel, msg);
                 }
             } else {
-                Speaker.say(channel, Resource.getString("RESOURCE_AND_USER_UNKNOWN", locale));
+                Speaker.say(channel, Resource.getError("RESOURCE_AND_USER_UNKNOWN", locale));
             }
         }
     }

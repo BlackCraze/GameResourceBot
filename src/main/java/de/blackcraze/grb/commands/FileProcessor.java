@@ -1,5 +1,20 @@
 package de.blackcraze.grb.commands;
 
+import static de.blackcraze.grb.util.CommandUtils.getMateDevice;
+import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
+import static de.blackcraze.grb.util.PrintUtils.prettyPrint;
+import static org.bytedeco.javacpp.Pointer.deallocateReferences;
+
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Locale;
+import java.util.Map;
+
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+
 import de.blackcraze.grb.commands.concrete.Update;
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.core.Speaker;
@@ -9,20 +24,6 @@ import de.blackcraze.grb.ocr.OCR;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.Message.Attachment;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
-
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.Locale;
-import java.util.Map;
-
-import static de.blackcraze.grb.util.CommandUtils.getMateDevice;
-import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
-import static de.blackcraze.grb.util.PrintUtils.prettyPrint;
-import static org.bytedeco.javacpp.Pointer.deallocateReferences;
 
 public class FileProcessor {
 
@@ -33,9 +34,10 @@ public class FileProcessor {
             if (att.isImage()) {
                 InputStream stream = null;
                 try {
-                    // check if the filename ends with png (only working image format)
-                    if(!FilenameUtils.getExtension(att.getFileName()).equalsIgnoreCase("png")){
-                        Speaker.err(message, String.format(Resource.getString("ONLY_PNG_IMAGES", locale)));
+                    // Check if the filename ends with .png (only working image format).
+                    if (!FilenameUtils.getExtension(att.getFileName()).equalsIgnoreCase("png")) {
+                        Speaker.err(message,
+                                String.format(Resource.getError("ONLY_PNG_IMAGES", locale)));
                         continue;
                     }
                     URLConnection conn = new URL(att.getProxyUrl()).openConnection();
@@ -44,16 +46,18 @@ public class FileProcessor {
                     conn.connect();
 
                     stream = new BufferedInputStream(conn.getInputStream());
-                    Map<String, Long> stocks = OCR.getInstance().convertToStocks(stream, locale, device);
+                    Map<String, Long> stocks =
+                            OCR.getInstance().convertToStocks(stream, locale, device);
 
-                    /* decide if the result is printed into the channel */
+                    // Decide whether the result is printed into the channel.
                     if ("on".equalsIgnoreCase(BotConfig.getConfig().OCR_RESULT)) {
                         Speaker.sayCode(message.getChannel(), prettyPrint(stocks, locale));
                     }
 
                     Update.internalUpdate(message, locale, stocks);
                 } catch (Throwable e) {
-                    Speaker.err(message, String.format(Resource.getString("ERROR_UNKNOWN", locale), e.getMessage()));
+                    Speaker.err(message, String.format(Resource.getError("ERROR_UNKNOWN", locale),
+                            e.getMessage()));
                     e.printStackTrace();
                 } finally {
                     IOUtils.closeQuietly(stream);
@@ -62,14 +66,14 @@ public class FileProcessor {
             }
         }
 
-        /* try to delete the message containing the upload images */
+        // Try to delete the message containing the upload images.
         if ("on".equalsIgnoreCase(BotConfig.getConfig().DELETE_PICTURE_MESSAGE)
                 && message.getChannelType().equals(ChannelType.TEXT)) {
             try {
                 message.delete().queue();
             } catch (Exception e) {
-                Speaker.err(message, "Cant delete messages here :( - " + e.getMessage());
-                /* Why is this message hard-coded in one language? Look for new entry CANT_DELETE_MESSAGES in strings.xml. Translate to other strings files, as needed. */
+                Speaker.err(message,
+                        String.format(Resource.getError("CANT_DELETE_MESSAGES", locale)));
             }
         }
     }

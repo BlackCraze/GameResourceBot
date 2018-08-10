@@ -29,14 +29,14 @@ public class Update implements BaseCommand {
             if (stocks.size() > 0) {
                 if (!unknownStocks.isEmpty()) {
                     Speaker.err(message,
-                            String.format(Resource.getString("DO_NOT_KNOW_ABOUT", locale),
+                            String.format(Resource.getError("DO_NOT_KNOW_ABOUT", locale),
                                     unknownStocks.toString()));
                 }
                 if (unknownStocks.size() != stocks.size()) {
                     message.addReaction(Speaker.Reaction.SUCCESS).queue();
                 }
             } else {
-                Speaker.err(message, Resource.getString("RESOURCES_EMPTY", locale));
+                Speaker.err(message, Resource.getError("RESOURCES_EMPTY", locale));
             }
         } catch (Exception e) {
             e.printStackTrace();

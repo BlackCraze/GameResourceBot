@@ -1,10 +1,11 @@
 package de.blackcraze.grb.i18n;
 
-import com.sksamuel.diffpatch.DiffMatchPatch;
-import com.sksamuel.diffpatch.DiffMatchPatch.Diff;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import com.sksamuel.diffpatch.DiffMatchPatch;
+import com.sksamuel.diffpatch.DiffMatchPatch.Diff;
 
 public class Resource {
 
@@ -39,8 +40,8 @@ public class Resource {
         if (scoreIsGood(itemTyped, diffScore)) {
             return bestMatch;
         } else {
-            throw new RuntimeException(String.format("Can't find %s in %s %s", item, baseName,
-                    locale.toLanguageTag()));
+            throw new RuntimeException(String.format(
+                    "Can't find %s in %s %s.", item, baseName, locale.toLanguageTag()));
         }
     }
 
@@ -63,20 +64,25 @@ public class Resource {
         return getResource(key, locale, "items");
     }
 
-    public static String getString(String key, Locale locale) {
-        return getResource(key, locale, "strings");
+    public static String getError(String key, Locale locale) {
+        return getResource(key, locale, "errors");
+    }
+
+    public static String getHeader(String key, Locale locale) {
+        return getResource(key, locale, "headers");
     }
 
     public static String getHelp(String key, Locale locale) {
         return getResource(key, locale, "help");
     }
 
+    public static String getInfo(String key, Locale locale) {
+        return getResource(key, locale, "inform");
+    }
+
     private static String getResource(String key, Locale locale, String baseName) {
         ResourceBundle resourceBundle =
                 ResourceBundle.getBundle(baseName, locale, new XMLResourceBundleControl());
-        if (!resourceBundle.containsKey(key)) {
-            System.err.printf("Can't find key %s in locale %s%n", key, locale.toLanguageTag());
-        }
         return resourceBundle.getString(key);
     }
 

@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.imageio.ImageIO;
 
@@ -48,6 +49,7 @@ import org.bytedeco.javacpp.opencv_core.Rect;
 import org.bytedeco.javacpp.opencv_core.Scalar;
 import org.bytedeco.javacpp.opencv_core.Size;
 
+import de.blackcraze.grb.i18n.Resource;
 import de.blackcraze.grb.model.Device;
 
 public class Preprocessor {
@@ -60,8 +62,8 @@ public class Preprocessor {
     }
 
     public static List<File> cropMasked(BufferedImage image) throws IOException {
-        // now we iterate over the rows and remove the masked areas since the
-        // text we want to read is underneath it
+        // Iterate over the rows and remove the masked areas, since the
+        // text we want to read is underneath it.
         WritableRaster raster = image.getRaster();
         List<Integer> rowsToRemove = new ArrayList<>();
         for (int yy = 0; yy < image.getHeight(); yy++) {
@@ -76,7 +78,8 @@ public class Preprocessor {
                 rowsToRemove.add(yy);
             }
         }
-        List<SubImage> subImages = extractSubimageBetweenMaskedRows(rowsToRemove, image.getHeight(), 50);
+        List<SubImage> subImages =
+                extractSubimageBetweenMaskedRows(rowsToRemove, image.getHeight(), 50);
         List<File> result = new ArrayList<>(subImages.size() * 3);
         int i = 0;
         for (SubImage subImage : subImages) {
@@ -107,28 +110,27 @@ public class Preprocessor {
     public static BufferedImage cropCenterScreen(BufferedImage image) {
         int width = image.getWidth();
         int height = image.getHeight();
-        // a fourth of screen wide is reserved for header stuff (level, coins,
-        // gems ...)
+        // One-fourth of screen width is reserved for header stuff (level, coins,
+        // gems, etc.)
         int headerHeight = width / 4;
         int footerHeight = width / 2;
-        // a half of screen width is reserved for details stuff at the bottom
-        // screen (sell bar, price and such stuff)
+        // One-half of screen width is reserved for footer stuff (sell bar, price,
+        // etc.)
         return image.getSubimage(0, headerHeight, width, height - headerHeight - footerHeight);
     }
 
     /**
-     * This is a try to mask the icon images from the game screen. Icons do
-     * often have white or black in it (shadows and lights). This areas would be
-     * left over with {@link #monochrome(int, int, WritableRaster)} and are
-     * disturbing the ocr. But since the black and white parts are in the near
-     * of colored areas (blue or red or green). We mask an area around the
+     * This is a try to mask the icon images from the game screen. Icons do often have white or
+     * black in them (shadows and lights). These areas would be left over from
+     * {@link #monochrome(int, int, WritableRaster)} and are disturbing the OCR. But since the black
+     * and white parts are near colored areas (blue or red or green), we mask an area around the
      * colored pixels and overpaint the shadows and lights with it.
      *
      * @param image
      * @throws IOException
      */
     public static void maskIconRing(BufferedImage image) throws IOException {
-        // resolution independent mask box size (720 pixels --> boxsize 10)
+        // resolution-independent mask box size (720 pixels --> boxsize 10)
         WritableRaster raster = image.getRaster();
         int boxWidth = image.getWidth() / 100;
         for (int xx = 0; xx < image.getWidth(); xx++) {
@@ -142,12 +144,14 @@ public class Preprocessor {
     }
 
     /**
-     * change an area of pixels around a pixel to a specified color
+     * Change an area of pixels around a pixel to a specified color.
      */
-    private static void paintOverArea(int centerX, int centerY, int areaSize, Color color, WritableRaster raster) {
+    private static void paintOverArea(int centerX, int centerY, int areaSize, Color color,
+            WritableRaster raster) {
         for (int x = centerX - areaSize; x < raster.getWidth() && x < centerX + areaSize; x++) {
             x = x < 0 ? 0 : x; // ArrayOutOfBound protection
-            for (int y = centerY - areaSize; y < raster.getHeight() && y < centerY + areaSize; y++) {
+            for (int y = centerY - areaSize; y < raster.getHeight()
+                    && y < centerY + areaSize; y++) {
                 y = y < 0 ? 0 : y; // ArrayOutOfBound protection
                 int[] strip = getPixelValue(raster, x, y);
                 changeColor(strip, color);
@@ -159,7 +163,8 @@ public class Preprocessor {
     private static boolean matchColor(int[] pixel, Color... colors) {
         boolean match = false;
         for (Color color : colors) {
-            match = pixel[0] == color.getRed() && pixel[1] == color.getGreen() && pixel[2] == color.getBlue();
+            match = pixel[0] == color.getRed() && pixel[1] == color.getGreen()
+                    && pixel[2] == color.getBlue();
             if (match) {
                 break;
             }
@@ -239,11 +244,12 @@ public class Preprocessor {
         return dimg;
     }
 
-    private static File process(File srcFile, Mat maskLow, Mat maskUp, double thresh, int threshSrcBwLow,
-            int threshSrcBwUp, int distTransformThreshMode, String prefix) throws IOException {
+    private static File process(File srcFile, Mat maskLow, Mat maskUp, double thresh,
+            int threshSrcBwLow, int threshSrcBwUp, int distTransformThreshMode, String prefix)
+            throws IOException {
         Mat src = imread(srcFile.getAbsolutePath());
-        Mat crop = process(src, maskLow, maskUp, thresh, threshSrcBwLow, threshSrcBwUp, distTransformThreshMode,
-                prefix);
+        Mat crop = process(src, maskLow, maskUp, thresh, threshSrcBwLow, threshSrcBwUp,
+                distTransformThreshMode, prefix);
         File result = null;
         if (crop != null) {
             result = File.createTempFile(prefix, ".png", TMP_FILE_DIR);
@@ -255,8 +261,8 @@ public class Preprocessor {
         return result;
     }
 
-    public static Mat process(Mat src, Mat maskLow, Mat maskUp, double thresh, int threshSrcBwLow, int threshSrcBwUp,
-            int distTransformThreshMode, String prefix) throws IOException {
+    public static Mat process(Mat src, Mat maskLow, Mat maskUp, double thresh, int threshSrcBwLow,
+            int threshSrcBwUp, int distTransformThreshMode, String prefix) throws IOException {
         int borderSize = 1;
         Mat colorFilter = src.clone();
         cvtColor(colorFilter, colorFilter, CV_BGR2HSV);
@@ -267,14 +273,14 @@ public class Preprocessor {
         saveToDisk(colorFilter, prefix + "_04_thresh");
         distanceTransform(colorFilter, colorFilter, CV_DIST_L2, 3);
         // Normalize the distance image for range = {0.0, 1.0}
-        // so we can visualize and threshold it
+        // so we can visualize and threshold it.
         normalize(colorFilter, colorFilter, 0, 1., NORM_MINMAX, -1, null);
         threshold(colorFilter, colorFilter, thresh, 1, CV_THRESH_BINARY);
 
         Mat dist_8u = new Mat();
         colorFilter.convertTo(dist_8u, CV_8U);
         colorFilter.close();
-        // Find total markers
+        // Find total markers.
         MatVector contours = new MatVector();
         Mat hierarchy = new Mat();
         dist_8u = applyBorders(dist_8u, borderSize, Scalar.WHITE); // to prevent
@@ -305,8 +311,8 @@ public class Preprocessor {
             contour.close();
         }
         if (debug()) {
-            System.out.println("found contours: " + contours.size());
-            System.out.println("valid contours: " + validContours);
+            System.out.println("Found contours: " + contours.size());
+            System.out.println("Valid contours: " + validContours);
         }
         contours.close();
         dist_8u.close();
@@ -327,7 +333,8 @@ public class Preprocessor {
 
         Mat result = new Mat(crop.size(), CV_8UC1);
         cvtColor(crop, result, CV_BGR2GRAY);
-        resize(result, result, new Size(result.size().width() * 4, result.size().height() * 4), 0, 0, CV_INTER_CUBIC);
+        resize(result, result, new Size(result.size().width() * 4, result.size().height() * 4), 0,
+                0, CV_INTER_CUBIC);
         crop.close();
         saveToDisk(result, prefix + "_07_scale");
         threshold(result, result, threshSrcBwLow, threshSrcBwUp, CV_THRESH_BINARY_INV);
@@ -353,8 +360,8 @@ public class Preprocessor {
     }
 
     public static File[] extract(File frame, Device userDevice) throws IOException {
-        Mat colorFilterTextLow = new Mat(new double[] { 0, 2, 0 });
-        Mat colorFilterNumberLow = new Mat(new double[] { 255, 255, 255 });
+        Mat colorFilterTextLow = new Mat(new double[] {0, 2, 0});
+        Mat colorFilterNumberLow = new Mat(new double[] {255, 255, 255});
         final double threshText = 0.04d;
         final int threshTextSrcLow = 200;
         final int threshTextSrcUp = 255;
@@ -366,34 +373,34 @@ public class Preprocessor {
         Device device = userDevice != null ? userDevice : Device.ANDROID;
         switch (device) {
         case IPHONE:
-            colorFilterNumLow = new Mat(new double[] { 25, 175, 50 });
+            colorFilterNumLow = new Mat(new double[] {25, 175, 50});
             break;
         default:
-            colorFilterNumLow = new Mat(new double[] { 25, 255, 50 });
+            colorFilterNumLow = new Mat(new double[] {25, 255, 50});
             break;
         }
 
-        Mat colorFilterNumUp = new Mat(new double[] { 50, 255, 255 });
+        Mat colorFilterNumUp = new Mat(new double[] {50, 255, 255});
         final int threshNumSrcLow = 180;
         final int threshNumSrcUp = 255;
 
         String prefix = StringUtils.substringBeforeLast(frame.getName(), "_");
 
-        File text = process(frame, colorFilterTextLow, colorFilterNumberLow, threshText, threshTextSrcLow,
-                threshTextSrcUp, CV_THRESH_BINARY, prefix + "_text");
-        File number = process(frame, colorFilterNumLow, colorFilterNumUp, threshNum, threshNumSrcLow, threshNumSrcUp,
-                CV_THRESH_BINARY_INV, prefix + "_num");
+        File text = process(frame, colorFilterTextLow, colorFilterNumberLow, threshText,
+                threshTextSrcLow, threshTextSrcUp, CV_THRESH_BINARY, prefix + "_text");
+        File number = process(frame, colorFilterNumLow, colorFilterNumUp, threshNum,
+                threshNumSrcLow, threshNumSrcUp, CV_THRESH_BINARY_INV, prefix + "_num");
 
         colorFilterTextLow.close();
         colorFilterNumberLow.close();
         colorFilterNumLow.close();
         colorFilterNumUp.close();
 
-        return new File[] { text, number };
+        return new File[] {text, number};
     }
 
-    public static List<SubImage> extractSubimageBetweenMaskedRows(List<Integer> maskedRows, int imageHeight,
-            int minSubImageHeight) {
+    public static List<SubImage> extractSubimageBetweenMaskedRows(List<Integer> maskedRows,
+            int imageHeight, int minSubImageHeight) {
         List<SubImage> result = new ArrayList<>();
         for (int i = 0; i < maskedRows.size(); i++) {
             int row = maskedRows.get(i);
@@ -439,6 +446,7 @@ public class Preprocessor {
     }
 
 }
+
 
 class SubImage {
 

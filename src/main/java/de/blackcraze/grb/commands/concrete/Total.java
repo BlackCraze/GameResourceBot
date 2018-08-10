@@ -38,7 +38,7 @@ public class Total implements BaseCommand {
                         getStockTypeGroupDao().findByName(nameOptional.get());
                 if (groupOpt.isPresent()) {
                     if (groupOpt.get().getTypes() == null || groupOpt.get().getTypes().isEmpty()) {
-                        String msg = String.format(Resource.getString("GROUP_EMPTY", locale),
+                        String msg = String.format(Resource.getError("GROUP_EMPTY", locale),
                                 nameOptional.get());
                         Speaker.say(message.getChannel(), msg);
                         return;
@@ -48,7 +48,7 @@ public class Total implements BaseCommand {
                     }
                 } else {
                     Speaker.say(message.getChannel(),
-                            Resource.getString("RESOURCE_UNKNOWN", locale));
+                            Resource.getError("RESOURCE_UNKNOWN", locale));
                     return;
                 }
             }
@@ -64,13 +64,13 @@ public class Total implements BaseCommand {
         }
         if (!rows.isEmpty()) {
             PrintableTable total_guild_resources = new PrintableTable(
-                    Resource.getString("TOTAL_RESOURCES", locale), Collections.emptyList(),
-                    Arrays.asList(Resource.getString("RAW_MATERIAL", locale),
-                            Resource.getString("AMOUNT", locale)),
+                    Resource.getHeader("TOTAL_RESOURCES", locale), Collections.emptyList(),
+                    Arrays.asList(Resource.getHeader("RAW_MATERIAL", locale),
+                            Resource.getHeader("QUANTITY", locale)),
                     rows, Arrays.asList(Block.DATA_MIDDLE_LEFT, Block.DATA_MIDDLE_RIGHT));
             Speaker.sayCode(message.getChannel(), prettyPrint(total_guild_resources));
         } else {
-            Speaker.say(message.getChannel(), Resource.getString("RESOURCES_EMPTY", locale));
+            Speaker.say(message.getChannel(), Resource.getError("RESOURCES_EMPTY", locale));
         }
     }
 }
