@@ -77,7 +77,7 @@ public final class Table {
             List<String> row = rowsList.get(i);
             if (row.size() != headersList.size()) {
                 throw new RuntimeException("Size(" + row.size() + ") of the row(" + i
-                        + ") and header size(" + headersList.size() + ") are not equal");
+                        + ") and header size(" + headersList.size() + ") are not equal.");
             }
         }
         this.rowsList = rowsList;
@@ -122,7 +122,7 @@ public final class Table {
         this(board, tableWidth, headersList, rowsList);
         if (colWidthsList.size() != headersList.size()) {
             throw new RuntimeException("Column width count(" + colWidthsList.size()
-                    + ") and header size(" + headersList.size() + ") are not equal");
+                    + ") and header size(" + headersList.size() + ") are not equal.");
         } else {
             this.colWidthsList = colWidthsList;
         }
@@ -133,7 +133,7 @@ public final class Table {
         this(board, tableWidth, headersList, rowsList, colWidthsList);
         if (colAlignsList.size() != headersList.size()) {
             throw new RuntimeException("Column align count(" + colAlignsList.size()
-                    + ") and header size(" + headersList.size() + ") are not equal");
+                    + ") and header size(" + headersList.size() + ") are not equal.");
         } else {
             this.colAlignsList = colAlignsList;
         }
@@ -164,7 +164,7 @@ public final class Table {
     public Table setColWidthsList(List<Integer> colWidthsList) {
         if (colWidthsList.size() != headersList.size()) {
             throw new RuntimeException("Column width count(" + colWidthsList.size()
-                    + ") and header size(" + headersList.size() + ") are not equal");
+                    + ") and header size(" + headersList.size() + ") are not equal.");
         } else {
             this.colWidthsList = colWidthsList;
         }
@@ -178,7 +178,7 @@ public final class Table {
     public Table setColAlignsList(List<Integer> colAlignsList) {
         if (colAlignsList.size() != headersList.size()) {
             throw new RuntimeException("Column align count(" + colAlignsList.size()
-                    + ") and header size(" + headersList.size() + ") are not equal");
+                    + ") and header size(" + headersList.size() + ") are not equal.");
         } else {
             this.colAlignsList = colAlignsList;
         }

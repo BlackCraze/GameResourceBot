@@ -88,20 +88,17 @@ public final class PrintUtils {
                                                                          // milliseconds
         PeriodFormatter formatter = new PeriodFormatterBuilder().printZeroNever()//
                 .appendWeeks().appendSuffix(Resource.getHeader("WEEKS", locale)).appendSeparator(" ")//
-                /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
-                .appendWeeks().appendSuffix("w").appendSeparator(" ")// */
                 .appendDays().appendSuffix(Resource.getHeader("DAYS", locale)).appendSeparator(" ")//
-                /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
-                .appendDays().appendSuffix("d").appendSeparator(" ")// */
                 .appendHours().appendSuffix(Resource.getHeader("HOURS", locale)).appendSeparator(" ")//
-                /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
-                .appendHours().appendSuffix("h").appendSeparator(" ")// */
                 .appendMinutes().appendSuffix(Resource.getHeader("MINUTES", locale)).appendSeparator(" ")//
-                /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
-                .appendMinutes().appendSuffix("m").appendSeparator(" ")// */
                 .appendSeconds().appendSuffix(Resource.getHeader("SECONDS", locale))//
-                /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
-                .appendSeconds().appendSuffix("s")// */
+                /* ORIGINAL VERSION OF PREVIOUS 5 LINES BELOW
+                .appendWeeks().appendSuffix("w").appendSeparator(" ")//
+                .appendDays().appendSuffix("d").appendSeparator(" ")//
+                .appendHours().appendSuffix("h").appendSeparator(" ")//
+                .appendMinutes().appendSuffix("m").appendSeparator(" ")//
+                .appendSeconds().appendSuffix("s")//
+                */
                 .toFormatter();
         String fullTimeAgo = formatter.print(duration.toPeriod(PeriodType.yearMonthDayTime()));
         return Arrays.stream(fullTimeAgo.split(" ")).limit(2).collect(Collectors.joining(" "));

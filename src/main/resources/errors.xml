@@ -16,6 +16,7 @@
 	<entry key="GROUP_RENAME_UNKNOWN">Tell me the name of the existing group you want to rename and then the new name.</entry>
 	<entry key="GROUP_SUBCOMMAND_UNKNOWN">Unknown sub-command [list (default), create, add, remove, rename, delete]</entry>
 	<entry key="GROUP_UNKNOWN">I do not know this resource group: %s</entry>
+	<entry key="NO_COMMAND">No such command `%s`.</entry>
 	<entry key="NO_DATA">Sorry, nothing to see here. :-(</entry>
 	<entry key="ONLY_PNG_IMAGES">I can process only PNG images. One or more images submitted are in a different format.</entry>
 	<entry key="ONLY_TEXT">Only for text channels</entry>
@@ -23,12 +24,9 @@
 	<entry key="RESOURCES_EMPTY">There is nothing here! Why don't you consider updating your resources?</entry>
 	<entry key="RESOURCE_AND_USER_UNKNOWN">I know neither a user nor a resource with that name.</entry>
 	<entry key="RESOURCE_UNKNOWN">I don't know this resource. =(</entry>
-	<entry key="TESSERACT">Could not initialise tesseract.</entry>
 	<entry key="USER_UNKNOWN">I do not know this user. =(</entry>
 	<!-- -->
 	<!-- MESSAGES SHOWN MOSTLY TO DEVELOPERS APPEAR BELOW -->
-	<entry key="NO_PHYS_DATA">No physical data available</entry>
-	<entry key="PCO">Public command only</entry>
-	<entry key="PCO_EXCEPTION">An unknown user cannot automatically be created with a direct message.</entry>
+	<entry key="NO_PHYS_DATA">No physical data available.</entry>
 </properties>
 <!-- @formatter:on -->

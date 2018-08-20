@@ -34,7 +34,7 @@ public interface BaseCommand {
                     String.format(
                             Resource.getError("PUBLIC_COMMAND_ONLY", getResponseLocale(message)),
                             "#" + BotConfig.getConfig().CHANNEL));
-            throw new IllegalStateException("public command only");
+            throw new IllegalStateException("Public command only");
         }
     }
 

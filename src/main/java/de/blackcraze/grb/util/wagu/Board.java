@@ -79,7 +79,7 @@ public class Board {
             block.setBelowBlock(tableBlock);
             rearranegCoordinates(block);
         } else {
-            throw new RuntimeException("Invalid block appending direction given");
+            throw new RuntimeException("Invalid block appending direction given.");
         }
         return this;
     }

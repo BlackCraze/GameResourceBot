@@ -29,6 +29,7 @@ public class Users implements BaseCommand {
 
     private BaseCommand syncUser = (Scanner scanner, Message message) -> {
         if (!(message.getChannel() instanceof TextChannel)) {
+            // I'm not sure if this ISE needs to be hard-coded or not. Plus, as you can see, I didn't save it. :'(
             throw new IllegalStateException(Resource.getError("ONLY_TEXT", CommandUtils.getResponseLocale(message)));
         }
         Locale locale = CommandUtils.getResponseLocale(message);

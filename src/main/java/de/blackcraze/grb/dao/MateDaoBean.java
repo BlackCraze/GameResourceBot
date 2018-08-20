@@ -58,7 +58,7 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
                 // Locale)
                 unknown.add(stockKey);
             } else if (0 == stockAmount.longValue()) {
-                System.out.printf("clearing stock %s for player %s%n", stockKey, mate.getName());
+                System.out.printf("Clearing stock %s for player %s%n...", stockKey, mate.getName());
                 Optional<StockType> type = stockTypeDao.findByKey(stockKey);
                 if (type.isPresent()) {
                     stockDao.delete(mate, type.get());
@@ -74,7 +74,7 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
                     }
                 }
                 if (!found) {
-                    System.out.printf("Creating new stock %s for player %s%n", stockKey,
+                    System.out.printf("Creating new stock %s for player %s%n...", stockKey,
                             mate.getName());
                     Optional<StockType> type = stockTypeDao.findByKey(stockKey);
                     if (type.isPresent()) {
@@ -125,11 +125,7 @@ public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
         }
         if (!mateOptional.isPresent()) {
             if (message.getChannelType().equals(ChannelType.PRIVATE)) {
-                throw new IllegalStateException(Resource.getError("PCO_EXCEPTION", locale));
-                /*
-                 * ORIGINAL VERSION OF PREVIOUS LINE BELOW throw new IllegalStateException(
-                 * "unknown user can not automatically be created in private messages");
-                 */
+                throw new IllegalStateException("Unknown user cannot automatically be created in a direct message.");
             }
             return createMate(locale, discordId, name);
         } else {

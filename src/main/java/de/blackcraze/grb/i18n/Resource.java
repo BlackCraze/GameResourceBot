@@ -40,12 +40,8 @@ public class Resource {
         if (scoreIsGood(itemTyped, diffScore)) {
             return bestMatch;
         } else {
-            throw new RuntimeException(String.format(Resource.getError("CANT_FIND_KEY", locale),
-                    item, baseName, locale.toLanguageTag()));
-            /*
-             * ORIGINAL VERSION OF PREVIOUS LINE BELOW throw new RuntimeException(String.format(
-             * "Can't find %s in %s %s", item, baseName, locale.toLanguageTag()));
-             */
+            throw new RuntimeException(String.format(
+                    "Can't find %s in %s %s.", item, baseName, locale.toLanguageTag()));
         }
     }
 

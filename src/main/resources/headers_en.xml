@@ -4,8 +4,13 @@
 <properties>
 	<entry key="ACTION">Action</entry>
 	<entry key="DAYS">d</entry>
+	<!-- BLACKCRAZE: Concerning both "DEVICE" and "LANGUAGE": Since `bot userconfig set` needs the English words to work
+	correctly, I will modify the non-English files to show the English word followed by the non-English word in
+	parentheses. That will give those users both the needed word for the command and the understanding of what it is. -->
+	<entry key="DEVICE">device: %s [</entry>
 	<entry key="GROUP_LIST_HEADER">List of Resource Groups</entry>
 	<entry key="HOURS">h</entry>
+	<entry key="LANGUAGE">language: %s%n</entry>
 	<entry key="MINUTES">m</entry>
 	<entry key="NAME">Name</entry>
 	<entry key="OLDEST_STOCK">Age</entry>
@@ -20,7 +25,7 @@
 	<entry key="USERS_SYNC_HEADER">User synchronization</entry>
 	<entry key="WEEKS">w</entry>
 	<!-- -->
-	<!-- MESSAGES SHOWN MOSTLY TO DEVELOPERS APPEAR BELOW -->
+	<!-- MESSAGES SHOWN MOSTLY (BUT NOT EXCLUSIVELY) TO DEVELOPERS APPEAR BELOW -->
 	<!-- Headers for command "nativeStatus" -->
 	<entry key="JAVACPP">JAVACPP:%n</entry>
 	<entry key="DEALLOCATORS">Memory tracked by deallocators: </entry>
@@ -35,6 +40,7 @@
 	<entry key="USED">%n%tUSED:      </entry>
 	<entry key="COMMITTED">%n%tCOMMITTED: </entry>
 	<entry key="MAX">%n%tMAX:       </entry>
+	<!-- I'm not actually sure the two below can be used at all, even if you keep all this crap. LOL -->
 	<entry key="HEAP">Heap</entry>
 	<entry key="NON-HEAP">Non-Heap</entry>
 </properties>

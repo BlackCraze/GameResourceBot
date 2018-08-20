@@ -4,6 +4,8 @@
 <properties>
 	<entry key="GENERAL">**GENERAL HELP INFORMATION**
 
+Greetings! I am the GameResourceBot.
+
 I can understand only one command at a time.
 Commands are NOT case-sensitive, unless otherwise noted.
 DO NOT send one message with multiple commands on separate lines.
@@ -160,6 +162,8 @@ Clear the entire guild's inventory.
 
 `help`
 `help [command]`
+`help screenshot`
+	- Please note that `%1$s screenshot` is NOT A COMMAND, but help with screenshots is available.
 
 `check`
 `checkTypes`
@@ -189,7 +193,7 @@ Display the current global settings.
 
 **==========**
 
-Tell me the language of the guild's screenshots.
+Tell me the most common language of the guild's screenshots.
 ```%1$s config set language [de, en, es, fr, it, pt]```
 __Options configured with the `userConfig` command always take priority over global options.__
 
@@ -210,7 +214,7 @@ __The default setting is "off".__
 **==========**
 
 I cannot change the settings for PREFIX or CHANNEL. These can be changed only at Heroku's website.
-For more information, please contact your guild's bot administrator.
+For more information, please contact your guild's GameResourceBot administrator.
 
 
 **See also:**
@@ -220,6 +224,7 @@ For more information, please contact your guild's bot administrator.
 Greek translations by ThatGreekGuy.
 Portuguese translations by Benur21.
 Documentation assistance by PellaAndroid.
+i18n coordination by PellaAndroid.
 
 Codebase:
 https://github.com/BlackCraze/GameResourceBot/
@@ -267,6 +272,28 @@ List all groups and their resources.
 
 **See also:**
 + `%1$s help total`</entry>
+	<!-- If you agree with me that `bot help help` should display the list of commands, I've done it for you.
+	If you disagree, simply delete this entry. No blood, no foul. -->
+	<entry key="HELP">**Available Commands**
+
+`help`
+`help [command]`
+
+`check`
+`checkTypes`
+`clear`
+`config`
+`credits`
+`group`
+`info`
+`nativeStatus`
+`ping`
+`shutdown`
+`status`
+`total`
+`update`
+`userConfig`
+`users`</entry>
 	<entry key="INFO">I am a little bot who helps you coordinate your Discord guild better! Specifically, I have been designed to assist guilds who play the mobile game "Deep Town".</entry>
 	<entry key="NATIVESTATUS">**NativeStatus**
 
@@ -297,16 +324,18 @@ To update your inventory using screenshots:
 1) Ensure your language setting matches the language of your screenshots. For details, type:
 ```%1$s help userConfig```
 
-2) Use your preferred method to take screenshots of your inventory screen in the game.
+2) Turn off any software screen filters you have running. In particular, blue light filters make me go blind. (After you take the screenshots, feel free to turn on your filters again, if you like.)
+
+3) Use your preferred method to take screenshots of your inventory screen in the game.
 + Both the resource name and the amount must be clearly visible.
 + Android - recommended app: https://play.google.com/store/apps/details?id=com.shamanland.privatescreenshots
 
-3) Keep all screenshots in their original size.
+4) Keep all screenshots in their original size.
 + DO NOT CROP IMAGES!! My ability to read screenshots depends on seeing the full screen.
 
-4) Save all screenshots as PNG files. (Hint: That probably happens automatically.) If you do not know the file type of your screenshots, then upload them, anyway. If they're not PNG files, I will tell you.
+5) Save all screenshots as PNG files. (Hint: That probably happens automatically.) If you do not know the file type of your screenshots, then upload them, anyway. If they're not PNG files, I will tell you.
 
-5) In your Discord app, go to my channel (or DM) and upload the images.
+6) In your Discord app, go to my channel (or DM) and upload the images.
 
 **==========**
 
@@ -322,8 +351,8 @@ __Method #2__: Upload the unaltered screenshot. Then use a command to delete the
 __TIPS__
 + You may upload screenshots to update your entire inventory at once, or only part of your inventory.
 + When updating your inventory, I will __always__:
-+ ADD each resource in your screenshots to your inventory list, unless the resource is already there from a previous update.
-+ REPLACE the old amount of each resource with the new amount.
+		+ ADD each resource in your screenshots to your inventory list, unless the resource is already there from a previous update.
+		+ REPLACE the old amount of each resource with the new amount.
 + When updating your inventory, I will __never__ remove a resource from your inventory list.
 + Example:
 __old inventory list__
@@ -354,7 +383,7 @@ The purpose of the `shutdown` command is to make me shut down and restart. This 
 
 **==========**
 
-Shut down and restart this app.
+Shut down and restart the GameResourceBot.
 ```%1$s shutdown```</entry>
 	<entry key="STATUS">**Status**
 
@@ -462,8 +491,8 @@ Display a list of all active users, __plus__ the number of resources each user h
 **==========**
 
 Synchronise the list of users in my database with the list of current users on your Discord server.
-I will delete from my database all users who no longer have access to the %2$s channel on your Discord server.
-Then I will add to my database any new users who have access to the %2$s channel on your Discord server.
+I will delete from my database all users who no longer have access to the `#%2$s` channel on your Discord server.
+Then I will add to my database any new users who have access to the `#%2$s` channel on your Discord server.
 ```%1$s users sync```
 
 **See also:**
