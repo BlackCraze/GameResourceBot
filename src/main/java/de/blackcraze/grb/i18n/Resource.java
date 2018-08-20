@@ -40,8 +40,8 @@ public class Resource {
         if (scoreIsGood(itemTyped, diffScore)) {
             return bestMatch;
         } else {
-            throw new RuntimeException(String.format(
-                    "Can't find %s in %s %s.", item, baseName, locale.toLanguageTag()));
+            throw new RuntimeException(String.format("Can't find %s in %s %s.", item, baseName,
+                    locale.toLanguageTag()));
         }
     }
 
@@ -64,26 +64,31 @@ public class Resource {
         return getResource(key, locale, "items");
     }
 
-    public static String getError(String key, Locale locale) {
-        return getResource(key, locale, "errors");
+    public static String getError(String key, Locale locale, Object... args) {
+        return getResource(key, locale, "errors", args);
     }
 
-    public static String getHeader(String key, Locale locale) {
-        return getResource(key, locale, "headers");
+    public static String getHeader(String key, Locale locale, Object... args) {
+        return getResource(key, locale, "headers", args);
     }
 
-    public static String getHelp(String key, Locale locale) {
-        return getResource(key, locale, "help");
+    public static String getHelp(String key, Locale locale, Object... args) {
+        return getResource(key, locale, "help", args);
     }
 
-    public static String getInfo(String key, Locale locale) {
-        return getResource(key, locale, "inform");
+    public static String getInfo(String key, Locale locale, Object... args) {
+        return getResource(key, locale, "inform", args);
     }
 
-    private static String getResource(String key, Locale locale, String baseName) {
+    private static String getResource(String key, Locale locale, String baseName, Object... args) {
         ResourceBundle resourceBundle =
                 ResourceBundle.getBundle(baseName, locale, new XMLResourceBundleControl());
-        return resourceBundle.getString(key);
+        String string = resourceBundle.getString(key);
+        if (args != null && args.length > 0) {
+            return String.format(string, args);
+        } else {
+            return string;
+        }
     }
 
 }

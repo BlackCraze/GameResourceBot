@@ -31,9 +31,10 @@ public class Check implements BaseCommand {
         if (!nameOptional.isPresent()) {
             // Didn't you define this variable already?
             Mate mate = getMateDao().getOrCreateMate(message, locale);
-            /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
-            Mate mate = getMateDao().getOrCreateMate(message, getResponseLocale(message));
-            */
+            /*
+             * ORIGINAL VERSION OF PREVIOUS LINE BELOW Mate mate =
+             * getMateDao().getOrCreateMate(message, getResponseLocale(message));
+             */
             List<Mate> mates = Collections.singletonList(mate);
             Speaker.sayCode(channel, prettyPrintMate(mates, locale));
         } else {
@@ -57,8 +58,7 @@ public class Check implements BaseCommand {
                     groupTypes.sort(comp);
                     Speaker.sayCode(channel, prettyPrintStocks(groupTypes, locale));
                 } else {
-                    String msg = String.format(Resource.getError("GROUP_EMPTY", locale),
-                            nameOptional.get());
+                    String msg = Resource.getError("GROUP_EMPTY", locale, nameOptional.get());
                     Speaker.say(channel, msg);
                 }
             } else {

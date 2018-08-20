@@ -38,8 +38,7 @@ public class Total implements BaseCommand {
                         getStockTypeGroupDao().findByName(nameOptional.get());
                 if (groupOpt.isPresent()) {
                     if (groupOpt.get().getTypes() == null || groupOpt.get().getTypes().isEmpty()) {
-                        String msg = String.format(Resource.getError("GROUP_EMPTY", locale),
-                                nameOptional.get());
+                        String msg = Resource.getError("GROUP_EMPTY", locale, nameOptional.get());
                         Speaker.say(message.getChannel(), msg);
                         return;
                     } else {

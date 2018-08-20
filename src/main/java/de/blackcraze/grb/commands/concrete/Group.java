@@ -37,33 +37,33 @@ public class Group implements BaseCommand {
         if (scanner.hasNext()) {
             String subCommand = scanner.next();
             switch (subCommand) {
-            case "create":
-                BaseCommand.checkPublic(message);
-                groupCreate.run(scanner, message);
-                break;
-            case "delete":
-                BaseCommand.checkPublic(message);
-                groupDelete.run(scanner, message);
-                break;
-            case "add":
-                BaseCommand.checkPublic(message);
-                groupAdd.run(scanner, message);
-                break;
-            case "remove":
-                BaseCommand.checkPublic(message);
-                groupRemove.run(scanner, message);
-                break;
-            case "rename":
-                groupRename.run(scanner, message);
-                BaseCommand.checkPublic(message);
-                break;
-            case "list":
-                groupList.run(scanner, message);
-                break;
-            default:
-                Speaker.err(message,
-                        Resource.getError("GROUP_SUBCOMMAND_UNKNOWN", getResponseLocale(message)));
-                break;
+                case "create":
+                    BaseCommand.checkPublic(message);
+                    groupCreate.run(scanner, message);
+                    break;
+                case "delete":
+                    BaseCommand.checkPublic(message);
+                    groupDelete.run(scanner, message);
+                    break;
+                case "add":
+                    BaseCommand.checkPublic(message);
+                    groupAdd.run(scanner, message);
+                    break;
+                case "remove":
+                    BaseCommand.checkPublic(message);
+                    groupRemove.run(scanner, message);
+                    break;
+                case "rename":
+                    groupRename.run(scanner, message);
+                    BaseCommand.checkPublic(message);
+                    break;
+                case "list":
+                    groupList.run(scanner, message);
+                    break;
+                default:
+                    Speaker.err(message, Resource.getError("GROUP_SUBCOMMAND_UNKNOWN",
+                            getResponseLocale(message)));
+                    break;
             }
         } else {
             groupList.run(scanner, message);
@@ -273,8 +273,8 @@ public class Group implements BaseCommand {
             }
         }
         if (!unknownStockTypes.isEmpty()) {
-            String msg = String.format(Resource.getError("RESOURCE_UNKNOWN", locale),
-                    unknownStockTypes.toString());
+            String msg =
+                    Resource.getError("RESOURCE_UNKNOWN", locale, unknownStockTypes.toString());
             Speaker.err(message, msg);
         }
         return stockTypes;

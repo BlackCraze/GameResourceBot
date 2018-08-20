@@ -29,10 +29,8 @@ public class Help implements BaseCommand {
                         .invoke(fakeInstance, message);
                 Speaker.say(message.getChannel(), helpText);
             } catch (Exception e) {
-                Speaker.err(message, Resource.getError("NO_COMMAND", getResponseLocale(message)), command);
-                /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
-                Speaker.err(message, "No such command `" + command + "`");
-                */
+                Speaker.err(message,
+                        Resource.getError("NO_COMMAND", getResponseLocale(message), command));
             }
         }
     }

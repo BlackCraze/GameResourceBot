@@ -1,11 +1,10 @@
 package de.blackcraze.grb.listener;
 
-import java.util.stream.Collectors;
-
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
 import de.blackcraze.grb.util.CommandUtils;
+import java.util.stream.Collectors;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDA.Status;
 import net.dv8tion.jda.core.entities.Guild;
@@ -48,11 +47,8 @@ public class ReadyListener extends ListenerAdapter {
     }
 
     private void initialise(TextChannel channel) {
-        Speaker.say(channel, Resource.getInfo("INIT", CommandUtils.getDefaultLocale()), BotConfig.getConfig().PREFIX);
-        /* ORIGINAL VERSION OF PREVIOUS LINE BELOW
-        Speaker.say(channel, Resource.getInfo("INIT", CommandUtils.getDefaultLocale()) + "`"
-                + BotConfig.getConfig().PREFIX + "`.");
-        */
+        Speaker.say(channel, Resource.getInfo("INIT", CommandUtils.getDefaultLocale(),
+                BotConfig.getConfig().PREFIX));
     }
 
     /* Send a goodbye message when the shutting down event is triggered. */

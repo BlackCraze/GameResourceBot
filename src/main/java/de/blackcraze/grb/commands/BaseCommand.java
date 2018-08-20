@@ -24,8 +24,8 @@ public interface BaseCommand {
         // NEXT 3 LINES CREATED BY @DANGERCROW TO MAKE DESCRIPTIVE HELP SYSTEM WORK
         String className = this.getClass().getSimpleName();
         String key = className.toUpperCase();
-        return String.format(Resource.getHelp(key, getResponseLocale(message)),
-                BotConfig.getConfig().PREFIX, "#" + BotConfig.getConfig().CHANNEL);
+        return Resource.getHelp(key, getResponseLocale(message), BotConfig.getConfig().PREFIX,
+                "#" + BotConfig.getConfig().CHANNEL);
     }
 
     static void checkPublic(Message message) {

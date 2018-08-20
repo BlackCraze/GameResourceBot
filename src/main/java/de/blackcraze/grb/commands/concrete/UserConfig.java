@@ -5,37 +5,27 @@ import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
 
 import de.blackcraze.grb.commands.BaseCommand;
 import de.blackcraze.grb.core.Speaker;
+import de.blackcraze.grb.i18n.Resource;
 import de.blackcraze.grb.model.Device;
 import de.blackcraze.grb.model.entity.Mate;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import net.dv8tion.jda.core.entities.Message;
 import org.apache.commons.lang3.StringUtils;
 
 public class UserConfig implements BaseCommand {
     public void run(Scanner scanner, Message message) {
-        Mate mate = getMateDao().getOrCreateMate(message, getResponseLocale(message));
+        Locale local = getResponseLocale(message);
+        Mate mate = getMateDao().getOrCreateMate(message, local);
         if (!scanner.hasNext()) {
             StringBuilder response = new StringBuilder();
-            response.append(Resource.getHeader("LANGUAGE", getResponseLocale(message)), mate.getLanguage());
-            response.append(Resource.getHeader("DEVICE", getResponseLocale(message)), mate.getDevice());
-            /* ORIGINAL VERSION OF PREVIOUS 6 LINES BELOW
-            response.append("language: ");
-            response.append(mate.getLanguage());
-            response.append("\n");
-            response.append("device: ");
-            response.append(mate.getDevice());
-            response.append(" [");
-            */
-            Device[] devices = Device.values();
-            for (int i = 0; i < devices.length; i++) {
-                response.append(devices[i].name());
-                if (i + 1 < devices.length) {
-                    response.append(',');
-                }
-            }
-            response.append("]\n");
+            response.append(Resource.getHeader("LANGUAGE", local, mate.getLanguage()));
+            String allDevices = Arrays.asList(Device.values()).stream().map(t -> t.name())
+                    .collect(Collectors.joining(","));
+            response.append(Resource.getHeader("DEVICE", local, mate.getDevice(), allDevices));
             Speaker.sayCode(message.getChannel(), response.toString());
             return;
         }

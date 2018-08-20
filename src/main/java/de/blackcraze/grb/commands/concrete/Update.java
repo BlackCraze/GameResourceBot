@@ -28,9 +28,8 @@ public class Update implements BaseCommand {
             List<String> unknownStocks = getMateDao().updateStocks(mate, stocks);
             if (stocks.size() > 0) {
                 if (!unknownStocks.isEmpty()) {
-                    Speaker.err(message,
-                            String.format(Resource.getError("DO_NOT_KNOW_ABOUT", locale),
-                                    unknownStocks.toString()));
+                    Speaker.err(message, Resource.getError("DO_NOT_KNOW_ABOUT", locale,
+                            unknownStocks.toString()));
                 }
                 if (unknownStocks.size() != stocks.size()) {
                     message.addReaction(Speaker.Reaction.SUCCESS).queue();
