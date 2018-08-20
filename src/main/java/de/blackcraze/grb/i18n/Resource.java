@@ -3,7 +3,7 @@ package de.blackcraze.grb.i18n;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
+import org.apache.commons.lang3.StringUtils;
 import com.sksamuel.diffpatch.DiffMatchPatch;
 import com.sksamuel.diffpatch.DiffMatchPatch.Diff;
 
@@ -13,13 +13,9 @@ public class Resource {
 
     }
 
-    public static String getItemKey(String item, Locale locale) {
-        return getKey(item, locale, "items");
-    }
-
-    private static String getKey(String item, Locale locale, String baseName) {
+    public static String guessItemKey(String item, Locale locale) {
         ResourceBundle resourceBundle =
-                ResourceBundle.getBundle(baseName, locale, new XMLResourceBundleControl());
+                ResourceBundle.getBundle("items", locale, new XMLResourceBundleControl());
 
         String itemTyped = correctItemName(item);
         String bestMatch = null;
@@ -40,8 +36,33 @@ public class Resource {
         if (scoreIsGood(itemTyped, diffScore)) {
             return bestMatch;
         } else {
-            throw new RuntimeException(String.format("Can't find %s in %s %s.", item, baseName,
+            throw new RuntimeException(String.format("Can't find %s in %s %s.", item, "items",
                     locale.toLanguageTag()));
+        }
+    }
+
+    public static String guessHelpKey(String key, Locale locale) {
+        ResourceBundle resourceBundle =
+                ResourceBundle.getBundle("help", locale, new XMLResourceBundleControl());
+        String keyTyped = StringUtils.upperCase(key);
+        String bestMatch = null;
+        int diffScore = Integer.MAX_VALUE;
+
+        for (String helpKey : resourceBundle.keySet()) {
+            if (keyTyped.equals(helpKey)) {
+                return helpKey;
+            } else {
+                int score = compareFuzzy(helpKey, keyTyped);
+                if (score < diffScore) {
+                    diffScore = score;
+                    bestMatch = helpKey;
+                }
+            }
+        }
+        if (scoreIsGood(keyTyped, diffScore)) {
+            return bestMatch;
+        } else {
+            return null;
         }
     }
 

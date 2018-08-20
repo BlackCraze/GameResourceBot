@@ -13,7 +13,6 @@ import java.util.MissingResourceException;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import net.dv8tion.jda.core.entities.Message;
-import org.apache.commons.lang3.StringUtils;
 
 public class Help implements BaseCommand {
     public void run(Scanner scanner, Message message) {
@@ -43,7 +42,8 @@ public class Help implements BaseCommand {
      */
     private String getHelpFromResource(Locale locale, String helpResourceKey)
             throws MissingResourceException {
-        return Resource.getHelp(StringUtils.upperCase(helpResourceKey), locale,
+        String guessedResourceKey = Resource.guessHelpKey(helpResourceKey, locale);
+        return Resource.getHelp(guessedResourceKey, locale,
                 BotConfig.getConfig().PREFIX, "#" + BotConfig.getConfig().CHANNEL);
     }
 

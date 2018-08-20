@@ -31,7 +31,7 @@ public class CommandUtils {
                 break;
             }
             try {
-                String stockIdentifier = Resource.getItemKey(stockName.get(), responseLocale);
+                String stockIdentifier = Resource.guessItemKey(stockName.get(), responseLocale);
                 stocks.put(stockIdentifier, stockAmount.get());
             } catch (Exception e) {
                 // We add the clear text stock name with an identifier value.

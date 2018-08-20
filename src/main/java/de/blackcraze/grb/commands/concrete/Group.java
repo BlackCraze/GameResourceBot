@@ -261,7 +261,7 @@ public class Group implements BaseCommand {
         for (String inputName : inputNames) {
             try {
                 // May throw IllegalArgumentException if argument does not exist.
-                String key = Resource.getItemKey(inputName, locale);
+                String key = Resource.guessItemKey(inputName, locale);
                 Optional<StockType> stockOpt = getStockTypeDao().findByKey(key);
                 if (!stockOpt.isPresent()) {
                     unknownStockTypes.add(inputName);

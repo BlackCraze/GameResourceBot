@@ -61,7 +61,7 @@ public class OCR {
                     if (StringUtils.isEmpty(itemName)) {
                         continue;
                     }
-                    itemName = Resource.getItemKey(itemName, locale);
+                    itemName = Resource.guessItemKey(itemName, locale);
                 } catch (Exception e) {
                     // We add the clear text stock name with an identifier value.
                     // This way, we can show the user an error message that

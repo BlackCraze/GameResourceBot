@@ -51,7 +51,7 @@ public class Clear implements BaseCommand {
             }
             clearReaction = Speaker.Reaction.SUCCESS;
         } else {
-            String stockIdentifier = Resource.getItemKey(mateOrStockOptional.get(), locale);
+            String stockIdentifier = Resource.guessItemKey(mateOrStockOptional.get(), locale);
             Optional<StockType> stockType = getStockTypeDao().findByKey(stockIdentifier);
             // Try to delete the given name from stocks of current user.
             stockType.ifPresent(aStockType -> getStockDao().delete(mate, aStockType));
