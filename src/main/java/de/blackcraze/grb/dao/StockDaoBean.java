@@ -1,5 +1,8 @@
 package de.blackcraze.grb.dao;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import de.blackcraze.grb.model.entity.Mate;
@@ -24,16 +27,17 @@ public class StockDaoBean extends BaseDaoBean<Stock> implements IStockDao {
 
     @Override
     public long getTotalAmount(StockType type) {
-        Number number = (Number) em.createQuery("select sum(s.amount) from Stock s where s.type = :type")
-                .setParameter("type", type).setMaxResults(1).getSingleResult();
+        Number number =
+                (Number) em.createQuery("select sum(s.amount) from Stock s where s.type = :type")
+                        .setParameter("type", type).setMaxResults(1).getSingleResult();
         return number != null ? number.longValue() : 0;
     }
 
     @Override
     public int delete(Mate mate, StockType type) {
         em.getTransaction().begin();
-        int rowCount = em.createQuery("delete Stock where type = :type and mate = :mate").setParameter("type", type)
-                .setParameter("mate", mate).executeUpdate();
+        int rowCount = em.createQuery("delete Stock where type = :type and mate = :mate")
+                .setParameter("type", type).setParameter("mate", mate).executeUpdate();
         em.getTransaction().commit();
         return rowCount;
     }
@@ -41,7 +45,18 @@ public class StockDaoBean extends BaseDaoBean<Stock> implements IStockDao {
     @Override
     public int deleteAll(Mate mate) {
         em.getTransaction().begin();
-        int rowCount = em.createQuery("delete Stock s where mate = :mate").setParameter("mate", mate).executeUpdate();
+        int rowCount = em.createQuery("delete Stock s where mate = :mate")
+                .setParameter("mate", mate).executeUpdate();
+        em.getTransaction().commit();
+        return rowCount;
+    }
+
+    @Override
+    public int deleteOlderThan(LocalDateTime limit) {
+        em.getTransaction().begin();
+        int rowCount = em.createQuery("delete Stock s where updated<:limit")
+                .setParameter("limit", Date.from(limit.atZone(ZoneId.systemDefault()).toInstant()))
+                .executeUpdate();
         em.getTransaction().commit();
         return rowCount;
     }

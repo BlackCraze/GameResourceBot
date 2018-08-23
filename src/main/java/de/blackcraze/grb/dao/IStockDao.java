@@ -1,5 +1,6 @@
 package de.blackcraze.grb.dao;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import de.blackcraze.grb.model.entity.Mate;
@@ -17,5 +18,7 @@ public interface IStockDao extends IBaseDao<Stock> {
     int delete(Mate mate, StockType type);
 
     int deleteAll(Mate mate);
+
+    int deleteOlderThan(LocalDateTime limit);
 
 }

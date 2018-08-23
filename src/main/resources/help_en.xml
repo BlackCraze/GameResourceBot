@@ -135,8 +135,7 @@ __The userName must be spelled correctly.__ For more information, type:
 Clear the entire guild's inventory.
 ```%1$s clear all```
 
-	**==========**
-
+**==========**
 
 Clear all of the entire guild's inventory items updated before [XX] hours ago.
 ```%1$s clear older [XX]h```
