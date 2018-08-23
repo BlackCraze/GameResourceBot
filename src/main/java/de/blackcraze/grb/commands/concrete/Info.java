@@ -1,4 +1,4 @@
- package de.blackcraze.grb.commands.concrete;
+package de.blackcraze.grb.commands.concrete;
 
 import de.blackcraze.grb.commands.BaseCommand;
 import de.blackcraze.grb.core.Speaker;
