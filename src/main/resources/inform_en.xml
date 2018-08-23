@@ -5,22 +5,12 @@
 	<entry key="ADDED">Added</entry>
 	<entry key="BYE_MSG">I am going offline now. I will be back as soon as possible.</entry>
 	<entry key="DELETED">Deleted</entry>
-	<entry key="INFO">I am a little bot who helps you coordinate your Discord guild better! Specifically, I have been designed to assist guilds who play the mobile game "Deep Town".</entry>
 	<entry key="INIT">Connection established! Listening for prefix `%s`.</entry>
 	<entry key="PONG">Pong!</entry>
 	<entry key="UP_TO_DATE">The user database is up to date.</entry>
-	<!-- -->
-	<!-- The keys above are arranged in alphabetical order. The credits are listed last, below. -->
-	<entry key="CREDITS">This bot was created by BlackCraze, with help from Dangercrow and firewaran.
-Greek translations by ThatGreekGuy.
-Portuguese translations by Benur21.
-Documentation assistance by PellaAndroid.
-i18n coordination by PellaAndroid.
-
-Codebase:
-https://github.com/BlackCraze/GameResourceBot/
-
-Discord server (for developers and users):
-https://discord.gg/e77yjxj</entry>
+	<entry key="WHY_ARE_YOU_HERE">If you don't understand anything below, then you probably should avoid using this command altogether.</entry>
+	<!-- The keys "INFO" and "CREDITS" should appear here because they are informational in nature. But they don't.
+	They are in the help_en.xml file instead because it made more sense to display their text instead of help, and
+	it's easier to code the descriptive help system by keeping the text over there. -->
 </properties>
 <!-- @formatter:on -->

@@ -21,29 +21,8 @@ public class NativeStatus implements BaseCommand {
     public void run(Scanner scanner, Message message) {
         StringBuilder sb = new StringBuilder();
         Locale locale = getResponseLocale(message);
-        /* BLACKCRAZE: I created headers for i18n here because this is a command that any user CAN use, even if they
-            probably won't. Instead of using %d within the strings, I kept your "append" format. Because of this,
-            several of the strings BEGIN with %n. My intent was to reduce clutter from the .append("\n") code.
-            If that won't work, then, obviously, you'll want to fix it.
-            Alternatively, your original code is here, in case you think we shouldn't bother with this one.
-            I still maintain my opinion, though, that we should translate anything that isn't exclusively in the logs.
-         */
-        sb.append(Resource.getHeader("JAVACPP", locale));
-        sb.append(Resource.getHeader("DEALLOCATORS", locale)).append(formatBytes(totalBytes()));
-        sb.append(Resource.getHeader("MAX_MEM_TRACKED", locale)).append(formatBytes(maxBytes()))
-                .append("\n");
-        try {
-            sb.append(Resource.getHeader("PHYS_MEM_INSTALLED", locale))
-                    .append(formatBytes(totalPhysicalBytes()));
-            sb.append(Resource.getHeader("MAX_PHYS_MEM", locale))
-                    .append(formatBytes(maxPhysicalBytes()));
-            sb.append(Resource.getHeader("PHYS_MEM_FREE", locale))
-                    .append(formatBytes(availablePhysicalBytes()));
-            sb.append(Resource.getHeader("PHYS_MEM_WHOLE", locale))
-                    .append(formatBytes(physicalBytes())).append("\n");
-        } catch (UnsatisfiedLinkError e) {
-            sb.append(Resource.getError("NO_PHYS_DATA", locale));
-        /* ORIGINAL VERSION OF PREVIOUS 9 LINES (WITH MINOR CORRECTIONS) BELOW
+        /* 2018-08-21: BLACKCRAZE: I reverted the code from my messed-up stuff that didn't work, anyway, to your
+        original code. I also added a new info line at the top of the output to satisfy me concerning i18n. ;-) */
         sb.append("JAVACPP:\n");
         sb.append("Memory tracked by deallocators: ").append(formatBytes(totalBytes()))
                 .append("\n");
@@ -62,8 +41,9 @@ public class NativeStatus implements BaseCommand {
                     .append(formatBytes(physicalBytes())).append("\n");
         } catch (UnsatisfiedLinkError e) {
             sb.append("No physical data available.");
-        */
         }
+        // Next line added by PellaAndroid to keep nosy users away from this command.
+        Speaker.say(message.getChannel(), Resource.getInfo("WHY_ARE_YOU_HERE", locale));
         Speaker.sayCode(message.getChannel(), sb.toString());
     }
 
