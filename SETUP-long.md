@@ -182,7 +182,7 @@ Every application on the Web requires a host. The host has several functions.
 
 1. Tab #2 - Same site, different page. Copy the link at the beginning of Step 3. Paste it into Tab #2 and go!
 	1. Create a name for GRB. Yes, again. This name is unique to Heroku. GRB will not use this name.
-	2. Heroku will use this name to keep track of our GRB in its filing cabinet. For this reason, the name must be unique. Be creative.
+	2. Heroku will use this name to keep track of our GRB in Heroku's filing cabinet. For this reason, the name must be unique. Be creative. We cannot stress this enough. BE CREATIVE.
 	3. Select a server region (USA or Europe).
 2. Tab #3
 	1. Scroll down to the section "Bot".
@@ -317,7 +317,7 @@ The Config Vars on Heroku are large and in charge. (That's why they're in ALL CA
 As mentioned in Step 3, a few of the Config Vars can be changed on Discord.  
 But everybody needs a break occasionally, and GRB is no different.
 
-Sometimes, GRB reboots. This could be because:
+Sometimes, GRB takes a break, meaning it reboots. This could be because:
 - you updated the source code to give it new features (Later. [Much later.](./README.md#updating-gameresourcebot)); or
 - you commanded it to shutdown and restart; or
 - it jolly well felt like it. So there.
@@ -326,4 +326,4 @@ The point is, whenever GRB restarts, it always needs to know what its Config Var
 
 Therefore, if you do change one of the Config Vars on Discord later, think about whether you need that change to be permanent or not. If you do, then you'll probably want to return to Heroku and update that Config Var to match your changing need. If you don't, then don't say we didn't warn you.
 
-[Click here to pick up where you left off.](#this-line-does-not-exist-you-are-not-reading-this-please-move-on)
+[Back to spot where you left off](#this-line-does-not-exist-you-are-not-reading-this-please-move-on)

@@ -35,10 +35,10 @@ public class Help implements BaseCommand {
     }
 
     /**
-     * @param locale the response locale
+     * @param locale: the response locale
      * @param helpResourceKey
-     * @return the help message text if it excists
-     * @throws MissingResourceException if the message key does not exist in the help message bundle
+     * @return the help message text if it exists.
+     * @throws MissingResourceException if the message key does not exist in the help message bundle.
      */
     private String getHelpFromResource(Locale locale, String helpResourceKey)
             throws MissingResourceException {
