@@ -22,7 +22,6 @@
 	<entry key="NO_COMMAND">No such command `%s`.</entry>
 	<entry key="NO_DATA">Sorry, nothing to see here. :-(</entry>
 	<entry key="ONLY_PNG_IMAGES">I can process only PNG images. One or more images submitted are in a different format.</entry>
-	<entry key="ONLY_TEXT">Only for text channels</entry>
 	<entry key="PUBLIC_COMMAND_ONLY">This command works only in the %s channel.</entry>
 	<entry key="RESOURCES_EMPTY">There is nothing here! Why don't you consider updating your resources?</entry>
 	<entry key="RESOURCE_AND_USER_UNKNOWN">I know neither a user nor a resource with that name.</entry>

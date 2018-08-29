@@ -21,7 +21,6 @@ public interface BaseCommand {
     void run(Scanner scanner, Message message);
 
     default String help(Message message) {
-        // NEXT 3 LINES CREATED BY @DANGERCROW TO MAKE DESCRIPTIVE HELP SYSTEM WORK
         String className = this.getClass().getSimpleName();
         String key = className.toUpperCase();
         return Resource.getHelp(key, getResponseLocale(message), BotConfig.getConfig().PREFIX,

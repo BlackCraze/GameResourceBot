@@ -92,13 +92,6 @@ public final class PrintUtils {
                 .appendHours().appendSuffix(Resource.getHeader("HOURS", locale)).appendSeparator(" ")//
                 .appendMinutes().appendSuffix(Resource.getHeader("MINUTES", locale)).appendSeparator(" ")//
                 .appendSeconds().appendSuffix(Resource.getHeader("SECONDS", locale))//
-                /* ORIGINAL VERSION OF PREVIOUS 5 LINES BELOW
-                .appendWeeks().appendSuffix("w").appendSeparator(" ")//
-                .appendDays().appendSuffix("d").appendSeparator(" ")//
-                .appendHours().appendSuffix("h").appendSeparator(" ")//
-                .appendMinutes().appendSuffix("m").appendSeparator(" ")//
-                .appendSeconds().appendSuffix("s")//
-                */
                 .toFormatter();
         String fullTimeAgo = formatter.print(duration.toPeriod(PeriodType.yearMonthDayTime()));
         return Arrays.stream(fullTimeAgo.split(" ")).limit(2).collect(Collectors.joining(" "));

@@ -92,12 +92,10 @@ public class CommandUtils {
             if (scanner.hasNext(BotConfig.getConfig().PREFIX)) {
                 scanner.next();
             }
-            // Why does the next line have a + in it? Wouldn't it do the same thing without it?
-            System.out.println("Mentioned with prefix: " + "direct message.");
+            System.out.println("Mentioned with prefix: [direct message]");
         } else {
             String botPrefix = scanner.next();
-            // Added punctuation to next line.
-            System.out.println("Mentioned with prefix: " + botPrefix + ".");
+            System.out.println("Mentioned with prefix: " + botPrefix);
         }
         return Optional.of(scanner);
     }
