@@ -4,18 +4,12 @@
 files: [
  {
   "source" : "/*_i18n.properties",
-  "translation" : "/%file_name%_%locale%.%file_extension%",
+  "translation" : "/%file_name%_%two_letters_code%.%file_extension%",
   "type" : "properties",
   "escape_quotes" : 0,
   "update_option": "update_as_unapproved",
-  "new_names": {
-   "_i18n": ""
-  },
   "languages_mapping": {
-   "locale": {
-    "es-ES": "es",
-    "hy-AM": "hy",
-    "pt-PT": "pt",
+   "two_letters_code": {
     "zh-CN": "zh_CN",
     "zh-TW": "zh_TW"
    }
