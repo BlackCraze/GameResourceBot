@@ -7,9 +7,15 @@ files: [
   "translation" : "/%file_name%_%two_letters_code%.%file_extension%",
   "type" : "properties",
   "escape_quotes" : 0,
-  "translation_replace": [
-   "_iArray8n": "",
-   "_zh.properties": "_%locale_with_underscore%.properties"
-  ]
+  "update_option": "update_as_unapproved",
+  "languages_mapping": {
+   "locale": {
+    "es-ES": "es",
+    "hy-AM": "hy",
+    "pt-PT": "pt",
+    "zh-CN": "zh_CN",
+    "zh-TW": "zh_TW"
+   }
+  }
  }
 ]
