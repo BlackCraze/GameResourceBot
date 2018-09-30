@@ -1,12 +1,13 @@
 "base_path": "/src/main/resources"
 "preserve_hierarchy": true
 
-"files":  [
-  { "source": "/*_i18n.properties",
-    "translation": "%original_path%/crowdin/%file_name%_%two_letters_code%.%file_extension%",
-    "update_option" : "update_as_unapproved",
-    "translation_replace": [
-      "_i18n" : "",
-      "_zh.properties" : "_%locale_with_underscore%.properties"
-    ],
-    
+"files": [
+{ "source": "/*_i18n.properties",
+  "translation": "%original_path%/crowdin/%file_name%_%two_letters_code%.%file_extension%",
+  "update_option": "update_as_unapproved",
+  "translation_replace": [
+    "_i18n": "",
+    "_zh.properties": "_%locale_with_underscore%.properties"
+  ]
+}
+]
