@@ -10,7 +10,7 @@ files: [
   "update_option": "update_as_unapproved",
   "new_names": {
    "_i18n": ""
-  }
+  },
   "languages_mapping": {
    "locale": {
     "es-ES": "es",
