@@ -1,5 +1,3 @@
 files:
-  - source: /src/main/resources/*.properties
-    ignore:
-      - /src/main/resources/log4j.properties
-    translation: '%original_path%/trans/%original_file_name%'
+  - source: /**/*_en.properties
+    translation: '%original_path%/%two_letters_code%/%original_file_name%'
