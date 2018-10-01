@@ -21,8 +21,6 @@ public class NativeStatus implements BaseCommand {
     public void run(Scanner scanner, Message message) {
         StringBuilder sb = new StringBuilder();
         Locale locale = getResponseLocale(message);
-        /* 2018-08-21: BLACKCRAZE: I reverted the code from my messed-up stuff that didn't work, anyway, to your
-        original code. I also added a new info line at the top of the output to satisfy me concerning i18n. ;-) */
         sb.append("JAVACPP:\n");
         sb.append("Memory tracked by deallocators: ").append(formatBytes(totalBytes()))
                 .append("\n");

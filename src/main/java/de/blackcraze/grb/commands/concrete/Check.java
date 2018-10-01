@@ -29,12 +29,7 @@ public class Check implements BaseCommand {
         MessageChannel channel = message.getChannel();
         Locale locale = getResponseLocale(message);
         if (!nameOptional.isPresent()) {
-            // Didn't you define this variable already?
             Mate mate = getMateDao().getOrCreateMate(message, locale);
-            /*
-             * ORIGINAL VERSION OF PREVIOUS LINE BELOW Mate mate =
-             * getMateDao().getOrCreateMate(message, getResponseLocale(message));
-             */
             List<Mate> mates = Collections.singletonList(mate);
             Speaker.sayCode(channel, prettyPrintMate(mates, locale));
         } else {
