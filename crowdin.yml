@@ -1,0 +1,12 @@
+base_path: /src/main/resources
+preserve_hierarchy: true
+files:
+  - source: /*_i18n.properties
+    translation: /%file_name%_%two_letters_code%.%file_extension%
+    type: properties
+    escape_quotes: 0
+    update_option: update_as_unapproved
+    languages_mapping:
+      two_letters_code:
+        zh-CN: zh_CN
+        zh-TW: zh_TW
