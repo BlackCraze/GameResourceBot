@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Updating GameResourceBot (MS Windows)
 ######  v1.0, by PellaAndroid
 
