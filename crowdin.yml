@@ -6,7 +6,8 @@
   "fr",
   "pt-PT"
 ]
-"files": {
+"files": [
+{
   "source": "/*.properties",
   "translation": "/crowdin/%file_name%_%two_letters_code%.%file_extension%",
   "ignore": [
@@ -24,3 +25,4 @@
     ]
   }
 }
+]
