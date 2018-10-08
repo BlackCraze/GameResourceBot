@@ -1,8 +1,16 @@
 preserve_hierarchy: true
+"export_languages": [
+    "de",
+    "es-ES",
+    "fr",
+    "pt-PT"
+]
+
+
 files:
   - source: /src/main/resources/*.properties
     translation: >-
-      /src/main/resources/crowdin/%file_name%_%two_letters_code%.%file_extension%
+      /src/main/resources/crowdin/%file_name%_%osx_locale%.%file_extension%
     ignore:
       - '*_??.properties'
       - log4j.properties
@@ -10,6 +18,6 @@ files:
     escape_quotes: 0
     update_option: update_as_unapproved
     languages_mapping:
-      two_letters_code:
+      osx_locale:
         zh-CN: zh_CN
         zh-TW: zh_TW
