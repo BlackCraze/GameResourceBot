@@ -12,17 +12,17 @@
   "translation": "/src/main/resources/crowdin/%file_name%_%two_letters_code%.%file_extension%",
   "ignore": [
     "/*_??.properties",
-    "/log4j.properties",W
+    "/log4j.properties",
     "/crowdin"
   ],
   "type": "properties",
   "escape_quotes": 0,
   "update_option": "update_as_unapproved",
   "languages_mapping": {
-    "two_letters_code": [
+    "two_letters_code": {
       "zh-CN": "zh_CN",
       "zh-TW": "zh_TW"
-    ]
+    }
   }
 }
 ]
