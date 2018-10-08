@@ -1,10 +1,11 @@
 "preserve_hierarchy": true
-"export_languages": [ #This disables export of the currently untranslated languages.
-  "de",
-  "es-ES",
-  "fr",
-  "pt-PT"
-]
+# Next line disables export of the currently untranslated languages.
+"export_languages": {
+                      "de",
+                      "es-ES",
+                      "fr",
+                      "pt-PT"
+}
 
 "files": [
 {
@@ -12,8 +13,7 @@
   "translation": "/src/main/resources/crowdin/%file_name%_%two_letters_code%.%file_extension%",
   "ignore": [
     "*_??.properties",
-    "log4j.properties",
-    "/src/main/resources/crowdin"
+    "log4j.properties"
   ],
   "type": "properties",
   "escape_quotes": 0,
