@@ -1,12 +1,13 @@
-"base_path" : "/src/main/resources"
-"preserve_hierarchy" : true
-"export_languages" : [ #This disables export of the currently untranslated languages.
+"base_path": "/src/main/resources"
+"preserve_hierarchy": true
+"export_languages": [ #This disables export of the currently untranslated languages.
   "de",
   "es-ES",
   "fr",
   "pt-PT"
- ]
-"files" : {
+]
+"files": [
+{
   "source": "/*.properties",
   "translation": "/crowdin/%file_name%_%two_letters_code%.%file_extension%",
   "ignore": [
@@ -24,3 +25,4 @@
     ]
   }
 }
+]
