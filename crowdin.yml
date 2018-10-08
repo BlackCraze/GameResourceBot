@@ -11,9 +11,9 @@
   "source": "/src/main/resources/*.properties",
   "translation": "/src/main/resources/crowdin/%file_name%_%two_letters_code%.%file_extension%",
   "ignore": [
-    "/*_??.properties",
-    "/log4j.properties",
-    "/crowdin"
+    "*_??.properties",
+    "log4j.properties",
+    "/src/main/resources/crowdin"
   ],
   "type": "properties",
   "escape_quotes": 0,
