@@ -10,7 +10,7 @@
 "files": [
 {
   "source": "/src/main/resources/*.properties",
-  "translation": "/src/main/resources/crowdin/%file_name%_%two_letters_code%.%file_extension%",
+  "translation": "/src/main/resources/crowdin/%file_name%_%osx_locale%.%file_extension%",
   "ignore": [
     "*_??.properties",
     "log4j.properties"
@@ -19,7 +19,7 @@
   "escape_quotes": 0,
   "update_option": "update_as_unapproved",
   "languages_mapping": {
-    "two_letters_code": {
+    "osx_locale": {
       "zh-CN": "zh_CN",
       "zh-TW": "zh_TW"
     }
