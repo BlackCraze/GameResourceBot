@@ -15,7 +15,7 @@ public class Resource {
 
     public static String guessItemKey(String item, Locale locale) {
         ResourceBundle resourceBundle =
-                ResourceBundle.getBundle("items", locale, new XMLResourceBundleControl());
+                ResourceBundle.getBundle("items", locale, new ResourceBundleControl());
 
         String itemTyped = correctItemName(item);
         String bestMatch = null;
@@ -43,7 +43,7 @@ public class Resource {
 
     public static String guessHelpKey(String key, Locale locale) {
         ResourceBundle resourceBundle =
-                ResourceBundle.getBundle("help", locale, new XMLResourceBundleControl());
+                ResourceBundle.getBundle("help", locale, new ResourceBundleControl());
         String keyTyped = StringUtils.upperCase(key);
         String bestMatch = null;
         int diffScore = Integer.MAX_VALUE;
@@ -103,7 +103,7 @@ public class Resource {
 
     private static String getResource(String key, Locale locale, String baseName, Object... args) {
         ResourceBundle resourceBundle =
-                ResourceBundle.getBundle(baseName, locale, new XMLResourceBundleControl());
+                ResourceBundle.getBundle(baseName, locale, new ResourceBundleControl());
         String string = resourceBundle.getString(key);
         if (args != null && args.length > 0) {
             return String.format(string, args);
