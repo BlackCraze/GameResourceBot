@@ -1,5 +1,5 @@
 # Setting Up GameResourceBot - long version
-######  v1.3, by PellaAndroid
+######  v1.2, by PellaAndroid
 
 *GameResourceBot has a nickname. It likes to be called "GRB", so we call it that most of the time.*
 
@@ -201,7 +201,6 @@ Every application on the Web requires a host. The host has several functions.
 			2. The others can ~~deal with it~~ ~~learn everyone else's language~~ change their own language settings later.
 				- de - Deutsch (German)
 				- en - English
-				- es - Español (Spanish)
 				- pt - Português (Portuguese)
 				- More languages coming soon!
 		- §§ OCR_RESULT - After it processes a screenshot, GRB will list the results so you can verify they are correct. If you change this to "off", it won't.
