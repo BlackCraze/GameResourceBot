@@ -14,4 +14,6 @@ public interface IStockTypeDao extends IBaseDao<StockType> {
 
     List<StockType> findByNameLike(String name, Locale locale);
 
+    void trimNames();
+
 }

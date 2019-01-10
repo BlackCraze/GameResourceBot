@@ -14,6 +14,14 @@ import de.blackcraze.grb.model.entity.StockType;
 import de.blackcraze.grb.util.StockTypeComparator;
 
 public class StockTypeDaoBean extends BaseDaoBean<StockType> implements IStockTypeDao {
+    
+    
+    @Override
+    public void trimNames() {
+        em.getTransaction().begin();
+        em.createQuery("update StockType set name = trim(name)").executeUpdate();
+        em.getTransaction().commit();
+    }
 
     @SuppressWarnings("unchecked")
     @Override
