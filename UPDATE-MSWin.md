@@ -4,7 +4,7 @@
 *GameResourceBot has a nickname. It likes to be called "GRB", so we call it that most of the time.*
 
 ***FIRST-TIMERS: SKIP THIS PART***  
-If you previously completed all steps in this guide and need to update again, please [skip to STEP 4](#step-4-synchronise-your-repository-aka-the-actual-update-process).  
+If you previously completed all steps in this guide and need to update again, please [skip to STEP 4](#step-4-synchronise-your-repository-the-actual-update-process).  
 ***FIRST-TIMERS: SKIP THIS PART***
 
 ### CONTENTS
@@ -14,7 +14,7 @@ If you previously completed all steps in this guide and need to update again, pl
     (1) [STEP 1. INSTALL GITHUB DESKTOP](#step-1-install-github-desktop)  
     (2) [STEP 2. LOG IN TO GITHUB](#step-2-log-in-to-github)  
     (3) [STEP 3. CLONE YOUR REPOSITORY](#step-3-clone-your-repository)  
-    (4) [STEP 4. SYNC YOUR REPOSITORY](#step-4-synchronise-your-repository-aka-the-actual-update-process)
+    (4) [STEP 4. SYNC YOUR REPOSITORY](#step-4-synchronise-your-repository-the-actual-update-process)
 
 ## About This Guide
 The GRB setup process you already encountered is the same for everyone. The GRB update process here is not.  
@@ -100,7 +100,7 @@ Local path: The default local path begins with your user directory, then adds `\
 
 Congratulations! The hardest part is done. In the next step, we will synchronise your forked repository with the master repository. For future updates, the next step is the only step you will need to do.
 
-#### STEP 4: SYNCHRONISE YOUR REPOSITORY  (a.k.a. THE ACTUAL UPDATE PROCESS)
+#### STEP 4: SYNCHRONISE YOUR REPOSITORY  (THE ACTUAL UPDATE PROCESS)
 1. Start or Switch to GitHub Desktop (if needed).
 	1. Below the menu bar, second button should read: Current branch: master
 		1. If it does not, click it and select "master".
