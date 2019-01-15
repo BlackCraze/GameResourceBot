@@ -77,7 +77,7 @@ public class Clear implements BaseCommand {
             throw new IllegalArgumentException();
         } else if (time.matches("^\\d+\\s?h?$")) {
             if (time.matches("^\\d+$")) {
-                String info = Resource.getError("CLEAR_OLD_MISSING_UNIT", locale, time);
+                String info = Resource.getError("CLEAR_OLD_MISSING_UNIT", locale, time, Resource.getHeader("HOURS", locale));
                 Speaker.say(message.getChannel(), info);
             }
             int hours = Integer.valueOf(time.substring(0, time.length() - 1));
