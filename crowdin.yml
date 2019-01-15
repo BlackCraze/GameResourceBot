@@ -1,10 +1,12 @@
 preserve_hierarchy: true
 # The next line restricts exported languages to those actively being translated.
 "export_languages": {
+                      "az",
                       "de",
                       "es-ES",
                       "fr",
-                      "pt-PT"
+                      "pt-PT",
+                      "ru"
 }
 
 files:
