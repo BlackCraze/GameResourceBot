@@ -101,7 +101,8 @@
 	<entry key="POLISHED_SAPPHIRE">Safira Polida</entry>
 	<entry key="POLISHED_TOPAZ">Topã¡Zio Polido</entry>
 	<entry key="PUMPKIN">Abóbora</entry>
-	<entry key="RED_CANDY">Doce Vermelho</entry>
+    <entry key="PUMPKIN_TORCH">Tocha de Abóbora</entry>
+    <entry key="RED_CANDY">Doce Vermelho</entry>
 	<entry key="REFINED_OIL">Petróleo Refinado</entry>
 	<entry key="RESEARCH_BEAM">Laser de Pesquisa</entry>
 	<entry key="ROCKET_TYPE_A">Foguete Tipo A</entry>

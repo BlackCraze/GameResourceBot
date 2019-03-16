@@ -97,7 +97,8 @@
 	<entry key="POLISHED_SAPPHIRE">Safiro Pulido</entry>
 	<entry key="POLISHED_TOPAZ">Topacio Pulido</entry>
 	<entry key="PUMPKIN">Calabaza</entry>
-	<entry key="RED_CANDY">Caramelo Rojo</entry>
+    <entry key="PUMPKIN_TORCH">Antorcha de Calabaza</entry>
+    <entry key="RED_CANDY">Caramelo Rojo</entry>
 	<entry key="REFINED_OIL">Petróleo Refinado</entry>
 	<entry key="RESEARCH_BEAM">Rayo de Investigación</entry>
 	<entry key="ROCKET_TYPE_A">Cohete de Tipo A</entry>

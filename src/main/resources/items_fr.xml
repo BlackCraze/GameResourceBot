@@ -97,7 +97,8 @@
 	<entry key="POLISHED_SAPPHIRE">Saphir Poli</entry>
 	<entry key="POLISHED_TOPAZ">Topaze Poli</entry>
 	<entry key="PUMPKIN">Citrouille</entry>
-	<entry key="RED_CANDY">Bonbon Rouge</entry>
+    <entry key="PUMPKIN_TORCH">Torche Citrouille</entry>
+    <entry key="RED_CANDY">Bonbon Rouge</entry>
 	<entry key="REFINED_OIL">Pétrole Raffiné</entry>
 	<entry key="RESEARCH_BEAM">Rechercher Rayon</entry>
 	<entry key="ROCKET_TYPE_A">Fusée de Type A</entry>

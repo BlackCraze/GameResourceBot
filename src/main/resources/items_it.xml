@@ -97,7 +97,8 @@
 	<entry key="POLISHED_SAPPHIRE">Zaffiro Lucidato</entry>
 	<entry key="POLISHED_TOPAZ">Topazio Lucidato</entry>
 	<entry key="PUMPKIN">Zucca</entry>
-	<entry key="RED_CANDY">Dolcetto Rosso</entry>
+    <entry key="PUMPKIN_TORCH">Torcia Zucca</entry>
+    <entry key="RED_CANDY">Dolcetto Rosso</entry>
 	<entry key="REFINED_OIL">Petrolio Raffinato</entry>
 	<entry key="RESEARCH_BEAM">Raggio di Ricerca</entry>
 	<entry key="ROCKET_TYPE_A">Razzo di Tipo A</entry>

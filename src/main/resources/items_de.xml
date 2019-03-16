@@ -97,7 +97,8 @@
 	<entry key="POLISHED_SAPPHIRE">Polierter Saphir</entry>
 	<entry key="POLISHED_TOPAZ">Polierter Topas</entry>
 	<entry key="PUMPKIN">Kürbis</entry>
-	<entry key="RED_CANDY">Rote Süßigkeit</entry>
+    <entry key="PUMPKIN_TORCH">Kürbisfackel</entry>
+    <entry key="RED_CANDY">Rote Süßigkeit</entry>
 	<entry key="REFINED_OIL">Raffiniertes Öl</entry>
 	<entry key="RESEARCH_BEAM">Forschungsstrahl</entry>
 	<entry key="ROCKET_TYPE_A">Rakete Typ A</entry>
