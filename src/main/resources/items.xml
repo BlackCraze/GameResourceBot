@@ -8,6 +8,7 @@
 	<entry key="ALUMINIUM">Aluminium</entry>
 	<entry key="ALUMINIUM_BAR">Aluminium Bar</entry>
 	<entry key="ALUMINIUM_BOTTLE">Aluminium Bottle</entry>
+	<entry key="ALUMINIUM_TANK">Aluminium Tank</entry>
 	<entry key="AMBER">Amber</entry>
 	<entry key="AMBER_BRACELET">Amber Bracelet</entry>
 	<entry key="AMBER_CHARGER">Amber Charger</entry>
@@ -17,7 +18,7 @@
 	<entry key="BATTERY">Battery</entry>
 	<entry key="BOMB">Bomb</entry>
 	<entry key="CANDY_BATCH">Candy Batch</entry>
-	<entry key="CARVED_PUMPKIN">Carved Pumkin</entry>
+	<entry key="CARVED_PUMPKIN">Carved Pumpkin</entry>
 	<entry key="CHIPSET">Chipset</entry>
 	<entry key="CIRCUIT">Circuits</entry>
 	<entry key="CLEAN_WATER">Clean Water</entry>
@@ -25,7 +26,7 @@
 	<entry key="COMPRESSOR">Compressor</entry>
 	<entry key="COPPER">Copper</entry>
 	<entry key="COPPER_BAR">Copper Bar</entry>
-	<entry key="COPPER_KNIVE">Copper Knive</entry>
+	<entry key="COPPER_KNIVE">Copper Knife</entry>
 	<entry key="COPPER_NAIL">Copper Nail</entry>
 	<entry key="COPPER_WIRE">Wire</entry>
 	<entry key="COSMIC_ICE">Cosmic Ice</entry>
@@ -39,6 +40,7 @@
 	<entry key="EMERALD_RING">Emerald Ring</entry>
 	<entry key="ENHANCED_HELIUM_3">Enhanced Helium 3</entry>
 	<entry key="ETHANOL">Ethanol</entry>
+	<entry key="GAS_CYLINDER">Gas Cylinder</entry>
 	<entry key="GEAR">Gear</entry>
 	<entry key="GLASS">Glass</entry>
 	<entry key="GLASS_FLASK">Lab Flask</entry>
@@ -59,6 +61,7 @@
 	<entry key="IRON">Iron</entry>
 	<entry key="IRON_BAR">Iron Bar</entry>
 	<entry key="LAMP">Lamp</entry>
+	<entry key="LCD_MONITOR">LCD Monitor</entry>
 	<entry key="LIANA">Liana</entry>
 	<entry key="LIANA_SEED">Liana Seed</entry>
 	<entry key="LIQUID_NITROGEN">Liquid Nitrogen</entry>
@@ -70,6 +73,8 @@
 	<entry key="MAGNETITE_BAR">Magnetite Bar</entry>
 	<entry key="MAGNETITE_ORE">Magnetite Ore</entry>
 	<entry key="MAYAN_CALENDAR">Maya Calendar</entry>
+	<entry key="MIRROR">Mirror</entry>
+	<entry key="MIRROR_LASER">Mirror Laser</entry>
 	<entry key="MOTHERBOARD">Motherboard</entry>
 	<entry key="NITROGEN">Nitrogen</entry>
 	<entry key="OBSIDIAN">Obsidian</entry>
@@ -77,6 +82,7 @@
 	<entry key="OIL">Oil</entry>
 	<entry key="OPTIC_FIBER">Optic Fiber</entry>
 	<entry key="OXYGEN">Oxygen</entry>
+	<entry key="OXYGEN_CYLINDER">Oxygen Cylinder</entry>
 	<entry key="PLASTIC">Plastic Plate</entry>
 	<entry key="PLATINUM">Platinum</entry>
 	<entry key="POLISHED_ALEXANDRITE">Polished Alexandrite</entry>
@@ -89,7 +95,8 @@
 	<entry key="POLISHED_SAPPHIRE">Polished Sapphire</entry>
 	<entry key="POLISHED_TOPAZ">Polished Topaz</entry>
 	<entry key="PUMPKIN">Pumpkin</entry>
-	<entry key="RED_CANDY">Red Candy</entry>
+    <entry key="PUMPKIN_TORCH">Pumpkin Torch</entry>
+    <entry key="RED_CANDY">Red Candy</entry>
 	<entry key="REFINED_OIL">Refined Oil</entry>
 	<entry key="RESEARCH_BEAM">Research Beam</entry>
 	<entry key="ROCKET_TYPE_A">Rocket Type A</entry>
@@ -97,6 +104,7 @@
 	<entry key="RUBBER">Rubber</entry>
 	<entry key="RUBY">Ruby</entry>
 	<entry key="SAPPHIRE">Sapphire</entry>
+	<entry key="SAPPHIRE_CRYSTAL_GLASS">Sapphire Crystal Glass</entry>
 	<entry key="SEED">Tree Seed</entry>
 	<entry key="SHARDS_OF_EMPATHY">Shards of Empathy</entry>
 	<entry key="SHARDS_OF_ENTROPY">Shards of Entropy</entry>
@@ -116,6 +124,7 @@
 	<entry key="SOLAR_PANEL">Solar Panel</entry>
 	<entry key="SOLID_PROPELLANT">Solid Propellant</entry>
 	<entry key="STEEL_BAR">Steel Bar</entry>
+	<entry key="STEEL_PIPE">Steel Pipe</entry>
 	<entry key="STEEL_PLATE">Steel Plate</entry>
 	<entry key="STONE_OF_EMPATHY">Stone of Empathy</entry>
 	<entry key="STONE_OF_ENTROPY">Stone of Entropy</entry>

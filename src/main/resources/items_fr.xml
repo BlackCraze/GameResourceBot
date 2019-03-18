@@ -10,6 +10,7 @@
 	<entry key="ALUMINIUM">Aluminium</entry>
 	<entry key="ALUMINIUM_BAR">Lingot d'Aluminium</entry>
 	<entry key="ALUMINIUM_BOTTLE">Bouteille en Aluminium</entry>
+	<entry key="ALUMINIUM_TANK">Réservoir d'Aluminium</entry>
 	<entry key="AMBER">Ambre</entry>
 	<entry key="AMBER_BRACELET">Bracelet en Ambre</entry>
 	<entry key="AMBER_CHARGER">Chargeur en Ambre</entry>
@@ -41,6 +42,7 @@
 	<entry key="EMERALD_RING">Bague en Émeraude</entry>
 	<entry key="ENHANCED_HELIUM_3">Hélium 3 Amélioré</entry>
 	<entry key="ETHANOL">Éthanol</entry>
+	<entry key="GAS_CYLINDER">Bouteille de Gaz</entry>
 	<entry key="GEAR">Engrenage</entry>
 	<entry key="GLASS">Verre</entry>
 	<entry key="GLASS_FLASK">Flasque de Labo</entry>
@@ -61,6 +63,7 @@
 	<entry key="IRON">Fer</entry>
 	<entry key="IRON_BAR">Lingot de Fer</entry>
 	<entry key="LAMP">Ampoule</entry>
+	<entry key="LCD_MONITOR">LCD Monitor</entry>
 	<entry key="LIANA">Liane</entry>
 	<entry key="LIANA_SEED">Graine de Liane</entry>
 	<entry key="LIQUID_NITROGEN">Azote Liquide</entry>
@@ -72,6 +75,8 @@
 	<entry key="MAGNETITE_BAR">Barre de Magnétite</entry>
 	<entry key="MAGNETITE_ORE">Minerai de Magnétite</entry>
 	<entry key="MAYAN_CALENDAR">Calendrier Maya</entry>
+	<entry key="MIRROR">Miroir</entry>
+	<entry key="MIRROR_LASER">Laser à Miroir</entry>
 	<entry key="MOTHERBOARD">Carte Mère</entry>
 	<entry key="NITROGEN">Azote</entry>
 	<entry key="OBSIDIAN">Obsidienne</entry>
@@ -79,6 +84,7 @@
 	<entry key="OIL">Pétrole</entry>
 	<entry key="OPTIC_FIBER">Câble en Fibre Optique</entry>
 	<entry key="OXYGEN">Oxygène</entry>
+	<entry key="OXYGEN_CYLINDER">Bouteille d'Oxygène</entry>
 	<entry key="PLASTIC">Plastique</entry>
 	<entry key="PLATINUM">Platine</entry>
 	<entry key="POLISHED_ALEXANDRITE">Alexandrite Polie</entry>
@@ -91,7 +97,8 @@
 	<entry key="POLISHED_SAPPHIRE">Saphir Poli</entry>
 	<entry key="POLISHED_TOPAZ">Topaze Poli</entry>
 	<entry key="PUMPKIN">Citrouille</entry>
-	<entry key="RED_CANDY">Bonbon Rouge</entry>
+    <entry key="PUMPKIN_TORCH">Torche Citrouille</entry>
+    <entry key="RED_CANDY">Bonbon Rouge</entry>
 	<entry key="REFINED_OIL">Pétrole Raffiné</entry>
 	<entry key="RESEARCH_BEAM">Rechercher Rayon</entry>
 	<entry key="ROCKET_TYPE_A">Fusée de Type A</entry>
@@ -99,6 +106,7 @@
 	<entry key="RUBBER">Caoutchouc</entry>
 	<entry key="RUBY">Rubis</entry>
 	<entry key="SAPPHIRE">Saphir</entry>
+	<entry key="SAPPHIRE_CRYSTAL_GLASS">Verre Saphir</entry>
 	<entry key="SEED">Graine</entry>
 	<entry key="SHARDS_OF_EMPATHY">Éclats d'Empathie</entry>
 	<entry key="SHARDS_OF_ENTROPY">Éclats d'Entropie</entry>
@@ -118,6 +126,7 @@
 	<entry key="SOLAR_PANEL">Panneau Solaire</entry>
 	<entry key="SOLID_PROPELLANT">Carburant Solide</entry>
 	<entry key="STEEL_BAR">Lingot d'Acier</entry>
+	<entry key="STEEL_PIPE">Tuyau en Acier</entry>
 	<entry key="STEEL_PLATE">Plaque d'Acier</entry>
 	<entry key="STONE_OF_EMPATHY">Pierre d'Empathie</entry>
 	<entry key="STONE_OF_ENTROPY">Pierre d'Entropie</entry>

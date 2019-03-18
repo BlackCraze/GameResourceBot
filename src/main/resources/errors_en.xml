@@ -6,7 +6,7 @@
 	<entry key="CANT_DELETE_MESSAGES">I can't delete messages here. No one gave me permission. :'(</entry>
 	<entry key="CLEAR_OLD_MISSING_FORMAT">Yeah? Okay, how old? Please specify a time limit.</entry>
 	<entry key="CLEAR_OLD_UNKNOWN_UNIT">Hey, I'm pretty busy back here. Would you convert that to whole hours for me, please?</entry>
-	<entry key="CLEAR_OLD_MISSING_UNIT">I'll assume you meant %sh. Done.</entry>
+	<entry key="CLEAR_OLD_MISSING_UNIT">I'll assume you meant %s%s. Done.</entry>
 	<entry key="COLUMN_MISMATCH">The number of header columns does not match the number of data columns.</entry>
 	<entry key="DO_NOT_KNOW_ABOUT">I do not know anything about this: %s</entry>
 	<entry key="ERROR_UNKNOWN">Ooooops... I found an error. Please don't beat me! --> "%s"</entry>

@@ -10,6 +10,7 @@
 	<entry key="ALUMINIUM">Alluminio</entry>
 	<entry key="ALUMINIUM_BAR">Lingotto di Alluminio</entry>
 	<entry key="ALUMINIUM_BOTTLE">Bottiglia di Alluminio</entry>
+	<entry key="ALUMINIUM_TANK">Serbatoio di Alluminio</entry>
 	<entry key="AMBER">Ambra</entry>
 	<entry key="AMBER_BRACELET">Bracciale d'Ambra</entry>
 	<entry key="AMBER_CHARGER">Caricatore Ambra</entry>
@@ -41,6 +42,7 @@
 	<entry key="EMERALD_RING">Anello di Smeraldo</entry>
 	<entry key="ENHANCED_HELIUM_3">Elio-3 Potenziato</entry>
 	<entry key="ETHANOL">Etanolo</entry>
+	<entry key="GAS_CYLINDER">Bombola di Gas</entry>
 	<entry key="GEAR">Ingranaggio</entry>
 	<entry key="GLASS">Vetro</entry>
 	<entry key="GLASS_FLASK">Beuta</entry>
@@ -61,6 +63,7 @@
 	<entry key="IRON">Ferro</entry>
 	<entry key="IRON_BAR">Lingotto di Ferro</entry>
 	<entry key="LAMP">Lampada</entry>
+	<entry key="LCD_MONITOR">Monitor LCD</entry>
 	<entry key="LIANA">Liana</entry>
 	<entry key="LIANA_SEED">Seme di Liana</entry>
 	<entry key="LIQUID_NITROGEN">Azoto Liquido</entry>
@@ -72,6 +75,8 @@
 	<entry key="MAGNETITE_BAR">Barra di Magnetite</entry>
 	<entry key="MAGNETITE_ORE">Blocco di Magnetite</entry>
 	<entry key="MAYAN_CALENDAR">Calendario Maya</entry>
+	<entry key="MIRROR">Specchio</entry>
+	<entry key="MIRROR_LASER">Laser Specchio</entry>
 	<entry key="MOTHERBOARD">Scheda Madre</entry>
 	<entry key="NITROGEN">Azoto</entry>
 	<entry key="OBSIDIAN">Ossidiana</entry>
@@ -79,6 +84,7 @@
 	<entry key="OIL">Petrolio</entry>
 	<entry key="OPTIC_FIBER">Cavo di Fibra Ottica</entry>
 	<entry key="OXYGEN">Ossigeno</entry>
+	<entry key="OXYGEN_CYLINDER">Bombola di Ossigeno</entry>
 	<entry key="PLASTIC">Plastica</entry>
 	<entry key="PLATINUM">Platino</entry>
 	<entry key="POLISHED_ALEXANDRITE">Alessandrite Lucidata</entry>
@@ -91,7 +97,8 @@
 	<entry key="POLISHED_SAPPHIRE">Zaffiro Lucidato</entry>
 	<entry key="POLISHED_TOPAZ">Topazio Lucidato</entry>
 	<entry key="PUMPKIN">Zucca</entry>
-	<entry key="RED_CANDY">Dolcetto Rosso</entry>
+    <entry key="PUMPKIN_TORCH">Torcia Zucca</entry>
+    <entry key="RED_CANDY">Dolcetto Rosso</entry>
 	<entry key="REFINED_OIL">Petrolio Raffinato</entry>
 	<entry key="RESEARCH_BEAM">Raggio di Ricerca</entry>
 	<entry key="ROCKET_TYPE_A">Razzo di Tipo A</entry>
@@ -99,6 +106,7 @@
 	<entry key="RUBBER">Gomma</entry>
 	<entry key="RUBY">Rubino</entry>
 	<entry key="SAPPHIRE">Zaffiro</entry>
+	<entry key="SAPPHIRE_CRYSTAL_GLASS">Cristallo di Zaffiro</entry>
 	<entry key="SEED">Seme</entry>
 	<entry key="SHARDS_OF_EMPATHY">Frammenti di Empatia</entry>
 	<entry key="SHARDS_OF_ENTROPY">Frammenti di Entropia</entry>
@@ -118,6 +126,7 @@
 	<entry key="SOLAR_PANEL">Pannello Solare</entry>
 	<entry key="SOLID_PROPELLANT">Propellente Solido</entry>
 	<entry key="STEEL_BAR">Lingotto d'Acciaio</entry>
+	<entry key="STEEL_PIPE">Tubo d'Acciaio</entry>
 	<entry key="STEEL_PLATE">Piastra di Acciaio</entry>
 	<entry key="STONE_OF_EMPATHY">Pietra dell'Empatia</entry>
 	<entry key="STONE_OF_ENTROPY">Pietra dell'Entropia</entry>

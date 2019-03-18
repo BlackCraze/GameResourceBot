@@ -10,6 +10,7 @@
 	<entry key="ALUMINIUM">Aluminium</entry>
 	<entry key="ALUMINIUM_BAR">Aluminiumbarren</entry>
 	<entry key="ALUMINIUM_BOTTLE">Aluminiumflasche</entry>
+	<entry key="ALUMINIUM_TANK">Aluminiumtank</entry>
 	<entry key="AMBER">Bernstein</entry>
 	<entry key="AMBER_BRACELET">Bernsteinarmband</entry>
 	<entry key="AMBER_CHARGER">Bernstein-Auflader</entry>
@@ -41,6 +42,7 @@
 	<entry key="EMERALD_RING">Smaragdring</entry>
 	<entry key="ENHANCED_HELIUM_3">Verbessertes Helium 3</entry>
 	<entry key="ETHANOL">Ethanol</entry>
+	<entry key="GAS_CYLINDER">Gasflasche</entry>
 	<entry key="GEAR">Zahnrad</entry>
 	<entry key="GLASS">Glas</entry>
 	<entry key="GLASS_FLASK">Laborfläschchen</entry>
@@ -61,6 +63,7 @@
 	<entry key="IRON">Eisen</entry>
 	<entry key="IRON_BAR">Eisenbarren</entry>
 	<entry key="LAMP">Lampe</entry>
+	<entry key="LCD_MONITOR">LCD-Monitor</entry>
 	<entry key="LIANA">Liane</entry>
 	<entry key="LIANA_SEED">Lianensamen</entry>
 	<entry key="LIQUID_NITROGEN">Flüssiger Stickstoff</entry>
@@ -72,6 +75,8 @@
 	<entry key="MAGNETITE_BAR">Magnetit-Stange</entry>
 	<entry key="MAGNETITE_ORE">Magnetit-Erz</entry>
 	<entry key="MAYAN_CALENDAR">Maya-Kalender</entry>
+	<entry key="MIRROR">Spiegel</entry>
+	<entry key="MIRROR_LASER">Spiegellaser</entry>
 	<entry key="MOTHERBOARD">Motherboard</entry>
 	<entry key="NITROGEN">Stickstoff</entry>
 	<entry key="OBSIDIAN">Obsidian</entry>
@@ -79,6 +84,7 @@
 	<entry key="OIL">Öl</entry>
 	<entry key="OPTIC_FIBER">Glasfaserkabel</entry>
 	<entry key="OXYGEN">Sauerstoff</entry>
+	<entry key="OXYGEN_CYLINDER">Sauerstoffflasche</entry>
 	<entry key="PLASTIC">Plastik</entry>
 	<entry key="PLATINUM">Platin</entry>
 	<entry key="POLISHED_ALEXANDRITE">Polierter Alexandrit</entry>
@@ -91,7 +97,8 @@
 	<entry key="POLISHED_SAPPHIRE">Polierter Saphir</entry>
 	<entry key="POLISHED_TOPAZ">Polierter Topas</entry>
 	<entry key="PUMPKIN">Kürbis</entry>
-	<entry key="RED_CANDY">Rote Süßigkeit</entry>
+    <entry key="PUMPKIN_TORCH">Kürbisfackel</entry>
+    <entry key="RED_CANDY">Rote Süßigkeit</entry>
 	<entry key="REFINED_OIL">Raffiniertes Öl</entry>
 	<entry key="RESEARCH_BEAM">Forschungsstrahl</entry>
 	<entry key="ROCKET_TYPE_A">Rakete Typ A</entry>
@@ -99,6 +106,7 @@
 	<entry key="RUBBER">Gummi</entry>
 	<entry key="RUBY">Rubin</entry>
 	<entry key="SAPPHIRE">Saphir</entry>
+	<entry key="SAPPHIRE_CRYSTAL_GLASS">Saphirkristallglas</entry>
 	<entry key="SEED">Saatgut</entry>
 	<entry key="SHARDS_OF_EMPATHY">Scherben der Empathie</entry>
 	<entry key="SHARDS_OF_ENTROPY">Scherben der Entropie</entry>
@@ -118,6 +126,7 @@
 	<entry key="SOLAR_PANEL">Solaranlage</entry>
 	<entry key="SOLID_PROPELLANT">Fester Treibstoff</entry>
 	<entry key="STEEL_BAR">Stahlbarren</entry>
+	<entry key="STEEL_PIPE">Stahlrohr</entry>
 	<entry key="STEEL_PLATE">Stahlplatte</entry>
 	<entry key="STONE_OF_EMPATHY">Stein der Empathie</entry>
 	<entry key="STONE_OF_ENTROPY">Stein der Entropie</entry>

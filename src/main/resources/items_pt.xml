@@ -14,6 +14,7 @@
 	<entry key="ALUMINIUM">Alumínio</entry>
 	<entry key="ALUMINIUM_BAR">Barra de Alumínio</entry>
 	<entry key="ALUMINIUM_BOTTLE">Garrafa de Alumínio</entry>
+	<entry key="ALUMINIUM_TANK">Tanque de Alumínio</entry>
 	<entry key="AMBER">Âmber</entry>
 	<entry key="AMBER_BRACELET">Bracelete de Âmbar</entry>
 	<entry key="AMBER_CHARGER">Carregador de Âmbar</entry>
@@ -45,6 +46,7 @@
 	<entry key="EMERALD_RING">Anel de Esmeralda</entry>
 	<entry key="ENHANCED_HELIUM_3">Hélio-3 Aprimorado</entry>
 	<entry key="ETHANOL">Etanol</entry>
+	<entry key="GAS_CYLINDER">Cilindro de Gás</entry>
 	<entry key="GEAR">Engrenagem</entry>
 	<entry key="GLASS">Vidro</entry>
 	<entry key="GLASS_FLASK">Frasco de Laboratãrio</entry>
@@ -65,6 +67,7 @@
 	<entry key="IRON">Ferro</entry>
 	<entry key="IRON_BAR">Barra de Ferro</entry>
 	<entry key="LAMP">Lâmpada</entry>
+	<entry key="LCD_MONITOR">Monitor LCD</entry>
 	<entry key="LIANA">Cipã</entry>
 	<entry key="LIANA_SEED">Semente de Cipã</entry>
 	<entry key="LIQUID_NITROGEN">Nitrogênio Líquido</entry>
@@ -76,6 +79,8 @@
 	<entry key="MAGNETITE_BAR">Barra de Magnetita</entry>
 	<entry key="MAGNETITE_ORE">Minério de Magnetita</entry>
 	<entry key="MAYAN_CALENDAR">Calendário Maia</entry>
+	<entry key="MIRROR">Espelho</entry>
+	<entry key="MIRROR_LASER">Laser de Espelho</entry>
 	<entry key="MOTHERBOARD">Placa Mãe</entry>
 	<entry key="NITROGEN">Nitrogênio</entry>
 	<entry key="OBSIDIAN">Obsidiana</entry>
@@ -83,6 +88,7 @@
 	<entry key="OIL">Óleo</entry>
 	<entry key="OPTIC_FIBER">Cabo de Fibra Ótica</entry>
 	<entry key="OXYGEN">Oxigãnio</entry>
+	<entry key="OXYGEN_CYLINDER">Cilindro de Oxigénio</entry>
 	<entry key="PLASTIC">Plástico</entry>
 	<entry key="PLATINUM">Platina</entry>
 	<entry key="POLISHED_ALEXANDRITE">Alexandrita Polida</entry>
@@ -95,7 +101,8 @@
 	<entry key="POLISHED_SAPPHIRE">Safira Polida</entry>
 	<entry key="POLISHED_TOPAZ">Topã¡Zio Polido</entry>
 	<entry key="PUMPKIN">Abóbora</entry>
-	<entry key="RED_CANDY">Doce Vermelho</entry>
+    <entry key="PUMPKIN_TORCH">Tocha de Abóbora</entry>
+    <entry key="RED_CANDY">Doce Vermelho</entry>
 	<entry key="REFINED_OIL">Petróleo Refinado</entry>
 	<entry key="RESEARCH_BEAM">Laser de Pesquisa</entry>
 	<entry key="ROCKET_TYPE_A">Foguete Tipo A</entry>
@@ -103,6 +110,7 @@
 	<entry key="RUBBER">Borracha</entry>
 	<entry key="RUBY">Rubi</entry>
 	<entry key="SAPPHIRE">Safira</entry>
+	<entry key="SAPPHIRE_CRYSTAL_GLASS">Cristal de Safira</entry>
 	<entry key="SEED">Sementes</entry>
 	<entry key="SHARDS_OF_EMPATHY">Fragmentos da Empatia</entry>
 	<entry key="SHARDS_OF_ENTROPY">Fragmentos da Entropia</entry>
@@ -122,6 +130,7 @@
 	<entry key="SOLAR_PANEL">Painel Solar</entry>
 	<entry key="SOLID_PROPELLANT">Propulsor Sãlido</entry>
 	<entry key="STEEL_BAR">Barra de Aço</entry>
+	<entry key="STEEL_PIPE">Tubo de Aço</entry>
 	<entry key="STEEL_PLATE">Placa de Aão</entry>
 	<entry key="STONE_OF_EMPATHY">Pedra da Empatia</entry>
 	<entry key="STONE_OF_ENTROPY">Pedra da Entropia</entry>
