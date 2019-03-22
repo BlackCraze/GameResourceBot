@@ -4,11 +4,11 @@
 *GameResourceBot has a nickname. It likes to be called "GRB", so we call it that most of the time.*
 
 ### CONTENTS
-1. Getting Help with GameResourceBot
-2. Setting Up GameResourceBot
-3. Updating GameResourceBot
-4. Changelogs
-5. Editor's Note
+1. [Getting Help with GameResourceBot](#getting-help-with-gameresourcebot)
+2. [Setting Up GameResourceBot](#setting-up-gameresource-bot)
+3. [Updating GameResourceBot](#updating-gameresourcebot)
+4. [Changelogs](#changelogs)
+5. [Editor's Note](#editors-note)
 
 ## Getting Help with GameResourceBot
 For help on any subject concerning GRB at any time while using GRB, type:  
