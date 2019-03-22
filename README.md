@@ -5,7 +5,7 @@
 
 ### CONTENTS
 1. [Getting Help with GameResourceBot](#getting-help-with-gameresourcebot)
-2. [Setting Up GameResourceBot](#setting-up-gameresource-bot)
+2. [Setting Up GameResourceBot](#setting-up-gameresourcebot)
 3. [Updating GameResourceBot](#updating-gameresourcebot)
 4. [Changelogs](#changelogs)
 5. [Editor's Note](#editors-note)
