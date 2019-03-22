@@ -20,6 +20,7 @@
 	<entry key="CANDY_BATCH">Candy Batch</entry>
 	<entry key="CARVED_PUMPKIN">Carved Pumpkin</entry>
 	<entry key="CHIPSET">Chipset</entry>
+	<entry key="CHLORINE">Chlorine</entry>
 	<entry key="CIRCUIT">Circuits</entry>
 	<entry key="CLEAN_WATER">Clean Water</entry>
 	<entry key="COAL">Coal</entry>
@@ -29,18 +30,22 @@
 	<entry key="COPPER_KNIVE">Copper Knife</entry>
 	<entry key="COPPER_NAIL">Copper Nail</entry>
 	<entry key="COPPER_WIRE">Wire</entry>
+	<entry key="CORONA_DISCHARGE_TUBE">Corona Discharge Tube</entry>
 	<entry key="COSMIC_ICE">Cosmic Ice</entry>
 	<entry key="DEFECTIVE_PUMPKIN">Defective Pumpkin</entry>
 	<entry key="DIAMOND">Diamond</entry>
 	<entry key="DIAMOND_CUTTER">Diamond Cutter</entry>
 	<entry key="DIETHYL_ETHER">Diethyl Ether</entry>
+	<entry key="DNA_FLORA_CAPSULE">DNA Flora Capsule</entry>
 	<entry key="DRY_ICE">Dry Ice</entry>
 	<entry key="ELECTRICAL_ENGINE">Electrical Engine</entry>
 	<entry key="EMERALD">Emerald</entry>
 	<entry key="EMERALD_RING">Emerald Ring</entry>
 	<entry key="ENHANCED_HELIUM_3">Enhanced Helium 3</entry>
 	<entry key="ETHANOL">Ethanol</entry>
+	<entry key="FLORA_DEFENDER">Flora Defender</entry>
 	<entry key="GAS_CYLINDER">Gas Cylinder</entry>
+	<entry key="GAS_STORAGE">Gas Storage</entry>
 	<entry key="GEAR">Gear</entry>
 	<entry key="GLASS">Glass</entry>
 	<entry key="GLASS_FLASK">Lab Flask</entry>
@@ -77,12 +82,15 @@
 	<entry key="MIRROR_LASER">Mirror Laser</entry>
 	<entry key="MOTHERBOARD">Motherboard</entry>
 	<entry key="NITROGEN">Nitrogen</entry>
+	<entry key="NITROGEN_TANK">Nitrogen Tank</entry>
 	<entry key="OBSIDIAN">Obsidian</entry>
 	<entry key="OBSIDIAN_KNIFE">Obsidian Knife</entry>
 	<entry key="OIL">Oil</entry>
 	<entry key="OPTIC_FIBER">Optic Fiber</entry>
 	<entry key="OXYGEN">Oxygen</entry>
 	<entry key="OXYGEN_CYLINDER">Oxygen Cylinder</entry>
+	<entry key="PINE_SEED">Pine Seed</entry>
+	<entry key="PINE_TREE">Pine Tree</entry>
 	<entry key="PLASTIC">Plastic Plate</entry>
 	<entry key="PLATINUM">Platinum</entry>
 	<entry key="POLISHED_ALEXANDRITE">Polished Alexandrite</entry>
@@ -101,10 +109,12 @@
 	<entry key="RESEARCH_BEAM">Research Beam</entry>
 	<entry key="ROCKET_TYPE_A">Rocket Type A</entry>
 	<entry key="ROCKET_TYPE_B">Rocket Type B</entry>
+	<entry key="ROCKET_TYPE_C">Rocket Type C</entry>
 	<entry key="RUBBER">Rubber</entry>
 	<entry key="RUBY">Ruby</entry>
 	<entry key="SAPPHIRE">Sapphire</entry>
 	<entry key="SAPPHIRE_CRYSTAL_GLASS">Sapphire Crystal Glass</entry>
+	<entry key="SEAWATER">Seawater</entry>
 	<entry key="SEED">Tree Seed</entry>
 	<entry key="SHARDS_OF_EMPATHY">Shards of Empathy</entry>
 	<entry key="SHARDS_OF_ENTROPY">Shards of Entropy</entry>
@@ -150,5 +160,6 @@
 	<entry key="WINTERFEST_TOY">Winterfest Toy</entry>
 	<entry key="WOOD">Tree</entry>
 	<entry key="YELLOW_CANDY">Yellow Candy</entry>
+	<entry key="ZEOLIT">Zeolit</entry>
 	<entry key="ZIP_DRIVE">Zip Drive</entry>
 </properties>

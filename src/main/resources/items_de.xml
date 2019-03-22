@@ -22,6 +22,7 @@
 	<entry key="CANDY_BATCH">Schachtel mit Süßigkeiten</entry>
 	<entry key="CARVED_PUMPKIN">Geschnitzter Kürbis</entry>
 	<entry key="CHIPSET">Chipsatz</entry>
+	<entry key="CHLORINE">Chlor</entry>
 	<entry key="CIRCUIT">Schaltkreise</entry>
 	<entry key="CLEAN_WATER">Sauberes Wasser</entry>
 	<entry key="COAL">Kohle</entry>
@@ -31,18 +32,22 @@
 	<entry key="COPPER_KNIVE">Kupfermesser</entry>
 	<entry key="COPPER_NAIL">Kupfernagel</entry>
 	<entry key="COPPER_WIRE">Draht</entry>
+	<entry key="CORONA_DISCHARGE_TUBE">Koronaentladungsröhrchen</entry>
 	<entry key="COSMIC_ICE">Kosmisches Eis</entry>
 	<entry key="DEFECTIVE_PUMPKIN">Beschädigter Kürbis</entry>
 	<entry key="DIAMOND">Diamant</entry>
 	<entry key="DIAMOND_CUTTER">Diamantschneider</entry>
 	<entry key="DIETHYL_ETHER">Diäthyläther</entry>
+	<entry key="DNA_FLORA_CAPSULE">Kapsel mit Flora-DNA</entry>
 	<entry key="DRY_ICE">Trockeneis</entry>
 	<entry key="ELECTRICAL_ENGINE">Elektrischer Motor</entry>
 	<entry key="EMERALD">Smaragd</entry>
 	<entry key="EMERALD_RING">Smaragdring</entry>
 	<entry key="ENHANCED_HELIUM_3">Verbessertes Helium 3</entry>
 	<entry key="ETHANOL">Ethanol</entry>
+	<entry key="FLORA_DEFENDER">Floraverteidiger</entry>
 	<entry key="GAS_CYLINDER">Gasflasche</entry>
+	<entry key="GAS_STORAGE">Gasspeicher</entry>
 	<entry key="GEAR">Zahnrad</entry>
 	<entry key="GLASS">Glas</entry>
 	<entry key="GLASS_FLASK">Laborfläschchen</entry>
@@ -79,12 +84,15 @@
 	<entry key="MIRROR_LASER">Spiegellaser</entry>
 	<entry key="MOTHERBOARD">Motherboard</entry>
 	<entry key="NITROGEN">Stickstoff</entry>
+	<entry key="NITROGEN_TANK">Nitrogeniumtank</entry>
 	<entry key="OBSIDIAN">Obsidian</entry>
 	<entry key="OBSIDIAN_KNIFE">Obsidianmesser</entry>
 	<entry key="OIL">Öl</entry>
 	<entry key="OPTIC_FIBER">Glasfaserkabel</entry>
 	<entry key="OXYGEN">Sauerstoff</entry>
 	<entry key="OXYGEN_CYLINDER">Sauerstoffflasche</entry>
+	<entry key="PINE_SEED">Kiefernsamen</entry>
+	<entry key="PINE_TREE">Kiefer</entry>
 	<entry key="PLASTIC">Plastik</entry>
 	<entry key="PLATINUM">Platin</entry>
 	<entry key="POLISHED_ALEXANDRITE">Polierter Alexandrit</entry>
@@ -103,10 +111,12 @@
 	<entry key="RESEARCH_BEAM">Forschungsstrahl</entry>
 	<entry key="ROCKET_TYPE_A">Rakete Typ A</entry>
 	<entry key="ROCKET_TYPE_B">Rakete Typ B</entry>
+	<entry key="ROCKET_TYPE_C">Rakete Typ C</entry>
 	<entry key="RUBBER">Gummi</entry>
 	<entry key="RUBY">Rubin</entry>
 	<entry key="SAPPHIRE">Saphir</entry>
 	<entry key="SAPPHIRE_CRYSTAL_GLASS">Saphirkristallglas</entry>
+	<entry key="SEAWATER">Meerwasser</entry>
 	<entry key="SEED">Saatgut</entry>
 	<entry key="SHARDS_OF_EMPATHY">Scherben der Empathie</entry>
 	<entry key="SHARDS_OF_ENTROPY">Scherben der Entropie</entry>
@@ -152,5 +162,6 @@
 	<entry key="WINTERFEST_TOY">Winterfest-Spielzeug</entry>
 	<entry key="WOOD">Holz</entry>
 	<entry key="YELLOW_CANDY">Gelbe Süßigkeit</entry>
+	<entry key="ZEOLIT">Zeolit</entry>
 	<entry key="ZIP_DRIVE">Zip-Laufwerk</entry>
 </properties>
