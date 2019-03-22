@@ -22,6 +22,7 @@
 	<entry key="CANDY_BATCH">Lote de Caramelos</entry>
 	<entry key="CARVED_PUMPKIN">Calabaza Tallada</entry>
 	<entry key="CHIPSET">Chipset</entry>
+	<entry key="CHLORINE">Cloro</entry>
 	<entry key="CIRCUIT">Circuitos</entry>
 	<entry key="CLEAN_WATER">Agua Limpia</entry>
 	<entry key="COAL">Carbón</entry>
@@ -31,18 +32,22 @@
 	<entry key="COPPER_KNIVE">Cuchillo de Cobre</entry>
 	<entry key="COPPER_NAIL">Clavo de Cobre</entry>
 	<entry key="COPPER_WIRE">Cable</entry>
+	<entry key="CORONA_DISCHARGE_TUBE">Tubo de Descarga de Corona</entry>
 	<entry key="COSMIC_ICE">Hielo Cósmico</entry>
 	<entry key="DEFECTIVE_PUMPKIN">Calabaza Defectuosa</entry>
 	<entry key="DIAMOND">Diamante</entry>
 	<entry key="DIAMOND_CUTTER">Cortador de Diamante</entry>
 	<entry key="DIETHYL_ETHER">Éter Etílico</entry>
+	<entry key="DNA_FLORA_CAPSULE">Cápsula de Flora de ADN</entry>
 	<entry key="DRY_ICE">Hielo Seco</entry>
 	<entry key="ELECTRICAL_ENGINE">Motor Eléctrico</entry>
 	<entry key="EMERALD">Esmeralda</entry>
 	<entry key="EMERALD_RING">Anillo de Esmeralda</entry>
 	<entry key="ENHANCED_HELIUM_3">Helio-3 Potenciado</entry>
 	<entry key="ETHANOL">Etanol</entry>
+	<entry key="FLORA_DEFENDER">Defensor de la Flora</entry>
 	<entry key="GAS_CYLINDER">Botella de Gas</entry>
+	<entry key="GAS_STORAGE">Almacén de Gas</entry>
 	<entry key="GEAR">Engranaje</entry>
 	<entry key="GLASS">Vidrio</entry>
 	<entry key="GLASS_FLASK">Frasco de Laboratorio</entry>
@@ -79,12 +84,15 @@
 	<entry key="MIRROR_LASER">Láser Espejo</entry>
 	<entry key="MOTHERBOARD">Placas Base</entry>
 	<entry key="NITROGEN">Nitrógeno</entry>
+	<entry key="NITROGEN_TANK">Depósito de Nitrogenium</entry>
 	<entry key="OBSIDIAN">Obsidiana</entry>
 	<entry key="OBSIDIAN_KNIFE">Cuchillo de Obsidiana</entry>
 	<entry key="OIL">Petróleo</entry>
 	<entry key="OPTIC_FIBER">Cable de Fibra Óptica</entry>
 	<entry key="OXYGEN">Oxígeno</entry>
 	<entry key="OXYGEN_CYLINDER">Botella de Oxígeno</entry>
+	<entry key="PINE_SEED">Semilla de Pino</entry>
+	<entry key="PINE_TREE">Pino</entry>
 	<entry key="PLASTIC">Plástico</entry>
 	<entry key="PLATINUM">Platino</entry>
 	<entry key="POLISHED_ALEXANDRITE">Alejandrita Pulida</entry>
@@ -103,10 +111,12 @@
 	<entry key="RESEARCH_BEAM">Rayo de Investigación</entry>
 	<entry key="ROCKET_TYPE_A">Cohete de Tipo A</entry>
 	<entry key="ROCKET_TYPE_B">Cohete de Tipo B</entry>
+	<entry key="ROCKET_TYPE_C">Cohete Tipo C</entry>
 	<entry key="RUBBER">Hule</entry>
 	<entry key="RUBY">Rubí</entry>
 	<entry key="SAPPHIRE">Safiro</entry>
 	<entry key="SAPPHIRE_CRYSTAL_GLASS">Cristal de Zafiro</entry>
+	<entry key="SEAWATER">Agua Marina</entry>
 	<entry key="SEED">Semilla</entry>
 	<entry key="SHARDS_OF_EMPATHY">Fragmentos de Empatía</entry>
 	<entry key="SHARDS_OF_ENTROPY">Fragmentos de Entropía</entry>
@@ -152,5 +162,6 @@
 	<entry key="WINTERFEST_TOY">Juguete Cuento Invernal</entry>
 	<entry key="WOOD">Madera</entry>
 	<entry key="YELLOW_CANDY">Caramelo Amarillo</entry>
+	<entry key="ZEOLIT">Zeolit</entry>
 	<entry key="ZIP_DRIVE">Unidad Zip</entry>
 </properties>
