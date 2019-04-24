@@ -10,11 +10,8 @@ preserve_hierarchy: true
 }
 
 files:
-- source: /src/main/resources/*.properties
+- source: /src/main/resources/translators/*.properties
   translation: /src/main/resources/crowdin/%file_name%_%osx_locale%.%file_extension%
-  ignore:
-  - '*_??.properties'
-  - log4j.properties
   type: properties
   escape_quotes: 0
   update_option: update_as_unapproved
