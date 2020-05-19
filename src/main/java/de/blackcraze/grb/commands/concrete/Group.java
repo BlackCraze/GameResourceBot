@@ -54,8 +54,8 @@ public class Group implements BaseCommand {
                     groupRemove.run(scanner, message);
                     break;
                 case "rename":
-                    groupRename.run(scanner, message);
                     BaseCommand.checkPublic(message);
+                    groupRename.run(scanner, message);
                     break;
                 case "list":
                     groupList.run(scanner, message);

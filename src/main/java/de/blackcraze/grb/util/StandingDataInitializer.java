@@ -32,6 +32,7 @@ public class StandingDataInitializer {
             parser = new CSVParser(reader, CSVFormat.EXCEL.withHeader());
             List<CSVRecord> records = parser.getRecords();
             System.out.println("Initializing stock types: " + records.size());
+            getStockTypeDao().trimNames();//repairs failed database entries
             List<StockType> stocks = getStockTypeDao().findAll(new Locale(BotConfig.getConfig().LANGUAGE));
 
             for (CSVRecord record : records) {
@@ -46,7 +47,7 @@ public class StandingDataInitializer {
                 }
 
                 StockType type = new StockType();
-                type.setName(name);
+                type.setName(name.trim());
                 type.setPrice(Long.valueOf(price));
                 getStockTypeDao().save(type);
                 System.out.println("Created new stock type: " + type.getName());
