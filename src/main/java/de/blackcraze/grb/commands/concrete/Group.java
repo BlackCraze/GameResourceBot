@@ -9,7 +9,7 @@ import de.blackcraze.grb.model.entity.StockTypeGroup;
 import de.blackcraze.grb.util.PrintUtils;
 import de.blackcraze.grb.util.StockTypeComparator;
 import de.blackcraze.grb.util.wagu.Block;
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.api.entities.Message;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;

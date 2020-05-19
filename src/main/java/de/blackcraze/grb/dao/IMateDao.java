@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import de.blackcraze.grb.model.entity.Mate;
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.api.entities.Message;
 
 public interface IMateDao extends IBaseDao<Mate> {
 

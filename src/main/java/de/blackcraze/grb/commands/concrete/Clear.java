@@ -21,7 +21,7 @@ import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
 import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.StockType;
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.api.entities.Message;
 
 public class Clear implements BaseCommand {
 

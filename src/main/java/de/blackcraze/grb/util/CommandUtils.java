@@ -1,5 +1,6 @@
 package de.blackcraze.grb.util;
 
+
 import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
 
 import java.util.ArrayList;
@@ -16,9 +17,9 @@ import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.i18n.Resource;
 import de.blackcraze.grb.model.Device;
 import de.blackcraze.grb.model.entity.Mate;
-import net.dv8tion.jda.core.entities.ChannelType;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.SelfUser;
+import net.dv8tion.jda.api.entities.ChannelType;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.SelfUser;
 
 public class CommandUtils {
 

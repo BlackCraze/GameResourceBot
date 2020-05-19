@@ -5,15 +5,15 @@ import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
 import de.blackcraze.grb.util.CommandUtils;
 import java.util.stream.Collectors;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.JDA.Status;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.ReadyEvent;
-import net.dv8tion.jda.core.events.ReconnectedEvent;
-import net.dv8tion.jda.core.events.ResumedEvent;
-import net.dv8tion.jda.core.events.StatusChangeEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDA.Status;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.ReadyEvent;
+import net.dv8tion.jda.api.events.ReconnectedEvent;
+import net.dv8tion.jda.api.events.ResumedEvent;
+import net.dv8tion.jda.api.events.StatusChangeEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class ReadyListener extends ListenerAdapter {
 

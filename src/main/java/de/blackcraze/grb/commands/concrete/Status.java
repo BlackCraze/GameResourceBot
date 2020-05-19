@@ -15,7 +15,7 @@ import org.apache.commons.io.FileUtils;
 import de.blackcraze.grb.commands.BaseCommand;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.api.entities.Message;
 
 public class Status implements BaseCommand {
     public void run(Scanner scanner, Message message) {

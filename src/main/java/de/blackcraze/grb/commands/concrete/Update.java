@@ -1,19 +1,20 @@
 package de.blackcraze.grb.commands.concrete;
 
-import de.blackcraze.grb.commands.BaseCommand;
-import de.blackcraze.grb.core.Speaker;
-import de.blackcraze.grb.i18n.Resource;
-import de.blackcraze.grb.model.entity.Mate;
-import net.dv8tion.jda.core.entities.Message;
+
+import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
+import static de.blackcraze.grb.util.CommandUtils.parseStocks;
+import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
-import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
-import static de.blackcraze.grb.util.CommandUtils.parseStocks;
-import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
+import de.blackcraze.grb.commands.BaseCommand;
+import de.blackcraze.grb.core.Speaker;
+import de.blackcraze.grb.i18n.Resource;
+import de.blackcraze.grb.model.entity.Mate;
+import net.dv8tion.jda.api.entities.Message;
 
 public class Update implements BaseCommand {
     public void run(Scanner scanner, Message message) {

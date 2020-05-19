@@ -6,7 +6,7 @@ import de.blackcraze.grb.core.Speaker;
 import java.lang.reflect.Field;
 import java.util.Objects;
 import java.util.Scanner;
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.api.entities.Message;
 
 public class Config implements BaseCommand {
     public void run(Scanner scanner, Message message) {

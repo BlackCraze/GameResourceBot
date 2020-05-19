@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Scanner;
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.api.entities.Message;
 
 public class Total implements BaseCommand {
     public void run(Scanner scanner, Message message) {

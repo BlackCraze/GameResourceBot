@@ -3,7 +3,7 @@ package de.blackcraze.grb.commands.concrete;
 import de.blackcraze.grb.commands.BaseCommand;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.api.entities.Message;
 
 import java.util.Scanner;
 

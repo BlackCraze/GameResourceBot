@@ -34,7 +34,7 @@
 		<dependency>
 			<groupId>net.dv8tion</groupId>
 			<artifactId>JDA</artifactId>
-			<version>3.6.0_367</version>
+			<version>4.1.1_101</version>
 		</dependency>
 		<!-- start Hibernate library dependency -->
 		<dependency>

@@ -13,8 +13,8 @@ import com.google.common.reflect.ClassPath;
 import de.blackcraze.grb.core.BotConfig;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
-import net.dv8tion.jda.core.entities.ChannelType;
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.api.entities.ChannelType;
+import net.dv8tion.jda.api.entities.Message;
 
 public interface BaseCommand {
 

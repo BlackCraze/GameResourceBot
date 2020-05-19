@@ -19,9 +19,9 @@ import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.Stock;
 import de.blackcraze.grb.model.entity.StockType;
 import de.blackcraze.grb.util.PrintUtils;
-import net.dv8tion.jda.core.entities.ChannelType;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.api.entities.ChannelType;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
 
 public class MateDaoBean extends BaseDaoBean<Mate> implements IMateDao {
 
