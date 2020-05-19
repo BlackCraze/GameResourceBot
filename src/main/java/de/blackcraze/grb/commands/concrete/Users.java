@@ -20,9 +20,9 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import org.apache.commons.lang3.StringUtils;
 
 public class Users implements BaseCommand {

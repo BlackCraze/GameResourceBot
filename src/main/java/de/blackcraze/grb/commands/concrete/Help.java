@@ -12,7 +12,7 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.api.entities.Message;
 
 public class Help implements BaseCommand {
     public void run(Scanner scanner, Message message) {

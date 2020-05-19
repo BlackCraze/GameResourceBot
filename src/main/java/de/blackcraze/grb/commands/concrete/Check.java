@@ -1,5 +1,6 @@
 package de.blackcraze.grb.commands.concrete;
 
+
 import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
 import static de.blackcraze.grb.util.CommandUtils.parseStockName;
 import static de.blackcraze.grb.util.InjectorUtils.getMateDao;
@@ -8,6 +9,12 @@ import static de.blackcraze.grb.util.InjectorUtils.getStockTypeGroupDao;
 import static de.blackcraze.grb.util.PrintUtils.prettyPrintMate;
 import static de.blackcraze.grb.util.PrintUtils.prettyPrintStocks;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.Scanner;
+
 import de.blackcraze.grb.commands.BaseCommand;
 import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
@@ -15,13 +22,8 @@ import de.blackcraze.grb.model.entity.Mate;
 import de.blackcraze.grb.model.entity.StockType;
 import de.blackcraze.grb.model.entity.StockTypeGroup;
 import de.blackcraze.grb.util.StockTypeComparator;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.Scanner;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageChannel;
 
 public class Check implements BaseCommand {
     public void run(Scanner scanner, Message message) {

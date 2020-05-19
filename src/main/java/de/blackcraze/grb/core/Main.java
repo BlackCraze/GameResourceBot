@@ -1,13 +1,13 @@
 package de.blackcraze.grb.core;
 
+import java.util.Objects;
+
 import de.blackcraze.grb.listener.MessageListener;
 import de.blackcraze.grb.listener.ReadyListener;
 import de.blackcraze.grb.util.StandingDataInitializer;
-import net.dv8tion.jda.core.AccountType;
-import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.OnlineStatus;
-
-import java.util.Objects;
+import net.dv8tion.jda.api.AccountType;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.OnlineStatus;
 
 public class Main {
 
@@ -34,10 +34,8 @@ public class Main {
             builder.setToken(BotConfig.DISCORD_TOKEN);
             builder.setAutoReconnect(true);
             builder.setStatus(OnlineStatus.ONLINE);
-            builder.addEventListener(new ReadyListener());
-            builder.addEventListener(new MessageListener());
-
-            builder.buildBlocking();
+            builder.addEventListeners(new ReadyListener(), new MessageListener());
+            builder.build();
         } catch (Throwable e) {
             e.printStackTrace();
         } finally {

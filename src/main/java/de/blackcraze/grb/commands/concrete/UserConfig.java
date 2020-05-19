@@ -13,7 +13,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.api.entities.Message;
 import org.apache.commons.lang3.StringUtils;
 
 public class UserConfig implements BaseCommand {

@@ -1,9 +1,20 @@
 package de.blackcraze.grb.commands;
 
+
 import static de.blackcraze.grb.util.CommandUtils.getMateDevice;
 import static de.blackcraze.grb.util.CommandUtils.getResponseLocale;
 import static de.blackcraze.grb.util.PrintUtils.prettyPrint;
 import static org.bytedeco.javacpp.Pointer.deallocateReferences;
+
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Locale;
+import java.util.Map;
+
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 
 import de.blackcraze.grb.commands.concrete.Update;
 import de.blackcraze.grb.core.BotConfig;
@@ -11,17 +22,9 @@ import de.blackcraze.grb.core.Speaker;
 import de.blackcraze.grb.i18n.Resource;
 import de.blackcraze.grb.model.Device;
 import de.blackcraze.grb.ocr.OCR;
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.Locale;
-import java.util.Map;
-import net.dv8tion.jda.core.entities.ChannelType;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.Message.Attachment;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
+import net.dv8tion.jda.api.entities.ChannelType;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.Message.Attachment;
 
 public class FileProcessor {
 
