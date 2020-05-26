@@ -1,20 +1,17 @@
 preserve_hierarchy: true
-# The next line restricts exported languages to those actively being translated.
-"export_languages": [
-  "de",
-  "es-ES"
-]
-
+export_languages:
+  - de
+  - es-ES
 files:
-- source: /src/main/resources/translators/*.properties
-  translation: /src/main/resources/%file_name%_%two_letters_code%.%file_extension%
-  type: properties
-  escape_quotes: 0
-  update_option: update_as_unapproved
-  languages_mapping:
-    two_letters_code:
-      hy-AM: hy
-      pt-PT: pt
-      es-ES: es
-      zh-CN: zh_CN
-      zh-TW: zh_TW
+  - source: /src/main/resources/translators/*.properties
+    translation: /src/main/resources/%file_name%_%two_letters_code%.%file_extension%
+    type: properties
+    escape_quotes: 0
+    update_option: update_as_unapproved
+    languages_mapping:
+      two_letters_code:
+        hy-AM: hy
+        pt-PT: pt
+        es-ES: es
+        zh-CN: zh_CN
+        zh-TW: zh_TW
