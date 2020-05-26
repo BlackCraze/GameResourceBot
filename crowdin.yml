@@ -1,9 +1,9 @@
 preserve_hierarchy: true
 # The next line restricts exported languages to those actively being translated.
-"export_languages": {
+"export_languages": [
   "de",
   "es-ES"
-}
+]
 
 files:
 - source: /src/main/resources/translators/*.properties
