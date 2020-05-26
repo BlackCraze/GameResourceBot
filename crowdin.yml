@@ -1,21 +1,17 @@
 preserve_hierarchy: true
-# The next line restricts exported languages to those actively being translated.
-"export_languages": {
-                      "az",
-                      "de",
-                      "es-ES",
-                      "fr",
-                      "pt-PT",
-                      "ru"
-}
-
+export_languages:
+  - de
+  - es-ES
 files:
-- source: /src/main/resources/translators/*.properties
-  translation: /src/main/resources/crowdin/%file_name%_%osx_locale%.%file_extension%
-  type: properties
-  escape_quotes: 0
-  update_option: update_as_unapproved
-  languages_mapping:
-    osx_locale:
-      zh-CN: zh_CN
-      zh-TW: zh_TW
+  - source: /src/main/resources/translators/*.properties
+    translation: /src/main/resources/%file_name%_%osx_locale%.%file_extension%
+    type: properties
+    escape_quotes: 0
+    update_option: update_as_unapproved
+    languages_mapping:
+      osx_locale:
+        hy-AM: hy
+        pt-PT: pt
+        es-ES: es
+        zh-CN: zh_CN
+        zh-TW: zh_TW
