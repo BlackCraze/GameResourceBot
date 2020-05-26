@@ -4,12 +4,12 @@ export_languages:
   - es-ES
 files:
   - source: /src/main/resources/translators/*.properties
-    translation: /src/main/resources/%file_name%_%two_letters_code%.%file_extension%
+    translation: /src/main/resources/%file_name%_%language%.%file_extension%
     type: properties
     escape_quotes: 0
     update_option: update_as_unapproved
     languages_mapping:
-      two_letters_code:
+      language:
         hy-AM: hy
         pt-PT: pt
         es-ES: es
