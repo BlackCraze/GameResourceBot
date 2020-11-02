@@ -22,7 +22,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class MessageListener extends ListenerAdapter {
 
     public MessageListener() {}
-
+    
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         if (isFromMyself(event)) {

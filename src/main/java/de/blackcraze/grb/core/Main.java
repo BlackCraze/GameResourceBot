@@ -5,7 +5,6 @@ import java.util.Objects;
 import de.blackcraze.grb.listener.MessageListener;
 import de.blackcraze.grb.listener.ReadyListener;
 import de.blackcraze.grb.util.StandingDataInitializer;
-import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 
@@ -29,9 +28,8 @@ public class Main {
     }
 
     private static void initDiscord() {
-        JDABuilder builder = new JDABuilder(AccountType.BOT);
+        JDABuilder builder = JDABuilder.createLight(BotConfig.DISCORD_TOKEN);
         try {
-            builder.setToken(BotConfig.DISCORD_TOKEN);
             builder.setAutoReconnect(true);
             builder.setStatus(OnlineStatus.ONLINE);
             builder.addEventListeners(new ReadyListener(), new MessageListener());

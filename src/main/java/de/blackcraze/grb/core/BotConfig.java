@@ -7,7 +7,7 @@ public class BotConfig {
     static final String[] REQUIRED_ENV_VARS = { "GRB_DISCORD_TOKEN" };
 
     static final String DISCORD_TOKEN = System.getenv("GRB_DISCORD_TOKEN");
-    public static final String DATABASE_URL = getEnv("DATABASE_URL", "postgres://grb:grb@localhost:5432/grb");
+    public static final String DATABASE_URL = getEnv("DATABASE_URL", "postgres://gbr:gbr@localhost:5432/gbr");
     public static final String USE_SSL = getEnv("USE_SSL", "");
     public static final String TESS_DATA = getEnv("TESS_DATA", "./tessdata");
 

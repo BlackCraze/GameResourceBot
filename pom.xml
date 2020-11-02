@@ -34,7 +34,13 @@
 		<dependency>
 			<groupId>net.dv8tion</groupId>
 			<artifactId>JDA</artifactId>
-			<version>4.1.1_101</version>
+			<version>4.2.0_168</version>
+			<exclusions>
+				<exclusion>
+					<groupId>club.minnced</groupId>
+					<artifactId>opus-java</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- start Hibernate library dependency -->
 		<dependency>
@@ -68,7 +74,7 @@
 			<version>1.1.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.hsqldb/hsqldb -->
-		<!-- <dependency> <groupId>org.hsqldb</groupId> <artifactId>hsqldb</artifactId>
+		<!-- <dependency> <groupId>org.hsqldb</groupId> <artifactId>hsqldb</artifactId> 
 			<version>2.4.0</version> </dependency> -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -114,7 +120,7 @@
 		</dependency>
 		<!-- https://github.com/bytedeco/javacv -->
 		<!-- REMOVE THIS to get a smaller JAR -->
-		<!-- FIXME - there is only one class dependency that avoid me to remove
+		<!-- FIXME - there is only one class dependency that avoid me to remove 
 			this -->
 		<!-- Search for 'FIXME' to see that stuff -->
 		<dependency>
