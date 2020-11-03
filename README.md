@@ -1,3 +1,4 @@
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/gameresourcebot/localized.svg)](https://crowdin.com/project/gameresourcebot)
 # GameResourceBot
 ###### a Discord bot for managing guild resources
 
@@ -35,9 +36,6 @@ Please click the link for the appropriate operating system.
 
 ## Changelogs
 #### "Setting Up GameResourceBot" Changelogs
-
-v1.3
-- BOTH: Added es to the list of available languages.
 
 v1.2
 - BOTH: Added Step 6, referring to the GRB Update guides.

@@ -1,5 +1,5 @@
 # Setting Up GameResourceBot - short version
-######  v1.3, by PellaAndroid
+######  v1.2, by PellaAndroid
 
 *GameResourceBot has a nickname. It likes to be called "GRB", so we call it that most of the time.*
 
@@ -51,7 +51,6 @@ https://discordapp.com/oauth2/authorize?client_id=[ClientID]&scope=bot&permissio
 	- §§ LANGUAGE
 		- de - Deutsch (German)
 		- en - English
-		- es - Español (Spanish)
 		- pt - Português (Portuguese)
 		- More languages coming soon!
 	- §§ OCR_RESULT - default setting: "on"
