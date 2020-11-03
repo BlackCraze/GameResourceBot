@@ -20,7 +20,7 @@
       "required": "false"
     },
     "LANGUAGE": {
-      "description": "This will be your bot's default language for the guild. [de, en, es, pt]",
+      "description": "This will be your bot's default language for the guild. [de, en, pt]",
       "value": "en",
       "required": "false"
     },
