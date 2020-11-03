@@ -324,6 +324,6 @@ Sometimes, GRB takes a break, meaning it reboots. This could be because:
 
 The point is, whenever GRB restarts, it always needs to know what its Config Vars are, and it always asks Heroku for this information. If you changed one or more of them on Discord before GRB rebooted, it will have no memory of this. (In that respect, restarting is like a really bad hangover. You know you need to remember what your buddy told you last night, but there's no way it's going to happen.) 
 
-Therefore, if you do change one of the Config Vars on Discord later, think about whether you need that change to be permanent or not. If you do, then you'll probably want to return to Heroku and update that Config Var to match your changing need. If you don't, then don't say we didn't warn you.
+Therefore, if you do change one of the Config Vars on Discord later, think about whether you need that change to be permanent or not. If you do, then you'll probably want to return to Heroku and update that Config Var to match your changing need. If you decide not to return to Heroku, then don't say we didn't warn you.
 
 [Back to spot where you left off](#this-line-does-not-exist-you-are-not-reading-this-please-move-on)

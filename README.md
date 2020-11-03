@@ -1,3 +1,4 @@
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/gameresourcebot/localized.svg)](https://crowdin.com/project/gameresourcebot)
 # GameResourceBot
 ###### a Discord bot for managing guild resources
 
