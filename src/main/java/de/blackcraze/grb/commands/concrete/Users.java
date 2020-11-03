@@ -46,7 +46,7 @@ public class Users implements BaseCommand {
                 storedMates.stream().map(Mate::getDiscordId).collect(Collectors.toList());
         final List<Member> members = ((TextChannel) message.getChannel()).getMembers().stream()
                 .filter(m -> !m.getUser().isBot()).collect(Collectors.toList());
-
+        
         // Collect the users who are not in the channel anymore.
         List<Mate> toDelete = storedMates.stream()
                 .filter(mate -> members.stream()

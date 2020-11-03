@@ -1,5 +1,7 @@
 package de.blackcraze.grb.core;
 
+import static net.dv8tion.jda.api.requests.GatewayIntent.*;
+
 import java.util.Objects;
 
 import de.blackcraze.grb.listener.MessageListener;
@@ -28,11 +30,12 @@ public class Main {
     }
 
     private static void initDiscord() {
-        JDABuilder builder = JDABuilder.createLight(BotConfig.DISCORD_TOKEN);
+        JDABuilder builder =
+                JDABuilder.create(BotConfig.DISCORD_TOKEN, GUILD_MEMBERS, GUILD_MESSAGES);
+        builder.setAutoReconnect(true);
+        builder.setStatus(OnlineStatus.ONLINE);
+        builder.addEventListeners(new ReadyListener(), new MessageListener());
         try {
-            builder.setAutoReconnect(true);
-            builder.setStatus(OnlineStatus.ONLINE);
-            builder.addEventListeners(new ReadyListener(), new MessageListener());
             builder.build();
         } catch (Throwable e) {
             e.printStackTrace();
